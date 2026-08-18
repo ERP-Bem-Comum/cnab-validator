@@ -1,5 +1,26 @@
 import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import type { DslRule } from "./rule-mapper.js";
+
+const VALID_LAYOUT_KEY = /^[a-z0-9-]+$/;
+
+function assertValidLayout(layout: string): void {
+  if (!VALID_LAYOUT_KEY.test(layout)) {
+    throw new Error(`Invalid layout key: ${layout}`);
+  }
+}
+
+const TIPOS: Record<string, "remessa" | "retorno" | "infra"> = {
+  "cobranca-remessa": "remessa",
+  multipag: "remessa",
+  "folha-pagamento": "remessa",
+};
+
+function tipoLayout(layout: string): "remessa" | "retorno" | "infra" {
+  const tipo = TIPOS[layout];
+  if (!tipo) throw new Error(`Unknown layout: ${layout}`);
+  return tipo;
+}
 
 export interface LayoutEntry {
   layout: string;
@@ -25,7 +46,7 @@ export interface IndexSpec {
 export interface LayoutSpec {
   layout: string;
   nome: string;
-  tipo: string;
+  tipo: "remessa" | "retorno" | "infra";
   tamanhos_linha: number[];
   regras: DslRule[];
 }
@@ -34,7 +55,7 @@ export function writeSpecs(
   specsDir: string,
   rulesByLayout: Record<string, DslRule[]>
 ): void {
-  mkdirSync(`${specsDir}/layouts`, { recursive: true });
+  mkdirSync(join(specsDir, "layouts"), { recursive: true });
 
   const index: IndexSpec = {
     fonte: "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral",
@@ -46,12 +67,15 @@ export function writeSpecs(
       0
     ),
     layouts: Object.entries(rulesByLayout).map(([layout, rules]) => {
+      assertValidLayout(layout);
+
+      const tipo = tipoLayout(layout);
       const entry: LayoutEntry = {
         layout,
         nome: nomeLayout(layout),
-        tipo: "remessa",
+        tipo,
         tamanhos_linha: tamanhosLayout(layout),
-        arquivo: `layouts/${layout}.json`,
+        arquivo: join("layouts", `${layout}.json`),
         total_regras: rules.length,
         sub_layouts: subLayouts(layout, rules),
       };
@@ -65,7 +89,7 @@ export function writeSpecs(
       };
 
       writeFileSync(
-        `${specsDir}/layouts/${layout}.json`,
+        join(specsDir, "layouts", `${layout}.json`),
         JSON.stringify(layoutSpec, null, 2),
         "utf-8"
       );
@@ -74,7 +98,11 @@ export function writeSpecs(
     }),
   };
 
-  writeFileSync(`${specsDir}/index.json`, JSON.stringify(index, null, 2), "utf-8");
+  writeFileSync(
+    join(specsDir, "index.json"),
+    JSON.stringify(index, null, 2),
+    "utf-8"
+  );
 }
 
 function nomeLayout(layout: string): string {
