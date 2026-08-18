@@ -10,17 +10,42 @@ function parseUrl(url: string, context: string): URL {
   }
 }
 
-export async function downloadText(url: string): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    },
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} ao baixar ${url}`);
+const DEFAULT_TIMEOUT_MS = 30_000;
+const DEFAULT_RETRIES = 1;
+
+export async function downloadText(
+  url: string,
+  options: { timeoutMs?: number; retries?: number } = {}
+): Promise<string> {
+  const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  const retries = options.retries ?? DEFAULT_RETRIES;
+
+  let lastError: Error | undefined;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} ao baixar ${url}`);
+      }
+      return await response.text();
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err));
+      if (attempt < retries) {
+        console.warn(`Tentativa ${attempt + 1} falhou para ${url}; tentando novamente...`);
+      }
+    } finally {
+      clearTimeout(timer);
+    }
   }
-  return response.text();
+  throw new Error(`Falha ao baixar ${url} após ${retries + 1} tentativa(s): ${lastError?.message}`);
 }
 
 export function parseScripts(html: string): { urls: string[]; inline: string[] } {
