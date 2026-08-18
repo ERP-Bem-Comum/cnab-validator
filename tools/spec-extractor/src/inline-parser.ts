@@ -17,10 +17,10 @@ export function extractNamedFunctions(code: string): Map<string, string> {
       }
     },
     VariableDeclaration(node: VariableDeclaration) {
-      // Armazena a declaração completa (ex: const foo = () => {...}) para que
-      // extractRulesFromFunction possa localizar o declarador pelo nome e obter
-      // o corpo da função. Usar só o lado direito da atribuição quebraria a
-      // identificação por nome e a sintaxe de arrow/anonymous functions.
+      // Armazena cada declarador como uma declaração isolada (ex:
+      // "const foo = () => {...};") para que extractRulesFromFunction possa
+      // localizar o declarador pelo nome sem duplicar o source entre nomes
+      // em uma mesma declaração com múltiplos declaradores.
       for (const decl of node.declarations) {
         if (
           decl.id?.type === "Identifier" &&
@@ -29,7 +29,11 @@ export function extractNamedFunctions(code: string): Map<string, string> {
           (decl.init.type === "FunctionExpression" ||
             decl.init.type === "ArrowFunctionExpression")
         ) {
-          functions.set(decl.id.name, code.slice(node.start, node.end));
+          const declaratorSource = code.slice(decl.start, decl.end).trim();
+          functions.set(
+            decl.id.name,
+            `${node.kind} ${declaratorSource};`
+          );
         }
       }
     },

@@ -58,11 +58,11 @@ describe("extractNamedFunctions", () => {
     const functions = extractNamedFunctions(code);
     assert.strictEqual(
       functions.get("a")?.trim(),
-      "const a = function(x) { return x; }, b = (y) => y + 1, c = 42;"
+      "const a = function(x) { return x; };"
     );
     assert.strictEqual(
       functions.get("b")?.trim(),
-      "const a = function(x) { return x; }, b = (y) => y + 1, c = 42;"
+      "const b = (y) => y + 1;"
     );
     assert.strictEqual(functions.has("c"), false);
   });

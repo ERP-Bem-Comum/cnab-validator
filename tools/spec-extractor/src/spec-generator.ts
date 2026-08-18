@@ -32,7 +32,6 @@ export interface LayoutEntry {
 
 export interface IndexSpec {
   fonte: string;
-  extraido_em: string;
   observacao: string;
   total_regras: number;
   layouts: LayoutEntry[];
@@ -54,7 +53,6 @@ export function writeSpecs(
 
   const index: IndexSpec = {
     fonte: "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral",
-    extraido_em: new Date().toISOString().split("T")[0],
     observacao:
       "Regras extraídas por AST dos arquivos JS públicos do validador Bradesco.",
     total_regras: Object.values(rulesByLayout).reduce(

@@ -55,7 +55,7 @@ export function parseScripts(html: string): { urls: string[]; inline: string[] }
     .map((s) => s.getAttribute("src"))
     .filter((src): src is string => !!src);
   const inline = root
-    .querySelectorAll("script")
+    .querySelectorAll("script:not([src])")
     .map((s) => s.textContent)
     .filter((code) => code.trim().length > 0);
   return { urls, inline };

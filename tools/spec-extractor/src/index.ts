@@ -82,7 +82,6 @@ function findFunctionSource(
 }
 
 export function runPipeline(
-  html: string,
   sources: Map<string, string>,
   options: { inlineScripts?: string[]; assetUrls?: string[] } = {}
 ): PipelineResult {
@@ -137,7 +136,7 @@ export async function main(): Promise<MainResult> {
 
   const inlineScripts = extractInlineScripts(html);
 
-  const pipeline = runPipeline(html, sources, {
+  const pipeline = runPipeline(sources, {
     inlineScripts,
     assetUrls: [VALIDADOR_URL, ...scriptUrls],
   });

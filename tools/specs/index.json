@@ -1,6 +1,5 @@
 {
   "fonte": "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral",
-  "extraido_em": "2026-08-18",
   "observacao": "Regras extraídas por AST dos arquivos JS públicos do validador Bradesco.",
   "total_regras": 143,
   "layouts": [
