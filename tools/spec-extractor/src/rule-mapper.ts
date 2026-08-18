@@ -75,7 +75,7 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
 
   // Literal fixo: res[x].substring(a,b) != "valor"
   const literalMatch = condicaoOriginal.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(!=|==)\s*"([^"]*)"$/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=)\s*"([^"]*)"$/
   );
   if (literalMatch) {
     const [, target, a, b, operador, valor] = literalMatch;
@@ -133,21 +133,21 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
 }
 
 function inferirDominio(condicao: string): DslCondition | null {
+  const clauses = splitLogicalAndClauses(condicao);
+  if (clauses.length < 2) return null;
+
   const clauseRegex =
-    /(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*!=\s*"([^"]+)"/g;
-  const matches = [...condicao.matchAll(clauseRegex)];
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(!==|!=)\s*"([^"]+)"$/;
+  const matches = clauses.map((c) => c.match(clauseRegex));
+  if (matches.some((m) => m === null)) return null;
 
-  if (matches.length < 2) return null;
-
-  const reconstructed = matches.map((m) => m[0]).join(" && ");
-  if (reconstructed !== condicao) return null;
-
-  const first = matches[0];
+  const validMatches = matches as RegExpMatchArray[];
+  const first = validMatches[0];
   const target = first[1];
   const inicio0 = parseInt(first[2], 10);
   const fim0 = parseInt(first[3], 10);
 
-  const sameTargetAndPosition = matches.every(
+  const sameTargetAndPosition = validMatches.every(
     (m) =>
       m[1] === target &&
       parseInt(m[2], 10) === inicio0 &&
@@ -159,8 +159,82 @@ function inferirDominio(condicao: string): DslCondition | null {
     tipo: "dominio",
     alvo: target,
     posicao: { inicio0, fim0 },
-    valores: matches.map((m) => m[4]),
+    valores: validMatches.map((m) => m[5]),
   };
+}
+
+function splitLogicalAndClauses(expr: string): string[] {
+  const base = stripOuterParens(expr);
+
+  const parts: string[] = [];
+  let current = "";
+  let depth = 0;
+  let inQuote = false;
+  let quoteChar = "";
+
+  for (let i = 0; i < base.length; i++) {
+    const char = base[i];
+    const prev = base[i - 1];
+
+    if (inQuote) {
+      current += char;
+      if (char === quoteChar && prev !== "\\") inQuote = false;
+      continue;
+    }
+
+    if (char === '"' || char === "'") {
+      inQuote = true;
+      quoteChar = char;
+      current += char;
+      continue;
+    }
+
+    if (char === "(") {
+      depth++;
+      current += char;
+      continue;
+    }
+
+    if (char === ")") {
+      depth--;
+      current += char;
+      continue;
+    }
+
+    if (char === "&" && base[i + 1] === "&" && depth === 0) {
+      parts.push(stripOuterParens(current.trim()));
+      current = "";
+      i++;
+      continue;
+    }
+
+    current += char;
+  }
+
+  if (current.trim()) parts.push(stripOuterParens(current.trim()));
+  return parts;
+}
+
+function stripOuterParens(s: string): string {
+  let trimmed = s.trim();
+  let stripped: string;
+  while ((stripped = stripBalancedParens(trimmed)) !== trimmed) {
+    trimmed = stripped;
+  }
+  return trimmed;
+}
+
+function stripBalancedParens(s: string): string {
+  if (!s.startsWith("(") || !s.endsWith(")")) return s;
+  let depth = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(") depth++;
+    else if (s[i] === ")") {
+      depth--;
+      if (depth === 0 && i < s.length - 1) return s;
+    }
+  }
+  return s.slice(1, -1).trim();
 }
 
 function inferirDocumento(condicao: string): string {

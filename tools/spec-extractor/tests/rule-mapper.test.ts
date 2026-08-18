@@ -82,4 +82,67 @@ describe("mapToDsl", () => {
     assert.strictEqual(dsl.posicoes[0].fim0, 1);
     assert.strictEqual(dsl.posicoes[0].tamanho, 1);
   });
+
+  it("classifica dominio com && sem espacos", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 995,
+      condicao_original:
+        'res[0].substring(1,3)!="A"&&res[0].substring(1,3)!="B"',
+      mensagem: "Dominio sem espacos.",
+      registro: null,
+      colunas: [1, 3],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    assert.deepStrictEqual((dsl.condicao as any).valores, ["A", "B"]);
+  });
+
+  it("classifica dominio com espacos extras em torno de &&", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 994,
+      condicao_original:
+        'res[0].substring(1, 3) != "A"   &&   res[0].substring(1, 3) != "B"',
+      mensagem: "Dominio com espacos extras.",
+      registro: null,
+      colunas: [1, 3],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    assert.deepStrictEqual((dsl.condicao as any).valores, ["A", "B"]);
+  });
+
+  it("classifica dominio com clausulas entre parenteses", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 993,
+      condicao_original:
+        '(res[0].substring(1, 3) != "A") && (res[0].substring(1, 3) != "B")',
+      mensagem: "Dominio com parenteses.",
+      registro: null,
+      colunas: [1, 3],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    assert.deepStrictEqual((dsl.condicao as any).valores, ["A", "B"]);
+  });
+
+  it("classifica literal_fixo com !==", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 992,
+      condicao_original: 'res[0].substring(1, 3) !== "XX"',
+      mensagem: "Literal fixo com !==.",
+      registro: null,
+      colunas: [1, 3],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
+    assert.strictEqual((dsl.condicao as any).operador, "!==");
+  });
 });
