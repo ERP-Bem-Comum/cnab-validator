@@ -1,6 +1,14 @@
 import { writeFile, mkdir } from "node:fs/promises";
-import { dirname } from "node:path";
+import { dirname, join, relative } from "node:path";
 import { parse } from "node-html-parser";
+
+function parseUrl(url: string, context: string): URL {
+  try {
+    return new URL(url);
+  } catch {
+    throw new Error(`Invalid URL ${context}: ${url}`);
+  }
+}
 
 export async function downloadText(url: string): Promise<string> {
   const response = await fetch(url, {
@@ -15,21 +23,27 @@ export async function downloadText(url: string): Promise<string> {
   return response.text();
 }
 
-export function extractScriptUrls(html: string, baseUrl: string): string[] {
+export function parseScripts(html: string): { urls: string[]; inline: string[] } {
   const root = parse(html);
-  const scripts = root.querySelectorAll("script[src]");
-  return scripts
+  const urls = root
+    .querySelectorAll("script[src]")
     .map((s) => s.getAttribute("src"))
-    .filter((src): src is string => !!src)
-    .map((src) => new URL(src, baseUrl).href);
-}
-
-export function extractInlineScripts(html: string): string[] {
-  const root = parse(html);
-  return root
+    .filter((src): src is string => !!src);
+  const inline = root
     .querySelectorAll("script")
     .map((s) => s.textContent)
     .filter((code) => code.trim().length > 0);
+  return { urls, inline };
+}
+
+export function extractScriptUrls(html: string, baseUrl: string): string[] {
+  const base = parseUrl(baseUrl, "base");
+  const { urls } = parseScripts(html);
+  return urls.map((src) => new URL(src, base.href).href);
+}
+
+export function extractInlineScripts(html: string): string[] {
+  return parseScripts(html).inline;
 }
 
 export async function saveAsset(
@@ -37,8 +51,31 @@ export async function saveAsset(
   content: string,
   assetsDir: string
 ): Promise<string> {
-  const urlObj = new URL(url);
-  const filePath = `${assetsDir}${urlObj.pathname}`;
+  const urlObj = parseUrl(url, "asset");
+
+  let pathname: string;
+  try {
+    pathname = decodeURIComponent(urlObj.pathname);
+  } catch {
+    throw new Error(`URL pathname contains invalid percent-encoding: ${url}`);
+  }
+
+  if (pathname === "/" || pathname.endsWith("/")) {
+    throw new Error(`URL pathname is a directory: ${url}`);
+  }
+
+  const relativePath = pathname.replace(/^\/+/, "");
+  const segments = relativePath.split("/");
+  if (segments.some((segment) => segment === "..")) {
+    throw new Error(`URL pathname contains directory traversal: ${url}`);
+  }
+
+  const filePath = join(assetsDir, ...segments);
+  const relToAssets = relative(assetsDir, filePath);
+  if (relToAssets.startsWith("..") || relToAssets === "..") {
+    throw new Error(`Resolved path escapes assets dir: ${filePath}`);
+  }
+
   await mkdir(dirname(filePath), { recursive: true });
   await writeFile(filePath, content, "utf-8");
   return filePath;
