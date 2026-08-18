@@ -145,4 +145,20 @@ describe("mapToDsl", () => {
     assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
     assert.strictEqual((dsl.condicao as any).operador, "!==");
   });
+
+  it("classifica literal_fixo entre parenteses externos", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 991,
+      condicao_original: '(res[0].substring(1, 3) !== "XX")',
+      mensagem: "Literal fixo entre parenteses.",
+      registro: null,
+      colunas: [1, 3],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
+    assert.strictEqual((dsl.condicao as any).operador, "!==");
+    assert.strictEqual((dsl.condicao as any).valor, "XX");
+  });
 });

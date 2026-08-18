@@ -69,12 +69,14 @@ export function mapToDsl(raw: RawRule, layout: string): DslRule {
 }
 
 function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
+  const condicao = stripOuterParens(condicaoOriginal);
+
   // Dominio: cadeia de alvo.substring(a,b) != "valor" conectadas por &&
-  const dominio = inferirDominio(condicaoOriginal);
+  const dominio = inferirDominio(condicao);
   if (dominio) return dominio;
 
   // Literal fixo: res[x].substring(a,b) != "valor"
-  const literalMatch = condicaoOriginal.match(
+  const literalMatch = condicao.match(
     /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=)\s*"([^"]*)"$/
   );
   if (literalMatch) {
@@ -89,7 +91,7 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
   }
 
   // Numerico/branco: isNaN(alvo.substring(...)) || alvo.substring(...).replace(/\s/g,'').length != 0
-  const numericoMatch = condicaoOriginal.match(
+  const numericoMatch = condicao.match(
     /^isNaN\((res\[[^\]]+\]\.substring\((\d+),\s*(\d+)\))\)\s*\|\|\s*\1\.replace\(\/\\s\/g,\s*''\)\.length\s*!=\s*0$/
   );
   if (numericoMatch) {
@@ -102,7 +104,7 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
   }
 
   // Modulo 11: alvo.substring(...) != calcularModulo11(alvo.substring(...))
-  const moduloMatch = condicaoOriginal.match(
+  const moduloMatch = condicao.match(
     /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*!=\s*calcularModulo11\(\1\.substring\((\d+),\s*(\d+)\)\)$/
   );
   if (moduloMatch) {
@@ -112,15 +114,15 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
         tipo: "modulo_11",
         alvo: target,
         posicao: { inicio0: parseInt(a1, 10), fim0: parseInt(b1, 10) },
-        documento: inferirDocumento(condicaoOriginal),
+        documento: inferirDocumento(condicao),
       };
     }
   }
 
   // Coerencia entre registros: res[i]... != res[i+1]...
   if (
-    condicaoOriginal.includes("res[i + 1]") ||
-    condicaoOriginal.includes("res[i+1]")
+    condicao.includes("res[i + 1]") ||
+    condicao.includes("res[i+1]")
   ) {
     return {
       tipo: "coerencia_registro",
