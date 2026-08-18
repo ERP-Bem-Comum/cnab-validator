@@ -1,8 +1,11 @@
+import { join } from "node:path";
+
 export const VALIDADOR_URL =
   "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral";
 
-export const ASSETS_DIR = "./assets";
-export const SPECS_DIR = "../../specs";
+const ROOT = import.meta.dirname ?? __dirname;
+export const ASSETS_DIR = join(ROOT, "..", "assets");
+export const SPECS_DIR = join(ROOT, "..", "..", "specs");
 
 export const LAYOUTS_DO_CICLO = [
   "cobranca-remessa",
@@ -10,10 +13,10 @@ export const LAYOUTS_DO_CICLO = [
   "folha-pagamento",
 ] as const;
 
-export const MAPEAMENTO_FUNCOES: Record<string, string> = {
+export const MAPEAMENTO_FUNCOES = {
   validarDadosArquivo240: "cobranca-remessa",
   validarDadosArquivo400: "cobranca-remessa",
   validarDadosMultipag: "multipag",
   validarDadosFolha240: "folha-pagamento",
   validarDadosFolha200: "folha-pagamento",
-};
+} satisfies Record<string, (typeof LAYOUTS_DO_CICLO)[number]>;
