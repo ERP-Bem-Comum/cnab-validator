@@ -1,15 +1,18 @@
 import type { RawRule } from "./ast-walker.js";
 
-export interface DslCondition {
-  tipo: string;
-  alvo?: string;
-  posicao?: { inicio0: number; fim0: number };
-  operador?: string;
-  valor?: string;
-  valores?: string[];
-  documento?: string;
-  outro?: string;
-}
+export type DslCondition =
+  | {
+      tipo: "literal_fixo";
+      alvo: string;
+      posicao: { inicio0: number; fim0: number };
+      operador: string;
+      valor: string;
+    }
+  | { tipo: "numerico_branco"; alvo: string; posicao: { inicio0: number; fim0: number } }
+  | { tipo: "dominio"; alvo: string; posicao: { inicio0: number; fim0: number }; valores: string[] }
+  | { tipo: "modulo_11"; alvo: string; posicao: { inicio0: number; fim0: number }; documento: string }
+  | { tipo: "coerencia_registro"; alvo: string; outro: string }
+  | { tipo: "custom"; alvo: string };
 
 export interface DslRule {
   id: string;
@@ -66,58 +69,49 @@ export function mapToDsl(raw: RawRule, layout: string): DslRule {
 }
 
 function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
-  // Dominio: cadeia de != contra valores literais (deve vir antes do literal fixo)
-  const dominioMatches = [...condicaoOriginal.matchAll(/"([^"]+)"/g)];
-  if (dominioMatches.length >= 2 && condicaoOriginal.includes("&&")) {
-    const m = condicaoOriginal.match(/substring\((\d+),\s*(\d+)\)/);
-    if (m) {
-      return {
-        tipo: "dominio",
-        alvo,
-        posicao: { inicio0: parseInt(m[1], 10), fim0: parseInt(m[2], 10) },
-        valores: dominioMatches.map((x) => x[1]),
-      };
-    }
-  }
+  // Dominio: cadeia de alvo.substring(a,b) != "valor" conectadas por &&
+  const dominio = inferirDominio(condicaoOriginal);
+  if (dominio) return dominio;
 
   // Literal fixo: res[x].substring(a,b) != "valor"
   const literalMatch = condicaoOriginal.match(
-    /(\w+)\[(\w+)\]\.substring\((\d+),\s*(\d+)\)\s*(!=|==)\s*"([^"]*)"/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(!=|==)\s*"([^"]*)"$/
   );
   if (literalMatch) {
-    const [, , index, a, b, operador, valor] = literalMatch;
+    const [, target, a, b, operador, valor] = literalMatch;
     return {
       tipo: "literal_fixo",
-      alvo: `res[${index}]`,
+      alvo: target,
       posicao: { inicio0: parseInt(a, 10), fim0: parseInt(b, 10) },
       operador,
       valor,
     };
   }
 
-  // Numerico/branco: isNaN(...) || ...replace(/\s/g,'').length != 0
-  if (condicaoOriginal.includes("isNaN")) {
-    const m = condicaoOriginal.match(/substring\((\d+),\s*(\d+)\)/);
-    if (m) {
-      return {
-        tipo: "numerico_branco",
-        alvo,
-        posicao: { inicio0: parseInt(m[1], 10), fim0: parseInt(m[2], 10) },
-      };
-    }
+  // Numerico/branco: isNaN(alvo.substring(...)) || alvo.substring(...).replace(/\s/g,'').length != 0
+  const numericoMatch = condicaoOriginal.match(
+    /^isNaN\((res\[[^\]]+\]\.substring\((\d+),\s*(\d+)\))\)\s*\|\|\s*\1\.replace\(\/\\s\/g,\s*''\)\.length\s*!=\s*0$/
+  );
+  if (numericoMatch) {
+    const [, target, a, b] = numericoMatch;
+    return {
+      tipo: "numerico_branco",
+      alvo: target,
+      posicao: { inicio0: parseInt(a, 10), fim0: parseInt(b, 10) },
+    };
   }
 
-  // Modulo 11: substring(...) != calcularModulo11(...)
-  if (
-    condicaoOriginal.includes("calcularModulo11") ||
-    condicaoOriginal.includes("modulo11")
-  ) {
-    const m = condicaoOriginal.match(/substring\((\d+),\s*(\d+)\)/);
-    if (m) {
+  // Modulo 11: alvo.substring(...) != calcularModulo11(alvo.substring(...))
+  const moduloMatch = condicaoOriginal.match(
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*!=\s*calcularModulo11\(\1\.substring\((\d+),\s*(\d+)\)\)$/
+  );
+  if (moduloMatch) {
+    const [, target, a1, b1, a2, b2] = moduloMatch;
+    if (a1 === a2 && b1 === b2) {
       return {
         tipo: "modulo_11",
-        alvo,
-        posicao: { inicio0: parseInt(m[1], 10), fim0: parseInt(m[2], 10) },
+        alvo: target,
+        posicao: { inicio0: parseInt(a1, 10), fim0: parseInt(b1, 10) },
         documento: inferirDocumento(condicaoOriginal),
       };
     }
@@ -136,6 +130,37 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
   }
 
   return { tipo: "custom", alvo };
+}
+
+function inferirDominio(condicao: string): DslCondition | null {
+  const clauseRegex =
+    /(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*!=\s*"([^"]+)"/g;
+  const matches = [...condicao.matchAll(clauseRegex)];
+
+  if (matches.length < 2) return null;
+
+  const reconstructed = matches.map((m) => m[0]).join(" && ");
+  if (reconstructed !== condicao) return null;
+
+  const first = matches[0];
+  const target = first[1];
+  const inicio0 = parseInt(first[2], 10);
+  const fim0 = parseInt(first[3], 10);
+
+  const sameTargetAndPosition = matches.every(
+    (m) =>
+      m[1] === target &&
+      parseInt(m[2], 10) === inicio0 &&
+      parseInt(m[3], 10) === fim0
+  );
+  if (!sameTargetAndPosition) return null;
+
+  return {
+    tipo: "dominio",
+    alvo: target,
+    posicao: { inicio0, fim0 },
+    valores: matches.map((m) => m[4]),
+  };
 }
 
 function inferirDocumento(condicao: string): string {
