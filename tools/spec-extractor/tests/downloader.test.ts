@@ -75,6 +75,23 @@ describe("downloadText", () => {
     assert.strictEqual(calls, 2);
   });
 
+  it("retries on Bun 'Unable to connect' connection failure", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        throw new Error(
+          'Unable to connect. Is the computer able to access the url?'
+        );
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const result = await downloadText("http://example.com", { retries: 1 });
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+  });
+
   it("does not retry on HTTP 404", async () => {
     let calls = 0;
     global.fetch = mock(async () => {

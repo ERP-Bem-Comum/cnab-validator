@@ -12,6 +12,7 @@ function parseUrl(url: string, context: string): URL {
 
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_RETRIES = 1;
+const DEFAULT_BACKOFF_MS = 100;
 
 const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
 
@@ -21,18 +22,23 @@ function isRetryableError(err: Error, status?: number): boolean {
   }
   return (
     err.name === "AbortError" ||
-    /^(fetch failed|network error|getaddrinfo\b)|\b(ECONNREFUSED|ETIMEDOUT)\b/i.test(
+    /\b(fetch failed|network error|getaddrinfo|ECONNREFUSED|ETIMEDOUT|Unable to connect)\b/i.test(
       err.message
     )
   );
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export async function downloadText(
   url: string,
-  options: { timeoutMs?: number; retries?: number } = {}
+  options: { timeoutMs?: number; retries?: number; backoffMs?: number } = {}
 ): Promise<string> {
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const retries = options.retries ?? DEFAULT_RETRIES;
+  const backoffMs = options.backoffMs ?? DEFAULT_BACKOFF_MS;
 
   let lastError: Error | undefined;
   let lastStatus: number | undefined;
@@ -61,6 +67,8 @@ export async function downloadText(
       if (attempt >= retries || !isRetryableError(lastError, lastStatus)) {
         break;
       }
+      // Backoff exponencial antes da próxima tentativa.
+      await sleep(backoffMs * 2 ** attempt);
     } finally {
       clearTimeout(timer);
     }
