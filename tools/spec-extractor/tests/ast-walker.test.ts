@@ -114,6 +114,30 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[1].registro, "header-arquivo");
   });
 
+  it("uses the last definition when function names are duplicated", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[0] === "x") {
+          str += "Header de arquivo, colunas 001 a 003, erro.<br>";
+        }
+        return str;
+      }
+      function test(res) {
+        var str = "";
+        if (res[0] === "y") {
+          str += "Segmento Q, colunas 010 a 020, erro.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].registro, "segmento-q");
+    assert.deepStrictEqual(rules[0].colunas, [10, 20]);
+    assert.strictEqual(rules[0].condicao_original, 'res[0] === "y"');
+  });
+
   it("returns empty array when function is not found", () => {
     const rules = extractRulesFromFunction(fixture, "naoExiste");
     assert.deepStrictEqual(rules, []);

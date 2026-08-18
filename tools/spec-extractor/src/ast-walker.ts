@@ -30,15 +30,13 @@ export function extractRulesFromFunction(
   functionName: string
 ): RawRule[] {
   const ast = parse(code, { ecmaVersion: "latest", locations: true });
-  const rules: RawRule[] = [];
+  let targetBody: BlockStatement | undefined;
 
   simple(ast, {
     FunctionDeclaration(node: FunctionDeclaration | AnonymousFunctionDeclaration) {
       if (node.id?.name !== functionName) return;
       if (node.body.type !== "BlockStatement") return;
-      for (const stmt of node.body.body) {
-        visitStatement(stmt, code, functionName, rules);
-      }
+      targetBody = node.body;
     },
     VariableDeclarator(node: VariableDeclarator) {
       if (
@@ -54,12 +52,17 @@ export function extractRulesFromFunction(
       ) {
         const fn = node.init as FunctionExpression | ArrowFunctionExpression;
         if (fn.body.type !== "BlockStatement") return;
-        for (const stmt of fn.body.body) {
-          visitStatement(stmt, code, functionName, rules);
-        }
+        targetBody = fn.body;
       }
     },
   });
+
+  const rules: RawRule[] = [];
+  if (targetBody) {
+    for (const stmt of targetBody.body) {
+      visitStatement(stmt, code, functionName, rules);
+    }
+  }
 
   return rules;
 }
