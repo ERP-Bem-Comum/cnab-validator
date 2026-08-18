@@ -13,3 +13,24 @@ function validarDadosArquivo240(res) {
   }
   return str;
 }
+
+const validarComoExpressao = function (res) {
+  var str = "";
+  if (res[1].substring(0, 3) != "077") {
+    str += "Linha 2, colunas 001-003, Header de lote, código do banco inválido.<br>";
+  } else {
+    str += "Linha 2, colunas 001-003, Header de lote, código do banco OK.<br>";
+  }
+  return str;
+};
+
+const validarComoArrow = (res) => {
+  var str = "";
+  if (res[2].substring(0, 3) != "077" && res[2].substring(3, 7) != "0001") {
+    str += "Linha 3, colunas 004 a 007, Segmento Q, número do lote inválido.<br>";
+  }
+  if (Date.now() > 0) {
+    str += "Aviso genérico sem colunas.<br>";
+  }
+  return str;
+};

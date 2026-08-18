@@ -5,11 +5,14 @@ import type {
   Statement,
   FunctionDeclaration,
   AnonymousFunctionDeclaration,
+  FunctionExpression,
+  ArrowFunctionExpression,
   BlockStatement,
   BinaryExpression,
   Literal,
   MemberExpression,
   Identifier,
+  VariableDeclarator,
 } from "acorn";
 
 export interface RawRule {
@@ -17,9 +20,9 @@ export interface RawRule {
   linha_fonte: number;
   condicao_original: string;
   mensagem: string;
-  registro: string;
-  colunas: [number, number];
-  alvo: string;
+  registro: string | null;
+  colunas: [number, number] | null;
+  alvo: string | null;
 }
 
 export function extractRulesFromFunction(
@@ -37,6 +40,25 @@ export function extractRulesFromFunction(
         visitStatement(stmt, code, functionName, rules);
       }
     },
+    VariableDeclarator(node: VariableDeclarator) {
+      if (
+        node.id?.type !== "Identifier" ||
+        node.id.name !== functionName ||
+        !node.init
+      ) {
+        return;
+      }
+      if (
+        node.init.type === "FunctionExpression" ||
+        node.init.type === "ArrowFunctionExpression"
+      ) {
+        const fn = node.init as FunctionExpression | ArrowFunctionExpression;
+        if (fn.body.type !== "BlockStatement") return;
+        for (const stmt of fn.body.body) {
+          visitStatement(stmt, code, functionName, rules);
+        }
+      }
+    },
   });
 
   return rules;
@@ -50,20 +72,40 @@ function visitStatement(
 ): void {
   switch (stmt.type) {
     case "IfStatement": {
+      const testSource = code.slice(stmt.test.start, stmt.test.end);
+      const targets = findResMembers(stmt.test);
       const message = extractConcatenatedMessage(stmt.consequent, code);
       if (message) {
         rules.push({
           funcao_origem: functionName,
           linha_fonte: stmt.loc?.start.line ?? 0,
-          condicao_original: code.slice(stmt.test.start, stmt.test.end),
+          condicao_original: testSource,
           mensagem: message,
           registro: inferirRegistro(message),
           colunas: extrairColunas(message),
-          alvo: extrairAlvo(stmt.test),
+          alvo: targets[0] ?? null,
         });
       }
       if (stmt.alternate) {
-        visitStatement(stmt.alternate, code, functionName, rules);
+        if (
+          stmt.alternate.type === "BlockStatement" ||
+          stmt.alternate.type === "ExpressionStatement"
+        ) {
+          const altMessage = extractConcatenatedMessage(stmt.alternate, code);
+          if (altMessage) {
+            rules.push({
+              funcao_origem: functionName,
+              linha_fonte: stmt.alternate.loc?.start.line ?? 0,
+              condicao_original: `!(${testSource})`,
+              mensagem: altMessage,
+              registro: inferirRegistro(altMessage),
+              colunas: extrairColunas(altMessage),
+              alvo: targets[0] ?? null,
+            });
+          }
+        } else {
+          visitStatement(stmt.alternate, code, functionName, rules);
+        }
       }
       break;
     }
@@ -121,8 +163,12 @@ function extractConcatenatedMessage(
   return null;
 }
 
+function isLiteral(node: Node): node is Literal {
+  return node.type === "Literal";
+}
+
 function isLiteralString(node: Node): node is Literal & { value: string } {
-  return node.type === "Literal" && typeof (node as Literal).value === "string";
+  return isLiteral(node) && typeof node.value === "string";
 }
 
 function isAddExpression(node: Node): node is BinaryExpression {
@@ -142,71 +188,81 @@ function extractStringFromExpression(expr: Node, code: string): string {
   return "";
 }
 
-function inferirRegistro(mensagem: string): string {
+function inferirRegistro(mensagem: string): string | null {
   const lower = mensagem.toLowerCase();
-  if (lower.includes("header de arquivo")) return "header-arquivo";
-  if (lower.includes("header de lote")) return "header-lote";
-  if (lower.includes("segmento p")) return "segmento-p";
-  if (lower.includes("segmento q")) return "segmento-q";
-  if (lower.includes("segmento r")) return "segmento-r";
-  if (lower.includes("trailer de lote")) return "trailer-lote";
-  if (lower.includes("trailer de arquivo")) return "trailer-arquivo";
-  return "nao-classificado";
+  const synonyms: Record<string, string[]> = {
+    "header-arquivo": [
+      "header de arquivo",
+      "header do arquivo",
+      "header arquivo",
+      "cabeçalho de arquivo",
+      "cabeçalho do arquivo",
+    ],
+    "header-lote": [
+      "header de lote",
+      "header do lote",
+      "header lote",
+      "cabeçalho de lote",
+      "cabeçalho do lote",
+    ],
+    "segmento-p": ["segmento p", "segmento-p"],
+    "segmento-q": ["segmento q", "segmento-q"],
+    "segmento-r": ["segmento r", "segmento-r"],
+    "trailer-lote": [
+      "trailer de lote",
+      "trailer do lote",
+      "trailer lote",
+    ],
+    "trailer-arquivo": [
+      "trailer de arquivo",
+      "trailer do arquivo",
+      "trailer arquivo",
+    ],
+  };
+
+  for (const [registro, terms] of Object.entries(synonyms)) {
+    if (terms.some((term) => lower.includes(term))) {
+      return registro;
+    }
+  }
+
+  return null;
 }
 
-function extrairColunas(mensagem: string): [number, number] {
-  const match = mensagem.match(/colunas?\s+(\d+)\s+a\s+(\d+)/i);
-  if (match) return [parseInt(match[1], 10), parseInt(match[2], 10)];
+function extrairColunas(mensagem: string): [number, number] | null {
+  const range = mensagem.match(/colunas?\s+(\d+)\s+a\s+(\d+)/i);
+  if (range) {
+    return [parseInt(range[1], 10), parseInt(range[2], 10)];
+  }
+  const hyphen = mensagem.match(/colunas?\s+(\d+)\s*[-–—]\s*(\d+)/i);
+  if (hyphen) {
+    return [parseInt(hyphen[1], 10), parseInt(hyphen[2], 10)];
+  }
   const single = mensagem.match(/coluna\s+(\d+)/i);
   if (single) {
     const n = parseInt(single[1], 10);
     return [n, n];
   }
-  return [0, 0];
-}
-
-function extrairAlvo(test: Node): string {
-  const found = findResMember(test);
-  return found ?? "res[0]";
-}
-
-function isIdentifier(node: Node): node is Identifier {
-  return node.type === "Identifier";
-}
-
-function isMemberExpression(node: Node): node is MemberExpression {
-  return node.type === "MemberExpression";
-}
-
-function findResMember(node: unknown): string | null {
-  if (!node || typeof node !== "object") return null;
-
-  const n = node as Node;
-  if (isMemberExpression(n)) {
-    const obj = n.object;
-    if (isIdentifier(obj) && obj.name === "res") {
-      const prop = n.property;
-      if (isLiteralString(prop)) {
-        return `res[${prop.value}]`;
-      }
-      if (isIdentifier(prop)) {
-        return `res.${prop.name}`;
-      }
-      return "res[?]";
-    }
-  }
-
-  for (const value of Object.values(node as Record<string, unknown>)) {
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        const result = findResMember(item);
-        if (result) return result;
-      }
-    } else if (value && typeof value === "object" && "type" in value) {
-      const result = findResMember(value);
-      if (result) return result;
-    }
-  }
-
   return null;
+}
+
+function findResMembers(test: Node): string[] {
+  const targets: string[] = [];
+
+  simple(test, {
+    MemberExpression(node: MemberExpression) {
+      if (node.object.type !== "Identifier" || node.object.name !== "res") {
+        return;
+      }
+
+      const prop = node.property;
+      if (isLiteral(prop)) {
+        targets.push(`res[${prop.value}]`);
+      } else if (prop.type === "Identifier") {
+        targets.push(node.computed ? `res[${prop.name}]` : `res.${prop.name}`);
+      }
+    },
+  });
+
+  return targets;
 }
