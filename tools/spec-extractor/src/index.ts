@@ -7,6 +7,17 @@ import {
   SPECS_DIR,
   VALIDADOR_URL,
 } from "./config.js";
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildFunctionPattern(funcName: string): RegExp {
+  const esc = escapeRegExp(funcName);
+  return new RegExp(
+    `(?:function\\s+${esc}|\\b${esc}\\s*=\\s*(?:function|\\(.*\\)\\s*=>))`
+  );
+}
 import {
   downloadText,
   extractInlineScripts,
@@ -37,6 +48,8 @@ async function main() {
     console.log(`Salvo: ${path}`);
   }
 
+  const assetUrls = [VALIDADOR_URL, ...scriptUrls];
+
   const inlineScripts = extractInlineScripts(html);
   const inlineFunctions = new Map<string, string>();
   for (const script of inlineScripts) {
@@ -50,9 +63,10 @@ async function main() {
   for (const [funcName, layout] of Object.entries(MAPEAMENTO_FUNCOES)) {
     if (!LAYOUTS_DO_CICLO.includes(layout as (typeof LAYOUTS_DO_CICLO)[number])) continue;
 
+    const pattern = buildFunctionPattern(funcName);
     let source = "";
     for (const content of sources.values()) {
-      if (content.includes(`function ${funcName}`) || content.includes(`${funcName} =`)) {
+      if (pattern.test(content)) {
         source = content;
         break;
       }
@@ -75,16 +89,16 @@ async function main() {
   writeSpecs(SPECS_DIR, rulesByLayout);
   console.log(`Specs escritos em ${SPECS_DIR}`);
 
-  await writeBaseline([html, ...sources.values()]);
+  await writeBaseline([html, ...sources.values()], assetUrls);
 }
 
-async function writeBaseline(contents: string[]) {
+async function writeBaseline(contents: string[], urls: string[]) {
   const hash = createHash("sha256");
   for (const c of contents) hash.update(c);
   const baseline = {
     data: new Date().toISOString(),
     sha256: hash.digest("hex"),
-    fontes: [VALIDADOR_URL],
+    fontes: urls,
   };
   writeFileSync(`${ASSETS_DIR}/baseline.json`, JSON.stringify(baseline, null, 2));
   console.log(`Baseline SHA-256: ${baseline.sha256}`);

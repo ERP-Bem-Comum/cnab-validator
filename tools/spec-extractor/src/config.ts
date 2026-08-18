@@ -20,3 +20,15 @@ export const MAPEAMENTO_FUNCOES = {
   validarDadosFolha240: "folha-pagamento",
   validarDadosFolha200: "folha-pagamento",
 } satisfies Record<string, (typeof LAYOUTS_DO_CICLO)[number]>;
+
+export interface LayoutMetadata {
+  nome: string;
+  tipo: "remessa" | "retorno" | "infra";
+  tamanhos_linha: number[];
+}
+
+export const LAYOUTS: Record<(typeof LAYOUTS_DO_CICLO)[number], LayoutMetadata> = {
+  "cobranca-remessa": { nome: "Cobrança — Remessa", tipo: "remessa", tamanhos_linha: [240, 400] },
+  multipag: { nome: "Multipag", tipo: "remessa", tamanhos_linha: [240] },
+  "folha-pagamento": { nome: "Folha de Pagamento", tipo: "remessa", tamanhos_linha: [200, 240] },
+};

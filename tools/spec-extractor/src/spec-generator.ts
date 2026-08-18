@@ -1,5 +1,6 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { LAYOUTS } from "./config.js";
 import type { DslRule } from "./rule-mapper.js";
 
 const VALID_LAYOUT_KEY = /^[a-z0-9-]+$/;
@@ -10,16 +11,10 @@ function assertValidLayout(layout: string): void {
   }
 }
 
-const TIPOS: Record<string, "remessa" | "retorno" | "infra"> = {
-  "cobranca-remessa": "remessa",
-  multipag: "remessa",
-  "folha-pagamento": "remessa",
-};
-
 function tipoLayout(layout: string): "remessa" | "retorno" | "infra" {
-  const tipo = TIPOS[layout];
-  if (!tipo) throw new Error(`Unknown layout: ${layout}`);
-  return tipo;
+  const meta = LAYOUTS[layout as keyof typeof LAYOUTS];
+  if (!meta) throw new Error(`Unknown layout: ${layout}`);
+  return meta.tipo;
 }
 
 export interface LayoutEntry {
@@ -72,9 +67,9 @@ export function writeSpecs(
       const tipo = tipoLayout(layout);
       const entry: LayoutEntry = {
         layout,
-        nome: nomeLayout(layout),
+        nome: LAYOUTS[layout as keyof typeof LAYOUTS].nome,
         tipo,
-        tamanhos_linha: tamanhosLayout(layout),
+        tamanhos_linha: LAYOUTS[layout as keyof typeof LAYOUTS].tamanhos_linha,
         arquivo: join("layouts", `${layout}.json`),
         total_regras: rules.length,
         sub_layouts: subLayouts(layout, rules),
@@ -103,24 +98,6 @@ export function writeSpecs(
     JSON.stringify(index, null, 2),
     "utf-8"
   );
-}
-
-function nomeLayout(layout: string): string {
-  const nomes: Record<string, string> = {
-    "cobranca-remessa": "Cobrança — Remessa",
-    multipag: "Multipag",
-    "folha-pagamento": "Folha de Pagamento",
-  };
-  return nomes[layout] ?? layout;
-}
-
-function tamanhosLayout(layout: string): number[] {
-  const tamanhos: Record<string, number[]> = {
-    "cobranca-remessa": [240, 400],
-    multipag: [240],
-    "folha-pagamento": [200, 240],
-  };
-  return tamanhos[layout] ?? [];
 }
 
 function subLayouts(layout: string, rules: DslRule[]): { funcao: string; regras: number }[] {

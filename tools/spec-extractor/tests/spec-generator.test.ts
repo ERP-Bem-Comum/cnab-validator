@@ -8,7 +8,7 @@ import type { DslRule } from "../src/rule-mapper.js";
 
 function makeRule(layout: string, overrides: Partial<DslRule> = {}): DslRule {
   return {
-    id: `${layout}:117`,
+    id: `${layout}:validarDadosArquivo240:117`,
     funcao_origem: "validarDadosArquivo240",
     linha_fonte: 117,
     registro: "header-arquivo",
@@ -48,7 +48,7 @@ describe("writeSpecs", () => {
     try {
       writeSpecs(dir, {
         "cobranca-remessa": [makeRule("cobranca-remessa")],
-        multipag: [makeRule("multipag"), makeRule("multipag", { id: "multipag:118", linha_fonte: 118 })],
+        multipag: [makeRule("multipag"), makeRule("multipag", { id: "multipag:validarDadosArquivo240:118", linha_fonte: 118 })],
         "folha-pagamento": [],
       });
 
@@ -118,8 +118,8 @@ describe("writeSpecs", () => {
       writeSpecs(dir, {
         "cobranca-remessa": [
           makeRule("cobranca-remessa", { funcao_origem: "validarDadosArquivo240" }),
-          makeRule("cobranca-remessa", { funcao_origem: "validarDadosArquivo240", id: "cobranca-remessa:118", linha_fonte: 118 }),
-          makeRule("cobranca-remessa", { funcao_origem: "validarTrailerArquivo240", id: "cobranca-remessa:200", linha_fonte: 200 }),
+          makeRule("cobranca-remessa", { funcao_origem: "validarDadosArquivo240", id: "cobranca-remessa:validarDadosArquivo240:118", linha_fonte: 118 }),
+          makeRule("cobranca-remessa", { funcao_origem: "validarTrailerArquivo240", id: "cobranca-remessa:validarTrailerArquivo240:200", linha_fonte: 200 }),
         ],
       });
 

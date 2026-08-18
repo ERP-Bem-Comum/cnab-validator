@@ -36,15 +36,54 @@ export interface DslRule {
   severidade: string;
 }
 
+export function extrairPosicoesDaCondicao(
+  condicao: string
+): { inicio0: number; fim0: number } | null {
+  const match = condicao.match(/\.substring\((\d+),\s*(\d+)\)/);
+  if (!match) return null;
+  return { inicio0: parseInt(match[1], 10), fim0: parseInt(match[2], 10) };
+}
+
 export function mapToDsl(raw: RawRule, layout: string): DslRule {
   const alvo = raw.alvo ?? "res[0]";
   const condicao = inferirCondicao(raw.condicao_original, alvo);
-  const colunas = raw.colunas ?? [0, 0];
-  const inicio0 = colunas[0] > 0 ? colunas[0] - 1 : 0;
-  const fim0 = colunas[1] > 0 ? colunas[1] : inicio0 + 1;
+
+  let colunas: [number, number];
+  let inicio0: number;
+  let fim0: number;
+
+  const posicoesCondicao = extrairPosicoesDaCondicao(raw.condicao_original);
+  if (posicoesCondicao) {
+    inicio0 = posicoesCondicao.inicio0;
+    fim0 = posicoesCondicao.fim0;
+
+    if (fim0 < inicio0) {
+      console.warn(
+        `[${layout}:${raw.funcao_origem}:${raw.linha_fonte}] Posições invertidas na condição: ${raw.condicao_original}`
+      );
+      const temp = inicio0;
+      inicio0 = fim0;
+      fim0 = temp;
+    }
+
+    colunas = [inicio0 + 1, fim0];
+  } else {
+    colunas = raw.colunas ?? [0, 0];
+    inicio0 = colunas[0] > 0 ? colunas[0] - 1 : 0;
+    fim0 = colunas[1] > 0 ? colunas[1] : inicio0 + 1;
+
+    if (fim0 < inicio0) {
+      console.warn(
+        `[${layout}:${raw.funcao_origem}:${raw.linha_fonte}] Colunas invertidas: [${colunas[0]}, ${colunas[1]}]`
+      );
+      const temp = inicio0;
+      inicio0 = fim0;
+      fim0 = temp;
+    }
+  }
 
   return {
-    id: `${layout}:${raw.linha_fonte}`,
+    id: `${layout}:${raw.funcao_origem}:${raw.linha_fonte}`,
     funcao_origem: raw.funcao_origem,
     linha_fonte: raw.linha_fonte,
     registro: raw.registro ?? "nao-classificado",
@@ -75,18 +114,18 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
   const dominio = inferirDominio(condicao);
   if (dominio) return dominio;
 
-  // Literal fixo: res[x].substring(a,b) != "valor"
+  // Literal fixo: res[x].substring(a,b) (==|!=) "valor" ou número
   const literalMatch = condicao.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=)\s*"([^"]*)"$/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=)\s*(?:"([^"]*)"|(\d+))$/
   );
   if (literalMatch) {
-    const [, target, a, b, operador, valor] = literalMatch;
+    const [, target, a, b, operador, valorStr, valorNum] = literalMatch;
     return {
       tipo: "literal_fixo",
       alvo: target,
       posicao: { inicio0: parseInt(a, 10), fim0: parseInt(b, 10) },
       operador,
-      valor,
+      valor: valorStr ?? valorNum,
     };
   }
 
@@ -104,8 +143,15 @@ function inferirCondicao(condicaoOriginal: string, alvo: string): DslCondition {
   }
 
   // Modulo 11: alvo.substring(...) != calcularModulo11(alvo.substring(...))
+  // Nota: as fontes do ciclo atual não usam essas funções (o dígito é validado
+  // com expressões aritméticas inline), mas o matcher reconhece as variações
+  // mais comuns para quando/uso futuro.
+  const MODULO_11_FUNCOES =
+    "(?:calcularModulo11|modulo11|calcModulo11|mod11|calcularDigitoVerificador|calcularDigito|calcularDV|calcDV)";
   const moduloMatch = condicao.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*!=\s*calcularModulo11\(\1\.substring\((\d+),\s*(\d+)\)\)$/
+    new RegExp(
+      `^(res\\[[^\\]]+\\])\\.substring\\((\\d+),\\s*(\\d+)\\)\\s*!=\\s*${MODULO_11_FUNCOES}\\(\\1\\.substring\\((\\d+),\\s*(\\d+)\\)\\)$`
+    )
   );
   if (moduloMatch) {
     const [, target, a1, b1, a2, b2] = moduloMatch;
