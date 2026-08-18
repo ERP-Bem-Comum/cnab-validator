@@ -29,22 +29,18 @@ describe("runPipeline", () => {
 
   it("encontra funções inline quando não estão em sources externos", () => {
     const html = "<html></html>";
-    const inline = new Map<string, string>([
-      [
-        "validarDadosArquivo240",
-        `function validarDadosArquivo240(res) {
-          if (res[0].substring(0, 3) != "237") {
-            mensagem = "Linha 1, colunas 001 a 003, Header de arquivo, erro.";
-          }
-        }`,
-      ],
-    ]);
+    const inlineScript = `function validarDadosArquivo240(res) {
+      if (res[0].substring(0, 3) != "237") {
+        mensagem = "Linha 1, colunas 001 a 003, Header de arquivo, erro.";
+      }
+    }`;
 
     const result = runPipeline(html, new Map(), {
-      inlineFunctions: inline,
+      inlineScripts: [inlineScript],
       assetUrls: ["https://example.com/validador"],
     });
 
     expect(result.rulesByLayout["cobranca-remessa"]).toHaveLength(1);
+    expect(result.rulesByLayout["cobranca-remessa"][0].linha_fonte).toBe(2);
   });
 });

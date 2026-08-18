@@ -25,33 +25,49 @@ export interface MainResult {
 }
 
 export interface PipelineResult {
-  html: string;
   assetUrls: string[];
   sources: Map<string, string>;
   rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]>;
 }
 
-function findFunctionSource(
-  funcName: string,
+interface FunctionSource {
+  source: string;
+  fonte: string;
+}
+
+function buildFunctionIndex(
   sources: Map<string, string>,
-  inlineFunctions: Map<string, string>
-): { source: string; fonte: string } | null {
-  const matches: { source: string; fonte: string }[] = [];
+  inlineScripts: string[]
+): Map<string, FunctionSource[]> {
+  const index = new Map<string, FunctionSource[]>();
 
   for (const [url, content] of sources) {
-    const fns = extractNamedFunctions(content);
-    if (fns.has(funcName)) {
-      // Retorna o arquivo completo para preservar a rastreabilidade de linha
-      // no relatório (linha_fonte relativa ao arquivo original, não à fatia).
-      matches.push({ source: content, fonte: url });
+    for (const name of extractNamedFunctions(content).keys()) {
+      const entry = index.get(name) ?? [];
+      entry.push({ source: content, fonte: url });
+      index.set(name, entry);
     }
   }
 
-  if (inlineFunctions.has(funcName)) {
-    matches.push({ source: inlineFunctions.get(funcName)!, fonte: "inline" });
+  for (const script of inlineScripts) {
+    for (const name of extractNamedFunctions(script).keys()) {
+      const entry = index.get(name) ?? [];
+      // Guarda o script inline completo para preservar linha_fonte relativa ao
+      // documento original, não à fatia da função.
+      entry.push({ source: script, fonte: "inline" });
+      index.set(name, entry);
+    }
   }
 
-  if (matches.length === 0) {
+  return index;
+}
+
+function findFunctionSource(
+  funcName: string,
+  index: Map<string, FunctionSource[]>
+): FunctionSource | null {
+  const matches = index.get(funcName);
+  if (!matches || matches.length === 0) {
     return null;
   }
 
@@ -68,12 +84,13 @@ function findFunctionSource(
 export function runPipeline(
   html: string,
   sources: Map<string, string>,
-  options: { inlineFunctions?: Map<string, string>; assetUrls?: string[] } = {}
+  options: { inlineScripts?: string[]; assetUrls?: string[] } = {}
 ): PipelineResult {
-  const inlineFunctions = options.inlineFunctions ?? new Map<string, string>();
+  const inlineScripts = options.inlineScripts ?? [];
   const assetUrls =
     options.assetUrls ?? [VALIDADOR_URL, ...Array.from(sources.keys())];
 
+  const functionIndex = buildFunctionIndex(sources, inlineScripts);
   const rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]> = {};
 
   for (const [funcName, layout] of Object.entries(MAPEAMENTO_FUNCOES)) {
@@ -83,7 +100,7 @@ export function runPipeline(
       continue;
     }
 
-    const found = findFunctionSource(funcName, sources, inlineFunctions);
+    const found = findFunctionSource(funcName, functionIndex);
     if (!found) {
       console.warn(`Função não encontrada: ${funcName}`);
       continue;
@@ -96,7 +113,7 @@ export function runPipeline(
     console.log(`${funcName}: ${dslRules.length} regras -> ${layout}`);
   }
 
-  return { html, assetUrls, sources, rulesByLayout };
+  return { assetUrls, sources, rulesByLayout };
 }
 
 export async function main(): Promise<MainResult> {
@@ -119,15 +136,9 @@ export async function main(): Promise<MainResult> {
   }
 
   const inlineScripts = extractInlineScripts(html);
-  const inlineFunctions = new Map<string, string>();
-  for (const script of inlineScripts) {
-    for (const [name, body] of extractNamedFunctions(script)) {
-      inlineFunctions.set(name, body);
-    }
-  }
 
   const pipeline = runPipeline(html, sources, {
-    inlineFunctions,
+    inlineScripts,
     assetUrls: [VALIDADOR_URL, ...scriptUrls],
   });
   writeSpecs(SPECS_DIR, pipeline.rulesByLayout);
@@ -145,7 +156,6 @@ function writeBaseline(contents: string[], urls: string[]): string {
   const hash = createHash("sha256");
   for (const c of contents) hash.update(c);
   const baseline = {
-    data: new Date().toISOString(),
     sha256: hash.digest("hex"),
     fontes: urls,
   };
