@@ -113,9 +113,42 @@ describe("downloadText", () => {
     assert.ok(elapsed >= 50, `expected at least 50 ms backoff, got ${elapsed}`);
   });
 
+  it("uses zero backoff when backoffMs is 0", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        throw new TypeError("fetch failed");
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const start = Date.now();
+    const result = await downloadText("http://example.com", {
+      retries: 1,
+      backoffMs: 0,
+    });
+    const elapsed = Date.now() - start;
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+    assert.ok(elapsed < 50, `expected near-zero backoff, got ${elapsed}`);
+  });
+
   it("rejects invalid retry options", async () => {
     await assert.rejects(
       () => downloadText("http://example.com", { retries: -1 }),
+      /retries must be a non-negative finite number/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: 1.5 }),
+      /retries must be an integer/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: NaN }),
+      /retries must be a non-negative finite number/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: Infinity }),
       /retries must be a non-negative finite number/
     );
     await assert.rejects(
@@ -123,7 +156,15 @@ describe("downloadText", () => {
       /backoffMs must be a non-negative finite number/
     );
     await assert.rejects(
+      () => downloadText("http://example.com", { backoffMs: NaN }),
+      /backoffMs must be a non-negative finite number/
+    );
+    await assert.rejects(
       () => downloadText("http://example.com", { timeoutMs: -1 }),
+      /timeoutMs must be a non-negative finite number/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { timeoutMs: Infinity }),
       /timeoutMs must be a non-negative finite number/
     );
   });

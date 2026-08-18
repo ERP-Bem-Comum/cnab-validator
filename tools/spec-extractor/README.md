@@ -22,7 +22,7 @@ O downloader retrya automaticamente as seguintes condições:
 
 `retries` é o número de tentativas adicionais; o total de requisições é
 `retries + 1`. Entre tentativas há backoff exponencial com cap de 30 s
-(`Math.min(backoffMs * 2^attempt, 30000)`, default `backoffMs = 100 ms`).
+(`Math.min(backoffMs * 2 ** attempt, 30000)`, default `backoffMs = 100 ms`).
 Erros HTTP 4xx (exceto 408/429) e erros cuja mensagem não indique falha de
 rede não geram retry.
 

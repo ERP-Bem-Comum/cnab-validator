@@ -33,12 +33,22 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function assertNonNegativeInteger(
+function assertNonNegativeFinite(
   value: unknown,
   name: string
 ): asserts value is number {
   if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
     throw new TypeError(`${name} must be a non-negative finite number`);
+  }
+}
+
+function assertNonNegativeInteger(
+  value: unknown,
+  name: string
+): asserts value is number {
+  assertNonNegativeFinite(value, name);
+  if (!Number.isInteger(value)) {
+    throw new TypeError(`${name} must be an integer`);
   }
 }
 
@@ -50,9 +60,9 @@ export async function downloadText(
   const retries = options.retries ?? DEFAULT_RETRIES;
   const backoffMs = options.backoffMs ?? DEFAULT_BACKOFF_MS;
 
-  assertNonNegativeInteger(timeoutMs, "timeoutMs");
+  assertNonNegativeFinite(timeoutMs, "timeoutMs");
   assertNonNegativeInteger(retries, "retries");
-  assertNonNegativeInteger(backoffMs, "backoffMs");
+  assertNonNegativeFinite(backoffMs, "backoffMs");
 
   let lastError: Error | undefined;
   let lastStatus: number | undefined;
