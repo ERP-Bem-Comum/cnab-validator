@@ -27,7 +27,8 @@ export interface RawRule {
 
 export function extractRulesFromFunction(
   code: string,
-  functionName: string
+  functionName: string,
+  lineOffset: number = 0
 ): RawRule[] {
   const ast = parse(code, { ecmaVersion: "latest", locations: true });
   let targetBody: BlockStatement | undefined;
@@ -60,7 +61,7 @@ export function extractRulesFromFunction(
   const rules: RawRule[] = [];
   if (targetBody) {
     for (const stmt of targetBody.body) {
-      visitStatement(stmt, code, functionName, rules);
+      visitStatement(stmt, code, functionName, rules, lineOffset);
     }
   }
 
@@ -71,7 +72,8 @@ function visitStatement(
   stmt: Statement,
   code: string,
   functionName: string,
-  rules: RawRule[]
+  rules: RawRule[],
+  lineOffset: number
 ): void {
   switch (stmt.type) {
     case "IfStatement": {
@@ -81,7 +83,7 @@ function visitStatement(
       if (message) {
         rules.push({
           funcao_origem: functionName,
-          linha_fonte: stmt.loc?.start.line ?? 0,
+          linha_fonte: (stmt.loc?.start.line ?? 0) + lineOffset,
           condicao_original: testSource,
           mensagem: message,
           registro: inferirRegistro(message),
@@ -98,7 +100,7 @@ function visitStatement(
           if (altMessage) {
             rules.push({
               funcao_origem: functionName,
-              linha_fonte: stmt.alternate.loc?.start.line ?? 0,
+              linha_fonte: (stmt.alternate.loc?.start.line ?? 0) + lineOffset,
               condicao_original: `!(${testSource})`,
               mensagem: altMessage,
               registro: inferirRegistro(altMessage),
@@ -107,7 +109,7 @@ function visitStatement(
             });
           }
         } else {
-          visitStatement(stmt.alternate, code, functionName, rules);
+          visitStatement(stmt.alternate, code, functionName, rules, lineOffset);
         }
       }
       break;
@@ -116,12 +118,12 @@ function visitStatement(
     case "WhileStatement": {
       const body = stmt.body;
       if (body.type === "BlockStatement") {
-        visitBlock(body, code, functionName, rules);
+        visitBlock(body, code, functionName, rules, lineOffset);
       }
       break;
     }
     case "BlockStatement": {
-      visitBlock(stmt, code, functionName, rules);
+      visitBlock(stmt, code, functionName, rules, lineOffset);
       break;
     }
   }
@@ -131,10 +133,11 @@ function visitBlock(
   block: BlockStatement,
   code: string,
   functionName: string,
-  rules: RawRule[]
+  rules: RawRule[],
+  lineOffset: number
 ): void {
   for (const inner of block.body) {
-    visitStatement(inner, code, functionName, rules);
+    visitStatement(inner, code, functionName, rules, lineOffset);
   }
 }
 

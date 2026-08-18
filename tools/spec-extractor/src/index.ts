@@ -13,6 +13,7 @@ import {
   extractInlineScripts,
   extractScriptUrls,
   saveAsset,
+  type InlineScript,
 } from "./downloader.js";
 import { extractNamedFunctions } from "./inline-parser.js";
 import { extractRulesFromFunction } from "./ast-walker.js";
@@ -30,31 +31,49 @@ export interface PipelineResult {
   rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]>;
 }
 
+export interface Logger {
+  log: (message: string) => void;
+  warn: (message: string) => void;
+}
+
+const noopLogger: Logger = {
+  log: () => {},
+  warn: () => {},
+};
+
+const consoleLogger: Logger = {
+  log: console.log,
+  warn: console.warn,
+};
+
 interface FunctionSource {
   source: string;
   fonte: string;
+  lineOffset: number;
 }
 
 function buildFunctionIndex(
   sources: Map<string, string>,
-  inlineScripts: string[]
+  inlineScripts: InlineScript[]
 ): Map<string, FunctionSource[]> {
   const index = new Map<string, FunctionSource[]>();
 
   for (const [url, content] of sources) {
     for (const name of extractNamedFunctions(content).keys()) {
       const entry = index.get(name) ?? [];
-      entry.push({ source: content, fonte: url });
+      entry.push({ source: content, fonte: url, lineOffset: 0 });
       index.set(name, entry);
     }
   }
 
   for (const script of inlineScripts) {
-    for (const name of extractNamedFunctions(script).keys()) {
+    for (const name of extractNamedFunctions(script.code).keys()) {
       const entry = index.get(name) ?? [];
-      // Guarda o script inline completo para preservar linha_fonte relativa ao
-      // documento original, não à fatia da função.
-      entry.push({ source: script, fonte: "inline" });
+      entry.push({
+        source: script.code,
+        fonte: "inline",
+        lineOffset: script.lineOffset,
+      });
       index.set(name, entry);
     }
   }
@@ -64,7 +83,8 @@ function buildFunctionIndex(
 
 function findFunctionSource(
   funcName: string,
-  index: Map<string, FunctionSource[]>
+  index: Map<string, FunctionSource[]>,
+  logger: Logger
 ): FunctionSource | null {
   const matches = index.get(funcName);
   if (!matches || matches.length === 0) {
@@ -73,7 +93,7 @@ function findFunctionSource(
 
   if (matches.length > 1) {
     const fontes = matches.map((m) => m.fonte).join(", ");
-    console.warn(
+    logger.warn(
       `Função ${funcName} encontrada em múltiplas fontes (${fontes}); usando ${matches[0].fonte}.`
     );
   }
@@ -83,11 +103,16 @@ function findFunctionSource(
 
 export function runPipeline(
   sources: Map<string, string>,
-  options: { inlineScripts?: string[]; assetUrls?: string[] } = {}
+  options: {
+    inlineScripts?: InlineScript[];
+    assetUrls?: string[];
+    logger?: Logger;
+  } = {}
 ): PipelineResult {
   const inlineScripts = options.inlineScripts ?? [];
   const assetUrls =
     options.assetUrls ?? [VALIDADOR_URL, ...Array.from(sources.keys())];
+  const logger = options.logger ?? noopLogger;
 
   const functionIndex = buildFunctionIndex(sources, inlineScripts);
   const rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]> = {};
@@ -99,17 +124,21 @@ export function runPipeline(
       continue;
     }
 
-    const found = findFunctionSource(funcName, functionIndex);
+    const found = findFunctionSource(funcName, functionIndex, logger);
     if (!found) {
-      console.warn(`Função não encontrada: ${funcName}`);
+      logger.warn(`Função não encontrada: ${funcName}`);
       continue;
     }
 
-    const rawRules = extractRulesFromFunction(found.source, funcName);
+    const rawRules = extractRulesFromFunction(
+      found.source,
+      funcName,
+      found.lineOffset
+    );
     const dslRules = rawRules.map((r) => mapToDsl(r, layout));
     rulesByLayout[layout] = rulesByLayout[layout] ?? [];
     rulesByLayout[layout].push(...dslRules);
-    console.log(`${funcName}: ${dslRules.length} regras -> ${layout}`);
+    logger.log(`${funcName}: ${dslRules.length} regras -> ${layout}`);
   }
 
   return { assetUrls, sources, rulesByLayout };
@@ -136,17 +165,16 @@ export async function main(): Promise<MainResult> {
 
   const inlineScripts = extractInlineScripts(html);
 
+  const assetUrls = [VALIDADOR_URL, ...sources.keys()];
   const pipeline = runPipeline(sources, {
     inlineScripts,
-    assetUrls: [VALIDADOR_URL, ...scriptUrls],
+    assetUrls,
+    logger: consoleLogger,
   });
   writeSpecs(SPECS_DIR, pipeline.rulesByLayout);
   console.log(`Specs escritos em ${SPECS_DIR}`);
 
-  const baselineSha256 = writeBaseline(
-    [html, ...sources.values()],
-    pipeline.assetUrls
-  );
+  const baselineSha256 = writeBaseline([html, ...sources.values()], assetUrls);
 
   return { baselineSha256, rulesByLayout: pipeline.rulesByLayout };
 }

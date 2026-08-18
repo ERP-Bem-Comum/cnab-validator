@@ -34,7 +34,7 @@ describe("bootstrap smoke test", () => {
     `;
     const result = parseScripts(html);
     expect(result.urls).toEqual(["/app.js"]);
-    expect(result.inline).toEqual(["var x = 1;"]);
+    expect(result.inline).toEqual([{ code: "var x = 1;", lineOffset: 3 }]);
   });
 
   it("extractNamedFunctions encontra funções nomeadas", () => {

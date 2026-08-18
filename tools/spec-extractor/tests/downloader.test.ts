@@ -56,7 +56,7 @@ describe("parseScripts", () => {
     const result = parseScripts(html);
     assert.deepStrictEqual(result, {
       urls: ["/js/util.js", "https://cdn.example.com/deps.js"],
-      inline: ['console.log("inline")'],
+      inline: [{ code: 'console.log("inline")', lineOffset: 2 }],
     });
   });
 
@@ -99,7 +99,10 @@ describe("extractInlineScripts", () => {
       <script>function run() {}</script>
     `;
     const scripts = extractInlineScripts(html);
-    assert.deepStrictEqual(scripts, ["var x = 1;", "function run() {}"]);
+    assert.deepStrictEqual(scripts, [
+      { code: "var x = 1;", lineOffset: 2 },
+      { code: "function run() {}", lineOffset: 3 },
+    ]);
   });
 
   it("returns empty array when no inline scripts exist", () => {

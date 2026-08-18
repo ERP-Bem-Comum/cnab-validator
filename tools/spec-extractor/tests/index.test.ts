@@ -34,11 +34,12 @@ describe("runPipeline", () => {
     }`;
 
     const result = runPipeline(new Map(), {
-      inlineScripts: [inlineScript],
+      inlineScripts: [{ code: inlineScript, lineOffset: 10 }],
       assetUrls: ["https://example.com/validador"],
     });
 
     expect(result.rulesByLayout["cobranca-remessa"]).toHaveLength(1);
-    expect(result.rulesByLayout["cobranca-remessa"][0].linha_fonte).toBe(2);
+    // linha 2 do snippet + offset 10 = 12
+    expect(result.rulesByLayout["cobranca-remessa"][0].linha_fonte).toBe(12);
   });
 });

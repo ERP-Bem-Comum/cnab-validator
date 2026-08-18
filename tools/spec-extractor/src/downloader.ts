@@ -48,16 +48,33 @@ export async function downloadText(
   throw new Error(`Falha ao baixar ${url} após ${retries + 1} tentativa(s): ${lastError?.message}`);
 }
 
-export function parseScripts(html: string): { urls: string[]; inline: string[] } {
+export interface InlineScript {
+  code: string;
+  lineOffset: number;
+}
+
+export function parseScripts(html: string): {
+  urls: string[];
+  inline: InlineScript[];
+} {
   const root = parse(html);
   const urls = root
     .querySelectorAll("script[src]")
     .map((s) => s.getAttribute("src"))
     .filter((src): src is string => !!src);
-  const inline = root
-    .querySelectorAll("script:not([src])")
-    .map((s) => s.textContent)
-    .filter((code) => code.trim().length > 0);
+
+  const inline: InlineScript[] = [];
+  const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+  let match: RegExpExecArray | null;
+  while ((match = scriptRegex.exec(html)) !== null) {
+    const attrs = match[1];
+    const code = match[2];
+    if (/\bsrc\s*=/.test(attrs)) continue;
+    if (code.trim().length === 0) continue;
+    const lineOffset = (html.slice(0, match.index).match(/\n/g) ?? []).length;
+    inline.push({ code, lineOffset });
+  }
+
   return { urls, inline };
 }
 
@@ -67,7 +84,7 @@ export function extractScriptUrls(html: string, baseUrl: string): string[] {
   return urls.map((src) => new URL(src, base.href).href);
 }
 
-export function extractInlineScripts(html: string): string[] {
+export function extractInlineScripts(html: string): InlineScript[] {
   return parseScripts(html).inline;
 }
 
