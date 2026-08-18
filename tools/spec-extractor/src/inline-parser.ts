@@ -3,7 +3,7 @@ import { simple } from "acorn-walk";
 import type {
   AnonymousFunctionDeclaration,
   FunctionDeclaration,
-  VariableDeclarator,
+  VariableDeclaration,
 } from "acorn";
 
 export function extractNamedFunctions(code: string): Map<string, string> {
@@ -16,14 +16,21 @@ export function extractNamedFunctions(code: string): Map<string, string> {
         functions.set(node.id.name, code.slice(node.start, node.end));
       }
     },
-    VariableDeclarator(node: VariableDeclarator) {
-      if (
-        node.id?.type === "Identifier" &&
-        node.id.name &&
-        node.init &&
-        (node.init.type === "FunctionExpression" || node.init.type === "ArrowFunctionExpression")
-      ) {
-        functions.set(node.id.name, code.slice(node.init.start, node.init.end));
+    VariableDeclaration(node: VariableDeclaration) {
+      // Armazena a declaração completa (ex: const foo = () => {...}) para que
+      // extractRulesFromFunction possa localizar o declarador pelo nome e obter
+      // o corpo da função. Usar só o lado direito da atribuição quebraria a
+      // identificação por nome e a sintaxe de arrow/anonymous functions.
+      for (const decl of node.declarations) {
+        if (
+          decl.id?.type === "Identifier" &&
+          decl.id.name &&
+          decl.init &&
+          (decl.init.type === "FunctionExpression" ||
+            decl.init.type === "ArrowFunctionExpression")
+        ) {
+          functions.set(decl.id.name, code.slice(node.start, node.end));
+        }
       }
     },
   });

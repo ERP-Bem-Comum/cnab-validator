@@ -37,11 +37,27 @@ export interface DslRule {
 }
 
 export function extrairPosicoesDaCondicao(
-  condicao: string
+  condicao: string,
+  alvo: string = "res[0]"
 ): { inicio0: number; fim0: number } | null {
-  const match = condicao.match(/\.substring\((\d+),\s*(\d+)\)/);
-  if (!match) return null;
-  return { inicio0: parseInt(match[1], 10), fim0: parseInt(match[2], 10) };
+  // Tenta extrair a posição da substring do alvo específico (ex: res[0].substring(a,b))
+  // para evitar usar o primeiro .substring() da condição quando há múltiplos res[...].
+  const escaped = alvo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const specific = new RegExp(`${escaped}\\.substring\\((\\d+),\\s*(\\d+)\\)`);
+  const specificMatch = condicao.match(specific);
+  if (specificMatch) {
+    return {
+      inicio0: parseInt(specificMatch[1], 10),
+      fim0: parseInt(specificMatch[2], 10),
+    };
+  }
+
+  // Fallback: primeiro .substring() encontrado. Pode ser impreciso quando a
+  // condição referencia mais de um res[...]; nesses casos o consumidor deve
+  // tratar as colunas com cautela.
+  const fallback = condicao.match(/\.substring\((\d+),\s*(\d+)\)/);
+  if (!fallback) return null;
+  return { inicio0: parseInt(fallback[1], 10), fim0: parseInt(fallback[2], 10) };
 }
 
 export function mapToDsl(raw: RawRule, layout: string): DslRule {
@@ -52,7 +68,7 @@ export function mapToDsl(raw: RawRule, layout: string): DslRule {
   let inicio0: number;
   let fim0: number;
 
-  const posicoesCondicao = extrairPosicoesDaCondicao(raw.condicao_original);
+  const posicoesCondicao = extrairPosicoesDaCondicao(raw.condicao_original, alvo);
   if (posicoesCondicao) {
     inicio0 = posicoesCondicao.inicio0;
     fim0 = posicoesCondicao.fim0;

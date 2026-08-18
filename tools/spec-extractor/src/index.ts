@@ -1,5 +1,6 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { join } from "node:path";
 import {
   ASSETS_DIR,
   LAYOUTS_DO_CICLO,
@@ -34,7 +35,7 @@ async function main() {
 
   console.log(`Baixando ${VALIDADOR_URL}...`);
   const html = await downloadText(VALIDADOR_URL);
-  const htmlPath = `${ASSETS_DIR}/validadorgeral.html`;
+  const htmlPath = join(ASSETS_DIR, "validadorgeral.html");
   writeFileSync(htmlPath, html, "utf-8");
 
   const scriptUrls = extractScriptUrls(html, VALIDADOR_URL);
@@ -89,10 +90,10 @@ async function main() {
   writeSpecs(SPECS_DIR, rulesByLayout);
   console.log(`Specs escritos em ${SPECS_DIR}`);
 
-  await writeBaseline([html, ...sources.values()], assetUrls);
+  writeBaseline([html, ...sources.values()], assetUrls);
 }
 
-async function writeBaseline(contents: string[], urls: string[]) {
+function writeBaseline(contents: string[], urls: string[]) {
   const hash = createHash("sha256");
   for (const c of contents) hash.update(c);
   const baseline = {
@@ -100,7 +101,10 @@ async function writeBaseline(contents: string[], urls: string[]) {
     sha256: hash.digest("hex"),
     fontes: urls,
   };
-  writeFileSync(`${ASSETS_DIR}/baseline.json`, JSON.stringify(baseline, null, 2));
+  writeFileSync(
+    join(ASSETS_DIR, "baseline.json"),
+    JSON.stringify(baseline, null, 2) + "\n"
+  );
   console.log(`Baseline SHA-256: ${baseline.sha256}`);
 }
 

@@ -85,7 +85,7 @@ export function writeSpecs(
 
       writeFileSync(
         join(specsDir, "layouts", `${layout}.json`),
-        JSON.stringify(layoutSpec, null, 2),
+        JSON.stringify(layoutSpec, null, 2) + "\n",
         "utf-8"
       );
 
@@ -95,7 +95,7 @@ export function writeSpecs(
 
   writeFileSync(
     join(specsDir, "index.json"),
-    JSON.stringify(index, null, 2),
+    JSON.stringify(index, null, 2) + "\n",
     "utf-8"
   );
 }
