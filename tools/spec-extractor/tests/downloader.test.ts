@@ -130,13 +130,6 @@ describe("saveAsset", () => {
     assert.strictEqual(content, "console.log('ok')");
   });
 
-  it("throws when URL pathname is a directory", async () => {
-    await assert.rejects(
-      () => saveAsset("https://example.com/js/", "content", tempDir),
-      /URL pathname is a directory/
-    );
-  });
-
   it("throws when URL pathname contains directory traversal", async () => {
     await assert.rejects(
       () => saveAsset("https://example.com/%2E%2E%2Fsecret.js", "content", tempDir),
@@ -144,7 +137,7 @@ describe("saveAsset", () => {
     );
   });
 
-  it("throws when resolved path escapes assets dir", async () => {
+  it("throws when URL pathname is a directory", async () => {
     await assert.rejects(
       () => saveAsset("https://example.com/", "content", tempDir),
       /URL pathname is a directory/

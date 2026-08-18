@@ -7,6 +7,16 @@ import {
   SPECS_DIR,
   VALIDADOR_URL,
 } from "./config.js";
+import {
+  downloadText,
+  extractInlineScripts,
+  extractScriptUrls,
+  saveAsset,
+} from "./downloader.js";
+import { extractNamedFunctions } from "./inline-parser.js";
+import { extractRulesFromFunction } from "./ast-walker.js";
+import { mapToDsl } from "./rule-mapper.js";
+import { writeSpecs } from "./spec-generator.js";
 
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -18,16 +28,6 @@ function buildFunctionPattern(funcName: string): RegExp {
     `(?:function\\s+${esc}|\\b${esc}\\s*=\\s*(?:function|\\(.*\\)\\s*=>))`
   );
 }
-import {
-  downloadText,
-  extractInlineScripts,
-  extractScriptUrls,
-  saveAsset,
-} from "./downloader.js";
-import { extractNamedFunctions } from "./inline-parser.js";
-import { extractRulesFromFunction } from "./ast-walker.js";
-import { mapToDsl } from "./rule-mapper.js";
-import { writeSpecs } from "./spec-generator.js";
 
 async function main() {
   mkdirSync(ASSETS_DIR, { recursive: true });
