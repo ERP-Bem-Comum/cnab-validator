@@ -13,6 +13,7 @@ function parseUrl(url: string, context: string): URL {
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_RETRIES = 1;
 const DEFAULT_BACKOFF_MS = 100;
+const MAX_BACKOFF_MS = 30_000;
 
 const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
 
@@ -32,6 +33,15 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function assertNonNegativeInteger(
+  value: unknown,
+  name: string
+): asserts value is number {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+    throw new TypeError(`${name} must be a non-negative finite number`);
+  }
+}
+
 export async function downloadText(
   url: string,
   options: { timeoutMs?: number; retries?: number; backoffMs?: number } = {}
@@ -39,6 +49,10 @@ export async function downloadText(
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const retries = options.retries ?? DEFAULT_RETRIES;
   const backoffMs = options.backoffMs ?? DEFAULT_BACKOFF_MS;
+
+  assertNonNegativeInteger(timeoutMs, "timeoutMs");
+  assertNonNegativeInteger(retries, "retries");
+  assertNonNegativeInteger(backoffMs, "backoffMs");
 
   let lastError: Error | undefined;
   let lastStatus: number | undefined;
@@ -68,7 +82,8 @@ export async function downloadText(
         break;
       }
       // Backoff exponencial antes da próxima tentativa.
-      await sleep(backoffMs * 2 ** attempt);
+      const delayMs = Math.min(backoffMs * 2 ** attempt, MAX_BACKOFF_MS);
+      await sleep(delayMs);
     } finally {
       clearTimeout(timer);
     }

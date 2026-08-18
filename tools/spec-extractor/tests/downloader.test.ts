@@ -80,7 +80,7 @@ describe("downloadText", () => {
     global.fetch = mock(async () => {
       calls++;
       if (calls === 1) {
-        throw new Error(
+        throw new TypeError(
           'Unable to connect. Is the computer able to access the url?'
         );
       }
@@ -90,6 +90,42 @@ describe("downloadText", () => {
     const result = await downloadText("http://example.com", { retries: 1 });
     assert.strictEqual(result, "ok");
     assert.strictEqual(calls, 2);
+  });
+
+  it("waits the configured backoff between retries", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        throw new TypeError("fetch failed");
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const start = Date.now();
+    const result = await downloadText("http://example.com", {
+      retries: 1,
+      backoffMs: 50,
+    });
+    const elapsed = Date.now() - start;
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+    assert.ok(elapsed >= 50, `expected at least 50 ms backoff, got ${elapsed}`);
+  });
+
+  it("rejects invalid retry options", async () => {
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: -1 }),
+      /retries must be a non-negative finite number/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { backoffMs: -1 }),
+      /backoffMs must be a non-negative finite number/
+    );
+    await assert.rejects(
+      () => downloadText("http://example.com", { timeoutMs: -1 }),
+      /timeoutMs must be a non-negative finite number/
+    );
   });
 
   it("does not retry on HTTP 404", async () => {

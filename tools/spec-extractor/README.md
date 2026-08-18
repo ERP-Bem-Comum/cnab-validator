@@ -16,12 +16,14 @@ Saída em `../../specs/`.
 O downloader retrya automaticamente as seguintes condições:
 
 - Códigos HTTP `408`, `429`, `500`, `502`, `503`, `504`.
-- Erros de rede/DNS/tempo de esgotamento, incluindo mensagens como
-  `fetch failed`, `ECONNREFUSED`, `ETIMEDOUT`, `getaddrinfo` e a mensagem
-  real do Bun `Unable to connect. Is the computer able to access the url?`.
+- Erros cuja mensagem indique falha de rede/DNS/tempo de esgotamento,
+  incluindo `fetch failed`, `ECONNREFUSED`, `ETIMEDOUT`, `getaddrinfo` e a
+  mensagem real do Bun `Unable to connect. Is the computer able to access the url?`.
 
-Entre tentativas há backoff exponencial (`backoffMs * 2^attempt`, default
-100 ms). Erros HTTP 4xx (exceto 408/429) e `TypeError` não relacionados a
+`retries` é o número de tentativas adicionais; o total de requisições é
+`retries + 1`. Entre tentativas há backoff exponencial com cap de 30 s
+(`Math.min(backoffMs * 2^attempt, 30000)`, default `backoffMs = 100 ms`).
+Erros HTTP 4xx (exceto 408/429) e erros cuja mensagem não indique falha de
 rede não geram retry.
 
 ## Limitações conhecidas
