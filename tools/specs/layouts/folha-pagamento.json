@@ -1,0 +1,2465 @@
+{
+  "layout": "folha-pagamento",
+  "nome": "Folha de Pagamento",
+  "tipo": "remessa",
+  "tamanhos_linha": [
+    200,
+    240
+  ],
+  "regras": [
+    {
+      "id": "folha-pagamento:validarDadosFolha240:898",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 898,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "COD_EMPR.trim().length > 4",
+      "descricao": "Código do convênio:",
+      "mensagem": "Código do convênio:",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:946",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 946,
+      "registro": "header-lote",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "==",
+        "valor": "1"
+      },
+      "condicao_original": "res[i].substring(7, 8) == 1",
+      "descricao": "Header de Lote:  Contrato:  Ag:  Cc: -",
+      "mensagem": "Header de Lote:  Contrato:  Ag:  Cc: -",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:949",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 949,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "==",
+        "valor": "5"
+      },
+      "condicao_original": "res[i].substring(7, 8) == 5",
+      "descricao": "Valor total do lote: R$ ....,",
+      "mensagem": "Valor total do lote: R$ ....,",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:969",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 969,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        164,
+        166
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 163,
+          "fim0": 166,
+          "colunas": [
+            164,
+            166
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(163, 166) == \"089\" && res[1].substring(13, 16) == \"045\"",
+      "descricao": "Arquivo com características de layout padrão Multipag. Verifique o produto contratado e o layout que o cliente realmente deseja.",
+      "mensagem": "Arquivo com características de layout padrão Multipag. Verifique o produto contratado e o layout que o cliente realmente deseja.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:984",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 984,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        7
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 7,
+          "colunas": [
+            4,
+            7
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 7
+        },
+        "operador": "!=",
+        "valor": "0000"
+      },
+      "condicao_original": "res[0].substring(3, 7) != \"0000\"",
+      "descricao": "Linha 1, colunas 004 a 007, Header de arquivo, não contém número de lote 0000.",
+      "mensagem": "Linha 1, colunas 004 a 007, Header de arquivo, não contém número de lote 0000.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:986",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 986,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(7, 8) != 0",
+      "descricao": "Linha 1, colunas 008 a 008, Header de arquivo, não contém tipo de registro 0(zero).",
+      "mensagem": "Linha 1, colunas 008 a 008, Header de arquivo, não contém tipo de registro 0(zero).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:988",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 988,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        9,
+        17
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 8,
+          "fim0": 17,
+          "colunas": [
+            9,
+            17
+          ],
+          "tamanho": 9
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 17
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(8, 17) != 0",
+      "descricao": "Linha 1, colunas 009 a 017, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 009 a 017, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1032",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1032,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        19,
+        32
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 18,
+          "fim0": 32,
+          "colunas": [
+            19,
+            32
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 32
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(18, 32) == 0",
+      "descricao": "Linha 1, colunas 019 a 032, Header de arquivo, número do CNPJ está zerado.",
+      "mensagem": "Linha 1, colunas 019 a 032, Header de arquivo, número do CNPJ está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1035",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1035,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        37
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 37,
+          "colunas": [
+            33,
+            37
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 32,
+          "fim0": 37
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(32, 37) == 0",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil não foi informado.",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil não foi informado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1038",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1038,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        33
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 33,
+          "colunas": [
+            33,
+            33
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(isNaN(res[0].substring(32, 33)) || res[0].substring(32, 33).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(33, 34)) || res[0].substring(33, 34).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(34, 35)) || res[0].substring(34, 35).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(35, 36)) || res[0].substring(35, 36).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(36, 37)) || res[0].substring(36, 37).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(32, 37)) || res[0].substring(32, 37).replace(/\\d/g, '').length == 1)",
+      "descricao": "Linha 1, colunas 033 a 052 Header de arquivo, Código do convênio/Perfil inválido. Informar nas colunas 33 até posição 38.",
+      "mensagem": "Linha 1, colunas 033 a 052 Header de arquivo, Código do convênio/Perfil inválido. Informar nas colunas 33 até posição 38.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1071",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1071,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        57
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 57,
+          "colunas": [
+            53,
+            57
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 57
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 57) == 0",
+      "descricao": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência está zerada.",
+      "mensagem": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1073",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1073,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        53
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 53,
+          "colunas": [
+            53,
+            53
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 53
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 53) != 0",
+      "descricao": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência inválido.",
+      "mensagem": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1075",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1075,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        57
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 57,
+          "colunas": [
+            53,
+            57
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(52, 57)) || res[0].substring(52, 57).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(52, 53)) || res[0].substring(52, 53).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, colunas 053 a 057, Header de arquivo, Agência/Dígito não é numérico",
+      "mensagem": "Linha 1, colunas 053 a 057, Header de arquivo, Agência/Dígito não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1132",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1132,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        63
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 63,
+          "colunas": [
+            59,
+            63
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(58, 63) != 0 & res[0].substring(59, 63) != res[0].substring(53, 57)",
+      "descricao": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta inválido.",
+      "mensagem": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1134",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1134,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        70
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 70,
+          "colunas": [
+            59,
+            70
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(58, 70)) || res[0].substring(58, 70).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(58, 59)) || res[0].substring(58, 59).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta não é numérico.",
+      "mensagem": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta não é numérico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1136",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1136,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        70
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 70,
+          "colunas": [
+            59,
+            70
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 58,
+          "fim0": 70
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(58, 70) == 0",
+      "descricao": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta está zerada.",
+      "mensagem": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1154",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1154,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        71,
+        71
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 70,
+          "fim0": 71,
+          "colunas": [
+            71,
+            71
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(70, 71) >= 'a' && res[0].substring(70, 71) <= 'z'",
+      "descricao": "Linha 1, colunas 071 a 071,  Header de arquivo, quando dígito da conta for P, informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 071 a 071,  Header de arquivo, quando dígito da conta for P, informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1205",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1205,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        72,
+        72
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 71,
+          "fim0": 72,
+          "colunas": [
+            72,
+            72
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 71,
+          "fim0": 72
+        },
+        "operador": "!=",
+        "valor": " "
+      },
+      "condicao_original": "res[0].substring(71, 72) != \" \"",
+      "descricao": "Linha 1, colunas 072 a 072, Header de arquivo, Dígito verificador. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 072 a 072, Header de arquivo, Dígito verificador. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1207",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1207,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(72, 102) >= 'a') && (res[0].substring(72, 102) <= 'z')",
+      "descricao": "Linha 1, colunas 073 a 102, Header de arquivo, nome da empresa informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 073 a 102, Header de arquivo, nome da empresa informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1209",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1209,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 72,
+          "fim0": 102
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(72, 102) == 0",
+      "descricao": "Linha 1, colunas 073 a 102, Header de arquivo, informar nome da empresa.",
+      "mensagem": "Linha 1, colunas 073 a 102, Header de arquivo, informar nome da empresa.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1211",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1211,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(102, 132) >= 'a') && (res[0].substring(102, 132) <= 'z')",
+      "descricao": "Linha 1, colunas 103 a 132, Header de arquivo, nome do banco informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 103 a 132, Header de arquivo, nome do banco informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1213",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1213,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 102,
+          "fim0": 132
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(102, 132) == 0",
+      "descricao": "Linha 1, colunas 103 a 132,  Header de arquivo, informar nome do banco.",
+      "mensagem": "Linha 1, colunas 103 a 132,  Header de arquivo, informar nome do banco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1215",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1215,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        133,
+        142
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 132,
+          "fim0": 142,
+          "colunas": [
+            133,
+            142
+          ],
+          "tamanho": 10
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 132,
+          "fim0": 142
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(132, 142) != 0",
+      "descricao": "Linha 1, colunas 132 a 142, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 132 a 142, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1217",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1217,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        143,
+        143
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 142,
+          "fim0": 143,
+          "colunas": [
+            143,
+            143
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 142,
+          "fim0": 143
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[0].substring(142, 143) != 1",
+      "descricao": "Linha 1, colunas 143 a 143, Header de arquivo, código de remessa inválido. Informar 1.",
+      "mensagem": "Linha 1, colunas 143 a 143, Header de arquivo, código de remessa inválido. Informar 1.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1219",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1219,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        157
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 157,
+          "colunas": [
+            144,
+            157
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(143, 157)) || res[0].substring(143, 157).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, colunas 144 a 157, Header de arquivo, Data/hora de gravação não é numérico",
+      "mensagem": "Linha 1, colunas 144 a 157, Header de arquivo, Data/hora de gravação não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1222",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1222,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(143, 145) == 00 ||\r\n            res[0].substring(145, 147) == 00 ||\r\n            res[0].substring(147, 149) == 00 ||\r\n            res[0].substring(149, 151) == 00",
+      "descricao": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "mensagem": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1228",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1228,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(143, 145) > \"31\"",
+      "descricao": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "mensagem": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1231",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1231,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(145, 147) > \"12\"",
+      "descricao": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "mensagem": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1234",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1234,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(147, 151) < \"2017\"",
+      "descricao": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "mensagem": "Linha 1, colunas 144 a 151, Header de arquivo, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1239",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1239,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        163,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 162,
+          "fim0": 163,
+          "colunas": [
+            163,
+            163
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(162, 163)) || res[0].substring(162, 163).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo inválido.",
+      "mensagem": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1241",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1241,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(157, 163)) || res[0].substring(157, 163).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo não é numérico.",
+      "mensagem": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo não é numérico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1243",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1243,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 157,
+          "fim0": 163
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(157, 163) == 0",
+      "descricao": "Linha 1, colunas 158 a 163, Header de arquivo, número sequencial de arquivo está zerado.",
+      "mensagem": "Linha 1, colunas 158 a 163, Header de arquivo, número sequencial de arquivo está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1245",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1245,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        164,
+        166
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 163,
+          "fim0": 166,
+          "colunas": [
+            164,
+            166
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 163,
+          "fim0": 166
+        },
+        "operador": "!=",
+        "valor": "080"
+      },
+      "condicao_original": "res[0].substring(163, 166) != \"080\"",
+      "descricao": "Linha 1, colunas 164 a 166, Header de arquivo, número da versão do layout do arquivo inválido. Informar 080.",
+      "mensagem": "Linha 1, colunas 164 a 166, Header de arquivo, número da versão do layout do arquivo inválido. Informar 080.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1250",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1250,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        172,
+        191
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 171,
+          "fim0": 191,
+          "colunas": [
+            172,
+            191
+          ],
+          "tamanho": 20
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 171,
+          "fim0": 191
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(171, 191) != 0",
+      "descricao": "Linha 1, colunas 172 a 191, Header de arquivo, reservado uso do banco. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 172 a 191, Header de arquivo, reservado uso do banco. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1252",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1252,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        212,
+        240
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 211,
+          "fim0": 240,
+          "colunas": [
+            212,
+            240
+          ],
+          "tamanho": 29
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 211,
+          "fim0": 240
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(211, 240) != 0",
+      "descricao": "Linha 1, colunas 212 a 240, Header de arquivo, reservado Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 212 a 240, Header de arquivo, reservado Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1261",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1261,
+      "registro": "header-lote",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[1].substring(7, 8) != 1",
+      "descricao": "Linha 2, Header de lote, coluna 008, não contém tipo de registro 1(um).",
+      "mensagem": "Linha 2, Header de lote, coluna 008, não contém tipo de registro 1(um).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:2383",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2383,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "resposta.slice(-133) == '<pre>============================================================================================================================<br>'",
+      "descricao": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "mensagem": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:62",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 62,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        49,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 48,
+          "fim0": 52,
+          "colunas": [
+            49,
+            52
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 48,
+          "fim0": 52
+        },
+        "operador": "==",
+        "valor": "pgit"
+      },
+      "condicao_original": "res[0].substring(48, 52) == \"pgit\"",
+      "descricao": "Linha 1, colunas 049 a 052, para processar contrato Multipag em layout Folha240, informar a sigla 'PGIT' em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 049 a 052, para processar contrato Multipag em layout Folha240, informar a sigla 'PGIT' em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:78",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 78,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        120,
+        120
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 119,
+          "fim0": 120,
+          "colunas": [
+            120,
+            120
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 119,
+          "fim0": 120
+        },
+        "operador": "!=",
+        "valor": "N"
+      },
+      "condicao_original": "res[0].substring(119, 120) != \"N\"",
+      "descricao": "//",
+      "mensagem": "//",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:98",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 98,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        1
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            1,
+            1
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[i]"
+      },
+      "condicao_original": "isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0 && res[i].substring(0, 1) == 0",
+      "descricao": "Agência  Razão  Conta - Convênio",
+      "mensagem": "Agência  Razão  Conta - Convênio",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:104",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 104,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        1
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            1,
+            1
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "operador": "==",
+        "valor": "9"
+      },
+      "condicao_original": "res[i].substring(0, 1) == 9",
+      "descricao": "Valor do lote: R$ ..,",
+      "mensagem": "Valor do lote: R$ ..,",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:115",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 115,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        120,
+        120
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 119,
+          "fim0": 120,
+          "colunas": [
+            120,
+            120
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 119,
+          "fim0": 120
+        },
+        "operador": "!=",
+        "valor": "N"
+      },
+      "condicao_original": "res[0].substring(119, 120) != \"N\"",
+      "descricao": "Obs.: Header, coluna 120, não consta indicativo do século 'N'. As datas serão consideradas no formato dd/mm/aa, deslocando as colunas para esquerda a partir da coluna 100.",
+      "mensagem": "Obs.: Header, coluna 120, não consta indicativo do século 'N'. As datas serão consideradas no formato dd/mm/aa, deslocando as colunas para esquerda a partir da coluna 100.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:123",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 123,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        1,
+        1
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            1,
+            1
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(0, 1) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 001 a 001, Registro inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 001 a 001, Registro inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:126",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 126,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        2,
+        2
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 1,
+          "fim0": 2,
+          "colunas": [
+            2,
+            2
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 1,
+          "fim0": 2
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[0].substring(1, 2) != 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 002 a 002, Identificação de remessa inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 002 a 002, Identificação de remessa inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:129",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 129,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        3,
+        9
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 2,
+          "fim0": 9,
+          "colunas": [
+            3,
+            9
+          ],
+          "tamanho": 7
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 2,
+          "fim0": 9
+        },
+        "operador": "!=",
+        "valor": "REMESSA"
+      },
+      "condicao_original": "res[0].substring(2, 9) != \"REMESSA\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 003 a 009, Identificação de REMESSA inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 003 a 009, Identificação de REMESSA inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:132",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 132,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        10,
+        11
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 9,
+          "fim0": 11,
+          "colunas": [
+            10,
+            11
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 9,
+          "fim0": 11
+        },
+        "operador": "!=",
+        "valor": "03"
+      },
+      "condicao_original": "res[0].substring(9, 11) != 03",
+      "descricao": "Linha 1, Header de arquivo, colunas 010 a 011, Constante inválida. Fixo 03.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 010 a 011, Constante inválida. Fixo 03.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:135",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 135,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        12,
+        22
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 11,
+          "fim0": 22,
+          "colunas": [
+            12,
+            22
+          ],
+          "tamanho": 11
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 11,
+          "fim0": 22
+        },
+        "operador": "!=",
+        "valor": "CREDITO C/C"
+      },
+      "condicao_original": "res[0].substring(11, 22) != \"CREDITO C/C\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 012 a 026, Identificação tipo de serviço inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 012 a 026, Identificação tipo de serviço inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:138",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 138,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        23,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 22,
+          "fim0": 26,
+          "colunas": [
+            23,
+            26
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(22, 26)",
+        "posicao": {
+          "inicio0": 22,
+          "fim0": 26
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(22, 26)) || res[0].substring(22, 26).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 012 a 026, Identificação tipo de serviço inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 012 a 026, Identificação tipo de serviço inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:141",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 141,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        31
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 31,
+          "colunas": [
+            27,
+            31
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(26, 31)) || res[0].substring(26, 31).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 027 a 031, Agência não informada.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 027 a 031, Agência não informada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:144",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 144,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        31
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 31,
+          "colunas": [
+            27,
+            31
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(26, 31)) || res[0].substring(26, 31).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 027 a 031, Agência não numérica.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 027 a 031, Agência não numérica.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:147",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 147,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        32,
+        36
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 31,
+          "fim0": 36,
+          "colunas": [
+            32,
+            36
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(31, 36)) || res[0].substring(31, 36).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 032 a 036, Razão da conta não informada.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 032 a 036, Razão da conta não informada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:150",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 150,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        32,
+        36
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 31,
+          "fim0": 36,
+          "colunas": [
+            32,
+            36
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(31, 36)) || res[0].substring(31, 36).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 032 a 036, Razão da conta não numérica.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 032 a 036, Razão da conta não numérica.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:154",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 154,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        37,
+        43
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 36,
+          "fim0": 43,
+          "colunas": [
+            37,
+            43
+          ],
+          "tamanho": 7
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(36, 43)) || res[0].substring(36, 43).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 037 a 043, Conta-corrente não informada.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 037 a 043, Conta-corrente não informada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:157",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 157,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        37,
+        43
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 36,
+          "fim0": 43,
+          "colunas": [
+            37,
+            43
+          ],
+          "tamanho": 7
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(36, 43)) || res[0].substring(36, 43).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 037 a 043, Conta-corrente não numérica.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 037 a 043, Conta-corrente não numérica.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:171",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 171,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "restoc == 1",
+      "descricao": "P",
+      "mensagem": "P",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:178",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 178,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        44,
+        44
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 43,
+          "fim0": 44,
+          "colunas": [
+            44,
+            44
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(43, 44) != dvc",
+      "descricao": "Linha 1, colunas 044 a 044, Header de arquivo, dígito da conta-corrente inválido.",
+      "mensagem": "Linha 1, colunas 044 a 044, Header de arquivo, dígito da conta-corrente inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:183",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 183,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        45,
+        45
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 44,
+          "fim0": 45,
+          "colunas": [
+            45,
+            45
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(44, 45)",
+        "posicao": {
+          "inicio0": 44,
+          "fim0": 45
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(44, 45)) || res[0].substring(44, 45).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 045 a 045, Identificação da empresa no CREC. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 045 a 045, Identificação da empresa no CREC. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:186",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 186,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        46,
+        46
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 45,
+          "fim0": 46,
+          "colunas": [
+            46,
+            46
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(45, 46)",
+        "posicao": {
+          "inicio0": 45,
+          "fim0": 46
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(45, 46)) || res[0].substring(45, 46).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 046 a 046, Reserva. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 046 a 046, Reserva. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:190",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 190,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        47,
+        51
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 46,
+          "fim0": 51,
+          "colunas": [
+            47,
+            51
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(46, 51)) || res[0].substring(46, 51).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa não informado.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa não informado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:192",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 192,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        51
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 51,
+          "colunas": [
+            51,
+            51
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(50, 51)) || res[0].substring(50, 51).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:194",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 194,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        47,
+        51
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 46,
+          "fim0": 51,
+          "colunas": [
+            47,
+            51
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(46, 51)) || res[0].substring(46, 51).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa não numérico.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 047 a 051, Código da empresa não numérico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:197",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 197,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        52,
+        76
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 51,
+          "fim0": 76,
+          "colunas": [
+            52,
+            76
+          ],
+          "tamanho": 25
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 51,
+          "fim0": 76
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(51, 76) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 052 a 076, Informar nome da empresa.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 052 a 076, Informar nome da empresa.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:200",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 200,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        77,
+        79
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 76,
+          "fim0": 79,
+          "colunas": [
+            77,
+            79
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 76,
+          "fim0": 79
+        },
+        "operador": "!=",
+        "valor": "237"
+      },
+      "condicao_original": "res[0].substring(76, 79) != 237",
+      "descricao": "Linha 1, Header de arquivo, colunas 077 a 079, Número do banco inválido. Informar 237.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 077 a 079, Número do banco inválido. Informar 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:357",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 357,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        195,
+        200
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 194,
+          "fim0": 200,
+          "colunas": [
+            195,
+            200
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "operador": "!=",
+        "valor": "000001"
+      },
+      "condicao_original": "res[0].substring(194, 200) != 000001",
+      "descricao": "Linha 1, colunas 195 a 200, Header de arquivo, Número sequencial inválido.",
+      "mensagem": "Linha 1, colunas 195 a 200, Header de arquivo, Número sequencial inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:360",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 360,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        1,
+        1
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            1,
+            1
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[1].substring(0, 1) != 1",
+      "descricao": "Linha 2, colunas 001 a 001, não contém tipo de registro 1(um).",
+      "mensagem": "Linha 2, colunas 001 a 001, não contém tipo de registro 1(um).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:859",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 859,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "resposta.slice(-133) == '<pre>============================================================================================================================<br>'",
+      "descricao": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "mensagem": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    }
+  ]
+}

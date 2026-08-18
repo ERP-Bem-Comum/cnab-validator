@@ -1,0 +1,1566 @@
+{
+  "layout": "multipag",
+  "nome": "Multipag",
+  "tipo": "remessa",
+  "tamanhos_linha": [
+    240
+  ],
+  "regras": [
+    {
+      "id": "multipag:validarDadosMultipag:23",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 23,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        18,
+        18
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 17,
+          "fim0": 18,
+          "colunas": [
+            18,
+            18
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 17,
+          "fim0": 18
+        },
+        "operador": "==",
+        "valor": "2"
+      },
+      "condicao_original": "res[0].substring(17, 18) == 2",
+      "descricao": "CNPJ:",
+      "mensagem": "CNPJ:",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:27",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 27,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        18,
+        18
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 17,
+          "fim0": 18,
+          "colunas": [
+            18,
+            18
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 17,
+          "fim0": 18
+        },
+        "operador": "==",
+        "valor": "1"
+      },
+      "condicao_original": "res[0].substring(17, 18) == 1",
+      "descricao": "CPF:",
+      "mensagem": "CPF:",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:54",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 54,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "==",
+        "valor": "1"
+      },
+      "condicao_original": "res[i].substring(7, 8) == 1",
+      "descricao": "Resumo do lote:",
+      "mensagem": "Resumo do lote:",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:196",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 196,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "==",
+        "valor": "5"
+      },
+      "condicao_original": "res[i].substring(7, 8) == 5",
+      "descricao": "Total do lote: R$ ....,",
+      "mensagem": "Total do lote: R$ ....,",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:204",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 204,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        7
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 7,
+          "colunas": [
+            4,
+            7
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 7
+        },
+        "operador": "!=",
+        "valor": "0000"
+      },
+      "condicao_original": "res[0].substring(3, 7) != \"0000\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 004 a 007, Número de lote inválido. Informar '0000'.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 004 a 007, Número de lote inválido. Informar '0000'.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:206",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 206,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(7, 8) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 008 a 008, Tipo de registro inválido. Informar '0'.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 008 a 008, Tipo de registro inválido. Informar '0'.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:208",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 208,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        9,
+        17
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 8,
+          "fim0": 17,
+          "colunas": [
+            9,
+            17
+          ],
+          "tamanho": 9
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(8, 17)",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 17
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(8, 17)) || res[0].substring(8, 17).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 009 a 017, Exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 009 a 017, Exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:213",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 213,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        18,
+        18
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 17,
+          "fim0": 18,
+          "colunas": [
+            18,
+            18
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(17, 18) == 1 && res[0].substring(18, 21) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 019 a 032, número de inscrição/CPF inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 019 a 032, número de inscrição/CPF inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:282",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 282,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        19,
+        32
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 18,
+          "fim0": 32,
+          "colunas": [
+            19,
+            32
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "obterValorCNPJAlfanumerico(res[0].substring(18, 32)) == 0",
+      "descricao": "Linha 1, colunas 019 a 032, Header de arquivo, Número de inscrição está zerado.",
+      "mensagem": "Linha 1, colunas 019 a 032, Header de arquivo, Número de inscrição está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:285",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 285,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        38
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 38,
+          "colunas": [
+            33,
+            38
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 32,
+          "fim0": 38
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(32, 38) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil não foi informado.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil não foi informado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:288",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 288,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        38
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 38,
+          "colunas": [
+            33,
+            38
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(32, 38)) || res[0].substring(32, 38).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil não é numérico",
+      "mensagem": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:291",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 291,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        33
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 33,
+          "colunas": [
+            33,
+            33
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(isNaN(res[0].substring(32, 33)) || res[0].substring(32, 33).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(33, 34)) || res[0].substring(33, 34).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(34, 35)) || res[0].substring(34, 35).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(35, 36)) || res[0].substring(35, 36).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(36, 37)) || res[0].substring(36, 37).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(37, 38)) || res[0].substring(37, 38).replace(/\\s/g, '').length == 0)",
+      "descricao": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil inválido",
+      "mensagem": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil inválido",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:299",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 299,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        39,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 38,
+          "fim0": 52,
+          "colunas": [
+            39,
+            52
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(38, 52)",
+        "posicao": {
+          "inicio0": 38,
+          "fim0": 52
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(38, 52)) || res[0].substring(38, 52).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil incorreto. Alinhar a esquerda 033 a 038 e 039 a 052 deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 033 a 052, Código do convênio/Perfil incorreto. Alinhar a esquerda 033 a 038 e 039 a 052 deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:302",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 302,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        57
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 57,
+          "colunas": [
+            53,
+            57
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 57
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 57) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 053 a 057, Número da agência está zerada.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 053 a 057, Número da agência está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:305",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 305,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        70
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 70,
+          "colunas": [
+            59,
+            70
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 58,
+          "fim0": 70
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(58, 70) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 059 a 070, Número da conta está zerada.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 059 a 070, Número da conta está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:308",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 308,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        53
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 53,
+          "colunas": [
+            53,
+            53
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 53
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 53) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 053 a 057, Número da agência inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 053 a 057, Número da agência inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:311",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 311,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        57
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 57,
+          "colunas": [
+            53,
+            57
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(52, 57)) || res[0].substring(52, 57).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 053 a 057, Agência não é numérico",
+      "mensagem": "Linha 1, Header de arquivo, colunas 053 a 057, Agência não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:357",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 357,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        58,
+        58
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 57,
+          "fim0": 58,
+          "colunas": [
+            58,
+            58
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(57, 58) >= 'a' && res[0].substring(57, 58) <= 'z'",
+      "descricao": "Linha 1, Header de arquivo, colunas 058 a 058, Quando dígito da agência for P, informar em letra maiúscula.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 058 a 058, Quando dígito da agência for P, informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:359",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 359,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        63
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 63,
+          "colunas": [
+            59,
+            63
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(58, 63) != 0 & res[0].substring(59, 63) != res[0].substring(53, 57)",
+      "descricao": "Linha 1, Header de arquivo, colunas 059 a 071, Número da conta inválido.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 059 a 071, Número da conta inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:361",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 361,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        70
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 70,
+          "colunas": [
+            59,
+            70
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(58, 70)) || res[0].substring(58, 70).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(58, 59)) || res[0].substring(58, 59).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 059 a 071, Número da conta não é numérico",
+      "mensagem": "Linha 1, Header de arquivo, colunas 059 a 071, Número da conta não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:376",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 376,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        71,
+        71
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 70,
+          "fim0": 71,
+          "colunas": [
+            71,
+            71
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(70, 71) >= 'a' && res[0].substring(70, 71) <= 'z'",
+      "descricao": "Linha 1, Header de arquivo, colunas 071 a 071, Quando dígito da conta for P, informar em letra maiúscula.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 071 a 071, Quando dígito da conta for P, informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:416",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 416,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        72,
+        72
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 71,
+          "fim0": 72,
+          "colunas": [
+            72,
+            72
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 71,
+          "fim0": 72
+        },
+        "operador": "!=",
+        "valor": " "
+      },
+      "condicao_original": "res[0].substring(71, 72) != \" \"",
+      "descricao": "Linha 1, Header de arquivo, colunas 072 a 072, Dígito verificador. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 072 a 072, Dígito verificador. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:418",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 418,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(72, 102) >= 'a') && (res[0].substring(72, 102) <= 'z')",
+      "descricao": "Linha 1, Header de arquivo, colunas 073 a 102, Nome da empresa informar em letra maiúscula.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 073 a 102, Nome da empresa informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:420",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 420,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 72,
+          "fim0": 102
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(72, 102) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 073 a 102, Informar nome da empresa.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 073 a 102, Informar nome da empresa.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:422",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 422,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(102, 132) >= 'a') && (res[0].substring(102, 132) <= 'z')",
+      "descricao": "Linha 1, Header de arquivo, colunas 103 a 132, Nome do banco informar em letra maiúscula.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 103 a 132, Nome do banco informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:424",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 424,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 102,
+          "fim0": 132
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(102, 132) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 103 a 132, informar nome do banco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 103 a 132, informar nome do banco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:426",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 426,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        110
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 110,
+          "colunas": [
+            103,
+            110
+          ],
+          "tamanho": 8
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(102, 110) != \"BRADESCO\" && res[0].substring(102, 116) != \"BANCO BRADESCO\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 103 a 132, Informar nome do banco Bradesco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 103 a 132, Informar nome do banco Bradesco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:428",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 428,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        133,
+        142
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 132,
+          "fim0": 142,
+          "colunas": [
+            133,
+            142
+          ],
+          "tamanho": 10
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 132,
+          "fim0": 142
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(132, 142) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 132 a 142, Exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 132 a 142, Exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:430",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 430,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        143,
+        143
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 142,
+          "fim0": 143,
+          "colunas": [
+            143,
+            143
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 142,
+          "fim0": 143
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[0].substring(142, 143) != 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 143 a 143, Código de remessa inválido. Informar 1.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 143 a 143, Código de remessa inválido. Informar 1.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:432",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 432,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        157
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 157,
+          "colunas": [
+            144,
+            157
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(143, 157)) || res[0].substring(143, 157).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 144 a 157, Data/hora de gravação não é numérico",
+      "mensagem": "Linha 1, Header de arquivo, colunas 144 a 157, Data/hora de gravação não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:434",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 434,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(143, 145) == \"00\" ||\r\n            res[0].substring(145, 147) == \"00\" ||\r\n            res[0].substring(147, 149) == \"00\" ||\r\n            res[0].substring(149, 151) == \"00\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "mensagem": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:439",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 439,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(143, 145) > \"31\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "mensagem": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:441",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 441,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(145, 147) > \"12\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "mensagem": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:443",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 443,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(147, 151) < \"2017\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "mensagem": "Linha 1, Header de arquivo, colunas 144 a 151, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:445",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 445,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(157, 163)) || res[0].substring(157, 163).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, Header de arquivo, colunas 158 a 163, Sequencial de arquivo não é numérico",
+      "mensagem": "Linha 1, Header de arquivo, colunas 158 a 163, Sequencial de arquivo não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:447",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 447,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        163,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 162,
+          "fim0": 163,
+          "colunas": [
+            163,
+            163
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(162, 163)) || res[0].substring(162, 163).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 158 a 163, Sequencial de arquivo inválido",
+      "mensagem": "Linha 1, Header de arquivo, colunas 158 a 163, Sequencial de arquivo inválido",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:449",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 449,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 157,
+          "fim0": 163
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(157, 163) == 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 158 a 163, Número sequencial de arquivo está zerado.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 158 a 163, Número sequencial de arquivo está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:451",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 451,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        164,
+        166
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 163,
+          "fim0": 166,
+          "colunas": [
+            164,
+            166
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 163,
+          "fim0": 166
+        },
+        "operador": "!=",
+        "valor": "089"
+      },
+      "condicao_original": "res[0].substring(163, 166) != \"089\"",
+      "descricao": "Linha 1, Header de arquivo, colunas 164 a 166, Número da versão do layout do arquivo inválida. Para Multipag '089'.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 164 a 166, Número da versão do layout do arquivo inválida. Para Multipag '089'.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:456",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 456,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        172,
+        191
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 171,
+          "fim0": 191,
+          "colunas": [
+            172,
+            191
+          ],
+          "tamanho": 20
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 171,
+          "fim0": 191
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(171, 191) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 172 a 191, Reservado uso do banco. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 172 a 191, Reservado uso do banco. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:458",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 458,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        212,
+        240
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 211,
+          "fim0": 240,
+          "colunas": [
+            212,
+            240
+          ],
+          "tamanho": 29
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 211,
+          "fim0": 240
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(211, 240) != 0",
+      "descricao": "Linha 1, Header de arquivo, colunas 212 a 240, Reservado Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, Header de arquivo, colunas 212 a 240, Reservado Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:460",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 460,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[1].substring(7, 8) != 1",
+      "descricao": "Linha 2, colunas 008 a 008, tipo de registro inválido.",
+      "mensagem": "Linha 2, colunas 008 a 008, tipo de registro inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:3130",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 3130,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "resposta.slice(-133) == \"<pre>============================================================================================================================<br>\"",
+      "descricao": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "mensagem": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    }
+  ]
+}

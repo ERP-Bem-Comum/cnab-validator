@@ -1,0 +1,1311 @@
+{
+  "layout": "cobranca-remessa",
+  "nome": "Cobrança — Remessa",
+  "tipo": "remessa",
+  "tamanhos_linha": [
+    240,
+    400
+  ],
+  "regras": [
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:74",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 74,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "==",
+        "valor": "1"
+      },
+      "condicao_original": "res[i].substring(7, 8) == 1",
+      "descricao": "Detalhes do lote:",
+      "mensagem": "Detalhes do lote:",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:117",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 117,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        7
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 7,
+          "colunas": [
+            4,
+            7
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 7
+        },
+        "operador": "!=",
+        "valor": "0000"
+      },
+      "condicao_original": "res[0].substring(3, 7) != \"0000\"",
+      "descricao": "Linha 1, colunas 004 a 007, Header de arquivo, não contém número de lote 0000.",
+      "mensagem": "Linha 1, colunas 004 a 007, Header de arquivo, não contém número de lote 0000.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:119",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 119,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(7, 8) != 0",
+      "descricao": "Linha 1, colunas 008 a 008, Header de arquivo, não contém tipo de registro 0(zero).",
+      "mensagem": "Linha 1, colunas 008 a 008, Header de arquivo, não contém tipo de registro 0(zero).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:121",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 121,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        9,
+        17
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 8,
+          "fim0": 17,
+          "colunas": [
+            9,
+            17
+          ],
+          "tamanho": 9
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(8, 17)",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 17
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(8, 17)) || res[0].substring(8, 17).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, colunas 009 a 017, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 009 a 017, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:222",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 222,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        19,
+        32
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 18,
+          "fim0": 32,
+          "colunas": [
+            19,
+            32
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 32
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(18, 32) == 0",
+      "descricao": "Linha 1, colunas 019 a 032, Header de arquivo, número do CNPJ está zerado.",
+      "mensagem": "Linha 1, colunas 019 a 032, Header de arquivo, número do CNPJ está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:225",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 225,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        45
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 45,
+          "colunas": [
+            33,
+            45
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 32,
+          "fim0": 45
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(32, 45) != 0",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio inválido.",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:228",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 228,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 52,
+          "colunas": [
+            33,
+            52
+          ],
+          "tamanho": 20
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(32, 52)) || res[0].substring(32, 52).replace(/\\s/g, '').length == 0 || res[0].substring(32, 52) == 0",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil em branco/zerado",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil em branco/zerado",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:231",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 231,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 52,
+          "colunas": [
+            33,
+            52
+          ],
+          "tamanho": 20
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(32, 52)) || res[0].substring(32, 52).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil não é numérico",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:234",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 234,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        52,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 51,
+          "fim0": 52,
+          "colunas": [
+            52,
+            52
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(51, 52)) || res[0].substring(51, 52).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil inválido.",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:238",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 238,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        57
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 57,
+          "colunas": [
+            53,
+            57
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 57
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 57) == 0",
+      "descricao": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência está zerada.",
+      "mensagem": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:240",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 240,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        70
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 70,
+          "colunas": [
+            59,
+            70
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 58,
+          "fim0": 70
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(58, 70) == 0",
+      "descricao": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta está zerada.",
+      "mensagem": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta está zerada.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:242",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 242,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        53,
+        53
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
+          "fim0": 53,
+          "colunas": [
+            53,
+            53
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 52,
+          "fim0": 53
+        },
+        "operador": "!=",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(52, 53) != 0",
+      "descricao": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência inválido.",
+      "mensagem": "Linha 1, colunas 053 a 057, Header de arquivo, número da agência inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:249",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 249,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        59
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 59,
+          "colunas": [
+            59,
+            59
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(isNaN(res[0].substring(58, 59)) || res[0].substring(58, 59).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(59, 60)) || res[0].substring(59, 60).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(60, 61)) || res[0].substring(60, 61).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(61, 62)) || res[0].substring(61, 62).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(62, 63)) || res[0].substring(62, 63).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(63, 64)) || res[0].substring(63, 64).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(64, 65)) || res[0].substring(64, 65).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(65, 66)) || res[0].substring(65, 66).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(66, 67)) || res[0].substring(66, 67).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(67, 68)) || res[0].substring(67, 68).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(68, 69)) || res[0].substring(68, 69).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(69, 70)) || res[0].substring(69, 70).replace(/\\s/g, '').length == 0)",
+      "descricao": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta não é numérico.",
+      "mensagem": "Linha 1, colunas 059 a 070, Header de arquivo, número da conta não é numérico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:322",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 322,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        59,
+        63
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
+          "fim0": 63,
+          "colunas": [
+            59,
+            63
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(58, 63) != 0 & res[0].substring(59, 63) != res[0].substring(53, 57)",
+      "descricao": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta inválido.",
+      "mensagem": "Linha 1, colunas 059 a 071, Header de arquivo, número da conta inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:338",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 338,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        71,
+        71
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 70,
+          "fim0": 71,
+          "colunas": [
+            71,
+            71
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(70, 71) >= 'a' && res[1].substring(70, 71) <= 'z'",
+      "descricao": "Linha 1, colunas 072,  Header de arquivo, quando dígito da conta for P, informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 072,  Header de arquivo, quando dígito da conta for P, informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:389",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 389,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        72,
+        72
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 71,
+          "fim0": 72,
+          "colunas": [
+            72,
+            72
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(71, 72)",
+        "posicao": {
+          "inicio0": 71,
+          "fim0": 72
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(71, 72)) || res[0].substring(71, 72).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, colunas 072 a 072, Header de arquivo, Dígito verificador. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 072 a 072, Header de arquivo, Dígito verificador. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:391",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 391,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(72, 102) >= 'a') && (res[0].substring(72, 102) <= 'z')",
+      "descricao": "Linha 1, colunas 073 a 102, Header de arquivo, nome da empresa informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 073 a 102, Header de arquivo, nome da empresa informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:393",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 393,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        73,
+        102
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 72,
+          "fim0": 102,
+          "colunas": [
+            73,
+            102
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 72,
+          "fim0": 102
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(72, 102) == 0",
+      "descricao": "Linha 1, colunas 073 a 102, Header de arquivo, informar nome da empresa.",
+      "mensagem": "Linha 1, colunas 073 a 102, Header de arquivo, informar nome da empresa.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:395",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 395,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(102, 132) >= 'a') && (res[0].substring(102, 132) <= 'z')",
+      "descricao": "Linha 1, colunas 103 a 132, Header de arquivo, nome do banco informar em letra maiúscula.",
+      "mensagem": "Linha 1, colunas 103 a 132, Header de arquivo, nome do banco informar em letra maiúscula.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:397",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 397,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        103,
+        132
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 102,
+          "fim0": 132,
+          "colunas": [
+            103,
+            132
+          ],
+          "tamanho": 30
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 102,
+          "fim0": 132
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(102, 132) == 0",
+      "descricao": "Linha 1, colunas 103 a 132,  Header de arquivo, informar nome do banco.",
+      "mensagem": "Linha 1, colunas 103 a 132,  Header de arquivo, informar nome do banco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:399",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 399,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        133,
+        142
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 132,
+          "fim0": 142,
+          "colunas": [
+            133,
+            142
+          ],
+          "tamanho": 10
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(132, 142)",
+        "posicao": {
+          "inicio0": 132,
+          "fim0": 142
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(132, 142)) || res[0].substring(132, 142).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, colunas 132 a 142, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 132 a 142, Header de arquivo, exclusivo Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:401",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 401,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        143,
+        143
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 142,
+          "fim0": 143,
+          "colunas": [
+            143,
+            143
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 142,
+          "fim0": 143
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[0].substring(142, 143) != 1",
+      "descricao": "Linha 1, colunas 143 a 143, Header de arquivo,código de remessa inválido. Informar 1.",
+      "mensagem": "Linha 1, colunas 143 a 143, Header de arquivo,código de remessa inválido. Informar 1.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:403",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 403,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        157
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 157,
+          "colunas": [
+            144,
+            157
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(143, 157)) || res[0].substring(143, 157).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, colunas 144 a 157, Header de arquivo, Data/hora de gravação não é numérico",
+      "mensagem": "Linha 1, colunas 144 a 157, Header de arquivo, Data/hora de gravação não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:407",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 407,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "res[0].substring(143, 145) == 00 ||\r\n            res[0].substring(145, 147) == 00 ||\r\n            res[0].substring(147, 149) == 00 ||\r\n            res[0].substring(149, 151) == 00",
+      "descricao": "Linha 1, colunas 154 a 151, Header de arquivo, Data de gravação inválida",
+      "mensagem": "Linha 1, colunas 154 a 151, Header de arquivo, Data de gravação inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:414",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 414,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(157, 163)) || res[0].substring(157, 163).replace(/\\d/g, '').length == 1",
+      "descricao": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo não é numérico",
+      "mensagem": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:416",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 416,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        158,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 157,
+          "fim0": 163,
+          "colunas": [
+            158,
+            163
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 157,
+          "fim0": 163
+        },
+        "operador": "==",
+        "valor": "0"
+      },
+      "condicao_original": "res[0].substring(157, 163) == 0",
+      "descricao": "Linha 1, colunas 157 a 163, Header de arquivo, número sequencial de arquivo está zerado.",
+      "mensagem": "Linha 1, colunas 157 a 163, Header de arquivo, número sequencial de arquivo está zerado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:419",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 419,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        163,
+        163
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 162,
+          "fim0": 163,
+          "colunas": [
+            163,
+            163
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "isNaN(res[0].substring(162, 163)) || res[0].substring(162, 163).replace(/\\s/g, '').length == 0",
+      "descricao": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo inválido",
+      "mensagem": "Linha 1, colunas 158 a 163, Header de arquivo, sequencial de arquivo inválido",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:423",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 423,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        164,
+        166
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 163,
+          "fim0": 166,
+          "colunas": [
+            164,
+            166
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 163,
+          "fim0": 166
+        },
+        "operador": "!=",
+        "valor": "084"
+      },
+      "condicao_original": "res[0].substring(163, 166) != \"084\"",
+      "descricao": "Linha 1, colunas 164 a 166, Header de arquivo, número da versão do layout do arquivo inválido. Informar 084.",
+      "mensagem": "Linha 1, colunas 164 a 166, Header de arquivo, número da versão do layout do arquivo inválido. Informar 084.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:428",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 428,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        172,
+        191
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 171,
+          "fim0": 191,
+          "colunas": [
+            172,
+            191
+          ],
+          "tamanho": 20
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(171, 191)",
+        "posicao": {
+          "inicio0": 171,
+          "fim0": 191
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(171, 191)) || res[0].substring(171, 191).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, colunas 172 a 191, Header de arquivo,  reservado uso do banco. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 172 a 191, Header de arquivo,  reservado uso do banco. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:430",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 430,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        212,
+        240
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 211,
+          "fim0": 240,
+          "colunas": [
+            212,
+            240
+          ],
+          "tamanho": 29
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(211, 240)",
+        "posicao": {
+          "inicio0": 211,
+          "fim0": 240
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(211, 240)) || res[0].substring(211, 240).replace(/\\s/g, '').length != 0",
+      "descricao": "Linha 1, colunas 212 a 240, Header de arquivo, reservado Febraban. Deixar em branco.",
+      "mensagem": "Linha 1, colunas 212 a 240, Header de arquivo, reservado Febraban. Deixar em branco.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:438",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 438,
+      "registro": "header-lote",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "operador": "!=",
+        "valor": "1"
+      },
+      "condicao_original": "res[1].substring(7, 8) != 1",
+      "descricao": "Linha 2, Header de lote, coluna 008, não contém tipo de registro 1(um).",
+      "mensagem": "Linha 2, Header de lote, coluna 008, não contém tipo de registro 1(um).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:3582",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 3582,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "resposta.slice(-133) == '<pre>============================================================================================================================<br>'",
+      "descricao": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "mensagem": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:3593",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 3593,
+      "registro": "header-arquivo",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        77,
+        79
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 76,
+          "fim0": 79,
+          "colunas": [
+            77,
+            79
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 76,
+          "fim0": 79
+        },
+        "operador": "!=",
+        "valor": "237"
+      },
+      "condicao_original": "res[0].substring(76, 79) != 237",
+      "descricao": "Arquivo inválido. Banco diferente de 237. Informado  Header de arquivo colunas 77 a 79.",
+      "mensagem": "Arquivo inválido. Banco diferente de 237. Informado  Header de arquivo colunas 77 a 79.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:3596",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 3596,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        77,
+        79
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 76,
+          "fim0": 79,
+          "colunas": [
+            77,
+            79
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "!(res[0].substring(76, 79) != 237)",
+      "descricao": ",  de  de .",
+      "mensagem": ",  de  de .",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:5720",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 5720,
+      "registro": "nao-classificado",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        0,
+        0
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            0,
+            0
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "resposta.slice(-133) == '<pre>============================================================================================================================<br>'",
+      "descricao": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "mensagem": "O arquivo foi validado e não necessita de ajustes em sua estrutura.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    }
+  ]
+}
