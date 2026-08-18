@@ -44,6 +44,64 @@ describe("downloadText", () => {
       /HTTP 404/
     );
   });
+
+  it("retries on HTTP 500 and returns eventual success", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        return { text: async () => "error", status: 500, ok: false } as Response;
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const result = await downloadText("http://example.com", { retries: 1 });
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+  });
+
+  it("retries on network TypeError and returns eventual success", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        throw new TypeError("fetch failed");
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const result = await downloadText("http://example.com", { retries: 1 });
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+  });
+
+  it("does not retry on HTTP 404", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      return { text: async () => "Not found", status: 404, ok: false } as Response;
+    }) as unknown as typeof fetch;
+
+    await assert.rejects(
+      () => downloadText("http://example.com/missing", { retries: 1 }),
+      /HTTP 404/
+    );
+    assert.strictEqual(calls, 1);
+  });
+
+  it("does not retry on non-network TypeError", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      throw new TypeError("cannot read property of undefined");
+    }) as unknown as typeof fetch;
+
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: 1 }),
+      /cannot read property of undefined/
+    );
+    assert.strictEqual(calls, 1);
+  });
 });
 
 describe("parseScripts", () => {
@@ -127,6 +185,53 @@ describe("extractInlineScripts", () => {
     `;
     const scripts = extractInlineScripts(html);
     assert.deepStrictEqual(scripts, [{ code: "var up = 1;", lineOffset: 2 }]);
+  });
+
+  it("lineOffset reflects code line, not script tag line", () => {
+    const html = `<html>
+<script>
+var x = 1;
+</script>
+<script
+  type="text/javascript">
+  var y = 2;
+</script>
+</html>`;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [
+      // <script> is on line 2; code starts on line 3 in the HTML.
+      // Parser sees "\nvar x = 1;\n", so var x=1 is at loc.start.line=2.
+      // Absolute line 3 = loc.start.line 2 + lineOffset 1.
+      { code: "\nvar x = 1;\n", lineOffset: 1 },
+      // Multi-line tag: tag starts line 5, attribute on line 6, code on line 7.
+      // Parser sees "\n  var y = 2;\n", so var y=2 is at loc.start.line=2.
+      // Absolute line 7 = loc.start.line 2 + lineOffset 5.
+      { code: "\n  var y = 2;\n", lineOffset: 5 },
+    ]);
+  });
+
+  it("does not confuse data-src with src", () => {
+    const html = `<script data-src="/external.js">var inline = 1;</script>`;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [{ code: "var inline = 1;", lineOffset: 0 }]);
+  });
+
+  it("does not confuse data-type with type", () => {
+    const html = `<script data-type="application/json">var ok = 1;</script>`;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [{ code: "var ok = 1;", lineOffset: 0 }]);
+  });
+
+  it("accepts executable script types case-insensitively", () => {
+    const html = `
+      <script type="TEXT/JAVASCRIPT">var a = 1;</script>
+      <script type="Module">var b = 2;</script>
+    `;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [
+      { code: "var a = 1;", lineOffset: 1 },
+      { code: "var b = 2;", lineOffset: 2 },
+    ]);
   });
 });
 

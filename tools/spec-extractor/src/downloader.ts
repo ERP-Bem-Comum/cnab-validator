@@ -19,8 +19,9 @@ function isRetryableError(err: Error, status?: number): boolean {
   }
   return (
     err.name === "AbortError" ||
-    err.name === "TypeError" ||
-    /fetch|network|ECONNREFUSED|ETIMEDOUT/i.test(err.message)
+    /\b(fetch failed|network|ECONNREFUSED|ETIMEDOUT|getaddrinfo)\b/i.test(
+      err.message
+    )
   );
 }
 
@@ -36,6 +37,7 @@ export async function downloadText(
   let attemptsMade = 0;
 
   for (let attempt = 0; attempt <= retries; attempt++) {
+    lastStatus = undefined;
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -75,6 +77,9 @@ export function parseScripts(html: string): {
   urls: string[];
   inline: InlineScript[];
 } {
+  // Usamos o parser HTML para URLs porque ele lida bem com atributos malformados.
+  // Para scripts inline precisamos preservar a linha absoluta de cada código,
+  // informação que o parser não expõe; por isso usamos regex aqui.
   const root = parse(html);
   const urls = root
     .querySelectorAll("script[src]")
@@ -89,23 +94,28 @@ export function parseScripts(html: string): {
     const attrs = attrsRaw.toLowerCase();
     const code = match[2];
 
-    // Ignora scripts externos.
-    if (/\bsrc\s*=/.test(attrs)) continue;
+    // Ignora scripts externos. O \s garante que não confundamos data-src com src.
+    if (/\ssrc\s*=/.test(attrs)) continue;
 
     // Ignora tipos não executáveis (json, template, etc.).
     const typeMatch = attrs.match(
-      /\btype\s*=\s*(?:"([^"]*)"|'([^']*)'|([^ \>]+))/
+      /\stype\s*=\s*(?:"([^"]*)"|'([^']*)'|([^ \s>]+))/
     );
-    const type = typeMatch?.[1] ?? typeMatch?.[2] ?? typeMatch?.[3] ?? "";
+    const type =
+      typeMatch?.[1] ?? typeMatch?.[2] ?? typeMatch?.[3] ?? "";
     if (
       type &&
-      !["text/javascript", "application/javascript", "module"].includes(type)
+      !["text/javascript", "application/javascript", "module"].includes(
+        type.toLowerCase()
+      )
     ) {
       continue;
     }
 
     if (code.trim().length === 0) continue;
-    const lineOffset = (html.slice(0, match.index).match(/\n/g) ?? []).length;
+    const tagLineBreaks = (html.slice(0, match.index).match(/\n/g) ?? []).length;
+    const attrLineBreaks = (attrsRaw.match(/\n/g) ?? []).length;
+    const lineOffset = tagLineBreaks + attrLineBreaks;
     inline.push({ code, lineOffset });
   }
 
