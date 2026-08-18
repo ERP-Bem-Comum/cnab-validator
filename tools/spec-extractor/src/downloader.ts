@@ -13,6 +13,17 @@ function parseUrl(url: string, context: string): URL {
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_RETRIES = 1;
 
+function isRetryableError(err: Error, status?: number): boolean {
+  if (status !== undefined) {
+    return status >= 500;
+  }
+  return (
+    err.name === "AbortError" ||
+    err.name === "TypeError" ||
+    /fetch|network|ECONNREFUSED|ETIMEDOUT/i.test(err.message)
+  );
+}
+
 export async function downloadText(
   url: string,
   options: { timeoutMs?: number; retries?: number } = {}
@@ -21,6 +32,8 @@ export async function downloadText(
   const retries = options.retries ?? DEFAULT_RETRIES;
 
   let lastError: Error | undefined;
+  let lastStatus: number | undefined;
+
   for (let attempt = 0; attempt <= retries; attempt++) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -33,19 +46,23 @@ export async function downloadText(
         },
       });
       if (!response.ok) {
+        lastStatus = response.status;
         throw new Error(`HTTP ${response.status} ao baixar ${url}`);
       }
       return await response.text();
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
-      if (attempt < retries) {
-        console.warn(`Tentativa ${attempt + 1} falhou para ${url}; tentando novamente...`);
+      if (attempt >= retries || !isRetryableError(lastError, lastStatus)) {
+        break;
       }
     } finally {
       clearTimeout(timer);
     }
   }
-  throw new Error(`Falha ao baixar ${url} após ${retries + 1} tentativa(s): ${lastError?.message}`);
+  const attemptsMade = lastError ? retries + 1 : 0;
+  throw new Error(
+    `Falha ao baixar ${url} após ${attemptsMade} tentativa(s): ${lastError?.message}`
+  );
 }
 
 export interface InlineScript {

@@ -56,14 +56,9 @@ describe("extractNamedFunctions", () => {
       const a = function(x) { return x; }, b = (y) => y + 1, c = 42;
     `;
     const functions = extractNamedFunctions(code);
-    assert.strictEqual(
-      functions.get("a")?.trim(),
-      "const a = function(x) { return x; };"
-    );
-    assert.strictEqual(
-      functions.get("b")?.trim(),
-      "const b = (y) => y + 1;"
-    );
+    const expected = "const a = function(x) { return x; }, b = (y) => y + 1, c = 42;";
+    assert.strictEqual(functions.get("a")?.trim(), expected);
+    assert.strictEqual(functions.get("b")?.trim(), expected);
     assert.strictEqual(functions.has("c"), false);
   });
 

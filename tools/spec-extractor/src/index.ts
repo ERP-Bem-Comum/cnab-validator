@@ -135,7 +135,7 @@ export function runPipeline(
       funcName,
       found.lineOffset
     );
-    const dslRules = rawRules.map((r) => mapToDsl(r, layout));
+    const dslRules = rawRules.map((r) => mapToDsl(r, layout, logger));
     rulesByLayout[layout] = rulesByLayout[layout] ?? [];
     rulesByLayout[layout].push(...dslRules);
     logger.log(`${funcName}: ${dslRules.length} regras -> ${layout}`);

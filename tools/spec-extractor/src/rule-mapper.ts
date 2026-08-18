@@ -1,5 +1,11 @@
 import type { RawRule } from "./ast-walker.js";
 
+export interface Logger {
+  warn: (message: string) => void;
+}
+
+const noopLogger: Logger = { warn: () => {} };
+
 export type DslCondition =
   | {
       tipo: "literal_fixo";
@@ -60,7 +66,11 @@ export function extrairPosicoesDaCondicao(
   return { inicio0: parseInt(fallback[1], 10), fim0: parseInt(fallback[2], 10) };
 }
 
-export function mapToDsl(raw: RawRule, layout: string): DslRule {
+export function mapToDsl(
+  raw: RawRule,
+  layout: string,
+  logger: Logger = noopLogger
+): DslRule {
   const alvo = raw.alvo ?? "res[0]";
   const condicao = inferirCondicao(raw.condicao_original, alvo);
 
@@ -74,7 +84,7 @@ export function mapToDsl(raw: RawRule, layout: string): DslRule {
     fim0 = posicoesCondicao.fim0;
 
     if (fim0 < inicio0) {
-      console.warn(
+      logger.warn(
         `[${layout}:${raw.funcao_origem}:${raw.linha_fonte}] Posições invertidas na condição: ${raw.condicao_original}`
       );
       const temp = inicio0;
@@ -89,7 +99,7 @@ export function mapToDsl(raw: RawRule, layout: string): DslRule {
     fim0 = colunas[1] > 0 ? colunas[1] : inicio0 + 1;
 
     if (fim0 < inicio0) {
-      console.warn(
+      logger.warn(
         `[${layout}:${raw.funcao_origem}:${raw.linha_fonte}] Colunas invertidas: [${colunas[0]}, ${colunas[1]}]`
       );
       const temp = inicio0;
