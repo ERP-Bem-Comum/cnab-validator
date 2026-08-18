@@ -167,6 +167,10 @@ describe("downloadText", () => {
       () => downloadText("http://example.com", { timeoutMs: Infinity }),
       /timeoutMs must be a non-negative finite number/
     );
+    await assert.rejects(
+      () => downloadText("http://example.com", { timeoutMs: NaN }),
+      /timeoutMs must be a non-negative finite number/
+    );
   });
 
   it("does not retry on HTTP 404", async () => {
