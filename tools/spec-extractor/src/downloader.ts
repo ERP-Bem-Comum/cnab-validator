@@ -13,13 +13,15 @@ function parseUrl(url: string, context: string): URL {
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_RETRIES = 1;
 
+const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
+
 function isRetryableError(err: Error, status?: number): boolean {
   if (status !== undefined) {
-    return status >= 500;
+    return RETRYABLE_STATUS_CODES.has(status);
   }
   return (
     err.name === "AbortError" ||
-    /\b(fetch failed|network|ECONNREFUSED|ETIMEDOUT|getaddrinfo)\b/i.test(
+    /^(fetch failed|network error|getaddrinfo\b)|\b(ECONNREFUSED|ETIMEDOUT)\b/i.test(
       err.message
     )
   );

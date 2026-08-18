@@ -102,6 +102,53 @@ describe("downloadText", () => {
     );
     assert.strictEqual(calls, 1);
   });
+
+  it("does not let HTTP 500 status pollute retry decision for a later TypeError", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        return { text: async () => "error", status: 500, ok: false } as Response;
+      }
+      throw new TypeError("cannot read property of undefined");
+    }) as unknown as typeof fetch;
+
+    await assert.rejects(
+      () => downloadText("http://example.com", { retries: 1 }),
+      /cannot read property of undefined/
+    );
+    assert.strictEqual(calls, 2);
+  });
+
+  it("retries on 408 Request Timeout", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        return { text: async () => "timeout", status: 408, ok: false } as Response;
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const result = await downloadText("http://example.com", { retries: 1 });
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+  });
+
+  it("retries on 429 Too Many Requests", async () => {
+    let calls = 0;
+    global.fetch = mock(async () => {
+      calls++;
+      if (calls === 1) {
+        return { text: async () => "rate limited", status: 429, ok: false } as Response;
+      }
+      return { text: async () => "ok", status: 200, ok: true } as Response;
+    }) as unknown as typeof fetch;
+
+    const result = await downloadText("http://example.com", { retries: 1 });
+    assert.strictEqual(result, "ok");
+    assert.strictEqual(calls, 2);
+  });
 });
 
 describe("parseScripts", () => {
@@ -199,13 +246,14 @@ var x = 1;
 </html>`;
     const scripts = extractInlineScripts(html);
     assert.deepStrictEqual(scripts, [
-      // <script> is on line 2; code starts on line 3 in the HTML.
+      // <script> is on line 2; the script content starts on line 3 in the HTML.
       // Parser sees "\nvar x = 1;\n", so var x=1 is at loc.start.line=2.
-      // Absolute line 3 = loc.start.line 2 + lineOffset 1.
+      // absoluteLine = astLine + lineOffset, where lineOffset is the number of
+      // newlines before the start of the script content. Hence 3 = 2 + 1.
       { code: "\nvar x = 1;\n", lineOffset: 1 },
-      // Multi-line tag: tag starts line 5, attribute on line 6, code on line 7.
+      // Multi-line tag: tag starts line 5, attribute on line 6, content on line 7.
       // Parser sees "\n  var y = 2;\n", so var y=2 is at loc.start.line=2.
-      // Absolute line 7 = loc.start.line 2 + lineOffset 5.
+      // lineOffset counts the 5 newlines before the content, hence 7 = 2 + 5.
       { code: "\n  var y = 2;\n", lineOffset: 5 },
     ]);
   });
