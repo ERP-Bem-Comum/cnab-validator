@@ -109,6 +109,25 @@ describe("extractInlineScripts", () => {
     const html = '<script src="/external.js"></script>';
     assert.deepStrictEqual(extractInlineScripts(html), []);
   });
+
+  it("ignores non-executable script types", () => {
+    const html = `
+      <script type="application/json">{"x":1}</script>
+      <script type="text/template"><div></div></script>
+      <script>var ok = 1;</script>
+    `;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [{ code: "var ok = 1;", lineOffset: 3 }]);
+  });
+
+  it("handles uppercase attributes", () => {
+    const html = `
+      <SCRIPT SRC="/external.js"></SCRIPT>
+      <SCRIPT>var up = 1;</SCRIPT>
+    `;
+    const scripts = extractInlineScripts(html);
+    assert.deepStrictEqual(scripts, [{ code: "var up = 1;", lineOffset: 2 }]);
+  });
 });
 
 describe("saveAsset", () => {

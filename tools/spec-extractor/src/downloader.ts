@@ -33,6 +33,7 @@ export async function downloadText(
 
   let lastError: Error | undefined;
   let lastStatus: number | undefined;
+  let attemptsMade = 0;
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     const controller = new AbortController();
@@ -51,6 +52,7 @@ export async function downloadText(
       }
       return await response.text();
     } catch (err) {
+      attemptsMade = attempt + 1;
       lastError = err instanceof Error ? err : new Error(String(err));
       if (attempt >= retries || !isRetryableError(lastError, lastStatus)) {
         break;
@@ -59,7 +61,6 @@ export async function downloadText(
       clearTimeout(timer);
     }
   }
-  const attemptsMade = lastError ? retries + 1 : 0;
   throw new Error(
     `Falha ao baixar ${url} após ${attemptsMade} tentativa(s): ${lastError?.message}`
   );
@@ -84,9 +85,25 @@ export function parseScripts(html: string): {
   const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
   let match: RegExpExecArray | null;
   while ((match = scriptRegex.exec(html)) !== null) {
-    const attrs = match[1];
+    const attrsRaw = match[1];
+    const attrs = attrsRaw.toLowerCase();
     const code = match[2];
+
+    // Ignora scripts externos.
     if (/\bsrc\s*=/.test(attrs)) continue;
+
+    // Ignora tipos não executáveis (json, template, etc.).
+    const typeMatch = attrs.match(
+      /\btype\s*=\s*(?:"([^"]*)"|'([^']*)'|([^ \>]+))/
+    );
+    const type = typeMatch?.[1] ?? typeMatch?.[2] ?? typeMatch?.[3] ?? "";
+    if (
+      type &&
+      !["text/javascript", "application/javascript", "module"].includes(type)
+    ) {
+      continue;
+    }
+
     if (code.trim().length === 0) continue;
     const lineOffset = (html.slice(0, match.index).match(/\n/g) ?? []).length;
     inline.push({ code, lineOffset });
