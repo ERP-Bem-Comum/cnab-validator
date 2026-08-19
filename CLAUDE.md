@@ -27,9 +27,16 @@ bun test tests/rule-mapper.test.ts        # arquivo único
 bun test -t "extrai regras"               # filtro por nome do teste
 bun run typecheck   # tsc --noEmit
 bun run reproduce   # verifica reprodutibilidade contra specs fixture (sem rede)
+bun run golden      # compara o runner com o validador oficial executado localmente
 ```
 
 `bun run dev` é a **única** coisa que acessa a rede; os testes mockam `global.fetch`.
+
+`bun run golden` é **local e opcional**: executa as funções do próprio banco, a partir do corpus em
+`assets/`, num contexto `node:vm`, e compara com o runner. Como `assets/` não é versionado, o script
+e `tests/golden.test.ts` se declaram pulados quando o corpus não está lá — é assim que o oráculo
+convive com o CA2 da #7 (o CI não toca a rede do banco). Só **falso positivo** derruba o script;
+lacuna de cobertura precisa de causa registrada em `src/golden-conhecidas.ts`.
 
 ## CI
 
