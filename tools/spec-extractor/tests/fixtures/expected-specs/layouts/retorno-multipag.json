@@ -8,7 +8,7 @@
   "regras": [],
   "campos": [
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8:123",
       "campo": "campo_8_8",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias",
+      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias:131",
       "campo": "ocorrencias",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
