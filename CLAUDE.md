@@ -8,9 +8,10 @@ Validador de arquivos CNAB do Bradesco. A estratégia é **reimplementação nat
 regras extraídas automaticamente (via AST) dos assets JavaScript públicos do validador oficial do banco
 — e não um wrapper sobre o JS original.
 
-**Estado atual: Fase 0.** Só existe o extrator (`tools/spec-extractor/`, Bun + TypeScript) e os specs
-JSON que ele gera (`tools/specs/`). Os crates Rust (`cnab-core`, `cnab-specs`, `cnab-validator-cli`,
-`cnab-validator-api`) ainda **não** foram criados — o design deles está em
+**Estado atual: Fase 0 fechada, Fase 1 começando.** Existem o extrator (`tools/spec-extractor/`,
+Bun + TypeScript), os specs JSON que ele gera (`tools/specs/`) e o primeiro crate Rust,
+`crates/cnab-specs` — o consumidor do contrato. `cnab-core`, `cnab-validator-cli` e
+`cnab-validator-api` ainda **não** existem; o design deles está em
 `docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
 
 Layouts do ciclo atual: `cobranca-remessa`, `multipag`, `folha-pagamento`, `retorno-multipag`.
@@ -38,6 +39,28 @@ e `tests/golden.test.ts` se declaram pulados quando o corpus não está lá — 
 convive com o CA2 da #7 (o CI não toca a rede do banco). Só **falso positivo** derruba o script;
 lacuna de cobertura precisa de causa registrada em `src/golden-conhecidas.ts`.
 
+### Crates Rust
+
+```bash
+cargo test            # da raiz; carrega os specs versionados e verifica o contrato
+cargo clippy --all-targets -- -D warnings
+cargo fmt --all
+```
+
+`crates/cnab-specs` é o **consumidor do contrato**, não um validador: carrega `tools/specs/` em
+structs e falha alto quando o JSON não casa. Duas escolhas que sustentam isso e não devem ser
+afrouxadas sem decisão explícita:
+
+- **`deny_unknown_fields` em todas as structs.** Campo novo publicado pelo extrator quebra a carga do
+  lado Rust, o que força atualizar os dois juntos. É o oposto de ignorar em silêncio uma informação
+  que o validador oficial usa.
+- **Nenhuma variante "desconhecida"** em `Condicao` nem em `VariavelDaGuarda`. Arquétipo novo faz a
+  carga falhar, pela mesma razão que o runner reporta *não avaliada* em vez de aprovar.
+
+Os nomes dos tipos seguem o JSON, em português: traduzir criaria um segundo vocabulário para as
+mesmas coisas. A variante `modulo_11` precisa de `#[serde(rename)]` — `rename_all = "snake_case"`
+produz `modulo11`, sem o sublinhado.
+
 ## CI
 
 O workflow `.github/workflows/ci.yml` roda em todo push e PR para `main` e `fase-0-extrator`:
@@ -46,6 +69,7 @@ O workflow `.github/workflows/ci.yml` roda em todo push e PR para `main` e `fase
 - `test`: `bun install` + `bun test`.
 - `reproducibility`: `bun install` + `bun run reproduce` — regera specs a partir do corpus fixture e falha se o resultado não for byte-a-byte idêntico aos golden specs versionados.
 - `diff-specs` (apenas em PRs): se `tools/specs/` for alterado, publica um resumo agregado por layout, tipo de registro e arquétipo de condição usando `src/diff-summary.ts`.
+- `rust`: `cargo fmt --check`, `cargo clippy -D warnings` e `cargo test`. Como `cnab-specs` carrega os specs versionados, mudança de contrato publicada sem atualizar as structs falha aqui.
 
 **Restrições de CI:**
 
@@ -208,6 +232,13 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   excluir um segmento de um código).
 - Fatias do mesmo campo são reconhecidas por serem contíguas, de mesma largura e com domínio quase
   igual; o **nome** do campo vem de `CAMPOS_NOMEADOS` em `config.ts`, porque o fonte não o nomeia.
+- O **id do campo termina na linha do bloco no fonte** (`…:campo_16_17:7926`). A faixa não identifica
+  o campo: o fonte decodifica as mesmas colunas em blocos diferentes com dicionários diferentes —
+  016-017 é situação do pagamento num bloco e ocorrência de cobrança em outro. Sem a linha, os dois
+  colidem e quem indexar por id perde um catálogo inteiro.
+- `registros_lidos` vazio significa **indeterminado**, não "nenhum": ele sai das tabelas irmãs que
+  decodificam o tipo de registro no mesmo bloco, e nem todo bloco as tem. Onde ele é indispensável é
+  no campo de ocorrências.
 
 `tools/specs/divergencias.json` é o catálogo manual × validador. A curadoria vive em
 `src/divergencias.ts` — o manual não é código —, mas cada item é **verificado contra a extração**:

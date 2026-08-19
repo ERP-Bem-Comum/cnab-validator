@@ -8,7 +8,7 @@
   "regras": [],
   "campos": [
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8:8224",
       "campo": "campo_8_8",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_10_11",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_10_11:7734",
       "campo": "campo_10_11",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_12_13",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_12_13:7801",
       "campo": "campo_12_13",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -697,7 +697,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_15_15",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_15_15:7916",
       "campo": "campo_15_15",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -766,7 +766,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17:7926",
       "campo": "campo_16_17",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -916,7 +916,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17:9657",
       "campo": "campo_16_17",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1264,7 +1264,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_18_20",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_18_20:7954",
       "campo": "campo_18_20",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1324,7 +1324,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_20_20",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_20_20:8036",
       "campo": "campo_20_20",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1366,7 +1366,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_76_76",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_76_76:8043",
       "campo": "campo_76_76",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1408,7 +1408,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_132_132",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_132_132:8051",
       "campo": "campo_132_132",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1450,7 +1450,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_229_229",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_229_229:9729",
       "campo": "campo_229_229",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -1501,7 +1501,7 @@
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias",
+      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias:8232",
       "campo": "ocorrencias",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [

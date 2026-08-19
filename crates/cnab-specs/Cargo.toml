@@ -1,0 +1,12 @@
+[package]
+name = "cnab-specs"
+version = "0.1.0"
+description = "Representação em Rust dos specs extraídos do validador oficial do Bradesco"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

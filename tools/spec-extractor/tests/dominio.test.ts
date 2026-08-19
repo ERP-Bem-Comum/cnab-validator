@@ -148,6 +148,15 @@ describe("spec de retorno versionado", () => {
     assert.strictEqual(ocorrencias.fora_do_dominio, "desconhecido");
   });
 
+  it("o id identifica um campo só", () => {
+    // A faixa não basta: o fonte decodifica as mesmas colunas em blocos
+    // diferentes com dicionários diferentes — 016-017 é situação do pagamento
+    // num bloco e ocorrência de cobrança em outro. Com id repetido, quem indexar
+    // por id perde um catálogo inteiro sem perceber.
+    const ids = spec.campos.map((c) => c.id);
+    assert.strictEqual(new Set(ids).size, ids.length, "id de campo repetido");
+  });
+
   it("códigos não se repetem dentro de um campo", () => {
     for (const campo of spec.campos) {
       const codigos = campo.entradas.map((e) => e.codigo);

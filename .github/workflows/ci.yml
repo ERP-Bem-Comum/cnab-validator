@@ -51,6 +51,21 @@ jobs:
       - run: bun install
       - run: bun run reproduce
 
+  rust:
+    name: Rust crates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all --check
+      # O crate carrega os specs versionados: mudança no contrato que o extrator
+      # publique sem atualizar as structs falha aqui, que é onde deve falhar.
+      - run: cargo clippy --all-targets --all-features -- -D warnings
+      - run: cargo test --all-features
+
   diff-specs:
     name: Diff summary for specs
     runs-on: ubuntu-latest

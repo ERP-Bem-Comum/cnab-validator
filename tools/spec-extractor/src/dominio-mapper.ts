@@ -68,9 +68,15 @@ export function mapearCampos(
     const campo =
       CAMPOS_NOMEADOS[layout]?.[`${colunas[0]}-${colunas[1]}`] ??
       `campo_${colunas[0]}_${colunas[1]}`;
+    const entradas = unificarEntradas(grupo);
 
     return {
-      id: `${layout}:${funcaoOrigem}:${campo}`,
+      // A faixa não identifica o campo: o fonte decodifica a mesma faixa em
+      // blocos diferentes, com dicionários diferentes — as colunas 016-017 são
+      // situação do pagamento num bloco e ocorrência de cobrança em outro. Sem a
+      // linha do bloco no id, os dois campos colidem e quem indexar por id perde
+      // um. A linha é a mesma convenção que identifica regra.
+      id: `${layout}:${funcaoOrigem}:${campo}:${linhaDoBloco(entradas)}`,
       campo,
       funcao_origem: funcaoOrigem,
       colunas,
@@ -82,11 +88,19 @@ export function mapearCampos(
       })),
       registros_lidos: registrosLidos(grupo, tabelas, familia),
       fora_do_dominio: "desconhecido",
-      entradas: unificarEntradas(grupo),
+      entradas,
     };
   });
 
   return unificarCamposIdenticos(campos);
+}
+
+/** Onde o bloco começa no fonte: a menor linha entre as entradas do campo. */
+function linhaDoBloco(entradas: EntradaCampo[]): number {
+  return entradas.reduce(
+    (menor, entrada) => Math.min(menor, entrada.linha_fonte),
+    Number.POSITIVE_INFINITY
+  );
 }
 
 /**
