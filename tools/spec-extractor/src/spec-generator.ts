@@ -1,6 +1,8 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { LAYOUTS } from "./config.js";
+import { montarDivergencias } from "./divergencias.js";
+import type { CampoDominio } from "./dominio-mapper.js";
 import type { DslRule } from "./rule-mapper.js";
 
 const VALID_LAYOUT_KEY = /^[a-z0-9-]+$/;
@@ -24,6 +26,9 @@ export interface LayoutEntry {
   tamanhos_linha: number[];
   arquivo: string;
   total_regras: number;
+  /** Campos decodificados por tabela — só o retorno tem. */
+  total_campos: number;
+  total_codigos: number;
   sub_layouts: {
     funcao: string;
     regras: number;
@@ -43,11 +48,17 @@ export interface LayoutSpec {
   tipo: "remessa" | "retorno" | "infra";
   tamanhos_linha: number[];
   regras: DslRule[];
+  /**
+   * Campos cujo conteúdo é decodificado por tabela em vez de validado por regra.
+   * O arquivo de retorno é feito disto; os de remessa não têm nenhum.
+   */
+  campos: CampoDominio[];
 }
 
 export function writeSpecs(
   specsDir: string,
-  rulesByLayout: Record<string, DslRule[]>
+  rulesByLayout: Record<string, DslRule[]>,
+  camposByLayout: Record<string, CampoDominio[]> = {}
 ): void {
   mkdirSync(join(specsDir, "layouts"), { recursive: true });
 
@@ -62,6 +73,7 @@ export function writeSpecs(
     layouts: Object.entries(rulesByLayout).map(([layout, rules]) => {
       assertValidLayout(layout);
 
+      const campos = camposByLayout[layout] ?? [];
       const tipo = tipoLayout(layout);
       const entry: LayoutEntry = {
         layout,
@@ -70,6 +82,8 @@ export function writeSpecs(
         tamanhos_linha: LAYOUTS[layout as keyof typeof LAYOUTS].tamanhos_linha,
         arquivo: join("layouts", `${layout}.json`),
         total_regras: rules.length,
+        total_campos: campos.length,
+        total_codigos: campos.reduce((soma, campo) => soma + campo.entradas.length, 0),
         sub_layouts: subLayouts(layout, rules),
       };
 
@@ -79,6 +93,7 @@ export function writeSpecs(
         tipo: entry.tipo,
         tamanhos_linha: entry.tamanhos_linha,
         regras: rules,
+        campos,
       };
 
       writeFileSync(
@@ -96,6 +111,16 @@ export function writeSpecs(
     JSON.stringify(index, null, 2) + "\n",
     "utf-8"
   );
+
+  // Só faz sentido quando há campo extraído: sem retorno no ciclo, não há o que
+  // comparar com o manual.
+  if (Object.keys(camposByLayout).length > 0) {
+    writeFileSync(
+      join(specsDir, "divergencias.json"),
+      JSON.stringify(montarDivergencias(camposByLayout), null, 2) + "\n",
+      "utf-8"
+    );
+  }
 }
 
 function subLayouts(layout: string, rules: DslRule[]): { funcao: string; regras: number }[] {

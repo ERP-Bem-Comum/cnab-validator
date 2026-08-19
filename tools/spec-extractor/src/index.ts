@@ -6,6 +6,7 @@ import {
   FAMILIA_POR_FUNCAO,
   LAYOUTS_DO_CICLO,
   MAPEAMENTO_FUNCOES,
+  MODO_POR_FUNCAO,
   SPECS_DIR,
   VALIDADOR_URL,
 } from "./config.js";
@@ -18,6 +19,8 @@ import {
 } from "./downloader.js";
 import { extractNamedFunctions } from "./inline-parser.js";
 import { extractRulesFromFunction } from "./ast-walker.js";
+import { extrairTabelasDeDominio } from "./dominio-extractor.js";
+import { mapearCampos, type CampoDominio } from "./dominio-mapper.js";
 import { mapToDsl } from "./rule-mapper.js";
 import { writeSpecs } from "./spec-generator.js";
 
@@ -26,12 +29,15 @@ const BASELINE_PATH = new URL("../baseline.json", import.meta.url);
 export interface MainResult {
   baselineSha256: string;
   rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]>;
+  camposByLayout: Record<string, CampoDominio[]>;
 }
 
 export interface PipelineResult {
   assetUrls: string[];
   sources: Map<string, string>;
   rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]>;
+  /** Campos decodificados por tabela — a forma do arquivo de retorno. */
+  camposByLayout: Record<string, CampoDominio[]>;
 }
 
 export interface Logger {
@@ -119,6 +125,7 @@ export function runPipeline(
 
   const functionIndex = buildFunctionIndex(sources, inlineScripts);
   const rulesByLayout: Record<string, ReturnType<typeof mapToDsl>[]> = {};
+  const camposByLayout: Record<string, CampoDominio[]> = {};
 
   for (const [funcName, layout] of Object.entries(MAPEAMENTO_FUNCOES)) {
     if (
@@ -133,11 +140,25 @@ export function runPipeline(
       continue;
     }
 
+    const familia = FAMILIA_POR_FUNCAO[funcName as keyof typeof FAMILIA_POR_FUNCAO];
+
+    // O arquivo de retorno não tem a forma "condição → mensagem": é dicionário.
+    if (MODO_POR_FUNCAO[funcName as keyof typeof MODO_POR_FUNCAO] === "tabelas") {
+      const tabelas = extrairTabelasDeDominio(found.source, funcName, found.lineOffset);
+      const campos = mapearCampos(tabelas, layout, funcName, familia);
+      camposByLayout[layout] = camposByLayout[layout] ?? [];
+      camposByLayout[layout].push(...campos);
+      rulesByLayout[layout] = rulesByLayout[layout] ?? [];
+      const entradas = campos.reduce((soma, c) => soma + c.entradas.length, 0);
+      logger.log(`${funcName}: ${campos.length} campos (${entradas} códigos) -> ${layout}`);
+      continue;
+    }
+
     const rawRules = extractRulesFromFunction(
       found.source,
       funcName,
       found.lineOffset,
-      FAMILIA_POR_FUNCAO[funcName as keyof typeof FAMILIA_POR_FUNCAO]
+      familia
     );
     const dslRules = rawRules.map((r) => mapToDsl(r, layout, logger));
     rulesByLayout[layout] = rulesByLayout[layout] ?? [];
@@ -145,7 +166,7 @@ export function runPipeline(
     logger.log(`${funcName}: ${dslRules.length} regras -> ${layout}`);
   }
 
-  return { assetUrls, sources, rulesByLayout };
+  return { assetUrls, sources, rulesByLayout, camposByLayout };
 }
 
 export async function main(): Promise<MainResult> {
@@ -175,13 +196,17 @@ export async function main(): Promise<MainResult> {
     assetUrls,
     logger: consoleLogger,
   });
-  writeSpecs(SPECS_DIR, pipeline.rulesByLayout);
+  writeSpecs(SPECS_DIR, pipeline.rulesByLayout, pipeline.camposByLayout);
   console.log(`Specs escritos em ${SPECS_DIR}`);
 
   const baselineSha256 = writeBaseline([html, ...sources.values()], assetUrls);
   checkBaselineVersioned(baselineSha256);
 
-  return { baselineSha256, rulesByLayout: pipeline.rulesByLayout };
+  return {
+    baselineSha256,
+    rulesByLayout: pipeline.rulesByLayout,
+    camposByLayout: pipeline.camposByLayout,
+  };
 }
 
 function checkBaselineVersioned(downloadedSha256: string): void {

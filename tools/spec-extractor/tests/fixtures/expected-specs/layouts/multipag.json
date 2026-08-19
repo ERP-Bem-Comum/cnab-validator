@@ -147,5 +147,6 @@
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     }
-  ]
+  ],
+  "campos": []
 }

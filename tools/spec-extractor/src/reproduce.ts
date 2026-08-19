@@ -45,7 +45,7 @@ export function runReproducibilityCheck(): {
 
   const tmpDir = mkdtempSync(join(tmpdir(), "spec-repro-"));
   try {
-    writeSpecs(tmpDir, pipeline.rulesByLayout);
+    writeSpecs(tmpDir, pipeline.rulesByLayout, pipeline.camposByLayout);
 
     const goldenFiles = listJsonFiles(GOLDEN_DIR.pathname);
     const generatedFiles = listJsonFiles(tmpDir);
@@ -64,6 +64,12 @@ export function runReproducibilityCheck(): {
     for (const rel of goldenRelative) {
       const goldenPath = join(GOLDEN_DIR.pathname, rel);
       const generatedPath = join(tmpDir, rel);
+      // Arquivo que existe só de um lado é diferença a relatar, não exceção a
+      // estourar: o gate precisa dizer o que mudou.
+      if (!generatedRelative.includes(rel)) {
+        diffs.push(`Arquivo ausente na geração: ${rel}`);
+        continue;
+      }
       const goldenContent = readFileSync(goldenPath, "utf-8");
       const generatedContent = readFileSync(generatedPath, "utf-8");
       if (goldenContent !== generatedContent) {

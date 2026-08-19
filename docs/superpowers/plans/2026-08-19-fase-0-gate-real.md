@@ -464,6 +464,31 @@ Verificado em `assets/.../retorno/arquivoRetorno.js`:
 | 2.6 | `tools/specs/divergencias.json` — catálogo manual × validador, consumível por outros repositórios. É a saída de maior valor da fase segundo o épico |
 | 2.7 | Adicionar `retorno-multipag` a `LAYOUTS_DO_CICLO`, `MAPEAMENTO_FUNCOES` e `LAYOUTS` — `config.ts` é a fonte da verdade do escopo |
 
+**Status em 2026-08-19 — onda entregue (2.1 a 2.7).** O layout `retorno-multipag` está no spec com
+**12 campos e 278 códigos**; nenhuma regra de remessa mudou (o diff é puramente aditivo).
+
+| Propriedade | Medição |
+|---|---|
+| Campo de ocorrências | colunas 231-240, **5 fatias** de dois dígitos, 142 códigos |
+| Registros em que é lido | `header-arquivo`, `header-lote`, `trailer-lote`, `trailer-arquivo` |
+| Balde de desconhecido | `fora_do_dominio: "desconhecido"` no próprio campo |
+| Divergências | `BD` (semântica divergente) e `XX` (ausente no manual), com fatias e linha do fonte |
+
+- **2.1 (CR4)** resolvida no extrator novo, não no walker de regras: o modo `tabelas` é outro
+  percurso do AST, e entra em `FunctionDeclaration` aninhada — que é onde o catálogo vive. Mexer no
+  walker de regras arriscaria as 1.539 regras de remessa sem necessidade.
+- **2.3** as fatias são descobertas do fonte, não declaradas: contíguas, de mesma largura e com
+  domínio quase igual. O limiar foi calibrado por medição — 0,99 entre fatias do campo de
+  ocorrências, 0,48 entre dois campos vizinhos de mesma largura sem relação (tipo de serviço e forma
+  de lançamento). Só o **nome** do campo é declarado, em `CAMPOS_NOMEADOS`.
+- **2.4** `registros_lidos` sai das tabelas irmãs que decodificam a posição do tipo de registro no
+  mesmo bloco do fonte — é evidência extraída, não afirmação nossa.
+- **2.6** `divergencias.json` é curado em `src/divergencias.ts` (o manual não é código) mas
+  **verificado contra a extração**: divergência sobre código que o validador não trata quebra a
+  geração, o que impede o catálogo de envelhecer em silêncio quando o banco mexer no validador.
+- O corpus de fixture do gate de reprodutibilidade ganhou uma função de retorno sintética, então o
+  modo `tabelas` e o `divergencias.json` passam a ser cobertos pelo CI. `baseline.json` atualizado.
+
 ---
 
 ### Onda 3 — Infra e gate automático (issue #7) · tamanho S

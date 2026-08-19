@@ -13,6 +13,8 @@
       ],
       "arquivo": "layouts/cobranca-remessa.json",
       "total_regras": 718,
+      "total_campos": 0,
+      "total_codigos": 0,
       "sub_layouts": [
         {
           "funcao": "validarDadosArquivo240",
@@ -33,6 +35,8 @@
       ],
       "arquivo": "layouts/multipag.json",
       "total_regras": 512,
+      "total_campos": 0,
+      "total_codigos": 0,
       "sub_layouts": [
         {
           "funcao": "validarDadosMultipag",
@@ -50,6 +54,8 @@
       ],
       "arquivo": "layouts/folha-pagamento.json",
       "total_regras": 309,
+      "total_campos": 0,
+      "total_codigos": 0,
       "sub_layouts": [
         {
           "funcao": "validarDadosFolha240",
@@ -60,6 +66,19 @@
           "regras": 134
         }
       ]
+    },
+    {
+      "layout": "retorno-multipag",
+      "nome": "Multipag/Folha — Retorno",
+      "tipo": "retorno",
+      "tamanhos_linha": [
+        240
+      ],
+      "arquivo": "layouts/retorno-multipag.json",
+      "total_regras": 0,
+      "total_campos": 12,
+      "total_codigos": 278,
+      "sub_layouts": []
     }
   ]
 }

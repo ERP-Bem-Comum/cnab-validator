@@ -11,6 +11,7 @@ export const LAYOUTS_DO_CICLO = [
   "cobranca-remessa",
   "multipag",
   "folha-pagamento",
+  "retorno-multipag",
 ] as const;
 
 export const MAPEAMENTO_FUNCOES = {
@@ -19,7 +20,25 @@ export const MAPEAMENTO_FUNCOES = {
   validarDadosMultipag: "multipag",
   validarDadosFolha240: "folha-pagamento",
   validarDadosFolha200: "folha-pagamento",
+  retorno_multipag_folha240: "retorno-multipag",
 } satisfies Record<string, (typeof LAYOUTS_DO_CICLO)[number]>;
+
+/**
+ * Como o fonte expressa o que precisa ser extraído.
+ *
+ * `regras` é a forma "condição → mensagem de erro" que o `ast-walker` reconhece.
+ * `tabelas` é a forma "campo igual a código → rótulo" do arquivo de retorno, que
+ * é dicionário e não regra — daí um fonte de 32 mil linhas com poucas dezenas de
+ * mensagens de erro.
+ */
+export const MODO_POR_FUNCAO = {
+  validarDadosArquivo240: "regras",
+  validarDadosArquivo400: "regras",
+  validarDadosMultipag: "regras",
+  validarDadosFolha240: "regras",
+  validarDadosFolha200: "regras",
+  retorno_multipag_folha240: "tabelas",
+} satisfies Record<keyof typeof MAPEAMENTO_FUNCOES, "regras" | "tabelas">;
 
 export interface LayoutMetadata {
   nome: string;
@@ -31,6 +50,16 @@ export const LAYOUTS: Record<(typeof LAYOUTS_DO_CICLO)[number], LayoutMetadata> 
   "cobranca-remessa": { nome: "Cobrança — Remessa", tipo: "remessa", tamanhos_linha: [240, 400] },
   multipag: { nome: "Multipag", tipo: "remessa", tamanhos_linha: [240] },
   "folha-pagamento": { nome: "Folha de Pagamento", tipo: "remessa", tamanhos_linha: [200, 240] },
+  "retorno-multipag": { nome: "Multipag/Folha — Retorno", tipo: "retorno", tamanhos_linha: [240] },
+};
+
+/**
+ * Nome do campo por faixa de colunas (1-based inclusivo), quando o fonte não o
+ * nomeia. O extrator descobre a faixa e os códigos sozinho; o rótulo do campo é
+ * conhecimento do time, e fica aqui em vez de ser adivinhado do texto.
+ */
+export const CAMPOS_NOMEADOS: Record<string, Record<string, string>> = {
+  "retorno-multipag": { "231-240": "ocorrencias" },
 };
 
 /**
@@ -50,4 +79,5 @@ export const FAMILIA_POR_FUNCAO = {
   validarDadosMultipag: "cnab240",
   validarDadosFolha240: "cnab240",
   validarDadosFolha200: "cnab200",
+  retorno_multipag_folha240: "cnab240",
 } satisfies Record<keyof typeof MAPEAMENTO_FUNCOES, FamiliaLayout>;

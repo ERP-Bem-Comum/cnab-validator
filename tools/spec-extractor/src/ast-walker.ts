@@ -505,7 +505,7 @@ function extractStringFromExpression(
  * Posição (0-based, fim exclusivo) que carrega o tipo de registro em cada família.
  * CNAB 240: posição 008. CNAB 400 e 200: coluna 001.
  */
-const POSICAO_TIPO_REGISTRO: Record<FamiliaLayout, [number, number]> = {
+export const POSICAO_TIPO_REGISTRO: Record<FamiliaLayout, [number, number]> = {
   cnab240: [7, 8],
   cnab400: [0, 1],
   cnab200: [0, 1],
@@ -529,7 +529,7 @@ const TIPO_REGISTRO_240: Record<string, string> = {
  * do fonte os chamam de header e trailer de arquivo. Os intermediários ficam com
  * rótulo neutro derivado do código, para não atribuir semântica que o fonte não afirma.
  */
-function tipoRegistroPorFamilia(valor: string, familia: FamiliaLayout): string {
+export function tipoRegistroPorFamilia(valor: string, familia: FamiliaLayout): string {
   if (familia === "cnab240") return TIPO_REGISTRO_240[valor] ?? `registro-tipo-${valor}`;
   if (valor === "0") return "header-arquivo";
   if (valor === "9") return "trailer-arquivo";
