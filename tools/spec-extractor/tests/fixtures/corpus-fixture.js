@@ -99,47 +99,47 @@ function retorno_multipag_folha240(res) {
       if (res[i].substring(7, 8) == 9)
         resposta = resposta + "<pre><b>Trailer de Arquivo</b> ";
       if (res[i].substring(230, 232) == "XX")
-        resposta = resposta + "      XX - Codigo fora do manual.";
+        resposta = resposta + "      XX - Rotulo sintetico, codigo ausente do manual.";
       if (res[i].substring(230, 232) == "BD")
-        resposta = resposta + "<b>      BD - Agendado.</b>";
+        resposta = resposta + "<b>      BD - Rotulo sintetico, semantica divergente.</b>";
       if (res[i].substring(230, 232) == 00 && res[i].substring(13, 14) != "B")
-        resposta = resposta + "      00 - Efetivado";
+        resposta = resposta + "      00 - Rotulo sintetico um";
       if (res[i].substring(230, 232) == 01)
-        resposta = resposta + "      01 - Recusado";
+        resposta = resposta + "      01 - Rotulo sintetico dois";
       if (res[i].substring(230, 232) == 02)
-        resposta = resposta + "      02 - Cancelado";
+        resposta = resposta + "      02 - Rotulo sintetico tres";
       if (res[i].substring(232, 234) == "XX")
-        resposta = resposta + " / XX - Codigo fora do manual.";
+        resposta = resposta + " / XX - Rotulo sintetico, codigo ausente do manual.";
       if (res[i].substring(232, 234) == "BD")
-        resposta = resposta + " / BD - Agendado.";
+        resposta = resposta + " / BD - Rotulo sintetico, semantica divergente.";
       if (res[i].substring(232, 234) == 01)
-        resposta = resposta + " / 01 - Recusado";
+        resposta = resposta + " / 01 - Rotulo sintetico dois";
       if (res[i].substring(232, 234) == 02)
-        resposta = resposta + " / 02 - Cancelado";
+        resposta = resposta + " / 02 - Rotulo sintetico tres";
       if (res[i].substring(234, 236) == "XX")
-        resposta = resposta + " / XX - Codigo fora do manual.";
+        resposta = resposta + " / XX - Rotulo sintetico, codigo ausente do manual.";
       if (res[i].substring(234, 236) == "BD")
-        resposta = resposta + " / BD - Agendado.";
+        resposta = resposta + " / BD - Rotulo sintetico, semantica divergente.";
       if (res[i].substring(234, 236) == 01)
-        resposta = resposta + " / 01 - Recusado";
+        resposta = resposta + " / 01 - Rotulo sintetico dois";
       if (res[i].substring(234, 236) == 02)
-        resposta = resposta + " / 02 - Cancelado";
+        resposta = resposta + " / 02 - Rotulo sintetico tres";
       if (res[i].substring(236, 238) == "XX")
-        resposta = resposta + " / XX - Codigo fora do manual.";
+        resposta = resposta + " / XX - Rotulo sintetico, codigo ausente do manual.";
       if (res[i].substring(236, 238) == "BD")
-        resposta = resposta + " / BD - Agendado.";
+        resposta = resposta + " / BD - Rotulo sintetico, semantica divergente.";
       if (res[i].substring(236, 238) == 01)
-        resposta = resposta + " / 01 - Recusado";
+        resposta = resposta + " / 01 - Rotulo sintetico dois";
       if (res[i].substring(236, 238) == 02)
-        resposta = resposta + " / 02 - Cancelado";
+        resposta = resposta + " / 02 - Rotulo sintetico tres";
       if (res[i].substring(238, 240) == "XX")
-        resposta = resposta + " / XX - Codigo fora do manual.";
+        resposta = resposta + " / XX - Rotulo sintetico, codigo ausente do manual.";
       if (res[i].substring(238, 240) == "BD")
-        resposta = resposta + " / BD - Agendado.";
+        resposta = resposta + " / BD - Rotulo sintetico, semantica divergente.";
       if (res[i].substring(238, 240) == 01)
-        resposta = resposta + " / 01 - Recusado";
+        resposta = resposta + " / 01 - Rotulo sintetico dois";
       if (res[i].substring(238, 240) == 02)
-        resposta = resposta + " / 02 - Cancelado";
+        resposta = resposta + " / 02 - Rotulo sintetico tres";
       resposta = resposta + "=====================================";
     }
   }

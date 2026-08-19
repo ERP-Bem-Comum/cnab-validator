@@ -24,7 +24,13 @@ import { mapearCampos, type CampoDominio } from "./dominio-mapper.js";
 import { mapToDsl } from "./rule-mapper.js";
 import { writeSpecs } from "./spec-generator.js";
 
-const BASELINE_PATH = new URL("../baseline.json", import.meta.url);
+/**
+ * Hash do corpus público do banco, para o monitor de mudança. É outro arquivo que
+ * o `baseline.json`, que guarda o hash do corpus de **fixture** usado no gate de
+ * reprodutibilidade — comparar o corpus baixado contra o hash da fixture faria o
+ * aviso disparar em toda execução, e um alerta que sempre toca não é alerta.
+ */
+const BASELINE_CORPUS_PATH = new URL("../baseline-corpus.json", import.meta.url);
 
 export interface MainResult {
   baselineSha256: string;
@@ -211,15 +217,19 @@ export async function main(): Promise<MainResult> {
 
 function checkBaselineVersioned(downloadedSha256: string): void {
   try {
-    const baselineContent = readFileSync(BASELINE_PATH, "utf-8");
+    const baselineContent = readFileSync(BASELINE_CORPUS_PATH, "utf-8");
     const baseline = JSON.parse(baselineContent) as { sha256?: string };
     if (baseline.sha256 && baseline.sha256 !== downloadedSha256) {
       console.warn(
-        `[baseline] Divergência detectada: corpus baixado (${downloadedSha256}) difere do baseline versionado (${baseline.sha256}). O validador do banco pode ter sido atualizado.`
+        `[baseline] Divergência detectada: corpus baixado (${downloadedSha256}) difere do baseline do corpus (${baseline.sha256}). O validador do banco foi atualizado — reveja os specs e atualize baseline-corpus.json.`
       );
+      return;
     }
+    console.log("[baseline] Corpus do banco idêntico ao baseline versionado.");
   } catch {
-    console.warn("[baseline] Não foi possível ler o baseline versionado; pulando comparação.");
+    console.warn(
+      "[baseline] Não foi possível ler baseline-corpus.json; pulando a comparação com o corpus do banco."
+    );
   }
 }
 

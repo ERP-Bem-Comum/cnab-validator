@@ -1,0 +1,23 @@
+{
+  "sha256": "248b0a5586b1f30284325c64c03ca32808cecc392f08221617da37bdc8bf46c4",
+  "observacao": "Hash SHA-256 do corpus público do validador do Bradesco, na última vez em que foi baixado. Serve de monitor de mudança: `bun run dev` avisa quando o corpus baixado divergir daqui, o que significa que o banco atualizou o validador e os specs precisam ser revisados. Os assets em si continuam fora do git.",
+  "capturado_em": "2026-08-19",
+  "fontes": [
+    "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/jquery-3.6.0.min.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/trocarCss.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/verificadorGeral.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/util.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/remessa/arquivoRemessa.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/multipag/arquivoMultipag.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/pagfor/arquivoPagFor.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/ptrb/arquivoPtrb.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/folhapagamento/arquivoFolhaPagamento.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/comprovantesalarial/arquivoComprovanteSalarial.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/retorno/arquivoRetorno.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/pix/arquivoRemessaPix.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/preAberturaEmpresa/arquivoRemessaPreAberuraEmpresa.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/preAberturaEmpresa/arquivoRetornoPreAberturaEmpresa.js",
+    "https://wspf.banco.bradesco/wsValidadorUniversal/Content/Js/pix/arquivoRetornoPix.js"
+  ]
+}
