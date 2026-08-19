@@ -51,6 +51,36 @@ function validarDadosMultipag(res) {
   if (res[0].substring(7, 8) != "S" && res[0].substring(7, 8) != "N") {
     str += "Linha 1, coluna 008, Header de arquivo, domínio inválido.<br>";
   }
+  // Dígito verificador: o fonte calcula fora do `if` e a regra só compara a
+  // faixa com a variável. A do segundo dígito fica sob uma guarda que cita o
+  // primeiro, e o bloco interno reusa `sm` — é o que exige resolver a guarda no
+  // ponto em que ela foi aberta, não no ponto da regra.
+  if (res[0].substring(17, 18) == 1) {
+    sm = res[0].substring(21, 22) * 10 + res[0].substring(22, 23) * 9 + res[0].substring(23, 24) * 8 + res[0].substring(24, 25) * 7 + res[0].substring(25, 26) * 6 + res[0].substring(26, 27) * 5 + res[0].substring(27, 28) * 4 + res[0].substring(28, 29) * 3 + res[0].substring(29, 30) * 2;
+    resto1 = sm;
+    resto1 %= 11;
+    dv1 = 11 - resto1;
+    if (resto1 == 0)
+      dv1 = 0;
+    if (resto1 == 1)
+      dv1 = 0;
+    if (res[0].substring(30, 31) != dv1) {
+      str += "Linha 1, coluna 031, Header de arquivo, primeiro dígito verificador inválido.<br>";
+    }
+    if (res[0].substring(30, 31) == dv1) {
+      sm = res[0].substring(21, 22) * 11 + res[0].substring(22, 23) * 10 + res[0].substring(23, 24) * 9 + res[0].substring(24, 25) * 8 + res[0].substring(25, 26) * 7 + res[0].substring(26, 27) * 6 + res[0].substring(27, 28) * 5 + res[0].substring(28, 29) * 4 + res[0].substring(29, 30) * 3 + res[0].substring(30, 31) * 2;
+      resto2 = sm;
+      resto2 %= 11;
+      dv2 = 11 - resto2;
+      if (resto2 == 0)
+        dv2 = 0;
+      if (resto2 == 1)
+        dv2 = 0;
+      if (res[0].substring(31, 32) != dv2) {
+        str += "Linha 1, coluna 032, Header de arquivo, segundo dígito verificador inválido.<br>";
+      }
+    }
+  }
   return str;
 }
 

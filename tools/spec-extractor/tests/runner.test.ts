@@ -114,6 +114,50 @@ describe("runner de conformidade", () => {
     );
   });
 
+  it("a regra do segundo dígito reprova, agora que a guarda resolve o primeiro", () => {
+    // A guarda é `substring(30, 31) == dv1`: sem o cálculo de `dv1` publicado, a
+    // regra do segundo dígito não era avaliada em arquivo nenhum, e um CPF com o
+    // último dígito errado passava limpo.
+    const relatorio = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-cpf-dv2-invalido.txt")
+    );
+    const digito = relatorio.achados.filter((a) => /dígito|inscrição\/CPF/i.test(a.mensagem));
+    assert.deepStrictEqual(
+      digito.map((a) => `${a.registro}:${a.linha}`),
+      ["header-arquivo:1", "header-lote:2"],
+      "o mesmo CPF está nas duas linhas, e o validador reprova as duas"
+    );
+    for (const achado of digito) {
+      assert.ok(
+        (relatorio.naoAvaliadas.find((n) => n.regra_id === achado.regra_id) ?? null) ===
+          null,
+        "regra que produziu achado não pode constar como não avaliada"
+      );
+    }
+  });
+
+  it("o mesmo CPF com o dígito certo não produz achado nenhum", () => {
+    const relatorio = aplicarSpec(multipag, carregarArquivo("multipag-cpf-correto.txt"));
+    assert.deepStrictEqual(
+      relatorio.achados.map((a) => `${a.regra_id} ${a.mensagem}`),
+      []
+    );
+  });
+
+  it("guarda que depende de função não modelada continua não avaliada", () => {
+    // O CNPJ alfanumérico passa cada posição por uma função do fonte que o spec
+    // não carrega. Publicar `dv1` não fecha essas: calcular seria inventar.
+    const relatorio = aplicarSpec(multipag, carregarArquivo("multipag-correto.txt"));
+    const porFuncao = relatorio.naoAvaliadas.filter((n) =>
+      /função do fonte não modelada/.test(n.detalhe ?? "")
+    );
+    assert.ok(porFuncao.length > 0, "a fronteira da função tem de aparecer no relatório");
+    for (const nao of porFuncao) {
+      assert.strictEqual(nao.motivo, "guarda_nao_avaliavel");
+    }
+  });
+
   it("custom nunca é avaliado como aprovado", () => {
     assert.strictEqual(
       avaliarCondicao({ tipo: "custom", alvo: "res[0]" }, { linhas: ["x"], i: 0 }),
@@ -176,6 +220,33 @@ describe("avaliador de expressão", () => {
     assert.throws(
       () => avaliarExpressao("funcaoDesconhecida(res[0]) == 1", ctx),
       ExpressaoNaoSuportada
+    );
+  });
+
+  it("curto-circuita como o JavaScript, e não exige o lado que o fonte não olha", () => {
+    // A guarda identifica o registro antes de comparar o dígito. Numa linha que
+    // não é aquele registro o fonte nunca avalia a segunda metade — avaliá-la
+    // faria a regra ser recusada em todo o arquivo por uma variável ausente.
+    assert.strictEqual(
+      avaliarExpressao('res[0].substring(0, 3) == "999" && res[0].substring(0, 1) == dv1', ctx),
+      false
+    );
+    assert.strictEqual(
+      avaliarExpressao('res[0].substring(0, 3) == "237" || naoExiste == 1', ctx),
+      true
+    );
+    // Com a esquerda verdadeira o lado direito volta a ser exigido: o curto-circuito
+    // não pode virar desculpa para aprovar o que não se sabe avaliar.
+    assert.throws(
+      () => avaliarExpressao('res[0].substring(0, 3) == "237" && naoExiste == 1', ctx),
+      ExpressaoNaoSuportada
+    );
+  });
+
+  it("resolve a variável da guarda quando ela é fornecida", () => {
+    assert.strictEqual(
+      avaliarExpressao("res[0].substring(0, 3) == banco", { ...ctx, variaveis: { banco: 237 } }),
+      true
     );
   });
 });

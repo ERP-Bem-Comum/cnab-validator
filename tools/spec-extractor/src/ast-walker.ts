@@ -43,6 +43,14 @@ export interface RawRule {
    * variável; sem o que está aqui, a regra é ilegível para um motor.
    */
   ambiente?: Record<string, AtribuicaoFonte[]>;
+  /**
+   * Idem para as variáveis que as **guardas** referenciam. É ambiente separado
+   * porque o ponto de avaliação é outro: a guarda vale onde o `if` foi aberto, e
+   * o fonte reatribui as mesmas variáveis (`sm`, `resto`) dentro do bloco que ela
+   * abre. Resolver a guarda com o ambiente da regra pegaria o cálculo do dígito
+   * seguinte para conferir o anterior.
+   */
+  ambiente_guarda?: Record<string, AtribuicaoFonte[]>;
 }
 
 /** Atribuição como o walker a viu: guarda a pilha inteira para decidir visibilidade. */
@@ -69,6 +77,8 @@ interface Guard {
   source: string;
   test: Expression;
   negada: boolean;
+  /** Posição no fluxo em que o `if` foi aberto — é o instante em que a guarda é avaliada. */
+  ordem: number;
 }
 
 export function extractRulesFromFunction(
@@ -146,12 +156,22 @@ function visitStatement(stmt: Statement, ctx: WalkContext, guards: Guard[]): voi
         emitRule(ctx, stmt, message, testSource, guards, targets[0] ?? null);
       }
 
-      const guardPositiva: Guard = { source: testSource, test: stmt.test, negada: false };
+      const guardPositiva: Guard = {
+        source: testSource,
+        test: stmt.test,
+        negada: false,
+        ordem: ctx.ordem.valor++,
+      };
       visitWithGuard(stmt.consequent, ctx, guards, guardPositiva);
 
       if (stmt.alternate) {
         const negated = `!(${testSource})`;
-        const guardNegativa: Guard = { source: negated, test: stmt.test, negada: true };
+        const guardNegativa: Guard = {
+          source: negated,
+          test: stmt.test,
+          negada: true,
+          ordem: guardPositiva.ordem,
+        };
         if (stmt.alternate.type === "IfStatement") {
           visitStatement(stmt.alternate, ctx, [...guards, guardNegativa]);
         } else if (
@@ -327,6 +347,37 @@ function ambienteDaCondicao(
 }
 
 /**
+ * Ambiente das guardas. Cada `if` externo é resolvido **no ponto em que foi
+ * aberto** — com a pilha que existia até ali e com corte de ordem na sua própria
+ * abertura. É o que separa o cálculo de um dígito do seguinte: o fonte reusa
+ * `sm` e `resto` no bloco interno, e resolver a guarda com a ordem da regra faria
+ * a conferência do primeiro dígito usar a soma ponderada do segundo.
+ */
+function ambienteDasGuardas(
+  guards: Guard[],
+  ctx: WalkContext
+): Record<string, AtribuicaoFonte[]> | undefined {
+  const ambiente: Record<string, AtribuicaoFonte[]> = {};
+
+  guards.forEach((guarda, k) => {
+    const doNivel = ambienteDaCondicao(
+      guarda.source,
+      ctx,
+      guards.slice(0, k),
+      guarda.ordem
+    );
+    if (!doNivel) return;
+    // A guarda mais externa é avaliada primeiro: quando duas citam a mesma
+    // variável, vale a resolução que o fluxo alcança antes.
+    for (const [nome, atribuicoes] of Object.entries(doNivel)) {
+      if (!(nome in ambiente)) ambiente[nome] = atribuicoes;
+    }
+  });
+
+  return Object.keys(ambiente).length > 0 ? ambiente : undefined;
+}
+
+/**
  * Uma atribuição só alcança a regra se valia onde a regra está: toda guarda da
  * regra precisa valer também para a atribuição. Sem isso, o ramo irmão do cálculo
  * — o fonte repete o bloco inteiro para cada valor informado no dígito — vazaria
@@ -369,6 +420,7 @@ function emitRule(
     colunas: extrairColunas(mensagem),
     alvo,
     ambiente: ambienteDaCondicao(condicaoPropria, ctx, guards, ctx.ordem.valor++),
+    ambiente_guarda: ambienteDasGuardas(guards, ctx),
   });
 }
 
@@ -702,7 +754,9 @@ export function registroDaGuardaSource(
     return null;
   }
   return inferirRegistroDaGuarda(
-    [{ source: condicaoGuarda, test: expressao, negada: false }],
+    // Guarda reconstruída de fora do walk: a ordem não tem uso aqui, onde só se
+    // quer o registro que a guarda identifica.
+    [{ source: condicaoGuarda, test: expressao, negada: false, ordem: 0 }],
     alvo,
     familia
   );

@@ -15,9 +15,15 @@ conta aparece aqui — o repositório é público.
 | `multipag-forma-lancamento-invalida.txt` | Header de lote com serviço de pagamento a fornecedor e forma de lançamento fora da lista que o validador aceita para esse serviço. Um campo diferente do correto. |
 | `multipag-g012-preenchido.txt` | Segmento A com o dígito da agência do favorecido (coluna 043) preenchido, onde o validador exige branco. Um campo diferente do correto. |
 | `multipag-banco-divergente-no-lote.txt` | Dois pares Segmento A/B no mesmo lote, com favorecidos em bancos diferentes. O segundo A usa a câmara de TED e os códigos de finalidade, que são o correto para banco de fora: o único defeito é a mistura de bancos. |
+| `multipag-cpf-correto.txt` | Igual ao correto, com a empresa identificada por CPF sintético (inscrição `1`) em vez de CNPJ, com os dois dígitos verificadores certos. Nenhum achado. |
+| `multipag-cpf-dv2-invalido.txt` | O mesmo CPF com o **segundo** dígito trocado e o primeiro intacto. Produz **dois** achados — header de arquivo e header de lote, que é onde a inscrição da empresa aparece. Antes de o spec publicar `variaveis_guarda`, este arquivo passava limpo: a regra do segundo dígito vive sob uma guarda que compara a faixa com o primeiro, e sem o cálculo publicado ela nunca era avaliada. |
 
-Os três últimos existem para os critérios de aceite da issue #2, e cada um produz
-**exatamente um achado** — o defeito injetado, nada mais.
+`multipag-forma-lancamento-invalida.txt`, `multipag-g012-preenchido.txt` e
+`multipag-banco-divergente-no-lote.txt` existem para os critérios de aceite da
+issue #2, e cada um produz **exatamente um achado** — o defeito injetado, nada
+mais. O par de CPF é a exceção deliberada: o campo de inscrição é repetido no
+header de lote, então um dígito errado é reprovado nas duas linhas, como o
+validador oficial faz.
 
 Estrutura de `multipag-correto.txt` (6 registros de 240 posições):
 

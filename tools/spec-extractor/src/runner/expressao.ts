@@ -151,11 +151,21 @@ class Parser {
     return valor;
   }
 
+  /**
+   * `&&` e `||` têm curto-circuito, como no fonte. Não é detalhe de performance:
+   * a guarda começa identificando o registro e só depois compara o dígito, então
+   * numa linha que não é aquele registro o validador nunca chega à parte que
+   * depende do cálculo. Avaliar os dois lados faria a regra ser recusada em toda
+   * linha do arquivo por uma expressão que o fonte não olha.
+   */
   private ou(): Valor {
     let esquerda = this.e();
     while (this.consumirSimbolo("||")) {
-      const direita = this.e();
-      esquerda = esquerda || direita;
+      if (esquerda) {
+        this.pularOperando(["||"]);
+        continue;
+      }
+      esquerda = this.e();
     }
     return esquerda;
   }
@@ -163,10 +173,33 @@ class Parser {
   private e(): Valor {
     let esquerda = this.comparacao();
     while (this.consumirSimbolo("&&")) {
-      const direita = this.comparacao();
-      esquerda = esquerda && direita;
+      if (!esquerda) {
+        this.pularOperando(["&&", "||"]);
+        continue;
+      }
+      esquerda = this.comparacao();
     }
     return esquerda;
+  }
+
+  /**
+   * Consome o operando que não será avaliado. Para no primeiro dos `ate` que
+   * estiver no nível externo de parênteses — o que estiver dentro de um grupo
+   * pertence ao operando descartado.
+   */
+  private pularOperando(ate: string[]): void {
+    let nivel = 0;
+    while (this.pos < this.tokens.length) {
+      const token = this.tokens[this.pos];
+      if (token.tipo === "simbolo") {
+        if (token.valor === "(" || token.valor === "[") nivel++;
+        else if (token.valor === ")" || token.valor === "]") {
+          if (nivel === 0) return;
+          nivel--;
+        } else if (nivel === 0 && ate.includes(token.valor)) return;
+      }
+      this.pos++;
+    }
   }
 
   /** Associatividade à esquerda: `a < b > c` é `(a < b) > c`, como no JavaScript. */
@@ -246,6 +279,13 @@ class Parser {
 
     const variavel = this.ctx.variaveis?.[nome];
     if (variavel !== undefined) return variavel;
+
+    // Chamada de função do fonte que o spec não modela — o CNPJ alfanumérico é a
+    // que aparece aqui. Distinguir da variável não resolvida importa: uma se
+    // fecha publicando o cálculo, a outra só extraindo a função.
+    if (this.espiarSimbolo() === "(") {
+      throw new ExpressaoNaoSuportada(`função do fonte não modelada: ${nome}`);
+    }
 
     throw new ExpressaoNaoSuportada(`identificador desconhecido: ${nome}`);
   }
