@@ -3421,6 +3421,106 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:475",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 475,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "operador": "==",
+        "valor": "0001",
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) == \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:478",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 478,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "0001"
+          }
+        ],
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) > \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:490",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 490,
@@ -3918,6 +4018,51 @@
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) != 9)",
       "descricao": "Linha {linha}, Tamanho do registro inválido. {valor} caracteres.",
       "mensagem": "Linha {linha}, Tamanho do registro inválido. {valor} caracteres.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:525",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 525,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[i].length > 1 && res[i].substring(0, 1) != 0) && (res[i].substring(0, 3) != 237)",
+      "condicao_guarda": "(res[i].length > 1 && res[i].substring(0, 1) != 0)",
+      "descricao": "Linha {linha}, Colunas 001 a 003, deve iniciar com 237.",
+      "mensagem": "Linha {linha}, Colunas 001 a 003, deve iniciar com 237.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -9609,6 +9754,140 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:996",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 996,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        9
+      ],
+      "colunas_mensagem": [
+        9,
+        13
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 9,
+          "colunas": [
+            9,
+            9
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 7,
+              "fim0": 8
+            },
+            "operador": "==",
+            "valor": "1",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 9
+            },
+            "operador": "==",
+            "valor": "C",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 13
+            },
+            "operador": "!=",
+            "valor": "00001",
+            "comparacao": "estrita"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\" && res[j].substring(8, 13) != \"00001\")",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo)",
+      "descricao": "Linha {valor}, colunas 009 a 013, sequencial de registro no lote deve iniciar com 00001.",
+      "mensagem": "Linha {valor}, colunas 009 a 013, sequencial de registro no lote deve iniciar com 00001.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1001",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1001,
+      "registro": "detalhe",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        9,
+        13
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[i]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3)",
+      "descricao": "Linha {valor}, colunas 009 a 013, sequencial de registro fora de sequencia.",
+      "mensagem": "Linha {valor}, colunas 009 a 013, sequencial de registro fora de sequencia.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:1006",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 1006,
@@ -12880,6 +13159,78 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:1298",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1298,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        21,
+        23
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 23,
+          "colunas": [
+            21,
+            23
+          ],
+          "tamanho": 3
+        },
+        {
+          "alvo": "res[i + 2]",
+          "inicio0": 20,
+          "fim0": 23,
+          "colunas": [
+            21,
+            23
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 23
+            },
+            "operador": "==",
+            "valor": "237",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i + 2]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 23
+            },
+            "operador": "!=",
+            "valor": "237",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(13, 14) == \"A\" && res[i + 2].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237 && res[i + 2].substring(20, 23) != 237)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(13, 14) == \"A\" && res[i + 2].substring(13, 14) == \"A\")",
+      "descricao": "Linha {valor}, Segmento A, colunas 021 a 023, Número do banco diferente no mesmo lote.",
+      "mensagem": "Linha {valor}, Segmento A, colunas 021 a 023, Número do banco diferente no mesmo lote.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:1301",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 1301,
@@ -13997,6 +14348,159 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:1436",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1436,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 97,
+          "fim0": 101
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) > res[i].substring(97, 101))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1439",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1439,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 95,
+          "fim0": 97
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101)) && (res[0].substring(145, 147) > res[i].substring(95, 97))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101))",
+      "descricao": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1443",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1443,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 93,
+          "fim0": 95
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97)) && (res[0].substring(143, 145) > res[i].substring(93, 95))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97))",
+      "descricao": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento A, colunas 094 a 101, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:1446",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 1446,
@@ -14432,8 +14936,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 154,
+          "fim0": 162
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 93,
+          "fim0": 101
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0) && (res[i].substring(154, 162) != res[i].substring(93, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0)",
@@ -14572,8 +15086,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 162,
+          "fim0": 177
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 119,
+          "fim0": 134
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0) && (res[i].substring(162, 177) != res[i].substring(119, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0)",
@@ -14681,6 +15205,51 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
       "descricao": "Linha {linha}, Segmento A, colunas 163 a 177, Valor real efetivação do pagamento em branco. Informar zeros.",
       "mensagem": "Linha {linha}, Segmento A, colunas 163 a 177, Valor real efetivação do pagamento em branco. Informar zeros.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1480",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1480,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        178,
+        217
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 177,
+          "fim0": 217,
+          "colunas": [
+            178,
+            217
+          ],
+          "tamanho": 40
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 177,
+          "fim0": 217
+        },
+        "operador": "!=",
+        "valor": "0",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(177, 217) != 0)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, Segmento A, colunas 178 a 217, campo destinado para informações SIAPE. Vide descrição G031 do layout técnico.",
+      "mensagem": "Linha {linha}, Segmento A, colunas 178 a 217, campo destinado para informações SIAPE. Vide descrição G031 do layout técnico.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -17137,6 +17706,51 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:1711",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1711,
+      "registro": "segmento-b",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        227,
+        232
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 226,
+          "fim0": 232,
+          "colunas": [
+            227,
+            232
+          ],
+          "tamanho": 6
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 226,
+          "fim0": 232
+        },
+        "operador": "!=",
+        "valor": "0",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(226, 232) != 0)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
+      "descricao": "Linha {linha}, Segmento B, colunas 227 a 232, campo destinado para informações SIAPE. Vide descrição P012 do layout técnico.",
+      "mensagem": "Linha {linha}, Segmento B, colunas 227 a 232, campo destinado para informações SIAPE. Vide descrição P012 do layout técnico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:1717",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 1717,
@@ -18974,8 +19588,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 36
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 104,
+          "fim0": 114
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[i].substring(26, 36) != res[i].substring(104, 114))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52))",
@@ -19870,6 +20494,159 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52))",
       "descricao": "Linha {linha}, Segmento J, colunas 145 a 152, Data de pagamento (nominal) inválida.",
       "mensagem": "Linha {linha}, Segmento J, colunas 145 a 152, Data de pagamento (nominal) inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1952",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1952,
+      "registro": "segmento-j",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "colunas_mensagem": [
+        145,
+        152
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 148,
+          "fim0": 152
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) > res[i].substring(148, 152))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52))",
+      "descricao": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1956",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1956,
+      "registro": "segmento-j",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "colunas_mensagem": [
+        145,
+        152
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 146,
+          "fim0": 148
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152)) && (res[0].substring(145, 147) > res[i].substring(146, 148))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152))",
+      "descricao": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:1961",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 1961,
+      "registro": "segmento-j",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "colunas_mensagem": [
+        145,
+        152
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 144,
+          "fim0": 146
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152) && res[0].substring(145, 147) == res[i].substring(146, 148)) && (res[0].substring(143, 145) > res[i].substring(144, 146))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152) && res[0].substring(145, 147) == res[i].substring(146, 148))",
+      "descricao": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, colunas 145 a 152, Segmento J, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -21736,6 +22513,210 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52))",
       "descricao": "Linha {valor}, Segmento J-52, colunas 076 a 076, Tipo de Inscrição do Cedente/Beneficiário Inválido.",
       "mensagem": "Linha {valor}, Segmento J-52, colunas 076 a 076, Tipo de Inscrição do Cedente/Beneficiário Inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2124",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2124,
+      "registro": "segmento-j-52",
+      "registro_referenciado": "header-lote",
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        19,
+        32
+      ],
+      "colunas_mensagem": [
+        77,
+        91
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 18,
+          "fim0": 32,
+          "colunas": [
+            19,
+            32
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 32
+        },
+        "operador": "==",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 91
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 1 && res[j].substring(75, 76) == 1) && (res[1].substring(18, 32) == res[j].substring(77, 91))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 1 && res[j].substring(75, 76) == 1)",
+      "descricao": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CPF informado é o mesmo do Contrato Pagador (Header de Lote).",
+      "mensagem": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CPF informado é o mesmo do Contrato Pagador (Header de Lote).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2128",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2128,
+      "registro": "segmento-j-52",
+      "registro_referenciado": "header-lote",
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[1]"
+      ],
+      "colunas": [
+        19,
+        32
+      ],
+      "colunas_mensagem": [
+        77,
+        91
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[1]",
+          "inicio0": 18,
+          "fim0": 32,
+          "colunas": [
+            19,
+            32
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[1]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 32
+        },
+        "operador": "==",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 91
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 2 && res[j].substring(75, 76) == 2) && (res[1].substring(18, 32) == res[j].substring(77, 91))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 2 && res[j].substring(75, 76) == 2)",
+      "descricao": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CNPJ informado é o mesmo do Contrato Pagador (Header de Lote).",
+      "mensagem": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CNPJ informado é o mesmo do Contrato Pagador (Header de Lote).",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2134",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2134,
+      "registro": "segmento-j",
+      "registro_referenciado": "segmento-j-52",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        22,
+        35
+      ],
+      "colunas_mensagem": [
+        77,
+        91
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 21,
+          "fim0": 35,
+          "colunas": [
+            22,
+            35
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 21,
+          "fim0": 35
+        },
+        "operador": "==",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 91
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 1 && res[j].substring(75, 76) == 1) && (res[j].substring(21, 35) == res[j].substring(77, 91))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 1 && res[j].substring(75, 76) == 1)",
+      "descricao": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CPF informado é o mesmo do Pagador.",
+      "mensagem": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CPF informado é o mesmo do Pagador.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2138",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2138,
+      "registro": "segmento-j",
+      "registro_referenciado": "segmento-j-52",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        22,
+        35
+      ],
+      "colunas_mensagem": [
+        77,
+        91
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 21,
+          "fim0": 35,
+          "colunas": [
+            22,
+            35
+          ],
+          "tamanho": 14
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 21,
+          "fim0": 35
+        },
+        "operador": "==",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 91
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 2 && res[j].substring(75, 76) == 2) && (res[j].substring(21, 35) == res[j].substring(77, 91))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 2 && res[j].substring(75, 76) == 2)",
+      "descricao": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CNPJ informado é o mesmo do Pagador.",
+      "mensagem": "Linha {valor}, colunas 077 a 091, Segmento J-52, Inscrição do Beneficiário, CNPJ informado é o mesmo do Pagador.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -25639,6 +26620,159 @@
       "severidade": "erro"
     },
     {
+      "id": "multipag:validarDadosMultipag:2539",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2539,
+      "registro": "segmento-o",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "colunas_mensagem": [
+        100,
+        107
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 103,
+          "fim0": 107
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) > res[i].substring(103, 107))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\")",
+      "descricao": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2543",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2543,
+      "registro": "segmento-o",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "colunas_mensagem": [
+        100,
+        107
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 101,
+          "fim0": 103
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107)) && (res[0].substring(145, 147) > res[i].substring(101, 103))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107))",
+      "descricao": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2548",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2548,
+      "registro": "segmento-o",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "colunas_mensagem": [
+        100,
+        107
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 99,
+          "fim0": 101
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107) && res[0].substring(145, 147) == res[i].substring(101, 103)) && (res[0].substring(143, 145) > res[i].substring(99, 101))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107) && res[0].substring(145, 147) == res[i].substring(101, 103))",
+      "descricao": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento O, colunas 100 a 107, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "multipag:validarDadosMultipag:2552",
       "funcao_origem": "validarDadosMultipag",
       "linha_fonte": 2552,
@@ -28457,6 +29591,159 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\")",
       "descricao": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento inválida.",
       "mensagem": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2784",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2784,
+      "registro": "segmento-n",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "colunas_mensagem": [
+        88,
+        95
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 91,
+          "fim0": 95
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) > res[i].substring(91, 95))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\")",
+      "descricao": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2788",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2788,
+      "registro": "segmento-n",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "colunas_mensagem": [
+        88,
+        95
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 89,
+          "fim0": 91
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95)) && (res[0].substring(145, 147) > res[i].substring(89, 91))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95))",
+      "descricao": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:2793",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 2793,
+      "registro": "segmento-n",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "colunas_mensagem": [
+        88,
+        95
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 87,
+          "fim0": 89
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95) && res[0].substring(145, 147) == res[i].substring(89, 91)) && (res[0].substring(143, 145) > res[i].substring(87, 89))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95) && res[0].substring(145, 147) == res[i].substring(89, 91))",
+      "descricao": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
+      "mensagem": "Linha {linha}, Segmento N, colunas 088 A 095, Data de pagamento, {valor}/{valor}/{valor}, inferior a data de gravação do arquivo. Confirme.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },

@@ -308,10 +308,39 @@ alterações são todas `custom → arquétipo`.
    parêntese fechado no lugar errado. Ambos ficam em `custom` de propósito — o comportamento não é o
    da conjunção lógica.
 
-⬜ Pendente fora desta onda: as 52 `custom` restantes são casos genuinamente irregulares — comparação
+**Terceira rodada em 2026-08-19 — o discriminador de sinal (CR3/0.4) refeito.** A regra de banco
+único por lote (CA3 da #2) não estava nos specs, e a causa não era o walker: `isNoise` decidia o que
+é regra por **lista de palavras** na mensagem, e "Número do banco diferente no mesmo lote" não casa
+nenhuma delas (a lista tem "divergent", não "diferente").
+
+O critério do CR3 — referência de linha + referência de coluna — **também estava errado sozinho**:
+medido contra o corpus, ele traria 134 regras novas mas **descartaria 27 regras legítimas**, entre
+elas todas as de comprimento de registro (que não citam coluna por natureza), os domínios de tipo de
+serviço e modalidade do Multipag (`{valor}-Serviço não localizado`) e as coerências aritméticas do
+Segmento J. O discriminador passou a exigir **uma das duas evidências**, não as duas:
+
+| Critério | Regras | Perdidas | Novas |
+|---|---:|---:|---:|
+| lista de palavras (antes) | 1.405 | — | — |
+| linha + coluna (CR3 literal) | 1.512 | **27** | 134 |
+| linha + coluna **ou** indicativo | **1.539** | **0** | **134** |
+
+As 134 novas foram revisadas uma a uma pelo texto: são comparações de data (pagamento inferior à
+gravação, desconto superior ao vencimento), percentual que excede o limite, código de banco, banco
+`237` nas colunas 001-003 e sequencial de registro. Nenhum render de relatório entrou. Apareceu o
+primeiro `segmento-j-52` do repositório.
+
+Na mesma rodada, `coerencia_registro` passou a cobrir **comparação entre dois campos da mesma linha**
+e **operador relacional** — é a forma com que o fonte compara datas entre si. Isso reclassificou 6
+regras que estavam em `custom` e absorveu 68 das novas. `custom` fica em **65 de 1.539 (4,2%)**.
+
+Diff da rodada: **+134 / -0 / ~6** — nenhuma regra perdida, e a única reclassificação é
+`custom → coerencia_registro`.
+
+⬜ Pendente fora desta onda: as 65 `custom` restantes são casos genuinamente irregulares — comparação
 entre duas faixas do **mesmo** registro (6), totalizador com `parseFloat` somando campos (7),
-variáveis de contagem (`qtde_reg != qtde_linha`, 3), os dois bugs do fonte acima, e dígitos com dois
-valores aceitos (`!= dv10 && != dv11`, 6).
+variáveis de contagem (`qtde_reg != qtde_linha`, 3), os dois bugs do fonte acima, dígitos com dois
+valores aceitos (`!= dv10 && != dv11`, 6) e aritmética sobre faixa (`faixa != outra - 1`).
 
 ---
 

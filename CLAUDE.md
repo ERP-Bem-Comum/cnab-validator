@@ -64,6 +64,11 @@ Pontos que só ficam claros lendo vários arquivos juntos:
 - **`config.ts` é a fonte da verdade do escopo.** Adicionar layout = adicionar entrada em
   `LAYOUTS_DO_CICLO`, `MAPEAMENTO_FUNCOES` (função JS → layout) e `LAYOUTS`. O `spec-generator` falha
   em layout desconhecido; o `index.ts` ignora função fora de `LAYOUTS_DO_CICLO`.
+- **O que vira regra é decidido por duas evidências independentes** (`isNoise`): a mensagem cita
+  linha **e** coluna, **ou** o texto traz um indicativo de erro. Nenhuma basta sozinha — o fonte tem
+  regra que não cita coluna (comprimento do registro) e regra cujo texto não usa palavra de erro
+  ("Número do banco diferente no mesmo lote", que é a regra de banco único por lote). Ao mexer aqui,
+  medir o diff **de conjunto** (quantas regras entram e quantas somem), não só a reclassificação.
 - **O walker mantém um ambiente de variáveis** (`RawRule.ambiente`): atribuições vistas até a regra,
   com a pilha de guardas de cada uma. Uma atribuição só alcança a regra se toda guarda da regra vale
   também para ela — sem esse escopo o ramo irmão do cálculo de dígito vazaria e o spec publicaria dois
@@ -113,6 +118,10 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   mas **só das faixas do alvo da regra**: uma parte que lê `res[i + 2]` fala de outra linha do
   arquivo, e somá-la ao envelope produziria uma faixa que não existe em registro nenhum. Nas demais
   regras `posicoes` continua com uma entrada só.
+- `coerencia_registro` cobre duas leituras comparadas entre si — a mesma faixa em linhas distintas
+  (`res[i]` contra `res[j]`), que sustenta "banco único por lote", **e** dois campos da mesma linha,
+  que é como o fonte compara datas. O operador pode ser relacional; o par (`alvo`, `outro`) diz se a
+  comparação atravessa registros.
 - `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
   sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
   minúscula no dígito.

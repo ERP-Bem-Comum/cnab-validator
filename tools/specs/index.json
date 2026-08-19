@@ -1,7 +1,7 @@
 {
   "fonte": "https://wspf.banco.bradesco/wsValidadorUniversal/validadorgeral",
   "observacao": "Regras extraídas por AST dos arquivos JS públicos do validador Bradesco.",
-  "total_regras": 1405,
+  "total_regras": 1539,
   "layouts": [
     {
       "layout": "cobranca-remessa",
@@ -12,15 +12,15 @@
         400
       ],
       "arquivo": "layouts/cobranca-remessa.json",
-      "total_regras": 637,
+      "total_regras": 718,
       "sub_layouts": [
         {
           "funcao": "validarDadosArquivo240",
-          "regras": 329
+          "regras": 385
         },
         {
           "funcao": "validarDadosArquivo400",
-          "regras": 308
+          "regras": 333
         }
       ]
     },
@@ -32,11 +32,11 @@
         240
       ],
       "arquivo": "layouts/multipag.json",
-      "total_regras": 488,
+      "total_regras": 512,
       "sub_layouts": [
         {
           "funcao": "validarDadosMultipag",
-          "regras": 488
+          "regras": 512
         }
       ]
     },
@@ -49,15 +49,15 @@
         240
       ],
       "arquivo": "layouts/folha-pagamento.json",
-      "total_regras": 280,
+      "total_regras": 309,
       "sub_layouts": [
         {
           "funcao": "validarDadosFolha240",
-          "regras": 158
+          "regras": 175
         },
         {
           "funcao": "validarDadosFolha200",
-          "regras": 122
+          "regras": 134
         }
       ]
     }

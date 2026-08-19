@@ -372,4 +372,48 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules.length, 1);
     assert.strictEqual(rules[0].ambiente, undefined);
   });
+  it("aceita regra cuja mensagem nao usa palavra de erro, mas cita linha e coluna", () => {
+    // "Número do banco diferente no mesmo lote" não casa nenhuma palavra da lista
+    // de indicadores — e é a regra de banco único por lote.
+    const codigo = `
+      function amostra(res) {
+        var resposta = "";
+        if (res[i].substring(20, 23) == 237 && res[i + 2].substring(20, 23) != 237)
+          resposta = resposta + "Linha " + [i + 3] + ", Segmento A, colunas 021 a 023, Número do banco diferente no mesmo lote.<br>";
+        return resposta;
+      }
+    `;
+    const rules = extractRulesFromFunction(codigo, "amostra");
+    assert.strictEqual(rules.length, 1);
+    assert.deepStrictEqual(rules[0].colunas, [21, 23]);
+  });
+
+  it("aceita regra sem referencia de coluna quando o texto indica o erro", () => {
+    // Comprimento do registro é sobre a linha inteira: não citar coluna é a
+    // modelagem certa dela, não ausência de evidência.
+    const codigo = `
+      function amostra(res) {
+        var resposta = "";
+        if (res[i].length != 240)
+          resposta = resposta + "Linha " + i + ", Tamanho do registro inválido.<br>";
+        return resposta;
+      }
+    `;
+    const rules = extractRulesFromFunction(codigo, "amostra");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].colunas, null);
+  });
+
+  it("descarta render de relatorio, que nao tem nem linha e coluna nem indicativo de erro", () => {
+    const codigo = `
+      function amostra(res) {
+        var resposta = "";
+        if (res[0].substring(0, 3) == "237")
+          resposta = resposta + "Empresa: " + res[0].substring(72, 102) + "<br>";
+        return resposta;
+      }
+    `;
+    const rules = extractRulesFromFunction(codigo, "amostra");
+    assert.deepStrictEqual(rules, []);
+  });
 });

@@ -688,4 +688,39 @@ describe("mapToDsl", () => {
     const dsl = mapToDsl(raw, "multipag");
     assert.strictEqual(dsl.condicao.tipo, "custom");
   });
+  it("classifica comparacao entre dois campos da mesma linha como coerencia", () => {
+    // O fonte compara datas entre si: "data do desconto superior à do vencimento"
+    // é faixa contra faixa, no mesmo registro, com operador relacional.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 800,
+      condicao_original: "res[i].substring(142, 150) > res[i].substring(76, 84)",
+      mensagem: "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      registro: "segmento-p",
+      colunas: [143, 150],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "coerencia_registro");
+    if (dsl.condicao.tipo === "coerencia_registro") {
+      assert.strictEqual(dsl.condicao.operador, ">");
+      assert.strictEqual(dsl.condicao.alvo, "res[i]");
+      assert.strictEqual(dsl.condicao.outro, "res[i]");
+      assert.deepStrictEqual(dsl.condicao.posicao_outro, { inicio0: 76, fim0: 84 });
+    }
+  });
+
+  it("nao classifica faixa comparada consigo mesma como coerencia", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 801,
+      condicao_original: "res[i].substring(10, 12) == res[i].substring(10, 12)",
+      mensagem: "Linha {linha}, colunas 011 a 012, valor inválido.",
+      registro: "segmento-p",
+      colunas: [11, 12],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "custom");
+  });
 });

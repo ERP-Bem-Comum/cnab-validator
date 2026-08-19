@@ -2990,6 +2990,106 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:471",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 471,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "operador": "==",
+        "valor": "0001",
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) == \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:474",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 474,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "0001"
+          }
+        ],
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) > \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:486",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 486,
@@ -3015,6 +3115,51 @@
       "condicao_guarda": "(res[i].substring(0, 241) != 0)",
       "descricao": "Linha {linha}, Tamanho do registro inválido {valor}.",
       "mensagem": "Linha {linha}, Tamanho do registro inválido {valor}.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:488",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 488,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 3) != 237)",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0)",
+      "descricao": "Linha {linha}, colunas 001 a 003, deve iniciar com 237.",
+      "mensagem": "Linha {linha}, colunas 001 a 003, deve iniciar com 237.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -4694,8 +4839,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 60,
+          "fim0": 64
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 54,
+          "fim0": 58
+        }
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"R\") && (res[i].substring(60, 64) != 0) && (res[i].substring(60, 64) != res[i].substring(54, 58))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"R\") && (res[i].substring(60, 64) != 0)",
@@ -5853,6 +6008,71 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:824",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 824,
+      "registro": "header-lote",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        200,
+        207
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 199,
+          "fim0": 207,
+          "colunas": [
+            200,
+            207
+          ],
+          "tamanho": 8
+        }
+      ],
+      "condicao": {
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 199,
+              "fim0": 207
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 199,
+              "fim0": 207
+            },
+            "operador": "!=",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"R\") && (isNaN(res[i].substring(199, 207)) || res[i].substring(199, 207).replace(/\\s/g, '').length == 0 || res[i].substring(199, 207) != 0)",
+      "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"R\")",
+      "descricao": "Linha {linha}, colunas 200 a 207, Header de lote, data de crédito retorno.",
+      "mensagem": "Linha {linha}, colunas 200 a 207, Header de lote, data de crédito retorno.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:826",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 826,
@@ -6175,6 +6395,140 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 1)",
       "descricao": "Linha {linha}, colunas 004 a 007, número do lote não pode se repetir em Lotes diferentes.",
       "mensagem": "Linha {linha}, colunas 004 a 007, número do lote não pode se repetir em Lotes diferentes.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:891",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 891,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        9
+      ],
+      "colunas_mensagem": [
+        9,
+        13
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 9,
+          "colunas": [
+            9,
+            9
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 7,
+              "fim0": 8
+            },
+            "operador": "==",
+            "valor": "1",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 9
+            },
+            "operador": "==",
+            "valor": "R",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 13
+            },
+            "operador": "!=",
+            "valor": "00001",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"R\" && res[j].substring(8, 13) != 00001)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo)",
+      "descricao": "Linha {linha}, colunas 009 a 013, sequencial de registro deve iniciar com 00001.",
+      "mensagem": "Linha {linha}, colunas 009 a 013, sequencial de registro deve iniciar com 00001.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:896",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 896,
+      "registro": "detalhe",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        9,
+        13
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[i]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0)",
+      "descricao": "Linha {linha}, colunas 009 a 013, Sequencial de registro fora de sequencia.",
+      "mensagem": "Linha {linha}, colunas 009 a 013, Sequencial de registro fora de sequencia.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -7512,6 +7866,105 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
       "descricao": "Linha {linha}, colunas 024 a 035, número da conta não é numérico",
       "mensagem": "Linha {linha}, colunas 024 a 035, número da conta não é numérico",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1110",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1110,
+      "registro": "segmento-p",
+      "registro_referenciado": "header-lote",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        19,
+        22
+      ],
+      "colunas_mensagem": [
+        18,
+        22
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 18,
+          "fim0": 22,
+          "colunas": [
+            19,
+            22
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 22
+        },
+        "operador": "!=",
+        "outro": "res[1]",
+        "posicao_outro": {
+          "inicio0": 54,
+          "fim0": 58
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(18, 22) != res[1].substring(54, 58))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
+      "descricao": "Linha {linha}, colunas 018 a 022, Número da agência diverge do header de lote.",
+      "mensagem": "Linha {linha}, colunas 018 a 022, Número da agência diverge do header de lote.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1113",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1113,
+      "registro": "segmento-p",
+      "registro_referenciado": "header-lote",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        24,
+        35
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 23,
+          "fim0": 35,
+          "colunas": [
+            24,
+            35
+          ],
+          "tamanho": 12
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 23,
+          "fim0": 35
+        },
+        "operador": "!=",
+        "outro": "res[1]",
+        "posicao_outro": {
+          "inicio0": 59,
+          "fim0": 71
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(23, 35) != res[1].substring(59, 71))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
+      "descricao": "Linha {linha}, colunas 024 a 035, Número da conta diverge do header de lote.",
+      "mensagem": "Linha {linha}, colunas 024 a 035, Número da conta diverge do header de lote.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -9731,6 +10184,85 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:1395",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1395,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        118,
+        141
+      ],
+      "colunas_mensagem": [
+        118,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 117,
+          "fim0": 118,
+          "colunas": [
+            118,
+            118
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 126,
+          "fim0": 141,
+          "colunas": [
+            127,
+            141
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 117,
+              "fim0": 118
+            },
+            "operador": "==",
+            "valor": "3",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "intervalo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 126,
+              "fim0": 141
+            },
+            "limites": [
+              {
+                "operador": ">",
+                "valor": "0"
+              }
+            ],
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 3 && res[i].substring(126, 141) > 0)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
+      "descricao": "Linha {linha}, colunas 118 a 118, código de juros de mora isento, porém com valor preenchido.",
+      "mensagem": "Linha {linha}, colunas 118 a 118, código de juros de mora isento, porém com valor preenchido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:1402",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1402,
@@ -9772,6 +10304,159 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2)",
       "descricao": "Linha {linha}, colunas 119 a 126, Data de juros/mora não informada. Será considerado o vencimento.",
       "mensagem": "Linha {linha}, colunas 119 a 126, Data de juros/mora não informada. Será considerado o vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1407",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1407,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        123,
+        126
+      ],
+      "colunas_mensagem": [
+        119,
+        126
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 122,
+          "fim0": 126,
+          "colunas": [
+            123,
+            126
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 122,
+          "fim0": 126
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 81,
+          "fim0": 85
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0) && (res[i].substring(122, 126) < res[i].substring(81, 85))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0)",
+      "descricao": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
+      "mensagem": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1412",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1412,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        121,
+        122
+      ],
+      "colunas_mensagem": [
+        119,
+        126
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 120,
+          "fim0": 122,
+          "colunas": [
+            121,
+            122
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 120,
+          "fim0": 122
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 79,
+          "fim0": 81
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0) && (res[i].substring(122, 126) == res[i].substring(81, 85)) && (res[i].substring(120, 122) < res[i].substring(79, 81))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0) && (res[i].substring(122, 126) == res[i].substring(81, 85))",
+      "descricao": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
+      "mensagem": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1417",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1417,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        119,
+        120
+      ],
+      "colunas_mensagem": [
+        119,
+        126
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 118,
+          "fim0": 120,
+          "colunas": [
+            119,
+            120
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 118,
+          "fim0": 120
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 79
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0) && (res[i].substring(122, 126) == res[i].substring(81, 85) && res[i].substring(120, 122) == res[i].substring(79, 81)) && (res[i].substring(118, 120) < res[i].substring(77, 79))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 120) != 0 && res[i].substring(120, 122) != 0 && res[i].substring(122, 124) != 0 && res[i].substring(124, 126) != 0) && (res[i].substring(122, 126) == res[i].substring(81, 85) && res[i].substring(120, 122) == res[i].substring(79, 81))",
+      "descricao": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
+      "mensagem": "Linha {linha}, colunas 119 a 126, Data do juros/mora inferior a data de vencimento do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -9961,6 +10646,183 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1 || res[i].substring(117, 118) == 2) && (res[i].substring(118, 126) != 0)",
       "descricao": "Linha {linha}, colunas 119 a 126, Data do juros/mora inválida.",
       "mensagem": "Linha {linha}, colunas 119 a 126, Data do juros/mora inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1444",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1444,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        127,
+        141
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 126,
+          "fim0": 141,
+          "colunas": [
+            127,
+            141
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1) && (mora > 99.99)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1)",
+      "descricao": "Linha {linha}, colunas 127 a 141, Valor de juro/mora por dia excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 127 a 141, Valor de juro/mora por dia excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1450",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1450,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        127,
+        141
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 126,
+          "fim0": 141,
+          "colunas": [
+            127,
+            141
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 126,
+          "fim0": 141
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "9999"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 2) && (res[i].substring(126, 141) > 9999)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 2)",
+      "descricao": "Linha {linha}, colunas 127 a 141, Taxa mensal de juro/mora excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 127 a 141, Taxa mensal de juro/mora excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1496",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1496,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        86,
+        100
+      ],
+      "colunas_mensagem": [
+        75,
+        89
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 85,
+          "fim0": 100,
+          "colunas": [
+            86,
+            100
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[i]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 1) && ((parseFloat(res[j + 1].substring(74, 89)) / parseFloat(res[i].substring(85, 100))) * 100 > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 1)",
+      "descricao": "Linha {valor}, colunas 075 a 089, Valor fixo de multa excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 075 a 089, Valor fixo de multa excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1505",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1505,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        75,
+        89
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 74,
+          "fim0": 89,
+          "colunas": [
+            75,
+            89
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 74,
+          "fim0": 89
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "9999"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 2) && (res[j + 1].substring(74, 89) > 9999)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 2)",
+      "descricao": "Linha {valor}, colunas 075 a 089, Percentual de multa excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 075 a 089, Percentual de multa excede 99,99% do valor do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -10881,6 +11743,1293 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:1594",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1594,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        147,
+        150
+      ],
+      "colunas_mensagem": [
+        143,
+        150
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 146,
+          "fim0": 150,
+          "colunas": [
+            147,
+            150
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 146,
+          "fim0": 150
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 81,
+          "fim0": 85
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[i].substring(146, 150) > res[i].substring(81, 85))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2)",
+      "descricao": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1599",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1599,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        145,
+        146
+      ],
+      "colunas_mensagem": [
+        143,
+        150
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 144,
+          "fim0": 146,
+          "colunas": [
+            145,
+            146
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 144,
+          "fim0": 146
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 79,
+          "fim0": 81
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[i].substring(146, 150) == res[i].substring(81, 85)) && (res[i].substring(144, 146) > res[i].substring(79, 81))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[i].substring(146, 150) == res[i].substring(81, 85))",
+      "descricao": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1604",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1604,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        143,
+        144
+      ],
+      "colunas_mensagem": [
+        143,
+        150
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 142,
+          "fim0": 144,
+          "colunas": [
+            143,
+            144
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 142,
+          "fim0": 144
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 79
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[i].substring(146, 150) == res[i].substring(81, 85) && res[i].substring(144, 146) == res[i].substring(79, 81)) && (res[i].substring(142, 144) > res[i].substring(77, 79))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[i].substring(146, 150) == res[i].substring(81, 85) && res[i].substring(144, 146) == res[i].substring(79, 81))",
+      "descricao": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {linha}, colunas 143 a 150, Data do primeiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1629",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1629,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        82,
+        85
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 81,
+          "fim0": 85,
+          "colunas": [
+            82,
+            85
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 22,
+          "fim0": 26
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 81,
+          "fim0": 85
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(22, 26) > res[i].substring(81, 85))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1634",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1634,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        80,
+        81
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 79,
+          "fim0": 81,
+          "colunas": [
+            80,
+            81
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 20,
+          "fim0": 22
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 79,
+          "fim0": 81
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(22, 26) == res[i].substring(81, 85)) && (res[j + 1].substring(20, 22) > res[i].substring(79, 81))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(22, 26) == res[i].substring(81, 85))",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1639",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1639,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        78,
+        79
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 77,
+          "fim0": 79,
+          "colunas": [
+            78,
+            79
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 20
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 79
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(22, 26) == res[i].substring(81, 85) && res[j + 1].substring(20, 22) == res[i].substring(79, 81)) && (res[j + 1].substring(18, 20) > res[i].substring(77, 79))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(22, 26) == res[i].substring(81, 85) && res[j + 1].substring(20, 22) == res[i].substring(79, 81))",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1647",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1647,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        147,
+        150
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 146,
+          "fim0": 150,
+          "colunas": [
+            147,
+            150
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 22,
+          "fim0": 26
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 146,
+          "fim0": 150
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)) && (res[j + 1].substring(22, 26) < res[i].substring(146, 150))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2))",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1652",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1652,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        145,
+        146
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 144,
+          "fim0": 146,
+          "colunas": [
+            145,
+            146
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 20,
+          "fim0": 22
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 144,
+          "fim0": 146
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)) && (res[j + 1].substring(22, 26) == res[i].substring(146, 150)) && (res[j + 1].substring(20, 22) < res[i].substring(144, 146))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)) && (res[j + 1].substring(22, 26) == res[i].substring(146, 150))",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1657",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1657,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        143,
+        144
+      ],
+      "colunas_mensagem": [
+        19,
+        26
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 142,
+          "fim0": 144,
+          "colunas": [
+            143,
+            144
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 18,
+          "fim0": 20
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 142,
+          "fim0": 144
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)) && (res[j + 1].substring(22, 26) == res[i].substring(146, 150) && res[j + 1].substring(20, 22) == res[i].substring(144, 146)) && (res[j + 1].substring(18, 20) < res[i].substring(142, 144))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[i].substring(141, 142) == 1 || res[i].substring(141, 142) == 2) && (res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2)) && (res[j + 1].substring(22, 26) == res[i].substring(146, 150) && res[j + 1].substring(20, 22) == res[i].substring(144, 146))",
+      "descricao": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 019 a 026, Data do segundo desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1667",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1667,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        82,
+        85
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 81,
+          "fim0": 85,
+          "colunas": [
+            82,
+            85
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 50
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 81,
+          "fim0": 85
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(46, 50) > res[i].substring(81, 85))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1672",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1672,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        80,
+        81
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 79,
+          "fim0": 81,
+          "colunas": [
+            80,
+            81
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 44,
+          "fim0": 46
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 79,
+          "fim0": 81
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(46, 50) == res[i].substring(81, 85)) && (res[j + 1].substring(44, 46) > res[i].substring(79, 81))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(46, 50) == res[i].substring(81, 85))",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1677",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1677,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        78,
+        79
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 77,
+          "fim0": 79,
+          "colunas": [
+            78,
+            79
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 42,
+          "fim0": 44
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 77,
+          "fim0": 79
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(46, 50) == res[i].substring(81, 85) && res[j + 1].substring(44, 46) == res[i].substring(79, 81)) && (res[j + 1].substring(42, 44) > res[i].substring(77, 79))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(46, 50) == res[i].substring(81, 85) && res[j + 1].substring(44, 46) == res[i].substring(79, 81))",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto superior a data de vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1689",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1689,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        47,
+        50
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 46,
+          "fim0": 50,
+          "colunas": [
+            47,
+            50
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 50
+        },
+        "operador": "<",
+        "outro": "res[j + 1]",
+        "posicao_outro": {
+          "inicio0": 22,
+          "fim0": 26
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)) && (res[j + 1].substring(46, 50) < res[j + 1].substring(22, 26))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2))",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1694",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1694,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        45,
+        46
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 44,
+          "fim0": 46,
+          "colunas": [
+            45,
+            46
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 44,
+          "fim0": 46
+        },
+        "operador": "<",
+        "outro": "res[j + 1]",
+        "posicao_outro": {
+          "inicio0": 20,
+          "fim0": 22
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)) && (res[j + 1].substring(46, 50) == res[j + 1].substring(22, 26)) && (res[j + 1].substring(44, 46) < res[j + 1].substring(20, 22))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)) && (res[j + 1].substring(46, 50) == res[j + 1].substring(22, 26))",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1699",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1699,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        43,
+        44
+      ],
+      "colunas_mensagem": [
+        43,
+        50
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 42,
+          "fim0": 44,
+          "colunas": [
+            43,
+            44
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 42,
+          "fim0": 44
+        },
+        "operador": "<",
+        "outro": "res[j + 1]",
+        "posicao_outro": {
+          "inicio0": 18,
+          "fim0": 20
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)) && (res[j + 1].substring(46, 50) == res[j + 1].substring(22, 26) && res[j + 1].substring(44, 46) == res[j + 1].substring(20, 22)) && (res[j + 1].substring(42, 44) < res[j + 1].substring(18, 20))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && ((res[j + 1].substring(17, 18) == 1 || res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(41, 42) == 1 || res[j + 1].substring(41, 42) == 2)) && (res[j + 1].substring(46, 50) == res[j + 1].substring(22, 26) && res[j + 1].substring(44, 46) == res[j + 1].substring(20, 22))",
+      "descricao": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 043 a 050, Data do terceiro desconto inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1889",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1889,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1) && (vlr_desc2 > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, valor excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, valor excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1894",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1894,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 41
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "9999"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 2) && (res[j + 1].substring(26, 41) > 9999)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 2)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1901",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1901,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 3) && (desc2_diacor > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 3)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, valor por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, valor por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1908",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1908,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 4) && (desc2_diauti > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 4)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, valor por dia útil excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, valor por dia útil excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1913",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1913,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 41
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "333"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 5) && (res[j + 1].substring(26, 41) > 333)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 5)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1918",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1918,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 41
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "454"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 6) && (res[j + 1].substring(26, 41) > 454)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 6)",
+      "descricao": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 027 a 041, Desconto 2, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1927",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1927,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1) && (vlr_desc3 > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, valor excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, valor excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1932",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1932,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 65
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "9999"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 2) && (res[j + 1].substring(50, 65) > 9999)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 2)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1939",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1939,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 3) && (desc3_diacor > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 3)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, valor por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, valor por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1946",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1946,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 4) && (desc3_diauti > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 4)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, valor por dia útil excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, valor por dia útil excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1951",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1951,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 65
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "333"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 5) && (res[j + 1].substring(50, 65) > 333)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 5)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1956",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1956,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j + 1]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 65
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "454"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 6) && (res[j + 1].substring(50, 65) > 454)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 6)",
+      "descricao": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {valor}, colunas 051 a 065, Desconto 3, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:1967",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1967,
@@ -11331,6 +13480,318 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:1987",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1987,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": [
+        181,
+        195
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 150,
+          "fim0": 165
+        },
+        "operador": "==",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 85,
+          "fim0": 100
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31) && (res[i].substring(150, 165) == res[i].substring(85, 100))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31)",
+      "descricao": "Linha {linha}, colunas 181 a 195, Valor do desconto igual ao valor do título.",
+      "mensagem": "Linha {linha}, colunas 181 a 195, Valor do desconto igual ao valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:1997",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 1997,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1) && (vlr_desc1 > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, valor excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, valor excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2002",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2002,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 150,
+          "fim0": 165
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "9999"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 2) && (res[i].substring(150, 165) > 9999)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 2)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2009",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2009,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 3) && (desc1_diacor > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 3)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, valor por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, valor por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2016",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2016,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 4) && (desc1_diauti > 99.995)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 4)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, valor por dia útil excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, valor por dia útil excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2021",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2021,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 150,
+          "fim0": 165
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "333"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 5) && (res[i].substring(150, 165) > 333)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 5)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2026",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2026,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        151,
+        165
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 150,
+          "fim0": 165,
+          "colunas": [
+            151,
+            165
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 150,
+          "fim0": 165
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "454"
+          }
+        ],
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 6) && (res[i].substring(150, 165) > 454)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 6)",
+      "descricao": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual por dia corrido excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 151 a 165, Desconto 1, percentual por dia corrido excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:2031",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 2031,
@@ -11423,6 +13884,54 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
       "descricao": "Linha {linha}, colunas 181 a 195, Valor do abatimento não numérico.",
       "mensagem": "Linha {linha}, colunas 181 a 195, Valor do abatimento não numérico.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2040",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2040,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        181,
+        195
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 180,
+          "fim0": 195,
+          "colunas": [
+            181,
+            195
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 180,
+          "fim0": 195
+        },
+        "operador": "==",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 85,
+          "fim0": 100
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 04 || res[i].substring(15, 17) == 18 || res[i].substring(15, 17) == 31) && (res[i].substring(180, 195) == res[i].substring(85, 100))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 04 || res[i].substring(15, 17) == 18 || res[i].substring(15, 17) == 31)",
+      "descricao": "Linha {linha}, colunas 181 a 195, Valor do abatimento igual ao valor do título.",
+      "mensagem": "Linha {linha}, colunas 181 a 195, Valor do abatimento igual ao valor do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -12110,6 +14619,51 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(227, 229) != 01) && (res[i].substring(227, 229) != 02) && (res[i].substring(227, 229) != 03) && (res[i].substring(227, 229) != 04) && (res[i].substring(227, 229) != 05) && (res[i].substring(227, 229) != 06) && (res[i].substring(227, 229) != 07) && (res[i].substring(227, 229) != 08) && (res[i].substring(227, 229) != 09) && (res[i].substring(227, 229) != 10) && (res[i].substring(227, 229) != 11) && (res[i].substring(227, 229) != 12) && (res[i].substring(227, 229) != 13)",
       "descricao": "Linha {linha}, colunas 228 a 229, Código da moeda inválido.",
       "mensagem": "Linha {linha}, colunas 228 a 229, Código da moeda inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2108",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2108,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        228,
+        229
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 227,
+          "fim0": 229,
+          "colunas": [
+            228,
+            229
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 227,
+          "fim0": 229
+        },
+        "operador": "!=",
+        "valor": "09",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(227, 229) != 09)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\")",
+      "descricao": "Linha {linha}, colunas 228 a 229, Código da moeda diferente de 09 - Real.",
+      "mensagem": "Linha {linha}, colunas 228 a 229, Código da moeda diferente de 09 - Real.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -16473,6 +19027,54 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:2654",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2654,
+      "registro": "segmento-r",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        27,
+        41
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 26,
+          "fim0": 41,
+          "colunas": [
+            27,
+            41
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 41
+        },
+        "operador": "==",
+        "outro": "res[i - 2]",
+        "posicao_outro": {
+          "inicio0": 85,
+          "fim0": 100
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"R\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31) && (res[i].substring(26, 41) == res[i - 2].substring(85, 100))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"R\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31)",
+      "descricao": "Linha {linha}, colunas 027 a 041, Valor do desconto 2 igual ao valor do título.",
+      "mensagem": "Linha {linha}, colunas 027 a 041, Valor do desconto 2 igual ao valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:2672",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 2672,
@@ -17742,6 +20344,54 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"R\")",
       "descricao": "Linha {linha}, colunas 051 a 065, percentual de desconto 3 por dia útil não informado.",
       "mensagem": "Linha {linha}, colunas 051 a 065, percentual de desconto 3 por dia útil não informado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo240:2740",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 2740,
+      "registro": "segmento-r",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        51,
+        65
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 50,
+          "fim0": 65,
+          "colunas": [
+            51,
+            65
+          ],
+          "tamanho": 15
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 65
+        },
+        "operador": "==",
+        "outro": "res[i - 2]",
+        "posicao_outro": {
+          "inicio0": 85,
+          "fim0": 100
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"R\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31) && (res[i].substring(50, 65) == res[i - 2].substring(85, 100))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"R\") && (res[i].substring(15, 17) == 01 || res[i].substring(15, 17) == 07 || res[i].substring(15, 17) == 16 || res[i].substring(15, 17) == 31)",
+      "descricao": "Linha {linha}, colunas 051 a 065, Valor do desconto 3 igual ao valor do título.",
+      "mensagem": "Linha {linha}, colunas 051 a 065, Valor do desconto 3 igual ao valor do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -22131,6 +24781,51 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:3343",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 3343,
+      "registro": "segmento-y",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        77,
+        79
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 76,
+          "fim0": 79,
+          "colunas": [
+            77,
+            79
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 76,
+          "fim0": 79
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"Y\") && (res[i].substring(17, 19) == \"50\") && (res[i].substring(76, 79) != 237)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"Y\") && (res[i].substring(17, 19) == \"50\")",
+      "descricao": "Linha {linha}, colunas 077 a 079, Código do banco para rateio diferente de 237.",
+      "mensagem": "Linha {linha}, colunas 077 a 079, Código do banco para rateio diferente de 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo240:3348",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 3348,
@@ -23805,6 +26500,51 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo240:3570",
+      "funcao_origem": "validarDadosArquivo240",
+      "linha_fonte": 3570,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[m]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[m]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[m]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[m].substring(7, 8) == 9) && (res[m].substring(0, 3) != 237)",
+      "condicao_guarda": "(res[m].substring(7, 8) == 9)",
+      "descricao": "Linha {valor}, Trailer de Arquivo, colunas 001 a 003, deve iniciar com 237.",
+      "mensagem": "Linha {valor}, Trailer de Arquivo, colunas 001 a 003, deve iniciar com 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo400:3593",
       "funcao_origem": "validarDadosArquivo400",
       "linha_fonte": 3593,
@@ -24372,6 +27112,54 @@
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237))",
       "descricao": "Linha 1, colunas 027 a 046, Header de arquivo, acessório escritural inválido. Zeros à esquerda.",
       "mensagem": "Linha 1, colunas 027 a 046, Header de arquivo, acessório escritural inválido. Zeros à esquerda.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:3717",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 3717,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        40,
+        41
+      ],
+      "colunas_mensagem": [
+        27,
+        46
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 39,
+          "fim0": 41,
+          "colunas": [
+            40,
+            41
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 39,
+          "fim0": 41
+        },
+        "operador": "==",
+        "valor": "80",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[0].substring(39, 41) == 80)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237))",
+      "descricao": "Linha 1, colunas 027 a 046, Header de arquivo, acessório escritural padrão HSBC. Verifique acessório adicional Bradesco.",
+      "mensagem": "Linha 1, colunas 027 a 046, Header de arquivo, acessório escritural padrão HSBC. Verifique acessório adicional Bradesco.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -29339,6 +32127,44 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo400:4176",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4176,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        83,
+        92
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 82,
+          "fim0": 92,
+          "colunas": [
+            83,
+            92
+          ],
+          "tamanho": 10
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (desc_boni > 99.995)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237)",
+      "descricao": "Linha {linha}, colunas 083 a 092, Registro tipo 1, Desconto/Bonificação R$ {valor},{valor} por dia, excede 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 083 a 092, Registro tipo 1, Desconto/Bonificação R$ {valor},{valor} por dia, excede 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo400:4180",
       "funcao_origem": "validarDadosArquivo400",
       "linha_fonte": 4180,
@@ -31961,6 +34787,44 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo400:4370",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4370,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        161,
+        173
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 160,
+          "fim0": 173,
+          "colunas": [
+            161,
+            173
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(66, 70) == 0) && (mora > 99.995)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(66, 70) == 0)",
+      "descricao": "Linha {linha}, colunas 161 a 173, Registro tipo 1, Juros de mora é superior a 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, colunas 161 a 173, Registro tipo 1, Juros de mora é superior a 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo400:4381",
       "funcao_origem": "validarDadosArquivo400",
       "linha_fonte": 4381,
@@ -32463,6 +35327,924 @@
       "severidade": "erro"
     },
     {
+      "id": "cobranca-remessa:validarDadosArquivo400:4400",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4400,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        178,
+        179
+      ],
+      "colunas_mensagem": [
+        174,
+        179
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 177,
+          "fim0": 179,
+          "colunas": [
+            178,
+            179
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 177,
+          "fim0": 179
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 124,
+          "fim0": 126
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0) && (res[i].substring(177, 179) > res[i].substring(124, 126))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0)",
+      "descricao": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data vencimento.",
+      "mensagem": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4405",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4405,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        176,
+        177
+      ],
+      "colunas_mensagem": [
+        174,
+        179
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 175,
+          "fim0": 177,
+          "colunas": [
+            176,
+            177
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 175,
+          "fim0": 177
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 122,
+          "fim0": 124
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0) && (res[i].substring(177, 179) == res[i].substring(124, 126)) && (res[i].substring(175, 177) > res[i].substring(122, 124))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0) && (res[i].substring(177, 179) == res[i].substring(124, 126))",
+      "descricao": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data do vencimento.",
+      "mensagem": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4410",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4410,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        174,
+        175
+      ],
+      "colunas_mensagem": [
+        174,
+        179
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 173,
+          "fim0": 175,
+          "colunas": [
+            174,
+            175
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 173,
+          "fim0": 175
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 120,
+          "fim0": 122
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0) && (res[i].substring(177, 179) == res[i].substring(124, 126) && res[i].substring(175, 177) == res[i].substring(122, 124)) && (res[i].substring(173, 175) > res[i].substring(120, 122))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(173, 179) > 0) && (res[i].substring(177, 179) == res[i].substring(124, 126) && res[i].substring(175, 177) == res[i].substring(122, 124))",
+      "descricao": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data do vencimento.",
+      "mensagem": "Linha {linha}, colunas 174 a 179, Registro tipo 1, Data do primeiro desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4428",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4428,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        326,
+        327
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 325,
+          "fim0": 327,
+          "colunas": [
+            326,
+            327
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 325,
+          "fim0": 327
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 124,
+          "fim0": 126
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) > res[i].substring(124, 126))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0)",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data vencimento.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4433",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4433,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        324,
+        325
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 323,
+          "fim0": 325,
+          "colunas": [
+            324,
+            325
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 323,
+          "fim0": 325
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 122,
+          "fim0": 124
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(124, 126)) && (res[j].substring(323, 325) > res[i].substring(122, 124))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(124, 126))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data do vencimento.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4438",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4438,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        322,
+        323
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 321,
+          "fim0": 323,
+          "colunas": [
+            322,
+            323
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 321,
+          "fim0": 323
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 120,
+          "fim0": 122
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(124, 126) && res[j].substring(323, 325) == res[i].substring(122, 124)) && (res[j].substring(321, 323) > res[i].substring(120, 122))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(124, 126) && res[j].substring(323, 325) == res[i].substring(122, 124))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data do vencimento.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4446",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4446,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        326,
+        327
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 325,
+          "fim0": 327,
+          "colunas": [
+            326,
+            327
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 325,
+          "fim0": 327
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 177,
+          "fim0": 179
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) < res[i].substring(177, 179))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0)",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4451",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4451,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        324,
+        325
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 323,
+          "fim0": 325,
+          "colunas": [
+            324,
+            325
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 323,
+          "fim0": 325
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 175,
+          "fim0": 177
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(177, 179)) && (res[j].substring(323, 325) < res[i].substring(175, 177))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(177, 179))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4456",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4456,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        322,
+        323
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 321,
+          "fim0": 323,
+          "colunas": [
+            322,
+            323
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 321,
+          "fim0": 323
+        },
+        "operador": "<=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 173,
+          "fim0": 175
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(177, 179) && res[j].substring(323, 325) == res[i].substring(175, 177)) && (res[j].substring(321, 323) <= res[i].substring(173, 175))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(321, 327) > 0) && (res[j].substring(325, 327) == res[i].substring(177, 179) && res[j].substring(323, 325) == res[i].substring(175, 177))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto igual ou inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do segundo desconto igual ou inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4462",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4462,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        345,
+        346
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 344,
+          "fim0": 346,
+          "colunas": [
+            345,
+            346
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 344,
+          "fim0": 346
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 124,
+          "fim0": 126
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) > res[i].substring(124, 126))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0)",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data vencimento.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4466",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4466,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        343,
+        344
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 342,
+          "fim0": 344,
+          "colunas": [
+            343,
+            344
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 342,
+          "fim0": 344
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 122,
+          "fim0": 124
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(124, 126)) && (res[j].substring(342, 344) > res[i].substring(122, 124))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(124, 126))",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data do vencimento.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4471",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4471,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        341,
+        342
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 340,
+          "fim0": 342,
+          "colunas": [
+            341,
+            342
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 340,
+          "fim0": 342
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 120,
+          "fim0": 122
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(124, 126) && res[j].substring(342, 344) == res[i].substring(122, 124)) && (res[j].substring(340, 342) > res[i].substring(120, 122))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(124, 126) && res[j].substring(342, 344) == res[i].substring(122, 124))",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data do vencimento.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto superior a data do vencimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4477",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4477,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        345,
+        346
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 344,
+          "fim0": 346,
+          "colunas": [
+            345,
+            346
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 344,
+          "fim0": 346
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 177,
+          "fim0": 179
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) < res[i].substring(177, 179))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0)",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4481",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4481,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        343,
+        344
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 342,
+          "fim0": 344,
+          "colunas": [
+            343,
+            344
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 342,
+          "fim0": 344
+        },
+        "operador": "<",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 175,
+          "fim0": 177
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(177, 179)) && (res[j].substring(342, 344) < res[i].substring(175, 177))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(177, 179))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4486",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4486,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        341,
+        342
+      ],
+      "colunas_mensagem": [
+        322,
+        327
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 340,
+          "fim0": 342,
+          "colunas": [
+            341,
+            342
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 340,
+          "fim0": 342
+        },
+        "operador": "<=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 173,
+          "fim0": 175
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(177, 179) && res[j].substring(342, 344) == res[i].substring(175, 177)) && (res[j].substring(340, 342) <= res[i].substring(173, 175))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[i].substring(177, 179) && res[j].substring(342, 344) == res[i].substring(175, 177))",
+      "descricao": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto igual ou inferior a data do primeiro desconto.",
+      "mensagem": "Linha {valor}, colunas 322 a 327, Registro tipo 2, Data do terceiro desconto igual ou inferior a data do primeiro desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4492",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4492,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        345,
+        346
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 344,
+          "fim0": 346,
+          "colunas": [
+            345,
+            346
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 344,
+          "fim0": 346
+        },
+        "operador": "<",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 325,
+          "fim0": 327
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) < res[j].substring(325, 327))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0)",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4496",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4496,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        343,
+        344
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 342,
+          "fim0": 344,
+          "colunas": [
+            343,
+            344
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 342,
+          "fim0": 344
+        },
+        "operador": "<",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 323,
+          "fim0": 325
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[j].substring(325, 327)) && (res[j].substring(342, 344) < res[j].substring(323, 325))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[j].substring(325, 327))",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4501",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4501,
+      "registro": "registro-tipo-2",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        341,
+        342
+      ],
+      "colunas_mensagem": [
+        341,
+        346
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 340,
+          "fim0": 342,
+          "colunas": [
+            341,
+            342
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 340,
+          "fim0": 342
+        },
+        "operador": "<=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 321,
+          "fim0": 323
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[j].substring(325, 327) && res[j].substring(342, 344) == res[j].substring(323, 325)) && (res[j].substring(340, 342) <= res[j].substring(321, 323))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (res[j].substring(340, 346) > 0) && (res[j].substring(344, 346) == res[j].substring(325, 327) && res[j].substring(342, 344) == res[j].substring(323, 325))",
+      "descricao": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto igual ou inferior a data do segundo desconto.",
+      "mensagem": "Linha {valor}, colunas 341 a 346, Registro tipo 2, Data do terceiro desconto igual ou inferior a data do segundo desconto.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "cobranca-remessa:validarDadosArquivo400:4507",
       "funcao_origem": "validarDadosArquivo400",
       "linha_fonte": 4507,
@@ -32656,6 +36438,120 @@
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237)",
       "descricao": "Linha {linha}, colunas 180 a 192, Registro tipo 1, Valor do desconto 1 não informado.",
       "mensagem": "Linha {linha}, colunas 180 a 192, Registro tipo 1, Valor do desconto 1 não informado.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4516",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4516,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        180,
+        192
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 179,
+          "fim0": 192,
+          "colunas": [
+            180,
+            192
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (per_desc1 > 99.995)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31)",
+      "descricao": "{valor}Linha {linha}, colunas 180 a 192, Registro tipo 1, Desconto 1 é superior a 99,99% do valor do título.",
+      "mensagem": "{valor}Linha {linha}, colunas 180 a 192, Registro tipo 1, Desconto 1 é superior a 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4537",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4537,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": "registro-tipo-2",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        328,
+        340
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 327,
+          "fim0": 340,
+          "colunas": [
+            328,
+            340
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (per_desc2 > 99.995)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2)",
+      "descricao": "Linha {linha}, Registro tipo 2, colunas 328 a 340, Desconto 2 é superior a 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, Registro tipo 2, colunas 328 a 340, Desconto 2 é superior a 99,99% do valor do título.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4541",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4541,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": "registro-tipo-2",
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        347,
+        359
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 346,
+          "fim0": 359,
+          "colunas": [
+            347,
+            359
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (per_desc3 > 99.995)",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2)",
+      "descricao": "Linha {linha}, Registro tipo 2, colunas 347 a 359, Desconto 3 é superior a 99,99% do valor do título.",
+      "mensagem": "Linha {linha}, Registro tipo 2, colunas 347 a 359, Desconto 3 é superior a 99,99% do valor do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -32906,6 +36802,54 @@
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237)",
       "descricao": "Linha {linha}, colunas 206 a 218, Registro tipo 1, Valor do abatimento não informado para instrução 04-Concessão de abatimento.",
       "mensagem": "Linha {linha}, colunas 206 a 218, Registro tipo 1, Valor do abatimento não informado para instrução 04-Concessão de abatimento.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "cobranca-remessa:validarDadosArquivo400:4594",
+      "funcao_origem": "validarDadosArquivo400",
+      "linha_fonte": 4594,
+      "registro": "registro-tipo-1",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        206,
+        218
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 205,
+          "fim0": 218,
+          "colunas": [
+            206,
+            218
+          ],
+          "tamanho": 13
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 205,
+          "fim0": 218
+        },
+        "operador": "==",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 126,
+          "fim0": 139
+        }
+      },
+      "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == 04 || res[i].substring(108, 110) == 01 || res[i].substring(108, 110) == 31) && (res[i].substring(205, 218) == res[i].substring(126, 139))",
+      "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == 04 || res[i].substring(108, 110) == 01 || res[i].substring(108, 110) == 31)",
+      "descricao": "Linha {linha}, colunas 206 a 218, Registro tipo 1, Valor do abatimento igual ao valor do título.",
+      "mensagem": "Linha {linha}, colunas 206 a 218, Registro tipo 1, Valor do abatimento igual ao valor do título.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
