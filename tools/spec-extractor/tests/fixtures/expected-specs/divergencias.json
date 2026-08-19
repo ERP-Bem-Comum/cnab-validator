@@ -1,0 +1,58 @@
+{
+  "observacao": "Divergências entre o manual e o validador oficial do Bradesco. O lado do validador é extraído dos assets públicos; o lado do manual é curado e datado.",
+  "regra_de_decisao": "Prevalece o validador: é ele que processa o arquivo. Código fora de ambos os domínios cai em desconhecido, nunca em sucesso.",
+  "divergencias": [
+    {
+      "layout": "retorno-multipag",
+      "campo": "ocorrencias",
+      "codigo": "BD",
+      "tipo": "semantica_divergente",
+      "manual": "descreve o código como conclusão bem-sucedida do pagamento",
+      "consequencia": "processador que segue o manual dá por pago um pagamento apenas agendado, que ainda pode falhar",
+      "confirmado_em": "2026-08-19",
+      "origem": "issue #4",
+      "validador": {
+        "rotulo": "Agendado.",
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "linha_fonte": 103,
+        "colunas": [
+          231,
+          240
+        ]
+      },
+      "prevalece": "validador"
+    },
+    {
+      "layout": "retorno-multipag",
+      "campo": "ocorrencias",
+      "codigo": "XX",
+      "tipo": "ausente_no_manual",
+      "manual": "não documenta o código",
+      "consequencia": "processador que valide a ocorrência contra o domínio do manual descarta ou rejeita um retorno legítimo",
+      "confirmado_em": "2026-08-19",
+      "origem": "issue #4",
+      "validador": {
+        "rotulo": "Codigo fora do manual.",
+        "slots": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "linha_fonte": 101,
+        "colunas": [
+          231,
+          240
+        ]
+      },
+      "prevalece": "validador"
+    }
+  ]
+}

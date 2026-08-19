@@ -13,7 +13,7 @@ JSON que ele gera (`tools/specs/`). Os crates Rust (`cnab-core`, `cnab-specs`, `
 `cnab-validator-api`) ainda **não** foram criados — o design deles está em
 `docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
 
-Layouts do ciclo atual: `cobranca-remessa`, `multipag`, `folha-pagamento`.
+Layouts do ciclo atual: `cobranca-remessa`, `multipag`, `folha-pagamento`, `retorno-multipag`.
 
 ## Comandos
 
@@ -58,6 +58,15 @@ spec-generator.ts DslRule[] → tools/specs/index.json + tools/specs/layouts/<la
 index.ts          orquestração: main() (com I/O) e runPipeline() (pura)
 config.ts         URL do validador, layouts do ciclo, MAPEAMENTO_FUNCOES, metadados de layout
 ```
+
+O fonte tem **duas formas**, e o pipeline tem um modo para cada — `MODO_POR_FUNCAO` em `config.ts`
+decide qual roda:
+
+- **`regras`** (remessa): "condição → mensagem de erro". Passa por `ast-walker` + `rule-mapper`.
+- **`tabelas`** (retorno): "campo igual a código → rótulo". É dicionário, não regra, e passa por
+  `dominio-extractor` + `dominio-mapper`. O catálogo vive numa **função aninhada** dentro da função
+  de layout, então esse extrator entra em `FunctionDeclaration` interna — o walker de regras não
+  entra, e não precisa.
 
 Fora do pipeline, `src/runner/` aplica um spec a um arquivo e devolve achados —
 `expressao.ts` (avaliador das guardas, que a DSL não modela), `condicao.ts` (avaliador dos
@@ -154,6 +163,30 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   (ex.: o dígito) — são informações distintas e ambas necessárias.
 - Regra sem faixa (comprimento de linha, por exemplo) tem `posicoes: []` e `colunas: [0, 0]`. Nunca
   publicar posição inventada: um motor leria a coluna errada.
+
+#### Contrato dos campos de domínio (retorno)
+
+`campos` no spec de layout é a saída do modo `tabelas`, e o consumidor de retorno vive dele:
+
+- **`slots`**: o campo de ocorrências carrega **cinco** códigos de dois dígitos concatenados. Ler o
+  campo como código único perde quatro — e o que se perde costuma ser a causa secundária. Cada
+  entrada diz em quais fatias aquele código é reconhecido, porque o fonte não decodifica todos em
+  todas.
+- **`registros_lidos`**: em que tipos de registro o fonte lê o campo. Para as ocorrências isso inclui
+  **header e trailer, de arquivo e de lote** — recusa de envelope chega por aí, e um processador que
+  varra só o detalhe lê "nenhum erro" num arquivo inteiro recusado. Sai das tabelas irmãs que
+  decodificam a posição do tipo de registro no mesmo bloco do fonte.
+- **`fora_do_dominio: "desconhecido"`**: código não catalogado nunca é ignorado nem tratado como
+  sucesso.
+- **`condicao_extra`** preserva a segunda condição do `if` quando existe (o fonte usa isso para
+  excluir um segmento de um código).
+- Fatias do mesmo campo são reconhecidas por serem contíguas, de mesma largura e com domínio quase
+  igual; o **nome** do campo vem de `CAMPOS_NOMEADOS` em `config.ts`, porque o fonte não o nomeia.
+
+`tools/specs/divergencias.json` é o catálogo manual × validador. A curadoria vive em
+`src/divergencias.ts` — o manual não é código —, mas cada item é **verificado contra a extração**:
+divergência declarada sobre código que o validador não trata quebra a geração. Prevalece sempre o
+validador. É a saída de maior valor da fase para outros repositórios.
 
 #### Classificação do tipo de registro
 

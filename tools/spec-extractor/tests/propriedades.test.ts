@@ -41,6 +41,10 @@ describe("propriedades dos specs", () => {
       const regras = carregar(layout);
 
       it("cobre os tipos de registro estruturais do layout", () => {
+        // Layout de retorno não tem regra: o fonte o expressa como dicionário, e a
+        // cobertura dele é medida pelos campos, na suíte de domínio.
+        if (regras.length === 0) return;
+
         const presentes = new Set(regras.map((r) => r.registro));
         for (const esperado of REGISTROS_ESPERADOS) {
           assert.ok(

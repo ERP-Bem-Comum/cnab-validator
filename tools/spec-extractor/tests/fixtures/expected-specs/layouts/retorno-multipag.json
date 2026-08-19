@@ -1,0 +1,202 @@
+{
+  "layout": "retorno-multipag",
+  "nome": "Multipag/Folha — Retorno",
+  "tipo": "retorno",
+  "tamanhos_linha": [
+    240
+  ],
+  "regras": [],
+  "campos": [
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8",
+      "campo": "campo_8_8",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        8,
+        8
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ]
+        }
+      ],
+      "registros_lidos": [
+        "header-arquivo",
+        "header-lote",
+        "trailer-arquivo",
+        "trailer-lote"
+      ],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "0",
+          "rotulo": "Header de Arquivo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 93
+        },
+        {
+          "codigo": "1",
+          "rotulo": "Header de Lote",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 95
+        },
+        {
+          "codigo": "5",
+          "rotulo": "Trailer de Lote",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 97
+        },
+        {
+          "codigo": "9",
+          "rotulo": "Trailer de Arquivo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 99
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias",
+      "campo": "ocorrencias",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        231,
+        240
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 230,
+          "fim0": 232,
+          "colunas": [
+            231,
+            232
+          ]
+        },
+        {
+          "ordem": 2,
+          "inicio0": 232,
+          "fim0": 234,
+          "colunas": [
+            233,
+            234
+          ]
+        },
+        {
+          "ordem": 3,
+          "inicio0": 234,
+          "fim0": 236,
+          "colunas": [
+            235,
+            236
+          ]
+        },
+        {
+          "ordem": 4,
+          "inicio0": 236,
+          "fim0": 238,
+          "colunas": [
+            237,
+            238
+          ]
+        },
+        {
+          "ordem": 5,
+          "inicio0": 238,
+          "fim0": 240,
+          "colunas": [
+            239,
+            240
+          ]
+        }
+      ],
+      "registros_lidos": [
+        "header-arquivo",
+        "header-lote",
+        "trailer-arquivo",
+        "trailer-lote"
+      ],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "00",
+          "rotulo": "Efetivado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": "res[i].substring(13, 14) != \"B\"",
+          "linha_fonte": 105
+        },
+        {
+          "codigo": "01",
+          "rotulo": "Recusado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 107
+        },
+        {
+          "codigo": "02",
+          "rotulo": "Cancelado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 109
+        },
+        {
+          "codigo": "BD",
+          "rotulo": "Agendado.",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 103
+        },
+        {
+          "codigo": "XX",
+          "rotulo": "Codigo fora do manual.",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 101
+        }
+      ]
+    }
+  ]
+}

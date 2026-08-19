@@ -80,3 +80,68 @@ function validarDadosFolha200(res) {
   }
   return str;
 }
+
+// Retorno: o fonte tem forma de dicionário, não de regra. O catálogo vive numa
+// função aninhada, e o campo de ocorrências carrega mais de um código.
+function retorno_multipag_folha240(res) {
+  var resposta = "";
+  var i = 0;
+  while (i < res.length) {
+    if (isNaN(res[i].substring(230, 240))) ocorrencias();
+    i++;
+    function ocorrencias() {
+      if (res[i].substring(7, 8) == "0")
+        resposta = resposta + "<pre><b>Header de Arquivo</b> ";
+      if (res[i].substring(7, 8) == 1)
+        resposta = resposta + "<pre><b>Header de Lote</b> ";
+      if (res[i].substring(7, 8) == 5)
+        resposta = resposta + "<pre><b>Trailer de Lote</b> ";
+      if (res[i].substring(7, 8) == 9)
+        resposta = resposta + "<pre><b>Trailer de Arquivo</b> ";
+      if (res[i].substring(230, 232) == "XX")
+        resposta = resposta + "      XX - Codigo fora do manual.";
+      if (res[i].substring(230, 232) == "BD")
+        resposta = resposta + "<b>      BD - Agendado.</b>";
+      if (res[i].substring(230, 232) == 00 && res[i].substring(13, 14) != "B")
+        resposta = resposta + "      00 - Efetivado";
+      if (res[i].substring(230, 232) == 01)
+        resposta = resposta + "      01 - Recusado";
+      if (res[i].substring(230, 232) == 02)
+        resposta = resposta + "      02 - Cancelado";
+      if (res[i].substring(232, 234) == "XX")
+        resposta = resposta + " / XX - Codigo fora do manual.";
+      if (res[i].substring(232, 234) == "BD")
+        resposta = resposta + " / BD - Agendado.";
+      if (res[i].substring(232, 234) == 01)
+        resposta = resposta + " / 01 - Recusado";
+      if (res[i].substring(232, 234) == 02)
+        resposta = resposta + " / 02 - Cancelado";
+      if (res[i].substring(234, 236) == "XX")
+        resposta = resposta + " / XX - Codigo fora do manual.";
+      if (res[i].substring(234, 236) == "BD")
+        resposta = resposta + " / BD - Agendado.";
+      if (res[i].substring(234, 236) == 01)
+        resposta = resposta + " / 01 - Recusado";
+      if (res[i].substring(234, 236) == 02)
+        resposta = resposta + " / 02 - Cancelado";
+      if (res[i].substring(236, 238) == "XX")
+        resposta = resposta + " / XX - Codigo fora do manual.";
+      if (res[i].substring(236, 238) == "BD")
+        resposta = resposta + " / BD - Agendado.";
+      if (res[i].substring(236, 238) == 01)
+        resposta = resposta + " / 01 - Recusado";
+      if (res[i].substring(236, 238) == 02)
+        resposta = resposta + " / 02 - Cancelado";
+      if (res[i].substring(238, 240) == "XX")
+        resposta = resposta + " / XX - Codigo fora do manual.";
+      if (res[i].substring(238, 240) == "BD")
+        resposta = resposta + " / BD - Agendado.";
+      if (res[i].substring(238, 240) == 01)
+        resposta = resposta + " / 01 - Recusado";
+      if (res[i].substring(238, 240) == 02)
+        resposta = resposta + " / 02 - Cancelado";
+      resposta = resposta + "=====================================";
+    }
+  }
+  return resposta;
+}
