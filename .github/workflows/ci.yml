@@ -2,9 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main, fase-0-extrator]
+    # `fase-*` cobre a branch da fase corrente sem virar referência morta quando ela
+    # é mergeada e apagada — foi o que aconteceu com `fase-0-extrator`.
+    branches: [main, "fase-*"]
   pull_request:
-    branches: [main, fase-0-extrator]
+    branches: [main, "fase-*"]
 
 jobs:
   typecheck:
