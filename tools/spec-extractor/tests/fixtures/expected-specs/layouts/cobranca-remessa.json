@@ -177,13 +177,8 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
-        "alvo": "res[0]",
-        "posicao": {
-          "inicio0": 8,
-          "fim0": 19
-        },
-        "documento": "desconhecido"
+        "tipo": "custom",
+        "alvo": "res[0]"
       },
       "condicao_original": "res[0].substring(8, 19) != calcularModulo11(res[0].substring(8, 19))",
       "condicao_guarda": null,
@@ -268,8 +263,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 20
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(19, 20) >= 'a') && (res[0].substring(19, 20) <= 'z')",
       "condicao_guarda": null,

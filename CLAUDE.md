@@ -64,6 +64,11 @@ Pontos que só ficam claros lendo vários arquivos juntos:
 - **`config.ts` é a fonte da verdade do escopo.** Adicionar layout = adicionar entrada em
   `LAYOUTS_DO_CICLO`, `MAPEAMENTO_FUNCOES` (função JS → layout) e `LAYOUTS`. O `spec-generator` falha
   em layout desconhecido; o `index.ts` ignora função fora de `LAYOUTS_DO_CICLO`.
+- **O walker mantém um ambiente de variáveis** (`RawRule.ambiente`): atribuições vistas até a regra,
+  com a pilha de guardas de cada uma. Uma atribuição só alcança a regra se toda guarda da regra vale
+  também para ela — sem esse escopo o ramo irmão do cálculo de dígito vazaria e o spec publicaria dois
+  resultados contraditórios. Acumulador de mensagem (`resposta = resposta + "…"`) é filtrado por
+  conteúdo, não por tamanho: o somatório de CNPJ passa de 600 caracteres.
 - **`runPipeline()` é pura e testável** (recebe `Map<url, source>` + inline scripts + logger injetável);
   `main()` concentra rede e escrita em disco. Novos testes de orquestração devem usar `runPipeline`.
 - **`Logger` é injetado** em `runPipeline` e `mapToDsl` (default no-op nos testes, `console` no CLI).
@@ -84,10 +89,10 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
 - Duas convenções de posição coexistem: `inicio0`/`fim0` são 0-based com fim exclusivo (espelham
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
-- Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `modulo_11`,
-  `coerencia_registro`, `tamanho_linha`, `disjuncao`, `custom`. `custom` é o escape hatch — regra que
-  não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a cobertura =
-  adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+- Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `intervalo`, `modulo_11`,
+  `coerencia_registro`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
+  — regra que não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a
+  cobertura = adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
 - `comparacao` (`estrita` | `frouxa`) existe em `literal_fixo` e `dominio` e **não é decoração**: o
   fonte compara o resultado de `substring()` — sempre string — ora contra literal entre aspas, ora
   contra literal numérico, e no segundo caso o JavaScript coage os tipos (`" 1"` passa como `01`). Um
@@ -102,10 +107,24 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   pedem coisas opostas — uma exige conteúdo numérico, a outra exige branco. Combinação de resíduo
   ainda não vista cai em `custom` de propósito, em vez de ser encaixada à força numa exigência que o
   fonte não faz.
-- `disjuncao` modela o `||` que o fonte usa para cobrir várias faixas com uma única mensagem
-  (`partes` são condições completas). Só é publicada quando **todas** as partes têm arquétipo próprio.
-  Nessas regras `posicoes` lista todas as faixas lidas e `colunas` é o envelope delas — nas demais,
-  `posicoes` continua com uma entrada só.
+- `disjuncao` e `conjuncao` modelam o `||` e o `&&` com que o fonte cobre várias faixas sob uma única
+  mensagem (`partes` são condições completas). Só são publicadas quando **todas** as partes têm
+  arquétipo próprio. Nessas regras `posicoes` lista todas as faixas lidas e `colunas` é o envelope —
+  mas **só das faixas do alvo da regra**: uma parte que lê `res[i + 2]` fala de outra linha do
+  arquivo, e somá-la ao envelope produziria uma faixa que não existe em registro nenhum. Nas demais
+  regras `posicoes` continua com uma entrada só.
+- `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
+  sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
+  minúscula no dígito.
+- `modulo_11` **depende do ambiente que o walker captura**: o fonte calcula o dígito numa variável
+  antes do `if` (soma ponderada → resto → um `if` por faixa de resto) e a condição só compara a faixa
+  com essa variável. `base` traz as parcelas com peso, `modulo` o divisor, `resultado` o dígito
+  esperado por faixa de resto **na ordem do fonte** (uma atribuição sem `operador` é o valor padrão,
+  que os `if` seguintes sobrescrevem — a última que casa vence), e `variavel` o nome no fonte. O
+  validador **repete o bloco de cálculo inteiro por valor informado no dígito**, então a mesma faixa
+  de resto tem resultado diferente em cada ramo; a guarda da regra diz qual ramo é. Sem ambiente não
+  se publica `modulo_11`: a condição sozinha é `faixa != variavel` e afirmar um algoritmo que o
+  extrator não viu seria inventar.
 - Três condições coexistem por regra e não são intercambiáveis: `condicao_original` é a conjunção
   completa (guardas + teste) e existe para rastreabilidade; `condicao_guarda` são só os `if` externos;
   `condicao_propria` é o teste que emite a mensagem — **é ela que a DSL classifica e de onde saem as

@@ -22,6 +22,19 @@ function familiaDe(regra: DslRule) {
   return FAMILIA_POR_FUNCAO[regra.funcao_origem as keyof typeof FAMILIA_POR_FUNCAO];
 }
 
+describe("qualidade da DSL", () => {
+  it("o escape hatch não domina o spec", () => {
+    // Meta da onda 0.5: `custom` é o que a Fase 1 teria de implementar à mão.
+    const todas = LAYOUTS_DO_CICLO.flatMap((layout) => carregar(layout));
+    const custom = todas.filter((r) => r.condicao.tipo === "custom");
+    const proporcao = custom.length / todas.length;
+    assert.ok(
+      proporcao <= 0.2,
+      `custom em ${(proporcao * 100).toFixed(1)}% das regras (${custom.length}/${todas.length}); meta é 20%`
+    );
+  });
+});
+
 describe("propriedades dos specs", () => {
   for (const layout of LAYOUTS_DO_CICLO) {
     describe(layout, () => {
@@ -103,14 +116,38 @@ describe("propriedades dos specs", () => {
         assert.deepStrictEqual(incoerentes.map((r) => r.id), []);
       });
 
-      it("colunas da regra envolvem todas as faixas que ela lê", () => {
+      it("colunas da regra envolvem as faixas lidas no registro que ela reprova", () => {
+        // Uma parte que lê outra linha (`res[i + 2]`) fica em `posicoes` com o
+        // seu próprio alvo, mas não entra no envelope: somar faixas de registros
+        // diferentes produziria uma faixa que não existe em nenhum deles.
         const foraDoEnvelope = regras.filter((r) => {
-          if (r.posicoes.length === 0) return false;
-          const inicio = Math.min(...r.posicoes.map((p) => p.colunas[0]));
-          const fim = Math.max(...r.posicoes.map((p) => p.colunas[1]));
+          const doAlvo = r.posicoes.filter((p) => p.alvo === r.registro_alvo[0]);
+          if (doAlvo.length === 0) return false;
+          const inicio = Math.min(...doAlvo.map((p) => p.colunas[0]));
+          const fim = Math.max(...doAlvo.map((p) => p.colunas[1]));
           return r.colunas[0] > inicio || r.colunas[1] < fim;
         });
         assert.deepStrictEqual(foraDoEnvelope.map((r) => r.id), []);
+      });
+
+      it("condição composta nunca esconde uma parte não modelada", () => {
+        const comCustom = regras.filter(
+          (r) =>
+            (r.condicao.tipo === "disjuncao" || r.condicao.tipo === "conjuncao") &&
+            r.condicao.partes.some((parte) => parte.tipo === "custom")
+        );
+        assert.deepStrictEqual(comCustom.map((r) => r.id), []);
+      });
+
+      it("modulo_11 publica base, módulo e resultado", () => {
+        const incompletas = regras.filter(
+          (r) =>
+            r.condicao.tipo === "modulo_11" &&
+            (r.condicao.base.length === 0 ||
+              r.condicao.modulo <= 0 ||
+              r.condicao.resultado.length === 0)
+        );
+        assert.deepStrictEqual(incompletas.map((r) => r.id), []);
       });
 
       it("domínio publica sentido e ao menos um valor", () => {
@@ -121,15 +158,6 @@ describe("propriedades dos specs", () => {
               (r.condicao.sentido !== "permitidos" && r.condicao.sentido !== "proibidos"))
         );
         assert.deepStrictEqual(invalidos.map((r) => r.id), []);
-      });
-
-      it("disjunção nunca esconde uma parte não modelada", () => {
-        const comCustom = regras.filter(
-          (r) =>
-            r.condicao.tipo === "disjuncao" &&
-            r.condicao.partes.some((parte) => parte.tipo === "custom")
-        );
-        assert.deepStrictEqual(comCustom.map((r) => r.id), []);
       });
 
       it("ids são únicos e determinísticos", () => {

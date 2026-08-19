@@ -218,8 +218,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 4
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(3, 4) >= 'a') && (res[0].substring(3, 4) <= 'z')",
       "condicao_guarda": null,

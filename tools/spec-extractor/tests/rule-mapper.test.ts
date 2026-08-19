@@ -48,18 +48,28 @@ describe("mapToDsl", () => {
       alvo: "res[0]",
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
-    assert.strictEqual(dsl.condicao.tipo, "custom");
+    // Duas faixas distintas não são um domínio; a conjunção descreve o que o
+    // fonte testa sem fundir os valores numa lista só.
+    assert.strictEqual(dsl.condicao.tipo, "conjuncao");
+    if (dsl.condicao.tipo === "conjuncao") {
+      assert.deepStrictEqual(
+        dsl.condicao.partes.map((p) => p.tipo),
+        ["literal_fixo", "literal_fixo"]
+      );
+    }
   });
 
-  it("nao classifica modulo_11 quando posicoes do comparado e do calculo nao batem", () => {
+  it("nao classifica modulo_11 sem o ambiente que define o digito", () => {
+    // A condição sozinha é `faixa != variavel`: sem saber como a variável foi
+    // calculada, publicar `modulo_11` seria afirmar um algoritmo que o extrator
+    // não viu.
     const raw: RawRule = {
       funcao_origem: "amostra",
       linha_fonte: 997,
-      condicao_original:
-        'res[0].substring(13, 27) != calcularModulo11(res[0].substring(0, 9))',
+      condicao_original: "res[0].substring(13, 14) != dv1",
       mensagem: "Modulo 11 invalido.",
       registro: null,
-      colunas: [13, 27],
+      colunas: [13, 14],
       alvo: "res[0]",
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
@@ -237,21 +247,6 @@ describe("mapToDsl", () => {
     assert.strictEqual((dsl.condicao as any).valor, "0");
   });
 
-  it("classifica modulo_11 com variantes de nome de funcao", () => {
-    for (const fn of ["modulo11", "calcModulo11", "calcularDigitoVerificador"]) {
-      const raw: RawRule = {
-        funcao_origem: "amostra",
-        linha_fonte: 989,
-        condicao_original: `res[0].substring(13, 27) != ${fn}(res[0].substring(13, 27))`,
-        mensagem: "Modulo 11 invalido.",
-        registro: null,
-        colunas: [13, 27],
-        alvo: "res[0]",
-      };
-      const dsl = mapToDsl(raw, "cobranca-remessa");
-      assert.strictEqual(dsl.condicao.tipo, "modulo_11", `deveria reconhecer ${fn}`);
-    }
-  });
   it("funde cadeia de ifs aninhados sobre a mesma posição em dominio", () => {
     // O fonte encadeia um `if` por valor e só o nível mais interno emite a mensagem;
     // a condição própria isolada é uma desigualdade só, a cadeia inteira é o domínio.
@@ -363,7 +358,8 @@ describe("mapToDsl", () => {
       alvo: "res[i]",
     };
     const dsl = mapToDsl(raw, "multipag");
-    assert.strictEqual(dsl.condicao.tipo, "custom");
+    assert.notStrictEqual(dsl.condicao.tipo, "dominio");
+    assert.strictEqual(dsl.condicao.tipo, "conjuncao");
   });
 
   it("classifica dominio proibido escrito como disjuncao de igualdades", () => {
@@ -500,6 +496,196 @@ describe("mapToDsl", () => {
       alvo: "res[0]",
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "custom");
+  });
+  it("classifica modulo_11 a partir do ambiente do fonte", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 700,
+      condicao_original:
+        '(res[0].substring(57, 58) == "P") && (res[0].substring(57, 58) != dva)',
+      condicao_guarda: '(res[0].substring(57, 58) == "P")',
+      condicao_propria: "res[0].substring(57, 58) != dva",
+      mensagem: "Linha 1, colunas 058 a 058, Dígito da agência inválido.",
+      registro: "header-arquivo",
+      colunas: [58, 58],
+      alvo: "res[0]",
+      ambiente: {
+        sm: [
+          {
+            operador: "=",
+            expressao:
+              "res[0].substring(53, 54) * 5 + res[0].substring(54, 55) * 4 + res[0].substring(55, 56) * 3 + res[0].substring(56, 57) * 2",
+            quando: null,
+            ordem: 1,
+          },
+        ],
+        restoa: [
+          { operador: "=", expressao: "sm", quando: null, ordem: 2 },
+          { operador: "%=", expressao: "11", quando: null, ordem: 3 },
+        ],
+        dva: [
+          { operador: "=", expressao: "0", quando: "(restoa == 0)", ordem: 4 },
+          { operador: "=", expressao: '"P"', quando: "(restoa == 1)", ordem: 5 },
+          { operador: "=", expressao: "11 - restoa", quando: "(restoa > 1)", ordem: 6 },
+        ],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
+    if (dsl.condicao.tipo !== "modulo_11") return;
+
+    assert.strictEqual(dsl.condicao.modulo, 11);
+    assert.strictEqual(dsl.condicao.variavel, "dva");
+    assert.strictEqual(dsl.condicao.documento, "agencia");
+    assert.deepStrictEqual(
+      dsl.condicao.base.map((b) => [b.inicio0, b.fim0, b.peso]),
+      [
+        [53, 54, 5],
+        [54, 55, 4],
+        [55, 56, 3],
+        [56, 57, 2],
+      ]
+    );
+    // Neste ramo — o arquivo informou `P` — o resto 1 espera `P`, não zero. É a
+    // bifurcação que faz o validador aceitar os dois no resto 1.
+    assert.deepStrictEqual(
+      dsl.condicao.resultado.map((r) => [r.operador, r.resto, r.valor, r.expressao]),
+      [
+        ["==", 0, "0", "0"],
+        ["==", 1, "P", '"P"'],
+        [">", 1, null, "11 - resto"],
+      ]
+    );
+    assert.deepStrictEqual(dsl.colunas, [58, 58]);
+  });
+
+  it("aceita valor padrão incondicional no calculo do digito", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 701,
+      condicao_original: "obterValorCNPJAlfanumerico(res[0].substring(30, 31)) != dv1",
+      mensagem: "Linha 1, colunas 019 a 033, número de inscrição/CNPJ inválido.",
+      registro: "header-arquivo",
+      colunas: [19, 33],
+      alvo: "res[0]",
+      ambiente: {
+        sm: [
+          {
+            operador: "=",
+            expressao:
+              "obterValorCNPJAlfanumerico(res[0].substring(18, 19)) * 5 + obterValorCNPJAlfanumerico(res[0].substring(19, 20)) * 4",
+            quando: null,
+            ordem: 1,
+          },
+        ],
+        resto1: [
+          { operador: "=", expressao: "sm", quando: null, ordem: 2 },
+          { operador: "%=", expressao: "11", quando: null, ordem: 3 },
+        ],
+        dv1: [
+          { operador: "=", expressao: "11 - resto1", quando: null, ordem: 4 },
+          { operador: "=", expressao: "0", quando: "(resto1 == 0)", ordem: 5 },
+        ],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
+    if (dsl.condicao.tipo !== "modulo_11") return;
+
+    assert.strictEqual(dsl.condicao.transformacao, "obterValorCNPJAlfanumerico");
+    assert.strictEqual(dsl.condicao.base[0].transformacao, "obterValorCNPJAlfanumerico");
+    // A atribuição sem guarda é o padrão, e vem primeiro: a ordem do fonte é a
+    // ordem de avaliação, e a última que casa vence.
+    assert.deepStrictEqual(
+      dsl.condicao.resultado.map((r) => [r.operador, r.resto]),
+      [
+        [null, null],
+        ["==", 0],
+      ]
+    );
+  });
+
+  it("classifica intervalo de caixa baixa como faixa sobre a mesma posicao", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 702,
+      condicao_original:
+        "res[0].substring(70, 71) >= 'a' && res[0].substring(70, 71) <= 'z'",
+      mensagem: "Linha 1, colunas 071 a 071, informar em letra maiúscula.",
+      registro: "header-arquivo",
+      colunas: [71, 71],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "intervalo");
+    if (dsl.condicao.tipo === "intervalo") {
+      assert.deepStrictEqual(dsl.condicao.limites, [
+        { operador: ">=", valor: "a" },
+        { operador: "<=", valor: "z" },
+      ]);
+      assert.strictEqual(dsl.condicao.comparacao, "estrita");
+    }
+  });
+
+  it("marca comparacao frouxa em relacional contra literal numerico", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 703,
+      condicao_original: "res[0].substring(143, 145) > 31",
+      mensagem: "Linha 1, colunas 144 a 145, dia inválido.",
+      registro: "header-arquivo",
+      colunas: [144, 145],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "intervalo");
+    if (dsl.condicao.tipo === "intervalo") {
+      assert.strictEqual(dsl.condicao.comparacao, "frouxa");
+    }
+  });
+
+  it("classifica conjuncao de campos diferentes e publica as duas faixas", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 704,
+      condicao_original:
+        'res[i].substring(17, 18) == "1" && res[i].substring(20, 21) == "0"',
+      mensagem: "Linha {linha}, combinação inválida.",
+      registro: "segmento-a",
+      colunas: [18, 21],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "conjuncao");
+    if (dsl.condicao.tipo === "conjuncao") {
+      assert.deepStrictEqual(
+        dsl.condicao.partes.map((p) => p.tipo),
+        ["literal_fixo", "literal_fixo"]
+      );
+    }
+    assert.deepStrictEqual(
+      dsl.posicoes.map((p) => p.colunas),
+      [
+        [18, 18],
+        [21, 21],
+      ]
+    );
+    assert.deepStrictEqual(dsl.colunas, [18, 21]);
+  });
+
+  it("conjuncao com parte nao modelada continua custom", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 705,
+      condicao_original:
+        'res[i].substring(17, 18) == "1" && funcaoEstranha(res[i]) > 3',
+      mensagem: "Linha {linha}, combinação inválida.",
+      registro: "segmento-a",
+      colunas: [18, 18],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
     assert.strictEqual(dsl.condicao.tipo, "custom");
   });
 });
