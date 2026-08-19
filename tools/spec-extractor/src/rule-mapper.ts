@@ -487,15 +487,19 @@ function inferirCondicaoSimples(
   const modulo11 = inferirModulo11(condicao, ambiente, mensagem);
   if (modulo11) return modulo11;
 
-  // Coerência entre registros: compara a mesma leitura em duas linhas distintas
-  // (res[i] contra res[j] ou contra res[i + 1]). É o arquétipo que sustenta regras
-  // como "banco único por lote".
+  // Coerência entre duas leituras: a mesma faixa em linhas distintas (`res[i]`
+  // contra `res[j]` ou `res[i + 1]`), que sustenta "banco único por lote", ou
+  // dois campos da mesma linha, que é como o fonte compara datas entre si. O
+  // operador relacional faz parte: "data do desconto superior à do vencimento" é
+  // exatamente uma comparação de faixa contra faixa.
   const coerencia = condicao.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=|>=|<=|>|<)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/
   );
   if (coerencia) {
     const [, alvoA, a1, b1, operador, alvoB, a2, b2] = coerencia;
-    if (alvoA !== alvoB) {
+    // Faixa comparada consigo mesma não é regra; é sempre verdadeira ou sempre falsa.
+    const mesmaLeitura = alvoA === alvoB && a1 === a2 && b1 === b2;
+    if (!mesmaLeitura) {
       return {
         tipo: "coerencia_registro",
         alvo: alvoA,

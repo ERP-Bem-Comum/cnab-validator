@@ -405,8 +405,14 @@ function isNoise(message: string): boolean {
   if (normalized.includes("foi validado") || normalized.includes("não necessita de ajustes")) {
     return true;
   }
+  // Duas evidências independentes de que a mensagem é um achado, não relatório.
+  // Nenhuma das duas basta sozinha: o fonte tem regra que não cita coluna
+  // (comprimento do registro) e regra cujo texto não usa nenhuma palavra de erro
+  // ("Número do banco diferente no mesmo lote"), e tem render que cita coluna.
+  const temLinha = /linha\s*(\{linha\}|\{valor\}|\d+)/i.test(message);
+  const temColuna = /colunas?\s*\d/i.test(message);
   const indicator = /(inválid|invalid|falhou|falha|erro|incorret|divergent|obrigatório|obrigatorio|deixar em branco|informar|zerad|ausente|reprovad|não|exclusivo|apenas|somente|obrigado)/i;
-  return !indicator.test(message);
+  return !((temLinha && temColuna) || indicator.test(message));
 }
 
 function extractConcatenatedMessage(
