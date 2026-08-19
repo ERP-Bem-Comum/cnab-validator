@@ -406,6 +406,20 @@ não um valor único.
   dizer isto explicitamente, senão a regra vira armadilha.
 - **CA4** — expor como função utilizável sobre um par agência/conta, não só como asserção sobre arquivo.
 
+**Status em 2026-08-19 — #3 fechada.** `src/digito-verificador.ts` deriva tudo do spec: pesos
+(agência 5·4·3·2, conta 2·7·6·5·4·3·2), módulo, tratamento de resto, rejeição de caixa baixa e a
+fronteira de banco. Nada escrito à mão — cópia manual divergiria do fonte na primeira atualização.
+
+- **CA1/CA2** — veredito reproduzido para agência e conta, incluindo os restos 0 e 1 e o caractere
+  alternativo. A bifurcação está confirmada por teste: **no resto 1 o validador aceita `0` e `P`**.
+- **CA3** — fora do banco aplicável o resultado é `aplicavel: false`, que não é "válido": é "o
+  validador não julga isso na remessa". Quem julga é a ocorrência de retorno.
+- **CA4** — `verificarPar({ banco, agencia, digito_agencia, conta, digito_conta })`, sem arquivo.
+- **CA5** — teste com o cenário sob investigação no core-api: o dígito da **agência** ocupando a
+  posição do dígito da **conta**. O veredito separa os dois campos — a agência confere, a conta não —,
+  o que transforma "N suspeitos" em "M errados, nominalmente".
+- Um teste amarra o corpus sintético ao algoritmo: se um mudar, o outro acusa.
+
 **Entrega paralela permitida pelo épico:** a versão manual destas regras cabe num teste de regressão
 do emissor do core-api **hoje**, sem esperar o extrator. Fazer as duas, com a manual marcada como
 temporária e ligada a esta issue — o risco declarado no épico é a manual virar permanente.
