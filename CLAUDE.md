@@ -8,11 +8,11 @@ Validador de arquivos CNAB do Bradesco. A estratégia é **reimplementação nat
 regras extraídas automaticamente (via AST) dos assets JavaScript públicos do validador oficial do banco
 — e não um wrapper sobre o JS original.
 
-**Estado atual: Fase 0 fechada, Fase 1 começando.** Existem o extrator (`tools/spec-extractor/`,
-Bun + TypeScript), os specs JSON que ele gera (`tools/specs/`) e o primeiro crate Rust,
-`crates/cnab-specs` — o consumidor do contrato. `cnab-core`, `cnab-validator-cli` e
-`cnab-validator-api` ainda **não** existem; o design deles está em
-`docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
+**Estado atual: Fase 0 fechada, Fase 1 em andamento.** Existem o extrator (`tools/spec-extractor/`,
+Bun + TypeScript), os specs JSON que ele gera (`tools/specs/`) e dois crates Rust:
+`crates/cnab-specs` (o consumidor do contrato) e `crates/cnab-core` (o motor, em paridade verificada
+com o runner TS). `cnab-validator-cli` e `cnab-validator-api` ainda **não** existem; o design deles
+está em `docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
 
 Layouts do ciclo atual: `cobranca-remessa`, `multipag`, `folha-pagamento`, `retorno-multipag`.
 
@@ -29,6 +29,7 @@ bun test -t "extrai regras"               # filtro por nome do teste
 bun run typecheck   # tsc --noEmit
 bun run reproduce   # verifica reprodutibilidade contra specs fixture (sem rede)
 bun run golden      # compara o runner com o validador oficial executado localmente
+bun run paridade    # congela o relatório do runner em tools/paridade/, para o motor Rust
 ```
 
 `bun run dev` é a **única** coisa que acessa a rede; os testes mockam `global.fetch`.
@@ -60,6 +61,23 @@ afrouxadas sem decisão explícita:
 Os nomes dos tipos seguem o JSON, em português: traduzir criaria um segundo vocabulário para as
 mesmas coisas. A variante `modulo_11` precisa de `#[serde(rename)]` — `rename_all = "snake_case"`
 produz `modulo11`, sem o sublinhado.
+
+`crates/cnab-core` é o motor: `aplicar_spec(&regras, &linhas)` devolve achados e não avaliadas. Ele é
+o espelho do runner TS, e é isso que sustenta a paridade:
+
+- `src/valor.rs` reproduz a coerção do JavaScript (`igual_js`, `relacional_js`, `numero_js`). É o que
+  faz campo em branco valer zero na comparação frouxa. `numero_js` cobre só o literal decimal —
+  `0x1f` e `Infinity` viram `NaN` de propósito, porque não existem em arquivo CNAB e aceitá-los
+  abriria divergência onde o fonte nunca chega.
+- `src/expressao.rs` avalia as guardas, com curto-circuito de `&&` e `||`, e recusa o que não
+  reconhece.
+- **Paridade:** `bun run paridade` congela o relatório do runner em `tools/paridade/<layout>/`, e
+  `crates/cnab-core/tests/paridade.rs` compara achado a achado e recusa a recusa. Do lado Bun,
+  `tests/paridade.test.ts` falha se o congelado sair de sincronia com o runner. Mudou o
+  comportamento de um dos dois motores? Regenere e **olhe o diff** — ele é a evidência de qual dos
+  lados mudou.
+- O `detalhe` da recusa fica fora da comparação: é diagnóstico para quem lê o relatório, e prendê-lo
+  travaria a redação da mensagem nos dois lados. O par (regra, motivo) é o que precisa concordar.
 
 ## CI
 
