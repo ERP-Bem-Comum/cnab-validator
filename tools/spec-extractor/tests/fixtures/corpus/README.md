@@ -40,3 +40,13 @@ Os arquivos foram construídos com o próprio runner como oráculo: cada campo f
 preenchido até que o relatório sobre `multipag-correto.txt` ficasse vazio. Ao
 mexer neles, rodar `bun test tests/runner.test.ts` — as contagens dos testes são
 o que sustenta as CA5 e CA6 da issue #2.
+
+**Todos usam CRLF**, porque é o que o validador oficial exige: ele checa o
+delimitador pelo hex do arquivo inteiro, não pelas linhas já divididas. Com LF,
+o validador reclama de uma linha por vez, do começo ao fim do arquivo.
+
+O corpus passou a ser conferido também pelo `bun run golden`, que roda o
+validador oficial sobre estes mesmos arquivos. Foi ele que mostrou que os
+trailers estavam com contagem errada — o runner não avaliava essas duas regras,
+então o corpus tinha sido dado por correto contra um oráculo incompleto. Hoje
+`multipag-correto.txt` passa limpo pelos dois lados.

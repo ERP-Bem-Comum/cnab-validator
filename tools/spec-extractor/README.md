@@ -98,6 +98,39 @@ O downloader retrya automaticamente as seguintes condições:
 Erros HTTP 4xx (exceto 408/429) e erros cuja mensagem não indique falha de
 rede não geram retry.
 
+## Golden test contra o validador oficial (`bun run golden`)
+
+O validador do Bradesco é JavaScript que roda no navegador, não um serviço — o
+oráculo não exige rede. `src/golden.ts` carrega o corpus já baixado em `assets/`
+num contexto isolado (`node:vm`), executa a função de layout do próprio banco
+sobre cada arquivo do corpus de teste e compara com o que o runner acusa.
+
+É **local e opcional**: `assets/` não é versionado, e sem ele o script e os
+testes se declaram pulados em vez de falhar. O CI continua sem tocar a rede do
+banco (CA2 da issue #7).
+
+O placar tem três colunas, e só uma derruba o script:
+
+- **falso positivo** — o runner reprova o que o oficial aprova. Sempre defeito, e
+  o único caso que falha: gate que reprova arquivo bom é pior que gate nenhum.
+- **lacuna nova** — o oficial reprova e o runner não, sem causa registrada. É a
+  fila de trabalho.
+- **conhecida** — lacuna já explicada em `src/golden-conhecidas.ts`, com o porquê
+  escrito por extenso. Entrar nessa lista exige entender a causa.
+
+A comparação casa **template contra instância**: o fonte concatena variáveis na
+mensagem e o extrator as preserva como `{valor}`, enquanto o validador emite o
+texto já preenchido.
+
+Duas coisas que este teste revelou sobre o fonte, e que valem para quem gera
+arquivo:
+
+- O validador **exige CRLF**. A checagem não olha as linhas — olha o hex do
+  arquivo inteiro, que a página guarda antes de dividir. Por isso o corpus de
+  teste usa CRLF: é o que o banco aceita.
+- Ele **aborta** em arquivo truncado, lendo `res[j]` sem checar limite. No
+  navegador a validação simplesmente não termina; o runner conclui e relata.
+
 ## Limitações conhecidas
 
 A extração de scripts inline usa regex sobre o HTML bruto para preservar a

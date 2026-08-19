@@ -6,7 +6,8 @@
     "dev": "bun run src/index.ts",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "reproduce": "bun run src/reproduce.ts"
+    "reproduce": "bun run src/reproduce.ts",
+    "golden": "bun run src/golden.ts"
   },
   "dependencies": {
     "acorn": "^8.12.1",

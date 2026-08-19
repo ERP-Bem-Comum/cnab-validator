@@ -496,6 +496,40 @@ sobram são a fronteira honesta, não omissão:
 Demonstrado por `multipag-cpf-dv2-invalido.txt`: com os specs anteriores o arquivo passava limpo;
 agora é reprovado no header de arquivo e no de lote, que é onde o CPF aparece.
 
+### Golden test contra o validador oficial — entregue em 2026-08-19
+
+O item 3.5 do plano estava travado por uma premissa errada: a de que comparar com o validador exigia
+rede, o que colidiria com o CA2 da #7. **Não exige.** O validador é JavaScript que roda no navegador
+do usuário; basta executar as funções do próprio banco sobre o corpus já baixado, num contexto
+isolado. `bun run golden` faz isso, e `tests/golden.test.ts` se declara pulado quando `assets/` não
+está lá — o CI segue sem tocar a rede.
+
+Placar hoje: **0 lacunas novas, 2 conhecidas, 0 falsos positivos** sobre os oito arquivos do corpus.
+
+O que ele achou logo na primeira execução, e que nenhum teste interno acharia:
+
+1. **O corpus estava errado, e o runner não tinha como saber.** Os trailers de lote e de arquivo
+   traziam contagens divergentes em **todos** os arquivos, inclusive no `multipag-correto.txt`. As
+   duas regras comparam a faixa com uma variável de fluxo (`qtde_linha = j`, o índice da linha), que
+   nenhum arquétipo modela — então o runner nunca as avaliou, e o corpus foi dado por correto contra
+   um oráculo incompleto. Corrigido; é um arquétipo novo a considerar.
+2. **O validador exige CRLF**, e a checagem não olha as linhas: olha o hex do arquivo inteiro, que a
+   página guarda antes de dividir. Um emissor que gere LF é recusado linha a linha. O corpus passou a
+   usar CRLF.
+3. **O validador aborta em arquivo truncado** — lê `res[j]` sem checar limite. No navegador a
+   validação não termina; o runner conclui e relata.
+4. **Defeito no validador: todo header com CPF é reprovado.** A regra é
+   `obterValorCNPJAlfanumerico(res[0].substring(18, 32)) == 0`, e essa função é
+   `caractere.toUpperCase().charCodeAt(0) - 48` — lê **um** caractere. Chamada com as 14 posições da
+   inscrição, decide pela primeira: qualquer inscrição que comece em `0` é declarada zerada. Como a
+   regra vizinha **exige** as colunas 019 a 021 zeradas quando a empresa é identificada por CPF, as
+   duas se contradizem. No header de lote o mesmo teste está escrito sem a função
+   (`substring(18, 32) == 0`), o que confirma o defeito. Também atinge CNPJ com zero à esquerda.
+   Registrado em `src/golden-conhecidas.ts`.
+
+O item 4 é material para o core-api: empresa identificada por CPF não passa pelo validador oficial do
+Multipag, e nenhuma mudança no arquivo resolve.
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M
