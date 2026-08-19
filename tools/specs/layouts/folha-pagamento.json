@@ -42,7 +42,8 @@
           "fim0": 17
         },
         "operador": "==",
-        "valor": "09"
+        "valor": "09",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(163, 166) == \"080\" && res[1].substring(13, 16) == \"040\") && (res[i].substring(7, 8) == 3) && (res[i].substring(15, 17) == \"09\")",
       "condicao_guarda": "(res[0].substring(163, 166) == \"080\" && res[1].substring(13, 16) == \"040\") && (res[i].substring(7, 8) == 3)",
@@ -86,7 +87,8 @@
           "fim0": 7
         },
         "operador": "!=",
-        "valor": "0000"
+        "valor": "0000",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(3, 7) != \"0000\"",
       "condicao_guarda": null,
@@ -130,7 +132,8 @@
           "fim0": 8
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(7, 8) != 0",
       "condicao_guarda": null,
@@ -174,7 +177,8 @@
           "fim0": 17
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(8, 17) != 0",
       "condicao_guarda": null,
@@ -211,14 +215,18 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 17,
           "fim0": 18
         },
-        "operador": "!=",
-        "valor": "2"
+        "valores": [
+          "1",
+          "2"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[0].substring(17, 18) != 1) && (res[0].substring(17, 18) != 2)",
       "condicao_guarda": "(res[0].substring(17, 18) != 1)",
@@ -344,7 +352,8 @@
           "fim0": 32
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(18, 32) == 0",
       "condicao_guarda": null,
@@ -391,7 +400,8 @@
           "fim0": 37
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(32, 37) == 0",
       "condicao_guarda": null,
@@ -412,7 +422,7 @@
       ],
       "colunas": [
         33,
-        33
+        37
       ],
       "colunas_mensagem": [
         33,
@@ -428,11 +438,147 @@
             33
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 37,
+          "colunas": [
+            33,
+            37
+          ],
+          "tamanho": 5
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 33,
+          "fim0": 34,
+          "colunas": [
+            34,
+            34
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 34,
+          "fim0": 35,
+          "colunas": [
+            35,
+            35
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 35,
+          "fim0": 36,
+          "colunas": [
+            36,
+            36
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 36,
+          "fim0": 37,
+          "colunas": [
+            37,
+            37
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 32,
+              "fim0": 33
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 33,
+              "fim0": 34
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 34,
+              "fim0": 35
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 35,
+              "fim0": 36
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 36,
+              "fim0": 37
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 32,
+              "fim0": 37
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          }
+        ]
       },
       "condicao_original": "(isNaN(res[0].substring(32, 33)) || res[0].substring(32, 33).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(33, 34)) || res[0].substring(33, 34).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(34, 35)) || res[0].substring(34, 35).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(35, 36)) || res[0].substring(35, 36).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(36, 37)) || res[0].substring(36, 37).replace(/\\s/g, '').length == 0) ||\r\n            (isNaN(res[0].substring(32, 37)) || res[0].substring(32, 37).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": null,
@@ -473,10 +619,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(37, 52)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 37,
           "fim0": 52
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[0].substring(48, 52) != \"PGIT\" && res[0].substring(32, 33) != 3) && (isNaN(res[0].substring(37, 52)) || res[0].substring(37, 52).replace(/\\s/g, '').length != 0)",
@@ -517,8 +669,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 37,
+          "fim0": 38
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[0].substring(48, 52) == \"PGIT\") && (isNaN(res[0].substring(37, 38)) || res[0].substring(37, 38).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[0].substring(48, 52) == \"PGIT\")",
@@ -562,7 +724,8 @@
           "fim0": 57
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(52, 57) == 0",
       "condicao_guarda": null,
@@ -609,7 +772,8 @@
           "fim0": 53
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(52, 53) != 0",
       "condicao_guarda": null,
@@ -637,6 +801,16 @@
         {
           "alvo": "res[0]",
           "inicio0": 52,
+          "fim0": 53,
+          "colunas": [
+            53,
+            53
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 52,
           "fim0": 57,
           "colunas": [
             53,
@@ -646,8 +820,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 52,
+              "fim0": 57
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 52,
+              "fim0": 53
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "isNaN(res[0].substring(52, 57)) || res[0].substring(52, 57).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(52, 53)) || res[0].substring(52, 53).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -795,6 +999,16 @@
         {
           "alvo": "res[0]",
           "inicio0": 58,
+          "fim0": 59,
+          "colunas": [
+            59,
+            59
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 58,
           "fim0": 70,
           "colunas": [
             59,
@@ -804,8 +1018,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 58,
+              "fim0": 70
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 58,
+              "fim0": 59
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "isNaN(res[0].substring(58, 70)) || res[0].substring(58, 70).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(58, 59)) || res[0].substring(58, 59).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -849,7 +1093,8 @@
           "fim0": 70
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(58, 70) == 0",
       "condicao_guarda": null,
@@ -905,7 +1150,9 @@
           "7",
           "8",
           "9"
-        ]
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(70, 71) != \"P\") && (res[0].substring(70, 71) != \"p\") && (res[0].substring(70, 71) != \"0\") && (res[0].substring(70, 71) != \"1\") && (res[0].substring(70, 71) != \"2\") && (res[0].substring(70, 71) != \"3\") && (res[0].substring(70, 71) != \"4\") && (res[0].substring(70, 71) != \"5\") && (res[0].substring(70, 71) != \"6\") && (res[0].substring(70, 71) != \"7\") && (res[0].substring(70, 71) != \"8\") && (res[0].substring(70, 71) != \"9\")",
       "condicao_guarda": "(res[0].substring(70, 71) != \"P\") && (res[0].substring(70, 71) != \"p\") && (res[0].substring(70, 71) != \"0\") && (res[0].substring(70, 71) != \"1\") && (res[0].substring(70, 71) != \"2\") && (res[0].substring(70, 71) != \"3\") && (res[0].substring(70, 71) != \"4\") && (res[0].substring(70, 71) != \"5\") && (res[0].substring(70, 71) != \"6\") && (res[0].substring(70, 71) != \"7\") && (res[0].substring(70, 71) != \"8\")",
@@ -1063,7 +1310,8 @@
           "fim0": 72
         },
         "operador": "!=",
-        "valor": " "
+        "valor": " ",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(71, 72) != \" \"",
       "condicao_guarda": null,
@@ -1145,7 +1393,8 @@
           "fim0": 102
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(72, 102) == 0",
       "condicao_guarda": null,
@@ -1227,7 +1476,8 @@
           "fim0": 132
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(102, 132) == 0",
       "condicao_guarda": null,
@@ -1274,7 +1524,8 @@
           "fim0": 142
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(132, 142) != 0",
       "condicao_guarda": null,
@@ -1318,7 +1569,8 @@
           "fim0": 143
         },
         "operador": "!=",
-        "valor": "1"
+        "valor": "1",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(142, 143) != 1",
       "condicao_guarda": null,
@@ -1355,8 +1607,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 157
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(143, 157)) || res[0].substring(143, 157).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -1377,12 +1639,9 @@
       ],
       "colunas": [
         144,
-        145
-      ],
-      "colunas_mensagem": [
-        144,
         151
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[0]",
@@ -1393,11 +1652,87 @@
             145
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 149,
+          "colunas": [
+            148,
+            149
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 149,
+          "fim0": 151,
+          "colunas": [
+            150,
+            151
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 143,
+              "fim0": 145
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 145,
+              "fim0": 147
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 147,
+              "fim0": 149
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 149,
+              "fim0": 151
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "res[0].substring(143, 145) == 00 ||\r\n            res[0].substring(145, 147) == 00 ||\r\n            res[0].substring(147, 149) == 00 ||\r\n            res[0].substring(149, 151) == 00",
       "condicao_guarda": null,
@@ -1560,8 +1895,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 162,
+          "fim0": 163
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(162, 163)) || res[0].substring(162, 163).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -1598,8 +1943,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 157,
+          "fim0": 163
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(157, 163)) || res[0].substring(157, 163).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -1643,7 +1998,8 @@
           "fim0": 163
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(157, 163) == 0",
       "condicao_guarda": null,
@@ -1687,7 +2043,8 @@
           "fim0": 166
         },
         "operador": "!=",
-        "valor": "080"
+        "valor": "080",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(163, 166) != \"080\"",
       "condicao_guarda": null,
@@ -1733,7 +2090,9 @@
         "valores": [
           "01600",
           "06250"
-        ]
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(166, 171) != \"01600\") && (res[0].substring(166, 171) != \"06250\")",
       "condicao_guarda": "(res[0].substring(166, 171) != \"01600\")",
@@ -1777,7 +2136,8 @@
           "fim0": 191
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(171, 191) != 0",
       "condicao_guarda": null,
@@ -1821,7 +2181,8 @@
           "fim0": 240
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(211, 240) != 0",
       "condicao_guarda": null,
@@ -1865,7 +2226,8 @@
           "fim0": 8
         },
         "operador": "!=",
-        "valor": "1"
+        "valor": "1",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[1].substring(7, 8) != 1",
       "condicao_guarda": null,
@@ -1886,12 +2248,9 @@
       ],
       "colunas": [
         18,
-        18
-      ],
-      "colunas_mensagem": [
-        18,
         23
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -1902,11 +2261,168 @@
             18
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 17,
+          "fim0": 23,
+          "colunas": [
+            18,
+            23
+          ],
+          "tamanho": 6
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 18,
+          "fim0": 19,
+          "colunas": [
+            19,
+            19
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 19,
+          "fim0": 20,
+          "colunas": [
+            20,
+            20
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 21,
+          "colunas": [
+            21,
+            21
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 21,
+          "fim0": 22,
+          "colunas": [
+            22,
+            22
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 22,
+          "fim0": 23,
+          "colunas": [
+            23,
+            23
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 18
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 18,
+              "fim0": 19
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 19,
+              "fim0": 20
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 21,
+              "fim0": 22
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 22,
+              "fim0": 23
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 23
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5) && ((isNaN(res[i].substring(17, 18)) || res[i].substring(17, 18).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(18, 19)) || res[i].substring(18, 19).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(19, 20)) || res[i].substring(19, 20).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(20, 21)) || res[i].substring(20, 21).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(21, 22)) || res[i].substring(21, 22).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(22, 23)) || res[i].substring(22, 23).replace(/\\s/g, '').length == 0) || res[i].substring(17, 23) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5)",
@@ -1965,12 +2481,9 @@
       ],
       "colunas": [
         24,
-        24
-      ],
-      "colunas_mensagem": [
-        24,
         29
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -1981,11 +2494,147 @@
             24
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 24,
+          "fim0": 25,
+          "colunas": [
+            25,
+            25
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 25,
+          "fim0": 26,
+          "colunas": [
+            26,
+            26
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 26,
+          "fim0": 27,
+          "colunas": [
+            27,
+            27
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 27,
+          "fim0": 28,
+          "colunas": [
+            28,
+            28
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 28,
+          "fim0": 29,
+          "colunas": [
+            29,
+            29
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 23,
+              "fim0": 24
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 24,
+              "fim0": 25
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 25,
+              "fim0": 26
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 26,
+              "fim0": 27
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 27,
+              "fim0": 28
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 28,
+              "fim0": 29
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5) && ((isNaN(res[i].substring(23, 24)) || res[i].substring(23, 24).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(24, 25)) || res[i].substring(24, 25).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(25, 26)) || res[i].substring(25, 26).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(26, 27)) || res[i].substring(26, 27).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(27, 28)) || res[i].substring(27, 28).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length == 0))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5)",
@@ -2022,8 +2671,35 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 29,
+              "fim0": 35
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 29,
+              "fim0": 35
+            },
+            "operador": "!=",
+            "valor": "000000",
+            "comparacao": "estrita"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5) && (isNaN(res[i].substring(29, 35)) || res[i].substring(29, 35).replace(/\\s/g, '').length == 0 || res[i].substring(29, 35) != \"000000\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5)",
@@ -2127,14 +2803,43 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 9,
           "fim0": 11
         },
-        "operador": "!=",
-        "valor": "98"
+        "valores": [
+          "01",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "20",
+          "25",
+          "26",
+          "29",
+          "30",
+          "40",
+          "41",
+          "50",
+          "60",
+          "70",
+          "75",
+          "80",
+          "90",
+          "98"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(9, 11) != \"01\") && (res[i].substring(9, 11) != \"03\") && (res[i].substring(9, 11) != \"04\") && (res[i].substring(9, 11) != \"05\") && (res[i].substring(9, 11) != \"06\") && (res[i].substring(9, 11) != \"07\") && (res[i].substring(9, 11) != \"08\") && (res[i].substring(9, 11) != \"09\") && (res[i].substring(9, 11) != \"10\") && (res[i].substring(9, 11) != \"11\") && (res[i].substring(9, 11) != \"12\") && (res[i].substring(9, 11) != \"13\") && (res[i].substring(9, 11) != \"14\") && (res[i].substring(9, 11) != \"20\") && (res[i].substring(9, 11) != \"25\") && (res[i].substring(9, 11) != \"26\") && (res[i].substring(9, 11) != \"29\") && (res[i].substring(9, 11) != \"30\") && (res[i].substring(9, 11) != \"40\") && (res[i].substring(9, 11) != \"41\") && (res[i].substring(9, 11) != \"50\") && (res[i].substring(9, 11) != \"60\") && (res[i].substring(9, 11) != \"70\") && (res[i].substring(9, 11) != \"75\") && (res[i].substring(9, 11) != \"80\") && (res[i].substring(9, 11) != \"90\") && (res[i].substring(9, 11) != \"98\")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(9, 11) != \"01\") && (res[i].substring(9, 11) != \"03\") && (res[i].substring(9, 11) != \"04\") && (res[i].substring(9, 11) != \"05\") && (res[i].substring(9, 11) != \"06\") && (res[i].substring(9, 11) != \"07\") && (res[i].substring(9, 11) != \"08\") && (res[i].substring(9, 11) != \"09\") && (res[i].substring(9, 11) != \"10\") && (res[i].substring(9, 11) != \"11\") && (res[i].substring(9, 11) != \"12\") && (res[i].substring(9, 11) != \"13\") && (res[i].substring(9, 11) != \"14\") && (res[i].substring(9, 11) != \"20\") && (res[i].substring(9, 11) != \"25\") && (res[i].substring(9, 11) != \"26\") && (res[i].substring(9, 11) != \"29\") && (res[i].substring(9, 11) != \"30\") && (res[i].substring(9, 11) != \"40\") && (res[i].substring(9, 11) != \"41\") && (res[i].substring(9, 11) != \"50\") && (res[i].substring(9, 11) != \"60\") && (res[i].substring(9, 11) != \"70\") && (res[i].substring(9, 11) != \"75\") && (res[i].substring(9, 11) != \"80\") && (res[i].substring(9, 11) != \"90\")",
@@ -2171,14 +2876,45 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 11,
           "fim0": 13
         },
-        "operador": "!=",
-        "valor": "73"
+        "valores": [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "10",
+          "11",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "30",
+          "31",
+          "40",
+          "41",
+          "43",
+          "50",
+          "70",
+          "71",
+          "72",
+          "73"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(11, 13) != \"01\") && (res[i].substring(11, 13) != \"02\") && (res[i].substring(11, 13) != \"03\") && (res[i].substring(11, 13) != \"04\") && (res[i].substring(11, 13) != \"05\") && (res[i].substring(11, 13) != \"10\") && (res[i].substring(11, 13) != \"11\") && (res[i].substring(11, 13) != \"16\") && (res[i].substring(11, 13) != \"17\") && (res[i].substring(11, 13) != \"18\") && (res[i].substring(11, 13) != \"19\") && (res[i].substring(11, 13) != \"20\") && (res[i].substring(11, 13) != \"21\") && (res[i].substring(11, 13) != \"22\") && (res[i].substring(11, 13) != \"23\") && (res[i].substring(11, 13) != \"24\") && (res[i].substring(11, 13) != \"25\") && (res[i].substring(11, 13) != \"26\") && (res[i].substring(11, 13) != \"27\") && (res[i].substring(11, 13) != \"30\") && (res[i].substring(11, 13) != \"31\") && (res[i].substring(11, 13) != \"40\") && (res[i].substring(11, 13) != \"41\") && (res[i].substring(11, 13) != \"43\") && (res[i].substring(11, 13) != \"50\") && (res[i].substring(11, 13) != \"70\") && (res[i].substring(11, 13) != \"71\") && (res[i].substring(11, 13) != \"72\") && (res[i].substring(11, 13) != \"73\")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(11, 13) != \"01\") && (res[i].substring(11, 13) != \"02\") && (res[i].substring(11, 13) != \"03\") && (res[i].substring(11, 13) != \"04\") && (res[i].substring(11, 13) != \"05\") && (res[i].substring(11, 13) != \"10\") && (res[i].substring(11, 13) != \"11\") && (res[i].substring(11, 13) != \"16\") && (res[i].substring(11, 13) != \"17\") && (res[i].substring(11, 13) != \"18\") && (res[i].substring(11, 13) != \"19\") && (res[i].substring(11, 13) != \"20\") && (res[i].substring(11, 13) != \"21\") && (res[i].substring(11, 13) != \"22\") && (res[i].substring(11, 13) != \"23\") && (res[i].substring(11, 13) != \"24\") && (res[i].substring(11, 13) != \"25\") && (res[i].substring(11, 13) != \"26\") && (res[i].substring(11, 13) != \"27\") && (res[i].substring(11, 13) != \"30\") && (res[i].substring(11, 13) != \"31\") && (res[i].substring(11, 13) != \"40\") && (res[i].substring(11, 13) != \"41\") && (res[i].substring(11, 13) != \"43\") && (res[i].substring(11, 13) != \"50\") && (res[i].substring(11, 13) != \"70\") && (res[i].substring(11, 13) != \"71\") && (res[i].substring(11, 13) != \"72\")",
@@ -2222,7 +2958,8 @@
           "fim0": 16
         },
         "operador": "!=",
-        "valor": "040"
+        "valor": "040",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(13, 16) != \"040\")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2266,7 +3003,8 @@
           "fim0": 17
         },
         "operador": "!=",
-        "valor": " "
+        "valor": " ",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(16, 17) != \" \")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2303,14 +3041,18 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 17,
           "fim0": 18
         },
-        "operador": "!=",
-        "valor": "2"
+        "valores": [
+          "1",
+          "2"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) != 1) && (res[i].substring(17, 18) != 2)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) != 1)",
@@ -2436,7 +3178,8 @@
           "fim0": 32
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(18, 32) == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2483,7 +3226,8 @@
           "fim0": 37
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(32, 37) == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2504,7 +3248,7 @@
       ],
       "colunas": [
         33,
-        33
+        37
       ],
       "colunas_mensagem": [
         33,
@@ -2520,11 +3264,147 @@
             33
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 32,
+          "fim0": 37,
+          "colunas": [
+            33,
+            37
+          ],
+          "tamanho": 5
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 33,
+          "fim0": 34,
+          "colunas": [
+            34,
+            34
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 34,
+          "fim0": 35,
+          "colunas": [
+            35,
+            35
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 35,
+          "fim0": 36,
+          "colunas": [
+            36,
+            36
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 36,
+          "fim0": 37,
+          "colunas": [
+            37,
+            37
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 32,
+              "fim0": 33
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 33,
+              "fim0": 34
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 34,
+              "fim0": 35
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 35,
+              "fim0": 36
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 36,
+              "fim0": 37
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 32,
+              "fim0": 37
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && ((isNaN(res[i].substring(32, 33)) || res[i].substring(32, 33).replace(/\\s/g, '').length == 0) ||\r\n                    (isNaN(res[i].substring(33, 34)) || res[i].substring(33, 34).replace(/\\s/g, '').length == 0) ||\r\n                    (isNaN(res[i].substring(34, 35)) || res[i].substring(34, 35).replace(/\\s/g, '').length == 0) ||\r\n                    (isNaN(res[i].substring(35, 36)) || res[i].substring(35, 36).replace(/\\s/g, '').length == 0) ||\r\n                    (isNaN(res[i].substring(36, 37)) || res[i].substring(36, 37).replace(/\\s/g, '').length == 0) ||\r\n                    (isNaN(res[i].substring(32, 37)) || res[i].substring(32, 37).replace(/\\d/g, '').length == 1))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2568,7 +3448,8 @@
           "fim0": 57
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(52, 57) == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2615,7 +3496,8 @@
           "fim0": 53
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(52, 53) != 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2643,6 +3525,16 @@
         {
           "alvo": "res[i]",
           "inicio0": 52,
+          "fim0": 53,
+          "colunas": [
+            53,
+            53
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 52,
           "fim0": 57,
           "colunas": [
             53,
@@ -2652,8 +3544,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 52,
+              "fim0": 57
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 52,
+              "fim0": 53
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(52, 57)) || res[i].substring(52, 57).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(52, 53)) || res[i].substring(52, 53).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2773,7 +3695,8 @@
           "fim0": 70
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(58, 70) == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2845,6 +3768,16 @@
         {
           "alvo": "res[i]",
           "inicio0": 58,
+          "fim0": 59,
+          "colunas": [
+            59,
+            59
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 58,
           "fim0": 70,
           "colunas": [
             59,
@@ -2854,8 +3787,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 58,
+              "fim0": 70
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 58,
+              "fim0": 59
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(58, 70)) || res[i].substring(58, 70).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(58, 59)) || res[i].substring(58, 59).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -2892,14 +3855,28 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 70,
           "fim0": 71
         },
-        "operador": "!=",
-        "valor": "9"
+        "valores": [
+          "P",
+          "p",
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) != \"P\") && (res[i].substring(70, 71) != \"p\") && (res[i].substring(70, 71) != \"0\") && (res[i].substring(70, 71) != \"1\") && (res[i].substring(70, 71) != \"2\") && (res[i].substring(70, 71) != \"3\") && (res[i].substring(70, 71) != \"4\") && (res[i].substring(70, 71) != \"5\") && (res[i].substring(70, 71) != \"6\") && (res[i].substring(70, 71) != \"7\") && (res[i].substring(70, 71) != \"8\") && (res[i].substring(70, 71) != \"9\")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) != \"P\") && (res[i].substring(70, 71) != \"p\") && (res[i].substring(70, 71) != \"0\") && (res[i].substring(70, 71) != \"1\") && (res[i].substring(70, 71) != \"2\") && (res[i].substring(70, 71) != \"3\") && (res[i].substring(70, 71) != \"4\") && (res[i].substring(70, 71) != \"5\") && (res[i].substring(70, 71) != \"6\") && (res[i].substring(70, 71) != \"7\") && (res[i].substring(70, 71) != \"8\")",
@@ -3057,7 +4034,8 @@
           "fim0": 72
         },
         "operador": "!=",
-        "valor": " "
+        "valor": " ",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(71, 72) != \" \")",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -3139,7 +4117,8 @@
           "fim0": 102
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(72, 102) == 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -3183,7 +4162,8 @@
           "fim0": 230
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(222, 230) != 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -3227,7 +4207,8 @@
           "fim0": 240
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(230, 240) != 0)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -3271,7 +4252,8 @@
           "fim0": 7
         },
         "operador": "!=",
-        "valor": "9999"
+        "valor": "9999",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[j].substring(3, 7) != 9999)",
       "condicao_guarda": "(res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9)",
@@ -3560,12 +4542,9 @@
       ],
       "colunas": [
         18,
-        18
-      ],
-      "colunas_mensagem": [
-        18,
         23
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -3576,11 +4555,147 @@
             18
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 18,
+          "fim0": 19,
+          "colunas": [
+            19,
+            19
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 19,
+          "fim0": 20,
+          "colunas": [
+            20,
+            20
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 21,
+          "colunas": [
+            21,
+            21
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 21,
+          "fim0": 22,
+          "colunas": [
+            22,
+            22
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 22,
+          "fim0": 23,
+          "colunas": [
+            23,
+            23
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 18
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 18,
+              "fim0": 19
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 19,
+              "fim0": 20
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 21,
+              "fim0": 22
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 22,
+              "fim0": 23
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && ((isNaN(res[i].substring(17, 18)) || res[i].substring(17, 18).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(18, 19)) || res[i].substring(18, 19).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(19, 20)) || res[i].substring(19, 20).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(20, 21)) || res[i].substring(20, 21).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(21, 22)) || res[i].substring(21, 22).replace(/\\s/g, '').length == 0) ||\r\n                        (isNaN(res[i].substring(22, 23)) || res[i].substring(22, 23).replace(/\\s/g, '').length == 0))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -3662,7 +4777,8 @@
           "fim0": 59
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (res[i].substring(41, 59) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -3699,8 +4815,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 41,
+          "fim0": 59
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (isNaN(res[i].substring(41, 59)) || res[i].substring(41, 59).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -3744,7 +4870,8 @@
           "fim0": 65
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (res[i].substring(59, 65) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -3781,8 +4908,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 59,
+          "fim0": 65
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (isNaN(res[i].substring(59, 65)) || res[i].substring(59, 65).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -3820,10 +4957,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(65, 230)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 65,
           "fim0": 230
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (isNaN(res[i].substring(65, 230)) || res[i].substring(65, 230).replace(/\\s/g, '').length != 0)",
@@ -3862,10 +5005,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(230, 240)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 230,
           "fim0": 240
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (isNaN(res[i].substring(230, 240)) || res[i].substring(230, 240).replace(/\\s/g, '').length != 0)",
@@ -3910,7 +5059,8 @@
           "fim0": 20
         },
         "operador": "!=",
-        "valor": "000"
+        "valor": "000",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 01) && (res[i + 3].substring(13, 14) == \"A\") && (res[j].substring(17, 20) != 000)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 01) && (res[i + 3].substring(13, 14) == \"A\")",
@@ -3954,7 +5104,8 @@
           "fim0": 20
         },
         "operador": "!=",
-        "valor": "000"
+        "valor": "000",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 02) && (res[i + 3].substring(13, 14) == \"A\") && (res[j].substring(17, 20) != 000)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 02) && (res[i + 3].substring(13, 14) == \"A\")",
@@ -3998,7 +5149,8 @@
           "fim0": 20
         },
         "operador": "!=",
-        "valor": "000"
+        "valor": "000",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 04) && (res[i + 3].substring(13, 14) == \"A\") && (res[j].substring(17, 20) != 000)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 04) && (res[i + 3].substring(13, 14) == \"A\")",
@@ -4042,7 +5194,8 @@
           "fim0": 20
         },
         "operador": "!=",
-        "valor": "000"
+        "valor": "000",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 05) && (res[i + 3].substring(13, 14) == \"A\") && (res[j].substring(17, 20) != 000)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 05) && (res[i + 3].substring(13, 14) == \"A\")",
@@ -4086,7 +5239,8 @@
           "fim0": 20
         },
         "operador": "!=",
-        "valor": "000"
+        "valor": "000",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 10) && (res[i + 3].substring(13, 14) == \"A\") && (res[j].substring(17, 20) != 000)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 10) && (res[i + 3].substring(13, 14) == \"A\")",
@@ -4130,7 +5284,8 @@
           "fim0": 11
         },
         "operador": "!=",
-        "valor": "30"
+        "valor": "30",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 04) && (res[i].substring(9, 11) != 30)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 04)",
@@ -4243,14 +5398,19 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 13,
           "fim0": 14
         },
-        "operador": "!=",
-        "valor": "C"
+        "valores": [
+          "A",
+          "B",
+          "C"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3) && (res[i].substring(13, 14) != \"A\") && (res[i].substring(13, 14) != \"B\") && (res[i].substring(13, 14) != \"C\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3) && (res[i].substring(13, 14) != \"A\") && (res[i].substring(13, 14) != \"B\")",
@@ -4287,8 +5447,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 14,
+          "fim0": 15
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -4325,14 +5495,21 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 14,
           "fim0": 15
         },
-        "operador": "!=",
-        "valor": "9"
+        "valores": [
+          "0",
+          "1",
+          "5",
+          "7",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[i].substring(14, 15) != 0) && (res[i].substring(14, 15) != 1) && (res[i].substring(14, 15) != 5) && (res[i].substring(14, 15) != 7) && (res[i].substring(14, 15) != 9)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[i].substring(14, 15) != 0) && (res[i].substring(14, 15) != 1) && (res[i].substring(14, 15) != 5) && (res[i].substring(14, 15) != 7)",
@@ -4369,14 +5546,18 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 15,
           "fim0": 17
         },
-        "operador": "!=",
-        "valor": "09"
+        "valores": [
+          "00",
+          "09"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 0) && (res[i].substring(15, 17) != 00) && (res[i].substring(15, 17) != 09)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 0) && (res[i].substring(15, 17) != 00)",
@@ -4420,7 +5601,8 @@
           "fim0": 17
         },
         "operador": "!=",
-        "valor": "99"
+        "valor": "99",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 9) && (res[i].substring(15, 17) != 99)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 9)",
@@ -4457,14 +5639,20 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 15,
           "fim0": 17
         },
-        "operador": "!=",
-        "valor": "19"
+        "valores": [
+          "10",
+          "11",
+          "17",
+          "19"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 5) && (res[i].substring(15, 17) != 10) && (res[i].substring(15, 17) != 11) && (res[i].substring(15, 17) != 17) && (res[i].substring(15, 17) != 19)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) == 5) && (res[i].substring(15, 17) != 10) && (res[i].substring(15, 17) != 11) && (res[i].substring(15, 17) != 17)",
@@ -4501,14 +5689,19 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 17,
           "fim0": 20
         },
-        "operador": "!=",
-        "valor": "700"
+        "valores": [
+          "000",
+          "018",
+          "700"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) != 000) && (res[i].substring(17, 20) != '018') && (res[i].substring(17, 20) != 700)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) != 000) && (res[i].substring(17, 20) != '018')",
@@ -4555,7 +5748,8 @@
           "fim0": 24
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(23, 24) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -4586,6 +5780,16 @@
         {
           "alvo": "res[i]",
           "inicio0": 24,
+          "fim0": 25,
+          "colunas": [
+            25,
+            25
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 24,
           "fim0": 28,
           "colunas": [
             25,
@@ -4595,8 +5799,49 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 24,
+              "fim0": 28
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 24,
+              "fim0": 28
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 24,
+              "fim0": 25
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(24, 28) == 0 || isNaN(res[i].substring(24, 28)) || res[i].substring(24, 28).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(24, 25)) || res[i].substring(24, 25).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -4703,6 +5948,16 @@
         {
           "alvo": "res[i]",
           "inicio0": 29,
+          "fim0": 30,
+          "colunas": [
+            30,
+            30
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 29,
           "fim0": 41,
           "colunas": [
             30,
@@ -4712,8 +5967,49 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 29,
+              "fim0": 41
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 29,
+              "fim0": 41
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 29,
+              "fim0": 30
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(29, 41) == 0 || isNaN(res[i].substring(29, 41)) || res[i].substring(29, 41).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(29, 30)) || res[i].substring(29, 30).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -4750,8 +6046,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 41,
+          "fim0": 42
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(41, 42) >= 0) && (isNaN(res[i].substring(41, 42)) || res[i].substring(41, 42).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(41, 42) >= 0)",
@@ -4788,14 +6094,28 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 41,
           "fim0": 42
         },
-        "operador": "!=",
-        "valor": "9"
+        "valores": [
+          "P",
+          "p",
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) != \"P\") && (res[i].substring(41, 42) != \"p\") && (res[i].substring(41, 42) != \"0\") && (res[i].substring(41, 42) != \"1\") && (res[i].substring(41, 42) != \"2\") && (res[i].substring(41, 42) != \"3\") && (res[i].substring(41, 42) != \"4\") && (res[i].substring(41, 42) != \"5\") && (res[i].substring(41, 42) != \"6\") && (res[i].substring(41, 42) != \"7\") && (res[i].substring(41, 42) != \"8\") && (res[i].substring(41, 42) != \"9\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) != \"P\") && (res[i].substring(41, 42) != \"p\") && (res[i].substring(41, 42) != \"0\") && (res[i].substring(41, 42) != \"1\") && (res[i].substring(41, 42) != \"2\") && (res[i].substring(41, 42) != \"3\") && (res[i].substring(41, 42) != \"4\") && (res[i].substring(41, 42) != \"5\") && (res[i].substring(41, 42) != \"6\") && (res[i].substring(41, 42) != \"7\") && (res[i].substring(41, 42) != \"8\")",
@@ -4956,7 +6276,8 @@
           "fim0": 43
         },
         "operador": "!=",
-        "valor": " "
+        "valor": " ",
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(42, 43) != \" \")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5000,7 +6321,8 @@
           "fim0": 73
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(43, 73) == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5044,7 +6366,8 @@
           "fim0": 93
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(73, 93) == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5081,8 +6404,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 93,
+          "fim0": 101
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(93, 101)) || res[i].substring(93, 101).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5103,12 +6436,9 @@
       ],
       "colunas": [
         94,
-        95
-      ],
-      "colunas_mensagem": [
-        94,
         101
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -5119,11 +6449,87 @@
             95
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 95,
+          "fim0": 97,
+          "colunas": [
+            96,
+            97
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 97,
+          "fim0": 99,
+          "colunas": [
+            98,
+            99
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 99,
+          "fim0": 101,
+          "colunas": [
+            100,
+            101
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 93,
+              "fim0": 95
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 95,
+              "fim0": 97
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 97,
+              "fim0": 99
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 99,
+              "fim0": 101
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(93, 95) == 00 ||\r\n                            res[i].substring(95, 97) == 00 ||\r\n                            res[i].substring(97, 99) == 00 ||\r\n                            res[i].substring(99, 101) == 00)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5249,7 +6655,8 @@
           "fim0": 104
         },
         "operador": "!=",
-        "valor": "BRL"
+        "valor": "BRL",
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(101, 104) != \"BRL\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5286,8 +6693,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 104,
+              "fim0": 119
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 104,
+              "fim0": 119
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && ((isNaN(res[i].substring(104, 119)) || res[i].substring(104, 119).replace(/\\d/g, '').length == 1) || (isNaN(res[i].substring(104, 119)) || res[i].substring(104, 119).replace(/\\s/g, '').length == 0))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5331,7 +6768,8 @@
           "fim0": 134
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(119, 134) == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5352,12 +6790,9 @@
       ],
       "colunas": [
         120,
-        120
-      ],
-      "colunas_mensagem": [
-        120,
         134
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -5368,11 +6803,65 @@
             120
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 119,
+          "fim0": 134,
+          "colunas": [
+            120,
+            134
+          ],
+          "tamanho": 15
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 119,
+              "fim0": 120
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 119,
+              "fim0": 134
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 119,
+              "fim0": 134
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && ((isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length == 0) || (isNaN(res[i].substring(119, 134)) || res[i].substring(119, 134).replace(/\\s/g, '').length == 0) || (isNaN(res[i].substring(119, 134)) || res[i].substring(119, 134).replace(/\\d/g, '').length == 1))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5416,7 +6905,8 @@
           "fim0": 150
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[j].substring(13, 14) == \"B\") && ((isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(120, 121)) || res[i].substring(120, 121).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(121, 122)) || res[i].substring(121, 122).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(122, 123)) || res[i].substring(122, 123).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(123, 124)) || res[i].substring(123, 124).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(124, 125)) || res[i].substring(124, 125).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(125, 126)) || res[i].substring(125, 126).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(126, 127)) || res[i].substring(126, 127).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(127, 128)) || res[i].substring(127, 128).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(128, 129)) || res[i].substring(128, 129).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(129, 130)) || res[i].substring(129, 130).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(130, 131)) || res[i].substring(130, 131).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(131, 132)) || res[i].substring(131, 132).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(132, 133)) || res[i].substring(132, 133).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(133, 134)) || res[i].substring(133, 134).replace(/\\s/g, '').length != 0)) && (res[i].substring(119, 134) != res[j].substring(135, 150)) && (res[j].substring(135, 150) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[j].substring(13, 14) == \"B\") && ((isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(120, 121)) || res[i].substring(120, 121).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(121, 122)) || res[i].substring(121, 122).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(122, 123)) || res[i].substring(122, 123).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(123, 124)) || res[i].substring(123, 124).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(124, 125)) || res[i].substring(124, 125).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(125, 126)) || res[i].substring(125, 126).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(126, 127)) || res[i].substring(126, 127).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(127, 128)) || res[i].substring(127, 128).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(128, 129)) || res[i].substring(128, 129).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(129, 130)) || res[i].substring(129, 130).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(130, 131)) || res[i].substring(130, 131).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(131, 132)) || res[i].substring(131, 132).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(132, 133)) || res[i].substring(132, 133).replace(/\\s/g, '').length != 0) &&\r\n                                (isNaN(res[i].substring(133, 134)) || res[i].substring(133, 134).replace(/\\s/g, '').length != 0)) && (res[i].substring(119, 134) != res[j].substring(135, 150))",
@@ -5501,7 +6991,8 @@
           "fim0": 154
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(134, 154) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5614,8 +7105,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 162,
+          "fim0": 177
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(162, 177)) || res[i].substring(162, 177).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5652,14 +7153,29 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 217,
           "fim0": 219
         },
-        "operador": "!=",
-        "valor": "13"
+        "valores": [
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06",
+          "07",
+          "08",
+          "09",
+          "10",
+          "11",
+          "12",
+          "13"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == 700) && (res[i].substring(217, 219) != \"01\") && (res[i].substring(217, 219) != \"02\") && (res[i].substring(217, 219) != \"03\") && (res[i].substring(217, 219) != \"04\") && (res[i].substring(217, 219) != \"05\") && (res[i].substring(217, 219) != \"06\") && (res[i].substring(217, 219) != \"07\") && (res[i].substring(217, 219) != \"08\") && (res[i].substring(217, 219) != \"09\") && (res[i].substring(217, 219) != \"10\") && (res[i].substring(217, 219) != \"11\") && (res[i].substring(217, 219) != \"12\") && (res[i].substring(217, 219) != \"13\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == 700) && (res[i].substring(217, 219) != \"01\") && (res[i].substring(217, 219) != \"02\") && (res[i].substring(217, 219) != \"03\") && (res[i].substring(217, 219) != \"04\") && (res[i].substring(217, 219) != \"05\") && (res[i].substring(217, 219) != \"06\") && (res[i].substring(217, 219) != \"07\") && (res[i].substring(217, 219) != \"08\") && (res[i].substring(217, 219) != \"09\") && (res[i].substring(217, 219) != \"10\") && (res[i].substring(217, 219) != \"11\") && (res[i].substring(217, 219) != \"12\")",
@@ -5741,7 +7257,8 @@
           "fim0": 229
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(224, 229) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5778,14 +7295,21 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 229,
           "fim0": 230
         },
-        "operador": "!=",
-        "valor": "7"
+        "valores": [
+          "0",
+          "2",
+          "5",
+          "6",
+          "7"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(229, 230)) || res[i].substring(229, 230).replace(/\\s/g, '').length != 0) && (res[i].substring(229, 230) != 0) && (res[i].substring(229, 230) != 2) && (res[i].substring(229, 230) != 5) && (res[i].substring(229, 230) != 6) && (res[i].substring(229, 230) != 7)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(229, 230)) || res[i].substring(229, 230).replace(/\\s/g, '').length != 0) && (res[i].substring(229, 230) != 0) && (res[i].substring(229, 230) != 2) && (res[i].substring(229, 230) != 5) && (res[i].substring(229, 230) != 6)",
@@ -5829,7 +7353,8 @@
           "fim0": 240
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(230, 240) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -5873,7 +7398,8 @@
           "fim0": 17
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(14, 17) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -5910,14 +7436,18 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 17,
           "fim0": 18
         },
-        "operador": "!=",
-        "valor": "2"
+        "valores": [
+          "1",
+          "2"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) != 1) && (res[i].substring(17, 18) != 2)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) != 1)",
@@ -6036,8 +7566,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 18,
+              "fim0": 32
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 18,
+              "fim0": 32
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && ((isNaN(res[i].substring(18, 32)) || res[i].substring(18, 32).replace(/\\d/g, '').length == 1) || (isNaN(res[i].substring(18, 32)) || res[i].substring(18, 32).replace(/\\s/g, '').length == 0))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6068,6 +7628,16 @@
         {
           "alvo": "res[i]",
           "inicio0": 117,
+          "fim0": 118,
+          "colunas": [
+            118,
+            118
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 117,
           "fim0": 125,
           "colunas": [
             118,
@@ -6077,8 +7647,52 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 117,
+              "fim0": 125
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 117,
+              "fim0": 125
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 117,
+              "fim0": 118
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(117, 125)) || res[i].substring(117, 125).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(117, 125)) || res[i].substring(117, 125).replace(/\\s/g, '').length == 0 || isNaN(res[i].substring(117, 118)) || res[i].substring(117, 118).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6115,8 +7729,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 127,
+          "fim0": 135
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(127, 135)) || res[i].substring(127, 135).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6137,12 +7761,9 @@
       ],
       "colunas": [
         128,
-        129
-      ],
-      "colunas_mensagem": [
-        128,
         135
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -6153,11 +7774,87 @@
             129
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 129,
+          "fim0": 131,
+          "colunas": [
+            130,
+            131
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 131,
+          "fim0": 133,
+          "colunas": [
+            132,
+            133
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 133,
+          "fim0": 135,
+          "colunas": [
+            134,
+            135
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 127,
+              "fim0": 129
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 129,
+              "fim0": 131
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 131,
+              "fim0": 133
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 133,
+              "fim0": 135
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(127, 129) == 00 ||\r\n                            res[i].substring(129, 131) == 00 ||\r\n                            res[i].substring(131, 133) == 00 ||\r\n                            res[i].substring(133, 135) == 00)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6276,8 +7973,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 135,
+          "fim0": 150
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(135, 150)) || res[i].substring(135, 150).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6321,7 +8028,8 @@
           "fim0": 150
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(135, 150) == 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6358,8 +8066,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 150,
+          "fim0": 165
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(150, 165)) || res[i].substring(150, 165).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6396,8 +8114,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 165,
+          "fim0": 180
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(165, 180)) || res[i].substring(165, 180).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6434,8 +8162,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 180,
+          "fim0": 195
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(180, 195)) || res[i].substring(180, 195).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6472,8 +8210,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 195,
+          "fim0": 210
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(195, 210)) || res[i].substring(195, 210).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -6511,10 +8259,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(225, 240)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 225,
           "fim0": 240
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (isNaN(res[i].substring(225, 240)) || res[i].substring(225, 240).replace(/\\s/g, '').length != 0)",
@@ -6617,7 +8371,8 @@
           "fim0": 52
         },
         "operador": "==",
-        "valor": "pgit"
+        "valor": "pgit",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(48, 52) == \"pgit\"",
       "condicao_guarda": null,
@@ -6661,7 +8416,8 @@
           "fim0": 120
         },
         "operador": "!=",
-        "valor": "N"
+        "valor": "N",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(119, 120) != \"N\"",
       "condicao_guarda": null,
@@ -6705,7 +8461,8 @@
           "fim0": 1
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(0, 1) != 0",
       "condicao_guarda": null,
@@ -6749,7 +8506,8 @@
           "fim0": 2
         },
         "operador": "!=",
-        "valor": "1"
+        "valor": "1",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(1, 2) != 1",
       "condicao_guarda": null,
@@ -6793,7 +8551,8 @@
           "fim0": 9
         },
         "operador": "!=",
-        "valor": "REMESSA"
+        "valor": "REMESSA",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(2, 9) != \"REMESSA\"",
       "condicao_guarda": null,
@@ -6837,7 +8596,8 @@
           "fim0": 11
         },
         "operador": "!=",
-        "valor": "03"
+        "valor": "03",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(9, 11) != 03",
       "condicao_guarda": null,
@@ -6884,7 +8644,8 @@
           "fim0": 22
         },
         "operador": "!=",
-        "valor": "CREDITO C/C"
+        "valor": "CREDITO C/C",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(11, 22) != \"CREDITO C/C\"",
       "condicao_guarda": null,
@@ -6925,10 +8686,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(22, 26)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 22,
           "fim0": 26
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "isNaN(res[0].substring(22, 26)) || res[0].substring(22, 26).replace(/\\s/g, '').length != 0",
@@ -6966,8 +8733,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 31
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(26, 31)) || res[0].substring(26, 31).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -7004,8 +8781,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 31
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(26, 31)) || res[0].substring(26, 31).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -7042,8 +8829,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 36
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(31, 36)) || res[0].substring(31, 36).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -7080,8 +8877,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 36
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(31, 36)) || res[0].substring(31, 36).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -7118,8 +8925,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 36,
+          "fim0": 43
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(36, 43)) || res[0].substring(36, 43).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -7156,8 +8973,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 36,
+          "fim0": 43
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(36, 43)) || res[0].substring(36, 43).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -7233,10 +9060,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(44, 45)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 44,
           "fim0": 45
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "isNaN(res[0].substring(44, 45)) || res[0].substring(44, 45).replace(/\\s/g, '').length != 0",
@@ -7275,10 +9108,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(45, 46)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 45,
           "fim0": 46
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "isNaN(res[0].substring(45, 46)) || res[0].substring(45, 46).replace(/\\s/g, '').length != 0",
@@ -7316,8 +9155,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 51
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(46, 51)) || res[0].substring(46, 51).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -7357,8 +9206,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 51
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "isNaN(res[0].substring(50, 51)) || res[0].substring(50, 51).replace(/\\s/g, '').length == 0",
       "condicao_guarda": null,
@@ -7395,8 +9254,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 51
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "isNaN(res[0].substring(46, 51)) || res[0].substring(46, 51).replace(/\\d/g, '').length == 1",
       "condicao_guarda": null,
@@ -7440,7 +9309,8 @@
           "fim0": 76
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(51, 76) == 0",
       "condicao_guarda": null,
@@ -7484,7 +9354,8 @@
           "fim0": 79
         },
         "operador": "!=",
-        "valor": "237"
+        "valor": "237",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(76, 79) != 237",
       "condicao_guarda": null,
@@ -7531,7 +9402,8 @@
           "fim0": 93
         },
         "operador": "!=",
-        "valor": "BANCO BRADESCO"
+        "valor": "BANCO BRADESCO",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(79, 87) != \"BRADESCO\") && (res[0].substring(79, 93) != \"BANCO BRADESCO\")",
       "condicao_guarda": "(res[0].substring(79, 87) != \"BRADESCO\")",
@@ -7575,7 +9447,8 @@
           "fim0": 120
         },
         "operador": "!=",
-        "valor": "N"
+        "valor": "N",
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) != \"N\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0)",
@@ -7612,8 +9485,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 102
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[0].substring(94, 102)) || res[0].substring(94, 102).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -7634,12 +9517,9 @@
       ],
       "colunas": [
         95,
-        96
-      ],
-      "colunas_mensagem": [
-        95,
         102
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[0]",
@@ -7650,11 +9530,87 @@
             96
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 100,
+          "fim0": 102,
+          "colunas": [
+            101,
+            102
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 94,
+              "fim0": 96
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 96,
+              "fim0": 98
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 98,
+              "fim0": 100
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 100,
+              "fim0": 102
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(94, 96) == 00 ||\r\n                res[0].substring(96, 98) == 00 ||\r\n                res[0].substring(98, 100) == 00 ||\r\n                res[0].substring(100, 102) == 00)",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -7780,7 +9736,8 @@
           "fim0": 107
         },
         "operador": "!=",
-        "valor": "01600"
+        "valor": "01600",
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(102, 107) != \"01600\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -7824,7 +9781,8 @@
           "fim0": 110
         },
         "operador": "!=",
-        "valor": "BPI"
+        "valor": "BPI",
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(107, 110) != \"BPI\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -7861,8 +9819,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 118
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[0].substring(110, 118)) || res[0].substring(110, 118).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -7883,12 +9851,9 @@
       ],
       "colunas": [
         111,
-        112
-      ],
-      "colunas_mensagem": [
-        111,
         118
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[0]",
@@ -7899,11 +9864,87 @@
             112
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 112,
+          "fim0": 114,
+          "colunas": [
+            113,
+            114
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 114,
+          "fim0": 116,
+          "colunas": [
+            115,
+            116
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 116,
+          "fim0": 118,
+          "colunas": [
+            117,
+            118
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 110,
+              "fim0": 112
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 112,
+              "fim0": 114
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 114,
+              "fim0": 116
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 116,
+              "fim0": 118
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(110, 112) == 00 ||\r\n                res[0].substring(112, 114) == 00 ||\r\n                res[0].substring(114, 116) == 00 ||\r\n                res[0].substring(116, 118) == 00)",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -8023,10 +10064,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(118, 119)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 118,
           "fim0": 119
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[0].substring(118, 119)) || res[0].substring(118, 119).replace(/\\s/g, '').length != 0)",
@@ -8065,10 +10112,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(120, 194)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 120,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[0].substring(120, 194)) || res[0].substring(120, 194).replace(/\\s/g, '').length != 0)",
@@ -8106,8 +10159,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 100
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (isNaN(res[0].substring(94, 100)) || res[0].substring(94, 100).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8128,12 +10191,9 @@
       ],
       "colunas": [
         95,
-        96
-      ],
-      "colunas_mensagem": [
-        95,
         100
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[0]",
@@ -8144,11 +10204,66 @@
             96
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 94,
+              "fim0": 96
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 96,
+              "fim0": 98
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 98,
+              "fim0": 100
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(94, 96) == 00 ||\r\n            res[0].substring(96, 98) == 00 ||\r\n            res[0].substring(98, 100) == 00)",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8274,7 +10389,8 @@
           "fim0": 105
         },
         "operador": "!=",
-        "valor": "01600"
+        "valor": "01600",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(100, 105) != \"01600\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8318,7 +10434,8 @@
           "fim0": 108
         },
         "operador": "!=",
-        "valor": "BPI"
+        "valor": "BPI",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(105, 108) != \"BPI\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8355,8 +10472,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 108,
+          "fim0": 114
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (isNaN(res[0].substring(108, 114)) || res[0].substring(108, 114).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8377,12 +10504,9 @@
       ],
       "colunas": [
         109,
-        110
-      ],
-      "colunas_mensagem": [
-        109,
         114
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[0]",
@@ -8393,11 +10517,66 @@
             110
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 110,
+          "fim0": 112,
+          "colunas": [
+            111,
+            112
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[0]",
+          "inicio0": 112,
+          "fim0": 114,
+          "colunas": [
+            113,
+            114
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "disjuncao",
+        "alvo": "res[0]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 108,
+              "fim0": 110
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 110,
+              "fim0": 112
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[0]",
+            "posicao": {
+              "inicio0": 112,
+              "fim0": 114
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(108, 110) == 00 ||\r\n            res[0].substring(110, 112) == 00 ||\r\n            res[0].substring(112, 114) == 00)",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -8517,10 +10696,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(114, 115)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 114,
           "fim0": 115
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (isNaN(res[0].substring(114, 115)) || res[0].substring(114, 115).replace(/\\s/g, '').length != 0)",
@@ -8559,10 +10744,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(115, 194)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 115,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (isNaN(res[0].substring(115, 194)) || res[0].substring(115, 194).replace(/\\s/g, '').length != 0)",
@@ -8607,7 +10798,8 @@
           "fim0": 200
         },
         "operador": "!=",
-        "valor": "000001"
+        "valor": "000001",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[0].substring(194, 200) != 000001",
       "condicao_guarda": null,
@@ -8651,7 +10843,8 @@
           "fim0": 1
         },
         "operador": "!=",
-        "valor": "1"
+        "valor": "1",
+        "comparacao": "frouxa"
       },
       "condicao_original": "res[1].substring(0, 1) != 1",
       "condicao_guarda": null,
@@ -8695,7 +10888,8 @@
           "fim0": 2
         },
         "operador": "!=",
-        "valor": "1"
+        "valor": "1",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(1, 2) != 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8739,7 +10933,8 @@
           "fim0": 9
         },
         "operador": "!=",
-        "valor": "REMESSA"
+        "valor": "REMESSA",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(2, 9) != \"REMESSA\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8783,7 +10978,8 @@
           "fim0": 11
         },
         "operador": "!=",
-        "valor": "03"
+        "valor": "03",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(9, 11) != 03)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8830,7 +11026,8 @@
           "fim0": 22
         },
         "operador": "!=",
-        "valor": "CREDITO C/C"
+        "valor": "CREDITO C/C",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(11, 22) != \"CREDITO C/C\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8871,10 +11068,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(22, 26)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 22,
           "fim0": 26
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(22, 26)) || res[i].substring(22, 26).replace(/\\s/g, '').length != 0)",
@@ -8912,8 +11115,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 31
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(26, 31)) || res[i].substring(26, 31).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8950,8 +11163,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 26,
+          "fim0": 31
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(26, 31)) || res[i].substring(26, 31).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -8988,8 +11211,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 36
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(31, 36)) || res[i].substring(31, 36).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9026,8 +11259,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 36
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(31, 36)) || res[i].substring(31, 36).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9064,8 +11307,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 36,
+          "fim0": 43
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(36, 43)) || res[i].substring(36, 43).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9102,8 +11355,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 36,
+          "fim0": 43
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(36, 43)) || res[i].substring(36, 43).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9179,10 +11442,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(44, 45)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 44,
           "fim0": 45
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(44, 45)) || res[i].substring(44, 45).replace(/\\s/g, '').length != 0)",
@@ -9221,10 +11490,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(45, 46)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 45,
           "fim0": 46
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(45, 46)) || res[i].substring(45, 46).replace(/\\s/g, '').length != 0)",
@@ -9262,8 +11537,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 51
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(46, 51)) || res[i].substring(46, 51).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9303,8 +11588,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 50,
+          "fim0": 51
+        },
+        "exige": "numerico_preenchido",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "==",
+          "valor": 0
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(50, 51)) || res[i].substring(50, 51).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9341,8 +11636,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 46,
+          "fim0": 51
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(46, 51)) || res[i].substring(46, 51).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9386,7 +11691,8 @@
           "fim0": 76
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(51, 76) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9430,7 +11736,8 @@
           "fim0": 79
         },
         "operador": "!=",
-        "valor": "237"
+        "valor": "237",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(76, 79) != 237)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -9477,7 +11784,8 @@
           "fim0": 93
         },
         "operador": "!=",
-        "valor": "BANCO BRADESCO"
+        "valor": "BANCO BRADESCO",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(79, 87) != \"BRADESCO\") && (res[i].substring(79, 93) != \"BANCO BRADESCO\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(79, 87) != \"BRADESCO\")",
@@ -9521,7 +11829,8 @@
           "fim0": 120
         },
         "operador": "!=",
-        "valor": "N"
+        "valor": "N",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) != \"N\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0)",
@@ -9558,8 +11867,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 102
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (isNaN(res[i].substring(94, 102)) || res[i].substring(94, 102).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9580,12 +11899,9 @@
       ],
       "colunas": [
         95,
-        96
-      ],
-      "colunas_mensagem": [
-        95,
         102
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -9596,11 +11912,87 @@
             96
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 100,
+          "fim0": 102,
+          "colunas": [
+            101,
+            102
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 94,
+              "fim0": 96
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 96,
+              "fim0": 98
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 98,
+              "fim0": 100
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 100,
+              "fim0": 102
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(94, 96) == 00 ||\r\n                                    res[i].substring(96, 98) == 00 ||\r\n                                    res[i].substring(98, 100) == 00 ||\r\n                                    res[i].substring(100, 102) == 00)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9726,7 +12118,8 @@
           "fim0": 107
         },
         "operador": "!=",
-        "valor": "01600"
+        "valor": "01600",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(102, 107) != \"01600\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9770,7 +12163,8 @@
           "fim0": 110
         },
         "operador": "!=",
-        "valor": "BPI"
+        "valor": "BPI",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(107, 110) != \"BPI\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9807,8 +12201,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 118
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (isNaN(res[i].substring(110, 118)) || res[i].substring(110, 118).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9829,12 +12233,9 @@
       ],
       "colunas": [
         111,
-        112
-      ],
-      "colunas_mensagem": [
-        111,
         118
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -9845,11 +12246,87 @@
             112
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 112,
+          "fim0": 114,
+          "colunas": [
+            113,
+            114
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 114,
+          "fim0": 116,
+          "colunas": [
+            115,
+            116
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 116,
+          "fim0": 118,
+          "colunas": [
+            117,
+            118
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 110,
+              "fim0": 112
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 112,
+              "fim0": 114
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 114,
+              "fim0": 116
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 116,
+              "fim0": 118
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(110, 112) == 00 ||\r\n                                    res[i].substring(112, 114) == 00 ||\r\n                                    res[i].substring(114, 116) == 00 ||\r\n                                    res[i].substring(116, 118) == 00)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -9969,10 +12446,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(118, 119)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 118,
           "fim0": 119
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (isNaN(res[i].substring(118, 119)) || res[i].substring(118, 119).replace(/\\s/g, '').length != 0)",
@@ -10011,10 +12494,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(120, 194)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 120,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (isNaN(res[i].substring(120, 194)) || res[i].substring(120, 194).replace(/\\s/g, '').length != 0)",
@@ -10052,8 +12541,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 100
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (isNaN(res[i].substring(94, 100)) || res[i].substring(94, 100).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10074,12 +12573,9 @@
       ],
       "colunas": [
         95,
-        96
-      ],
-      "colunas_mensagem": [
-        95,
         100
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -10090,11 +12586,66 @@
             96
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 94,
+              "fim0": 96
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 96,
+              "fim0": 98
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 98,
+              "fim0": 100
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(94, 96) == 00 ||\r\n                                res[i].substring(96, 98) == 00 ||\r\n                                res[i].substring(98, 100) == 00)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10220,7 +12771,8 @@
           "fim0": 105
         },
         "operador": "!=",
-        "valor": "01600"
+        "valor": "01600",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(100, 105) != \"01600\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10264,7 +12816,8 @@
           "fim0": 108
         },
         "operador": "!=",
-        "valor": "BPI"
+        "valor": "BPI",
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(105, 108) != \"BPI\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10301,8 +12854,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numerico_branco",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 108,
+          "fim0": 114
+        },
+        "exige": "numerico",
+        "residuo": {
+          "padrao": "\\d",
+          "operador": "==",
+          "valor": 1
+        }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (isNaN(res[i].substring(108, 114)) || res[i].substring(108, 114).replace(/\\d/g, '').length == 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10323,12 +12886,9 @@
       ],
       "colunas": [
         109,
-        110
-      ],
-      "colunas_mensagem": [
-        109,
         114
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
           "alvo": "res[i]",
@@ -10339,11 +12899,66 @@
             110
           ],
           "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 110,
+          "fim0": 112,
+          "colunas": [
+            111,
+            112
+          ],
+          "tamanho": 2
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 112,
+          "fim0": 114,
+          "colunas": [
+            113,
+            114
+          ],
+          "tamanho": 2
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 108,
+              "fim0": 110
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 110,
+              "fim0": 112
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 112,
+              "fim0": 114
+            },
+            "operador": "==",
+            "valor": "00",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(108, 110) == 00 ||\r\n                                res[i].substring(110, 112) == 00 ||\r\n                                res[i].substring(112, 114) == 00)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -10463,10 +13078,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(114, 115)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 114,
           "fim0": 115
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (isNaN(res[i].substring(114, 115)) || res[i].substring(114, 115).replace(/\\s/g, '').length != 0)",
@@ -10505,10 +13126,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(115, 194)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 115,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (isNaN(res[i].substring(115, 194)) || res[i].substring(115, 194).replace(/\\s/g, '').length != 0)",
@@ -10553,7 +13180,8 @@
           "fim0": 200
         },
         "operador": "!=",
-        "valor": "000001"
+        "valor": "000001",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(194, 200) != 000001)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -10590,14 +13218,18 @@
         }
       ],
       "condicao": {
-        "tipo": "literal_fixo",
+        "tipo": "dominio",
         "alvo": "res[j]",
         "posicao": {
           "inicio0": 0,
           "fim0": 1
         },
-        "operador": "!=",
-        "valor": "9"
+        "valores": [
+          "1",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (res[i].substring(0, 1) == 1) && (res[j].substring(0, 1) != 1) && (res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (res[i].substring(0, 1) == 1) && (res[j].substring(0, 1) != 1)",
@@ -10673,10 +13305,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(1, 62)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 1,
           "fim0": 62
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(1, 62)) || res[i].substring(1, 62).replace(/\\s/g, '').length != 0)",
@@ -10714,8 +13352,35 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 62,
+              "fim0": 67
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 62,
+              "fim0": 67
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(62, 67)) || res[i].substring(62, 67).replace(/\\s/g, '').length == 0 || res[i].substring(62, 67) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1)",
@@ -10752,8 +13417,35 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 67,
+              "fim0": 72
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 67,
+              "fim0": 72
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(67, 72)) || res[i].substring(67, 72).replace(/\\s/g, '').length == 0 || res[i].substring(67, 72) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1)",
@@ -10793,8 +13485,35 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 72,
+              "fim0": 79
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 72,
+              "fim0": 79
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(72, 79)) || res[i].substring(72, 79).replace(/\\s/g, '').length == 0 || res[i].substring(72, 79) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1)",
@@ -10876,7 +13595,8 @@
           "fim0": 80
         },
         "operador": "!=",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(72, 79)) || res[i].substring(72, 79).replace(/\\s/g, '').length != 0) && (dvc == \"P\") && (res[i].substring(79, 80) != dvc) && (res[i].substring(79, 80) != 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(72, 79)) || res[i].substring(72, 79).replace(/\\s/g, '').length != 0) && (dvc == \"P\") && (res[i].substring(79, 80) != dvc)",
@@ -10914,10 +13634,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(80, 82)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 80,
           "fim0": 82
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(80, 82)) || res[i].substring(80, 82).replace(/\\s/g, '').length != 0)",
@@ -10962,7 +13688,8 @@
           "fim0": 120
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[i].substring(82, 120) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -10999,8 +13726,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 120,
+              "fim0": 126
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 120,
+              "fim0": 126
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[i].substring(120, 126)) || res[i].substring(120, 126).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(120, 126)) || res[i].substring(120, 126).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -11037,8 +13794,49 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 126,
+              "fim0": 139
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 126,
+              "fim0": 139
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 126,
+              "fim0": 139
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[i].substring(126, 139)) || res[i].substring(126, 139).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(126, 139)) || res[i].substring(126, 139).replace(/\\s/g, '').length == 0 || res[i].substring(126, 139) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -11082,7 +13880,8 @@
           "fim0": 142
         },
         "operador": "!=",
-        "valor": "298"
+        "valor": "298",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[i].substring(139, 142) != 298)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -11120,10 +13919,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(142, 150)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 142,
           "fim0": 150
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[i].substring(142, 150)) || res[i].substring(142, 150).replace(/\\s/g, '').length != 0)",
@@ -11162,10 +13967,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(150, 194)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 150,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (isNaN(res[i].substring(150, 194)) || res[i].substring(150, 194).replace(/\\s/g, '').length != 0)",
@@ -11210,7 +14021,8 @@
           "fim0": 122
         },
         "operador": "==",
-        "valor": "0"
+        "valor": "0",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (res[i].substring(82, 122) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\")",
@@ -11247,8 +14059,38 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 122,
+              "fim0": 128
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 122,
+              "fim0": 128
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (isNaN(res[i].substring(122, 128)) || res[i].substring(122, 128).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(122, 128)) || res[i].substring(122, 128).replace(/\\s/g, '').length == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\")",
@@ -11285,8 +14127,49 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 128,
+              "fim0": 141
+            },
+            "exige": "numerico",
+            "residuo": {
+              "padrao": "\\d",
+              "operador": "==",
+              "valor": 1
+            }
+          },
+          {
+            "tipo": "numerico_branco",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 128,
+              "fim0": 141
+            },
+            "exige": "numerico_preenchido",
+            "residuo": {
+              "padrao": "\\s",
+              "operador": "==",
+              "valor": 0
+            }
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 128,
+              "fim0": 141
+            },
+            "operador": "==",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (isNaN(res[i].substring(128, 141)) || res[i].substring(128, 141).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(128, 141)) || res[i].substring(128, 141).replace(/\\s/g, '').length == 0 || res[i].substring(128, 141) == 0)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\")",
@@ -11330,7 +14213,8 @@
           "fim0": 144
         },
         "operador": "!=",
-        "valor": "298"
+        "valor": "298",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (res[i].substring(141, 144) != 298)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\")",
@@ -11368,10 +14252,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(144, 152)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 144,
           "fim0": 152
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (isNaN(res[i].substring(144, 152)) || res[i].substring(144, 152).replace(/\\s/g, '').length != 0)",
@@ -11410,10 +14300,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(152, 194)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 152,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (res[0].substring(119, 120) != \"N\") && (isNaN(res[i].substring(152, 194)) || res[i].substring(152, 194).replace(/\\s/g, '').length != 0)",
@@ -11490,10 +14386,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[i].substring(14, 194)",
+        "alvo": "res[i]",
         "posicao": {
           "inicio0": 14,
           "fim0": 194
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 9) && (isNaN(res[i].substring(14, 194)) || res[i].substring(14, 194).replace(/\\s/g, '').length != 0)",

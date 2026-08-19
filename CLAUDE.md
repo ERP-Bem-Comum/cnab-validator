@@ -85,9 +85,27 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
 - Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `modulo_11`,
-  `coerencia_registro`, `tamanho_linha`, `custom`. `custom` é o escape hatch — regra que não casa com
-  nenhum matcher cai nele com `condicao_original` preservada. Aumentar a cobertura = adicionar matcher
-  em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+  `coerencia_registro`, `tamanho_linha`, `disjuncao`, `custom`. `custom` é o escape hatch — regra que
+  não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a cobertura =
+  adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+- `comparacao` (`estrita` | `frouxa`) existe em `literal_fixo` e `dominio` e **não é decoração**: o
+  fonte compara o resultado de `substring()` — sempre string — ora contra literal entre aspas, ora
+  contra literal numérico, e no segundo caso o JavaScript coage os tipos (`" 1"` passa como `01`). Um
+  motor que compare bytes só reproduz o validador oficial se respeitar esse campo. Pelo mesmo motivo
+  `operador` é publicado já resolvido (`!(a == b)` vira `!=`), e `!==` colapsa em `!=` — o que os
+  separava virou `comparacao`.
+- `dominio` carrega `sentido`: `permitidos` (conjunção de desigualdades — erro quando o campo não é
+  nenhum dos valores) ou `proibidos` (disjunção de igualdades — erro quando é algum deles). Ler
+  `valores` sem olhar o `sentido` inverte a regra.
+- `numerico_branco` carrega `exige` (`numerico`, `numerico_preenchido`, `branco`) e o `residuo`
+  literal do fonte. As três formas partem do mesmo `isNaN(...)` e divergem só no teste residual, mas
+  pedem coisas opostas — uma exige conteúdo numérico, a outra exige branco. Combinação de resíduo
+  ainda não vista cai em `custom` de propósito, em vez de ser encaixada à força numa exigência que o
+  fonte não faz.
+- `disjuncao` modela o `||` que o fonte usa para cobrir várias faixas com uma única mensagem
+  (`partes` são condições completas). Só é publicada quando **todas** as partes têm arquétipo próprio.
+  Nessas regras `posicoes` lista todas as faixas lidas e `colunas` é o envelope delas — nas demais,
+  `posicoes` continua com uma entrada só.
 - Três condições coexistem por regra e não são intercambiáveis: `condicao_original` é a conjunção
   completa (guardas + teste) e existe para rastreabilidade; `condicao_guarda` são só os `if` externos;
   `condicao_propria` é o teste que emite a mensagem — **é ela que a DSL classifica e de onde saem as

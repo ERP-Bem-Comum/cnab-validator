@@ -42,7 +42,8 @@
           "fim0": 3
         },
         "operador": "!=",
-        "valor": "237"
+        "valor": "237",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(0, 3) != \"237\"",
       "condicao_guarda": null,
@@ -86,7 +87,8 @@
           "fim0": 7
         },
         "operador": "!=",
-        "valor": "0000"
+        "valor": "0000",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(3, 7) != \"0000\"",
       "condicao_guarda": null,
@@ -178,7 +180,8 @@
           "fim0": 3
         },
         "operador": "!=",
-        "valor": "237"
+        "valor": "237",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(0, 3) != \"237\"",
       "condicao_guarda": null,

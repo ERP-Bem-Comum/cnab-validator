@@ -187,8 +187,22 @@ Efeito colateral esperado: classificar pela condição própria destravou també
 `literal_fixo` e `numerico_branco`, que a conjunção com guardas impedia de casar. Isso adianta parte
 da 0.5.7 — `custom` caiu de ~94% para ~58%, ainda acima da meta de 20%.
 
-⬜ Pendente da onda: **0.7, a revisão humana do diff** (CA5). Os specs foram regerados e as invariantes
-estruturais passam, mas a revisão por tipo de registro e arquétipo ainda não foi feita.
+✅ **0.7 feita em 2026-08-19**, junto com a regeneração da Onda 0.5. Revisão por tipo de registro e
+por arquétipo, via `src/diff-summary.ts` e matriz de transição sobre os 1.405 ids:
+
+- **Nenhuma regra criada ou perdida** (`+0 / -0` em todos os layouts): as 449 alterações são todas
+  reclassificação de arquétipo.
+- Matriz de transição sem regressão — nenhum arquétipo específico voltou para `custom`. As transições
+  são `custom → numerico_branco` (178), `custom → disjuncao` (155), `literal_fixo → dominio` (109),
+  `custom → dominio` (7).
+- Amostras conferidas contra o fonte, uma por transição e por família de layout: código de movimento
+  do Segmento P (cobrança 240, colunas 016-017, 37 valores, comparação frouxa), dígito da conta
+  (colunas 036, domínio que aceita `P` e `p`), carteira (colunas 038-040, 23 valores), tipo de serviço
+  e modalidade do header de lote Multipag (31 valores cada), código de desconto do Segmento R
+  (domínio **proibido** sob guarda de coerência com `res[i - 2]`), e as disjunções de conta e de
+  quantidade de lotes.
+- 59 regras tiveram `colunas` alteradas — **todas** disjunções, onde a faixa passou a ser o envelope
+  das partes em vez da primeira faixa encontrada. 105 regras publicam mais de uma posição.
 
 ---
 
@@ -212,6 +226,45 @@ Rust — o oposto do "motor declarativo" do design doc.
 rastreabilidade ao fonte é o que sustenta o princípio "regra extraída, nunca escrita à mão".
 
 ⇒ Aberta como **#6** — depende da #1, bloqueia #2 e #3.
+
+**Status em 2026-08-19 — 0.5.1, 0.5.2 e 0.5.5 entregues.** Medição sobre o mesmo corpus, mesmas
+1.405 regras:
+
+| Arquétipo | Antes | Depois |
+|---|---:|---:|
+| `custom` | 823 (58,6%) | **483 (34,4%)** |
+| `numerico_branco` | 96 | 274 |
+| `literal_fixo` | 377 | 268 |
+| `disjuncao` (novo) | — | 155 |
+| `dominio` | 7 | 123 |
+| `coerencia_registro` | 94 | 94 |
+| `tamanho_linha` | 8 | 8 |
+
+O que mudou no matcher:
+
+- **0.5.1 `dominio`** — passou a reconhecer as três formas que o fonte usa: desigualdade encadeada,
+  negação de igualdade (`!(x == 01)`) e literal numérico sem aspas. Ganhou `sentido`, porque o fonte
+  também escreve o domínio ao contrário, como disjunção de igualdades (valores **proibidos**). A
+  fusão de cadeia deixou de exigir que toda a conjunção fosse da mesma posição: as cláusulas que
+  sobram são toleradas **apenas** quando são guardas já publicadas em `condicao_guarda`, e nenhuma
+  delas pode tocar a faixa do domínio.
+- **0.5.2 `numerico_branco`** — as três variantes do teste residual (`/\s/ == 0`, `/\s/ != 0`,
+  `/\d/ == 1`) eram colapsadas num arquétipo só, sem distinção. Duas delas pedem coisas **opostas**
+  (uma exige campo numérico preenchido, a outra exige branco): um motor não conseguiria implementar a
+  regra a partir do spec. Agora cada regra carrega `exige` e o `residuo` literal.
+- **Arquétipo novo `disjuncao`** — o fonte cobre várias faixas com um `||` e uma única mensagem
+  (conta testada caractere a caractere, data quebrada em pedaços). Antes isso era `custom` e a regra
+  publicava só a primeira faixa; agora publica todas, com `colunas` como envelope.
+- **0.5.5 modo de comparação** — `comparacao` (`estrita` | `frouxa`) em `literal_fixo` e `dominio`,
+  derivado da presença de aspas no literal do fonte. É o campo que impede a Fase 1 em Rust de
+  divergir do validador oficial por comparar bytes onde o JavaScript coage tipos.
+
+⬜ Pendente da onda: **0.5.3** (alvo relativo em `coerencia_registro`), **0.5.4** (`modulo_11`),
+**0.5.6** (resolução de alvo) e a meta da **0.5.7**. O resíduo de 483 `custom` é dominado por dois
+padrões: **174 regras comparam a faixa com uma variável de dígito calculada antes do `if`**
+(`dv1`, `dv2`, `dva`, `dvc`, `obterValorCNPJAlfanumerico(...)`) — é a 0.5.4, e o matcher atual de
+`modulo_11` nunca casa porque procura uma chamada de função dentro da própria condição —, e **140
+usam comparação relacional** (`>`, `>=`, faixa `'a'`–`'z'`), que ainda não tem arquétipo.
 
 ---
 
