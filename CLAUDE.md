@@ -80,6 +80,12 @@ sem API, sem detecção de layout, sem encoding. Nada é aprovado por omissão �
 incompleta e guarda não reconhecida viram *não avaliadas* com contagem. Quando `cnab-core` existir, o
 diff entre os dois sobre o mesmo corpus é o teste de paridade.
 
+O avaliador de guardas **curto-circuita `&&` e `||`**, como o JavaScript. Não é otimização: a guarda
+começa identificando o registro e só depois compara o dígito, então numa linha que não é aquele
+registro o fonte nunca chega à parte que depende do cálculo. Avaliar os dois lados fazia a regra ser
+recusada em todas as linhas do arquivo por uma expressão que o validador não olha. O curto-circuito
+nunca decide a favor: com a esquerda verdadeira, uma direita não reconhecida continua recusando.
+
 Pontos que só ficam claros lendo vários arquivos juntos:
 
 - **`config.ts` é a fonte da verdade do escopo.** Adicionar layout = adicionar entrada em
@@ -155,6 +161,14 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   de resto tem resultado diferente em cada ramo; a guarda da regra diz qual ramo é. Sem ambiente não
   se publica `modulo_11`: a condição sozinha é `faixa != variavel` e afirmar um algoritmo que o
   extrator não viu seria inventar.
+- `variaveis_guarda` publica o cálculo das variáveis que a **guarda** referencia, e é o que torna a
+  regra do segundo dígito avaliável: a guarda dela compara a faixa com o **primeiro** dígito, que o
+  fonte calculou antes do `if`. Cada variável é `modulo_11` (dígito, com `resultado` por faixa de
+  resto) ou `resto` (só a soma ponderada e o módulo — o fonte compara restos entre si para escolher
+  qual dígito exigir). A resolução usa o ambiente **do ponto em que a guarda foi aberta**, não o da
+  regra: o fonte reusa `sm` dentro do bloco, e resolver pela ordem da regra daria ao primeiro dígito
+  a soma ponderada do segundo. Variável que não se resolve inteira não é publicada — a guarda que
+  depende dela continua não avaliável, que é o resultado honesto.
 - Três condições coexistem por regra e não são intercambiáveis: `condicao_original` é a conjunção
   completa (guardas + teste) e existe para rastreabilidade; `condicao_guarda` são só os `if` externos;
   `condicao_propria` é o teste que emite a mensagem — **é ela que a DSL classifica e de onde saem as
