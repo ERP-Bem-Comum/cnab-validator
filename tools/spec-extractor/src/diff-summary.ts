@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 interface DslCondition {
@@ -35,6 +35,19 @@ interface Change {
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf-8")) as T;
+}
+
+/**
+ * Índice de um lado do diff. A base pode não ter specs — é o caso de um PR contra
+ * um branch onde `tools/specs/` ainda não existe. Aí todo o spec do PR é novidade,
+ * que é exatamente o que o resumo deve dizer, em vez de quebrar.
+ */
+function readIndexOrEmpty(dir: string): IndexSpec {
+  const path = join(dir, "index.json");
+  if (!existsSync(path)) {
+    return { layouts: [] };
+  }
+  return readJson<IndexSpec>(path);
 }
 
 function indexById(rules: DslRule[]): Map<string, DslRule> {
@@ -141,8 +154,8 @@ export function diffSummary(oldDir: string, newDir: string): {
   hasChanges: boolean;
   totalChanges: number;
 } {
-  const oldIndex = readJson<IndexSpec>(join(oldDir, "index.json"));
-  const newIndex = readJson<IndexSpec>(join(newDir, "index.json"));
+  const oldIndex = readIndexOrEmpty(oldDir);
+  const newIndex = readIndexOrEmpty(newDir);
 
   const oldLayouts = new Map(oldIndex.layouts.map((l) => [l.layout, l]));
   const newLayouts = new Map(newIndex.layouts.map((l) => [l.layout, l]));
