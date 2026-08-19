@@ -1,0 +1,142 @@
+{
+  "layout": "multipag",
+  "nome": "Multipag",
+  "tipo": "remessa",
+  "tamanhos_linha": [
+    240
+  ],
+  "regras": [
+    {
+      "id": "multipag:validarDadosMultipag:45",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 45,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237"
+      },
+      "condicao_original": "res[0].substring(0, 3) != \"237\"",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "mensagem": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:48",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 48,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        7
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 7,
+          "colunas": [
+            4,
+            7
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0].substring(3, 7)",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 7
+        }
+      },
+      "condicao_original": "isNaN(res[0].substring(3, 7)) || res[0].substring(3, 7).replace(/\\s/g, '').length != 0",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, colunas 004 a 007, Header de arquivo, campo numérico/branco inválido.",
+      "mensagem": "Linha 1, colunas 004 a 007, Header de arquivo, campo numérico/branco inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:51",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 51,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        8,
+        8
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "dominio",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "valores": [
+          "S",
+          "N"
+        ]
+      },
+      "condicao_original": "res[0].substring(7, 8) != \"S\" && res[0].substring(7, 8) != \"N\"",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, coluna 008, Header de arquivo, domínio inválido.",
+      "mensagem": "Linha 1, coluna 008, Header de arquivo, domínio inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    }
+  ]
+}

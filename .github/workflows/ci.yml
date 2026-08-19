@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main, fase-0-extrator]
+  pull_request:
+    branches: [main, fase-0-extrator]
+
+jobs:
+  typecheck:
+    name: TypeScript typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/spec-extractor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run typecheck
+
+  test:
+    name: Test suite
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/spec-extractor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun test
+
+  reproducibility:
+    name: Spec reproducibility
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/spec-extractor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun run reproduce
+
+  diff-specs:
+    name: Diff summary for specs
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: [reproducibility]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        working-directory: tools/spec-extractor
+        run: bun install
+      - name: Detect changes in tools/specs/
+        id: changed
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '^tools/specs/' || true)
+          if [ -n "$CHANGED" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Checkout base specs
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          mkdir -p /tmp/specs-base
+          if git cat-file -e "origin/${{ github.base_ref }}:tools/specs/index.json" 2>/dev/null; then
+            git archive "origin/${{ github.base_ref }}" -- tools/specs/ | tar -x -C /tmp/specs-base
+            mv /tmp/specs-base/tools/specs/* /tmp/specs-base/
+            rm -rf /tmp/specs-base/tools
+          fi
+      - name: Run diff summary
+        if: steps.changed.outputs.changed == 'true'
+        working-directory: tools/spec-extractor
+        run: bun run src/diff-summary.ts /tmp/specs-base ../specs

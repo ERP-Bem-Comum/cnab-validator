@@ -1,0 +1,229 @@
+{
+  "layout": "folha-pagamento",
+  "nome": "Folha de Pagamento",
+  "tipo": "remessa",
+  "tamanhos_linha": [
+    200,
+    240
+  ],
+  "regras": [
+    {
+      "id": "folha-pagamento:validarDadosFolha240:59",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 59,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237"
+      },
+      "condicao_original": "res[0].substring(0, 3) != \"237\"",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "mensagem": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:62",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 62,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        7
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 7,
+          "colunas": [
+            4,
+            7
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 3,
+          "fim0": 7
+        },
+        "operador": "!=",
+        "valor": "0000"
+      },
+      "condicao_original": "res[0].substring(3, 7) != \"0000\"",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, colunas 004 a 007, Header de arquivo, literal fixo inválido.",
+      "mensagem": "Linha 1, colunas 004 a 007, Header de arquivo, literal fixo inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:66",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 66,
+      "registro": "segmento-p",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        1
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 1,
+          "colunas": [
+            1,
+            1
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "operador": "!=",
+        "outro": "res[i + 1]",
+        "posicao_outro": {
+          "inicio0": 0,
+          "fim0": 1
+        }
+      },
+      "condicao_original": "res[i].substring(0, 1) != res[i + 1].substring(0, 1)",
+      "condicao_guarda": null,
+      "descricao": "Linha {linha}, coluna 001, Segmento P, coerência entre registros inválida.",
+      "mensagem": "Linha {linha}, coluna 001, Segmento P, coerência entre registros inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:75",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 75,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237"
+      },
+      "condicao_original": "res[0].substring(0, 3) != \"237\"",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "mensagem": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:78",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 78,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        4,
+        4
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 3,
+          "fim0": 4,
+          "colunas": [
+            4,
+            4
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[0]"
+      },
+      "condicao_original": "(res[0].substring(3, 4) >= 'a') && (res[0].substring(3, 4) <= 'z')",
+      "condicao_guarda": null,
+      "descricao": "Linha 1, coluna 004, Header de arquivo, regra custom inválida.",
+      "mensagem": "Linha 1, coluna 004, Header de arquivo, regra custom inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    }
+  ]
+}
