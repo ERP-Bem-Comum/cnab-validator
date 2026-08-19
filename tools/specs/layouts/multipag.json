@@ -5054,24 +5054,11 @@
         "res[i]"
       ],
       "colunas": [
-        10,
-        13
-      ],
-      "colunas_mensagem": [
         12,
         13
       ],
+      "colunas_mensagem": null,
       "posicoes": [
-        {
-          "alvo": "res[i]",
-          "inicio0": 9,
-          "fim0": 11,
-          "colunas": [
-            10,
-            11
-          ],
-          "tamanho": 2
-        },
         {
           "alvo": "res[i]",
           "inicio0": 11,
@@ -5084,32 +5071,26 @@
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
+        "tipo": "dominio",
         "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 9,
-              "fim0": 11
-            },
-            "operador": "==",
-            "valor": "20",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 11,
-              "fim0": 13
-            },
-            "operador": "!=",
-            "valor": "43",
-            "comparacao": "frouxa"
-          }
-        ]
+        "posicao": {
+          "inicio0": 11,
+          "fim0": 13
+        },
+        "valores": [
+          "01",
+          "02",
+          "03",
+          "05",
+          "10",
+          "20",
+          "30",
+          "31",
+          "41",
+          "43"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 01) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 02) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 03) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 05) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 10) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 20) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 30) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 31) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 41) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 43)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 01) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 02) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 03) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 05) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 10) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 20) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 30) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 31) && (res[i].substring(9, 11) == 20 && res[i].substring(11, 13) != 41)",
