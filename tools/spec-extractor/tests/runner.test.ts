@@ -158,6 +158,50 @@ describe("runner de conformidade", () => {
     }
   });
 
+  it("o trailer de lote com quantidade divergente é reprovado, e só ele", () => {
+    // A regra compara a faixa com o sequencial do último detalhe *mais dois*, e
+    // ficava em `custom` sem o deslocamento. Enquanto ela não era avaliada, o
+    // próprio corpus foi dado por correto com o trailer errado.
+    const relatorio = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-trailer-lote-divergente.txt")
+    );
+    assert.strictEqual(relatorio.achados.length, 1);
+    assert.strictEqual(relatorio.achados[0].regra_id, "multipag:validarDadosMultipag:1006");
+    assert.strictEqual(relatorio.achados[0].linha, 5);
+    assert.strictEqual(relatorio.achados[0].registro, "trailer-lote");
+  });
+
+  it("o deslocamento tira a comparação do texto e a leva para o número", () => {
+    const coerencia = {
+      tipo: "coerencia_registro",
+      alvo: "res[0]",
+      posicao: { inicio0: 0, fim0: 6 },
+      operador: "!=",
+      outro: "res[1]",
+      posicao_outro: { inicio0: 0, fim0: 5 },
+      ajuste: -2,
+      ajuste_outro: null,
+    } as const;
+    // `"000004" - 2` é 4 - 2 = 2, e o `!=` coage `"00002"` para 2: não é erro.
+    // Sem o deslocamento o fonte compararia `"000004"` com `"00002"`, textos de
+    // larguras diferentes que nunca casariam.
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["000004", "00002"], i: 0 }),
+      false
+    );
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["000005", "00002"], i: 0 }),
+      true
+    );
+    // Faixa não numérica vira NaN, que difere de tudo — inclusive de si mesma.
+    // É como o fonte reprova, e não pode virar aprovação silenciosa.
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["00000X", "00002"], i: 0 }),
+      true
+    );
+  });
+
   it("custom nunca é avaliado como aprovado", () => {
     assert.strictEqual(
       avaliarCondicao({ tipo: "custom", alvo: "res[0]" }, { linhas: ["x"], i: 0 }),

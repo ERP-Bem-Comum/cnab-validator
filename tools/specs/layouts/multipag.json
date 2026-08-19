@@ -8063,7 +8063,9 @@
         "posicao_outro": {
           "inicio0": 18,
           "fim0": 32
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(18, 32) != res[0].substring(18, 32))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -8492,7 +8494,9 @@
         "posicao_outro": {
           "inicio0": 32,
           "fim0": 38
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(32, 38) != res[0].substring(32, 38))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -8688,7 +8692,9 @@
         "posicao_outro": {
           "inicio0": 52,
           "fim0": 57
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(52, 57) != res[0].substring(52, 57))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -9271,7 +9277,9 @@
         "posicao_outro": {
           "inicio0": 58,
           "fim0": 70
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(58, 70) != res[0].substring(58, 70))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -10032,7 +10040,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[j].substring(7, 8) == 3) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[j].substring(7, 8) == 3)",
@@ -10081,7 +10091,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3)",
@@ -10130,7 +10142,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 5) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 5)",
@@ -10179,7 +10193,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 1) && (res[i].substring(3, 7) == res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 1)",
@@ -10411,8 +10427,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "operador": "!=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "ajuste": null,
+        "ajuste_outro": -1
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3)",
@@ -10450,8 +10478,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 17,
+          "fim0": 23
+        },
+        "operador": "!=",
+        "outro": "res[i - 1]",
+        "posicao_outro": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "ajuste": -2,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (res[i].substring(17, 23) - 2 != res[i - 1].substring(8, 13))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -11836,7 +11876,9 @@
         "posicao_outro": {
           "inicio0": 132,
           "fim0": 134
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[j].substring(13, 14) == \"N\") && (res[i].substring(11, 13) != res[j].substring(132, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[j].substring(13, 14) == \"N\")",
@@ -11937,7 +11979,9 @@
         "posicao_outro": {
           "inicio0": 18,
           "fim0": 32
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 41) && (res[i + 2].substring(13, 14) == \"B\") && (res[i].substring(18, 32) == res[i + 2].substring(18, 32))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(8, 9) == \"C\" && res[i].substring(11, 13) == 41) && (res[i + 2].substring(13, 14) == \"B\")",
@@ -14985,7 +15029,9 @@
         "posicao_outro": {
           "inicio0": 97,
           "fim0": 101
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) > res[i].substring(97, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -15037,7 +15083,9 @@
         "posicao_outro": {
           "inicio0": 95,
           "fim0": 97
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101)) && (res[0].substring(145, 147) > res[i].substring(95, 97))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101))",
@@ -15089,7 +15137,9 @@
         "posicao_outro": {
           "inicio0": 93,
           "fim0": 95
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97)) && (res[0].substring(143, 145) > res[i].substring(93, 95))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97))",
@@ -15552,7 +15602,9 @@
         "posicao_outro": {
           "inicio0": 93,
           "fim0": 101
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0) && (res[i].substring(154, 162) != res[i].substring(93, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0)",
@@ -15704,7 +15756,9 @@
         "posicao_outro": {
           "inicio0": 119,
           "fim0": 134
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0) && (res[i].substring(162, 177) != res[i].substring(119, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0)",
@@ -18040,7 +18094,9 @@
         "posicao_outro": {
           "inicio0": 119,
           "fim0": 134
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(135, 150) != \"000000000000000\") && (res[i].substring(135, 150) != res[i - 1].substring(119, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(135, 150) != \"000000000000000\")",
@@ -20477,7 +20533,9 @@
         "posicao_outro": {
           "inicio0": 104,
           "fim0": 114
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[i].substring(26, 36) != res[i].substring(104, 114))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52))",
@@ -21432,7 +21490,9 @@
         "posicao_outro": {
           "inicio0": 148,
           "fim0": 152
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) > res[i].substring(148, 152))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52))",
@@ -21484,7 +21544,9 @@
         "posicao_outro": {
           "inicio0": 146,
           "fim0": 148
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152)) && (res[0].substring(145, 147) > res[i].substring(146, 148))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152))",
@@ -21536,7 +21598,9 @@
         "posicao_outro": {
           "inicio0": 144,
           "fim0": 146
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152) && res[0].substring(145, 147) == res[i].substring(146, 148)) && (res[0].substring(143, 145) > res[i].substring(144, 146))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && (isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0 &&\r\n                            (res[i].substring(14, 15) == 0 || res[i].substring(14, 15) == 1 ||\r\n                                res[i].substring(14, 15) == 3 || res[i].substring(14, 15) == 5 ||\r\n                                res[i].substring(14, 15) == 7 || res[i].substring(14, 15) == 9) &&\r\n                            res[i].substring(17, 19) != 52) && (res[i - 1].substring(8, 9) == \"C\" || (res[i - 1].substring(13, 14) == \"J\" && res[i - 1].substring(17, 19) == 52)) && (res[0].substring(147, 151) == res[i].substring(148, 152) && res[0].substring(145, 147) == res[i].substring(146, 148))",
@@ -23685,7 +23749,9 @@
         "posicao_outro": {
           "inicio0": 77,
           "fim0": 91
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 1 && res[j].substring(75, 76) == 1) && (res[1].substring(18, 32) == res[j].substring(77, 91))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 1 && res[j].substring(75, 76) == 1)",
@@ -23737,7 +23803,9 @@
         "posicao_outro": {
           "inicio0": 77,
           "fim0": 91
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 2 && res[j].substring(75, 76) == 2) && (res[1].substring(18, 32) == res[j].substring(77, 91))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[1].substring(17, 18) == 2 && res[j].substring(75, 76) == 2)",
@@ -23789,7 +23857,9 @@
         "posicao_outro": {
           "inicio0": 77,
           "fim0": 91
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 1 && res[j].substring(75, 76) == 1) && (res[j].substring(21, 35) == res[j].substring(77, 91))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 1 && res[j].substring(75, 76) == 1)",
@@ -23841,7 +23911,9 @@
         "posicao_outro": {
           "inicio0": 77,
           "fim0": 91
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 2 && res[j].substring(75, 76) == 2) && (res[j].substring(21, 35) == res[j].substring(77, 91))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"J\" && res[i].substring(17, 19) != 52) && ((res[i].substring(13, 14) == \"J\" && isNaN(res[i].substring(14, 15)) || res[i].substring(14, 15).replace(/\\s/g, '').length != 0) && (res[j].substring(13, 14) == \"J\" && res[j].substring(17, 19) == 52)) && (res[j].substring(21, 35) > 0 && res[j].substring(77, 91) > 0) && (res[j].substring(19, 20) == 2 && res[j].substring(75, 76) == 2)",
@@ -30103,7 +30175,9 @@
         "posicao_outro": {
           "inicio0": 103,
           "fim0": 107
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) > res[i].substring(103, 107))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\")",
@@ -30155,7 +30229,9 @@
         "posicao_outro": {
           "inicio0": 101,
           "fim0": 103
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107)) && (res[0].substring(145, 147) > res[i].substring(101, 103))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107))",
@@ -30207,7 +30283,9 @@
         "posicao_outro": {
           "inicio0": 99,
           "fim0": 101
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107) && res[0].substring(145, 147) == res[i].substring(101, 103)) && (res[0].substring(143, 145) > res[i].substring(99, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && (res[0].substring(147, 151) == res[i].substring(103, 107) && res[0].substring(145, 147) == res[i].substring(101, 103))",
@@ -33321,7 +33399,9 @@
         "posicao_outro": {
           "inicio0": 91,
           "fim0": 95
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) > res[i].substring(91, 95))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\")",
@@ -33373,7 +33453,9 @@
         "posicao_outro": {
           "inicio0": 89,
           "fim0": 91
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95)) && (res[0].substring(145, 147) > res[i].substring(89, 91))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95))",
@@ -33425,7 +33507,9 @@
         "posicao_outro": {
           "inicio0": 87,
           "fim0": 89
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95) && res[0].substring(145, 147) == res[i].substring(89, 91)) && (res[0].substring(143, 145) > res[i].substring(87, 89))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[0].substring(147, 151) == res[i].substring(91, 95) && res[0].substring(145, 147) == res[i].substring(89, 91))",
@@ -34650,7 +34734,9 @@
         "posicao_outro": {
           "inicio0": 132,
           "fim0": 134
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[j].substring(13, 14) == \"N\") && (res[i].substring(132, 134) != res[j].substring(132, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"N\") && (res[j].substring(13, 14) == \"N\")",

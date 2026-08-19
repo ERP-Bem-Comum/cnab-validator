@@ -17,6 +17,7 @@ conta aparece aqui — o repositório é público.
 | `multipag-banco-divergente-no-lote.txt` | Dois pares Segmento A/B no mesmo lote, com favorecidos em bancos diferentes. O segundo A usa a câmara de TED e os códigos de finalidade, que são o correto para banco de fora: o único defeito é a mistura de bancos. |
 | `multipag-cpf-correto.txt` | Igual ao correto, com a empresa identificada por CPF sintético (inscrição `1`) em vez de CNPJ, com os dois dígitos verificadores certos. Nenhum achado. |
 | `multipag-cpf-dv2-invalido.txt` | O mesmo CPF com o **segundo** dígito trocado e o primeiro intacto. Produz **dois** achados — header de arquivo e header de lote, que é onde a inscrição da empresa aparece. Antes de o spec publicar `variaveis_guarda`, este arquivo passava limpo: a regra do segundo dígito vive sob uma guarda que compara a faixa com o primeiro, e sem o cálculo publicado ela nunca era avaliada. |
+| `multipag-trailer-lote-divergente.txt` | Um único byte diferente do correto: o trailer de lote declara `000005` registros onde o lote tem quatro. Produz **um** achado. É o arquivo que exercita o deslocamento da coerência (`substring(17, 23) - 2`) — enquanto essa regra ficava em `custom`, foi ela que deixou o corpus inteiro passar com trailer errado. |
 
 `multipag-forma-lancamento-invalida.txt`, `multipag-g012-preenchido.txt` e
 `multipag-banco-divergente-no-lote.txt` existem para os critérios de aceite da

@@ -7,7 +7,7 @@
 use cnab_specs::{Condicao, ModoComparacao, Parcela, Posicao, SentidoDominio, VariavelDaGuarda};
 
 use crate::expressao::{Contexto, aplicar_replace, substring};
-use crate::valor::{Valor, comparar};
+use crate::valor::{Valor, comparar, numero_js};
 
 pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
     match condicao {
@@ -80,10 +80,16 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             operador,
             outro,
             posicao_outro,
+            ajuste,
+            ajuste_outro,
         } => {
             let campo = ler_faixa(alvo, posicao, ctx)?;
             let outro = ler_faixa(outro, posicao_outro, ctx)?;
-            comparar(operador, &Valor::Texto(campo), &Valor::Texto(outro))
+            comparar(
+                operador,
+                &deslocar(campo, *ajuste),
+                &deslocar(outro, *ajuste_outro),
+            )
         }
 
         Condicao::TamanhoLinha {
@@ -277,6 +283,17 @@ pub fn resolver_variaveis(variaveis: &[VariavelDaGuarda], ctx: &Contexto) -> Vec
     resolvidas
 }
 
+/// Aplica o deslocamento do fonte a uma faixa. Sem deslocamento a faixa segue
+/// texto, e a comparação é textual; com deslocamento o `-` do JavaScript já
+/// converteu para número antes de o operador ver os dois lados — inclusive
+/// quando a conversão dá `NaN`, que é como o fonte reprova faixa não numérica.
+fn deslocar(campo: String, ajuste: Option<i64>) -> Valor {
+    match ajuste {
+        None => Valor::Texto(campo),
+        Some(delta) => Valor::Numero(numero_js(&campo) + delta as f64),
+    }
+}
+
 fn ler_faixa(alvo: &str, posicao: &Posicao, ctx: &Contexto) -> Option<String> {
     let indice = resolver_indice(alvo, ctx)?;
     Some(substring(ctx.linha(indice), posicao.inicio0, posicao.fim0))
@@ -316,5 +333,75 @@ fn variavel_de_indice(nome: &str, ctx: &Contexto) -> Option<i64> {
             Some(Valor::Numero(n)) => Some(*n as i64),
             _ => None,
         },
+    }
+}
+
+#[cfg(test)]
+mod testes {
+    use super::*;
+
+    fn coerencia(ajuste: Option<i64>, ajuste_outro: Option<i64>) -> Condicao {
+        Condicao::CoerenciaRegistro {
+            alvo: "res[0]".into(),
+            posicao: Posicao {
+                inicio0: 0,
+                fim0: 6,
+            },
+            operador: "!=".into(),
+            outro: "res[1]".into(),
+            posicao_outro: Posicao {
+                inicio0: 0,
+                fim0: 5,
+            },
+            ajuste,
+            ajuste_outro,
+        }
+    }
+
+    fn linhas(a: &str, b: &str) -> Vec<String> {
+        vec![a.to_string(), b.to_string()]
+    }
+
+    #[test]
+    fn o_deslocamento_tira_a_comparacao_do_texto_e_a_leva_para_o_numero() {
+        // `"000004" - 2` é 2, e o `!=` coage `"00002"` para 2: não é erro. Sem o
+        // deslocamento o fonte compararia dois textos de larguras diferentes,
+        // que nunca casariam.
+        let com_ajuste = coerencia(Some(-2), None);
+        let arquivo = linhas("000004", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(false)
+        );
+
+        let divergente = linhas("000005", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&divergente, 0)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn faixa_nao_numerica_com_deslocamento_difere_de_tudo() {
+        // `NaN` não é igual nem a si mesmo: o fonte reprova, e aprovar em
+        // silêncio seria o oposto do que ele faz.
+        let com_ajuste = coerencia(Some(-2), None);
+        let arquivo = linhas("00000X", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn sem_deslocamento_a_comparacao_segue_textual() {
+        // As mesmas faixas, sem ajuste: `"000004"` contra `"00002"` são textos
+        // diferentes, e o fonte acusa. É a regra de banco único por lote.
+        let sem_ajuste = coerencia(None, None);
+        let arquivo = linhas("000004", "00002");
+        assert_eq!(
+            avaliar_condicao(&sem_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(true)
+        );
     }
 }

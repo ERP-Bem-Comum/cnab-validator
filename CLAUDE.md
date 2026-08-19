@@ -197,7 +197,13 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
 - `coerencia_registro` cobre duas leituras comparadas entre si — a mesma faixa em linhas distintas
   (`res[i]` contra `res[j]`), que sustenta "banco único por lote", **e** dois campos da mesma linha,
   que é como o fonte compara datas. O operador pode ser relacional; o par (`alvo`, `outro`) diz se a
-  comparação atravessa registros.
+  comparação atravessa registros. `ajuste` e `ajuste_outro` carregam o deslocamento constante que o
+  fonte soma a um dos lados: `- 1` no sequencial que avança de um em um, `- 2` na quantidade de
+  registros do lote (que conta header e trailer, e o sequencial do último detalhe não). **A presença
+  de ajuste muda o tipo da comparação** — sem ele o fonte compara texto com texto, com ele o `-` do
+  JavaScript já converteu o lado ajustado para número e o `==` coage o outro; faixa não numérica vira
+  `NaN`, que difere de tudo, e é assim que o fonte reprova. `null` nos dois campos é comparação
+  textual, e é o que as demais regras de coerência trazem.
 - `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
   sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
   minúscula no dígito.

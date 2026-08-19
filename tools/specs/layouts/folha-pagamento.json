@@ -6091,7 +6091,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[j].substring(7, 8) == 3) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[j].substring(7, 8) == 3)",
@@ -6140,7 +6142,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3)",
@@ -6189,7 +6193,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 5) && (res[i].substring(3, 7) != res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 5)",
@@ -6238,7 +6244,9 @@
         "posicao_outro": {
           "inicio0": 3,
           "fim0": 7
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 1) && (res[i].substring(3, 7) == res[j].substring(3, 7))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 1)",
@@ -6373,8 +6381,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "operador": "!=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "ajuste": null,
+        "ajuste_outro": -1
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0)",
@@ -6412,8 +6432,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 17,
+          "fim0": 23
+        },
+        "operador": "!=",
+        "outro": "res[i - 1]",
+        "posicao_outro": {
+          "inicio0": 8,
+          "fim0": 13
+        },
+        "ajuste": -2,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && (res[i].substring(17, 23) - 2 != res[i - 1].substring(8, 13))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -9733,7 +9765,9 @@
         "posicao_outro": {
           "inicio0": 97,
           "fim0": 101
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) > res[i].substring(97, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -9785,7 +9819,9 @@
         "posicao_outro": {
           "inicio0": 95,
           "fim0": 97
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101)) && (res[0].substring(145, 147) > res[i].substring(95, 97))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101))",
@@ -9837,7 +9873,9 @@
         "posicao_outro": {
           "inicio0": 93,
           "fim0": 95
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97)) && (res[0].substring(143, 145) > res[i].substring(93, 95))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97))",
@@ -10312,7 +10350,9 @@
         "posicao_outro": {
           "inicio0": 93,
           "fim0": 101
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0) && (res[i].substring(154, 162) != res[i].substring(93, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0)",
@@ -10361,7 +10401,9 @@
         "posicao_outro": {
           "inicio0": 119,
           "fim0": 134
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0) && (res[i].substring(162, 177) != res[i].substring(119, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0)",
@@ -14014,7 +14056,9 @@
         "posicao_outro": {
           "inicio0": 114,
           "fim0": 118
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) > res[0].substring(114, 118))",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -14066,7 +14110,9 @@
         "posicao_outro": {
           "inicio0": 112,
           "fim0": 114
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118)) && (res[0].substring(96, 98) > res[0].substring(112, 114))",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118))",
@@ -14118,7 +14164,9 @@
         "posicao_outro": {
           "inicio0": 110,
           "fim0": 112
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118) && res[0].substring(96, 98) == res[0].substring(112, 114)) && (res[0].substring(94, 96) > res[0].substring(110, 112))",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118) && res[0].substring(96, 98) == res[0].substring(112, 114))",
@@ -14858,7 +14906,9 @@
         "posicao_outro": {
           "inicio0": 112,
           "fim0": 114
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) > res[0].substring(112, 114))",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -14910,7 +14960,9 @@
         "posicao_outro": {
           "inicio0": 110,
           "fim0": 112
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) == res[0].substring(112, 114)) && (res[0].substring(96, 98) > res[0].substring(110, 112))",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) == res[0].substring(112, 114))",
@@ -14962,7 +15014,9 @@
         "posicao_outro": {
           "inicio0": 108,
           "fim0": 110
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 102) == res[0].substring(112, 114) && res[0].substring(96, 98) == res[0].substring(110, 112)) && (res[0].substring(94, 96) > res[0].substring(108, 110))",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 102) == res[0].substring(112, 114) && res[0].substring(96, 98) == res[0].substring(110, 112))",
@@ -16922,7 +16976,9 @@
         "posicao_outro": {
           "inicio0": 114,
           "fim0": 118
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) > res[i].substring(114, 118))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -16974,7 +17030,9 @@
         "posicao_outro": {
           "inicio0": 112,
           "fim0": 114
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118)) && (res[i].substring(96, 98) > res[i].substring(112, 114))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118))",
@@ -17026,7 +17084,9 @@
         "posicao_outro": {
           "inicio0": 110,
           "fim0": 112
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118) && res[i].substring(96, 98) == res[i].substring(112, 114)) && (res[i].substring(94, 96) > res[i].substring(110, 112))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118) && res[i].substring(96, 98) == res[i].substring(112, 114))",
@@ -17766,7 +17826,9 @@
         "posicao_outro": {
           "inicio0": 112,
           "fim0": 114
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) > res[i].substring(112, 114))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -17818,7 +17880,9 @@
         "posicao_outro": {
           "inicio0": 110,
           "fim0": 112
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) == res[i].substring(112, 114)) && (res[i].substring(96, 98) > res[i].substring(110, 112))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) == res[i].substring(112, 114))",
@@ -17870,7 +17934,9 @@
         "posicao_outro": {
           "inicio0": 108,
           "fim0": 110
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 102) == res[i].substring(112, 114) && res[i].substring(96, 98) == res[i].substring(110, 112)) && (res[i].substring(94, 96) > res[i].substring(108, 110))",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 102) == res[i].substring(112, 114) && res[i].substring(96, 98) == res[i].substring(110, 112))",
@@ -19444,8 +19510,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "operador": "!=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "ajuste": null,
+        "ajuste_outro": -1
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (isNaN(res[i].substring(1, 14)) || res[i].substring(1, 14).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0 && res[j].substring(0, 1) == 1) && (res[i].substring(194, 200) != res[j].substring(194, 200) - 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (isNaN(res[i].substring(1, 14)) || res[i].substring(1, 14).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0 && res[j].substring(0, 1) == 1)",
@@ -19483,8 +19561,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "operador": "!=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "ajuste": null,
+        "ajuste_outro": -1
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 1) && (res[i].substring(194, 200) != res[j].substring(194, 200) - 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 1)",
@@ -19522,8 +19612,20 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "operador": "!=",
+        "outro": "res[j]",
+        "posicao_outro": {
+          "inicio0": 194,
+          "fim0": 200
+        },
+        "ajuste": null,
+        "ajuste_outro": -1
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 9) && (res[i].substring(194, 200) != res[j].substring(194, 200) - 1)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 9)",

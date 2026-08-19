@@ -563,6 +563,45 @@ Decisões que valem registro:
 Falta da Fase 1: `cnab-validator-cli` e `cnab-validator-api`, e estender o corpus de paridade para os
 demais layouts (hoje só o Multipag tem corpus).
 
+### Coerência com deslocamento — a primeira das duas lacunas que o golden abriu — 2026-08-19
+
+O golden mostrou que os trailers estavam errados em **todos** os arquivos do corpus, e a causa era
+uma só: o fonte não compara duas leituras, compara uma com a outra **deslocada de uma constante**. O
+matcher exigia `res[a].substring(…) OP res[b].substring(…)` e nada mais, então toda regra com `- 1`
+ou `- 2` caía em `custom` — e o runner, que nunca as avaliou, foi o oráculo contra o qual o corpus
+foi dado por correto.
+
+`coerencia_registro` ganhou `ajuste` e `ajuste_outro`. **9 regras saíram de `custom`**, em três
+layouts, e nenhuma outra mudou:
+
+| Layout | Regras | O que passam a checar |
+|---|---|---|
+| `cobranca-remessa` | `:896`, `:911` | sequencial de detalhe, quantidade de registros do lote |
+| `folha-pagamento` | `:1727`, `:1735`, `:824`, `:832`, `:839` | as mesmas, em 240 e em 200 |
+| `multipag` | `:1001`, `:1006` | as mesmas |
+
+Três coisas que valem registro:
+
+1. **O deslocamento aparece dos dois lados.** `a != b - 1` no sequencial e `a - 2 != b` na
+   quantidade — um matcher que só olhasse a direita perderia metade das regras.
+2. **Ajuste muda o tipo da comparação.** Sem ele o fonte compara texto; com ele o `-` do JavaScript
+   converte o lado ajustado para número e o `==` coage o outro. `"000004" - 2` casa com `"00002"`,
+   que como texto nunca casaria. Faixa não numérica vira `NaN`, que difere de tudo — o fonte reprova,
+   e o motor precisa reprovar igual.
+3. **A medição veio antes.** O pipeline rodou sobre o corpus local num diretório de scratch e o diff
+   foi comparado por **id**: 9 reclassificações, conjunto de ids idêntico, `index.json` intacto, e as
+   174 regras de coerência já existentes com `ajuste: null` — nenhuma tocada.
+
+`multipag-trailer-lote-divergente.txt` entrou no corpus: um byte diferente do correto, no trailer de
+lote. É o que fecha o ciclo — o golden mostra **1 achado em comum, 0 só no oficial, 0 só no runner**,
+que é a prova de que o arquétipo novo reproduz o validador do banco, e não só o que achamos dele.
+Verificado por mutação: fazer o motor Rust ignorar o ajuste derruba 2 dos 4 testes de paridade.
+
+Fica aberta a outra lacuna do golden — **comparação de faixa com variável de fluxo** (`qtde_linha = j`,
+o índice da linha), que é a regra de quantidade de registros do arquivo, em 4 regras — e o **módulo
+10 com dobra condicional do Segmento O**, que sozinho responde pelas 6 regras do dígito verificador
+do código de barras de tributo.
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M

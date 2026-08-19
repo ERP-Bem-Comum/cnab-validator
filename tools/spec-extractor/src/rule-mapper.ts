@@ -102,6 +102,20 @@ export type DslCondition =
       operador: string;
       outro: string;
       posicao_outro: { inicio0: number; fim0: number };
+      /**
+       * Deslocamento constante que o fonte soma a um dos lados antes de comparar:
+       * `res[i].substring(8, 13) != res[j].substring(8, 13) - 1` é o sequencial
+       * que deve avançar de um em um, e `substring(17, 23) - 2` é a quantidade de
+       * registros do lote descontando header e trailer.
+       *
+       * **Presença de ajuste muda o tipo da comparação.** Sem ele o fonte compara
+       * duas strings, byte a byte; com ele o `-` do JavaScript converte o lado
+       * ajustado para número e o `==` coage o outro — `"00002" - 1` é `1`, e
+       * `"00001"` passa. Faixa não numérica vira `NaN`, que difere de tudo: o
+       * fonte reporta erro, e é isso que o motor precisa reproduzir.
+       */
+      ajuste: number | null;
+      ajuste_outro: number | null;
     }
   | { tipo: "tamanho_linha"; alvo: string; operador: string; tamanho: number }
   /**
@@ -613,13 +627,26 @@ function inferirCondicaoSimples(
   // dois campos da mesma linha, que é como o fonte compara datas entre si. O
   // operador relacional faz parte: "data do desconto superior à do vencimento" é
   // exatamente uma comparação de faixa contra faixa.
+  // O deslocamento (`- 1`, `- 2`) é opcional e pode estar de qualquer um dos
+  // lados: o fonte escreve ora `a != b - 1` (sequencial que avança), ora
+  // `a - 2 != b` (quantidade de registros descontando header e trailer).
   const coerencia = condicao.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=|>=|<=|>|<)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)(?:\s*([-+])\s*(\d+))?\s*(===|!==|==|!=|>=|<=|>|<)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)(?:\s*([-+])\s*(\d+))?$/
   );
   if (coerencia) {
-    const [, alvoA, a1, b1, operador, alvoB, a2, b2] = coerencia;
-    // Faixa comparada consigo mesma não é regra; é sempre verdadeira ou sempre falsa.
-    const mesmaLeitura = alvoA === alvoB && a1 === a2 && b1 === b2;
+    const [, alvoA, a1, b1, sinalA, deltaA, operador, alvoB, a2, b2, sinalB, deltaB] =
+      coerencia;
+    const ajuste = deltaA === undefined ? null : sinalDe(sinalA, deltaA);
+    const ajusteOutro = deltaB === undefined ? null : sinalDe(sinalB, deltaB);
+    // Faixa comparada consigo mesma não é regra; é sempre verdadeira ou sempre
+    // falsa. Com deslocamento ela volta a ser regra: `a != a - 1` é sempre erro,
+    // mas `a >= a - 1` não, e nenhum dos dois é o teste degenerado.
+    const mesmaLeitura =
+      alvoA === alvoB &&
+      a1 === a2 &&
+      b1 === b2 &&
+      ajuste === null &&
+      ajusteOutro === null;
     if (!mesmaLeitura) {
       return {
         tipo: "coerencia_registro",
@@ -628,6 +655,8 @@ function inferirCondicaoSimples(
         operador,
         outro: alvoB,
         posicao_outro: { inicio0: parseInt(a2, 10), fim0: parseInt(b2, 10) },
+        ajuste,
+        ajuste_outro: ajusteOutro,
       };
     }
   }
@@ -639,6 +668,12 @@ function inferirCondicaoSimples(
   if (tamanhoLinha) return tamanhoLinha;
 
   return { tipo: "custom", alvo };
+}
+
+/** `- 2` vira `-2`; `+ 1` vira `1`. */
+function sinalDe(sinal: string | undefined, valor: string): number {
+  const magnitude = parseInt(valor, 10);
+  return sinal === "-" ? -magnitude : magnitude;
 }
 
 function inferirTamanhoLinha(condicao: string): DslCondition | null {

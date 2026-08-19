@@ -180,6 +180,17 @@ pub enum Condicao {
         operador: String,
         outro: String,
         posicao_outro: Posicao,
+        /// Deslocamento constante que o fonte soma a um dos lados antes de
+        /// comparar: o sequencial que avança de um em um (`- 1`), ou a
+        /// quantidade de registros do lote descontando header e trailer (`- 2`).
+        ///
+        /// **Presença de ajuste muda o tipo da comparação.** Sem ele o fonte
+        /// compara duas strings, byte a byte; com ele o `-` do JavaScript já
+        /// converteu o lado ajustado para número, e o `==` coage o outro. Faixa
+        /// não numérica vira `NaN`, que difere de tudo — é assim que o fonte
+        /// reprova, e é o que o motor precisa reproduzir.
+        ajuste: Option<i64>,
+        ajuste_outro: Option<i64>,
     },
     TamanhoLinha {
         alvo: String,

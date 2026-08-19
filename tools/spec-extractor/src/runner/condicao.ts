@@ -58,7 +58,11 @@ export function avaliarCondicao(
       const campo = lerFaixa(condicao.alvo, condicao.posicao, ctx);
       const outro = lerFaixa(condicao.outro, condicao.posicao_outro, ctx);
       if (campo === null || outro === null) return null;
-      return aplicarComparacao(condicao.operador, campo, outro);
+      return aplicarComparacao(
+        condicao.operador,
+        deslocar(campo, condicao.ajuste),
+        deslocar(outro, condicao.ajuste_outro)
+      );
     }
 
     case "tamanho_linha": {
@@ -187,6 +191,16 @@ function avaliarValor(fonte: string, ctx: ContextoArquivo): Valor {
 
   // `avaliarExpressao` devolve booleano; aqui o que se quer é o valor.
   throw new ExpressaoNaoSuportada(`expressão de valor não suportada: ${limpo}`);
+}
+
+/**
+ * Aplica o deslocamento do fonte a uma faixa. Sem deslocamento a faixa segue
+ * string, e a comparação é textual; com deslocamento o `-` do JavaScript já
+ * converteu para número antes do operador ver os dois lados — inclusive quando a
+ * conversão dá `NaN`, que é como o fonte reprova faixa não numérica.
+ */
+function deslocar(campo: string, ajuste: number | null): Valor {
+  return ajuste === null ? campo : Number(campo) + ajuste;
 }
 
 function comparar(
