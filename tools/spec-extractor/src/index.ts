@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import {
@@ -19,6 +19,8 @@ import { extractNamedFunctions } from "./inline-parser.js";
 import { extractRulesFromFunction } from "./ast-walker.js";
 import { mapToDsl } from "./rule-mapper.js";
 import { writeSpecs } from "./spec-generator.js";
+
+const BASELINE_PATH = new URL("../baseline.json", import.meta.url);
 
 export interface MainResult {
   baselineSha256: string;
@@ -175,8 +177,23 @@ export async function main(): Promise<MainResult> {
   console.log(`Specs escritos em ${SPECS_DIR}`);
 
   const baselineSha256 = writeBaseline([html, ...sources.values()], assetUrls);
+  checkBaselineVersioned(baselineSha256);
 
   return { baselineSha256, rulesByLayout: pipeline.rulesByLayout };
+}
+
+function checkBaselineVersioned(downloadedSha256: string): void {
+  try {
+    const baselineContent = readFileSync(BASELINE_PATH, "utf-8");
+    const baseline = JSON.parse(baselineContent) as { sha256?: string };
+    if (baseline.sha256 && baseline.sha256 !== downloadedSha256) {
+      console.warn(
+        `[baseline] Divergência detectada: corpus baixado (${downloadedSha256}) difere do baseline versionado (${baseline.sha256}). O validador do banco pode ter sido atualizado.`
+      );
+    }
+  } catch {
+    console.warn("[baseline] Não foi possível ler o baseline versionado; pulando comparação.");
+  }
 }
 
 function writeBaseline(contents: string[], urls: string[]): string {

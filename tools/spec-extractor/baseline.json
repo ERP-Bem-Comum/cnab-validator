@@ -1,0 +1,7 @@
+{
+  "sha256": "f34778e7115e0a4d81d545d387ea082ac92f96976719b66358973a68d9bb591e",
+  "fontes": [
+    "fixture://corpus-fixture.js"
+  ],
+  "observacao": "Baseline do corpus de fixture usado no gate de reprodutibilidade. Não é o corpus do Bradesco."
+}

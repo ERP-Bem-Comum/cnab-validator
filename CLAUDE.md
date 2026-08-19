@@ -26,9 +26,24 @@ bun test            # suíte completa (bun:test)
 bun test tests/rule-mapper.test.ts        # arquivo único
 bun test -t "extrai regras"               # filtro por nome do teste
 bun run typecheck   # tsc --noEmit
+bun run reproduce   # verifica reprodutibilidade contra specs fixture (sem rede)
 ```
 
 `bun run dev` é a **única** coisa que acessa a rede; os testes mockam `global.fetch`.
+
+## CI
+
+O workflow `.github/workflows/ci.yml` roda em todo push e PR para `main` e `fase-0-extrator`:
+
+- `typecheck`: `bun install` + `bun run typecheck`.
+- `test`: `bun install` + `bun test`.
+- `reproducibility`: `bun install` + `bun run reproduce` — regera specs a partir do corpus fixture e falha se o resultado não for byte-a-byte idêntico aos golden specs versionados.
+- `diff-specs` (apenas em PRs): se `tools/specs/` for alterado, publica um resumo agregado por layout, tipo de registro e arquétipo de condição usando `src/diff-summary.ts`.
+
+**Restrições de CI:**
+
+- Nenhum job faz requisições de rede aos assets do banco (`bun run dev` não roda em CI).
+- Nenhum conteúdo de asset do banco é ecoado em log (não usar `cat` de arquivos baixados).
 
 ## Arquitetura do extrator
 
@@ -73,6 +88,20 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   `coerencia_registro`, `custom`. `custom` é o escape hatch — regra que não casa com nenhum matcher
   cai nele com `condicao_original` preservada. Aumentar a cobertura = adicionar matcher em
   `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+
+### Política de baseline
+
+- `tools/spec-extractor/baseline.json` é versionado e contém o hash SHA-256 do corpus de fixture
+  (`tests/fixtures/corpus-fixture.js`) usado no gate de reprodutibilidade. **Não é o hash do corpus
+  do Bradesco.**
+- `assets/` continua fora do git. `bun run dev` ainda grava `assets/baseline.json` com o hash do
+  corpus baixado para referência local, mas a fonte de verdade para comparação é o arquivo
+  versionado.
+- Ao rodar `bun run dev`, o extrator compara o hash do corpus baixado com o baseline versionado.
+  Se divergir, emite um `console.warn` explícito, mas **não** quebra a execução. Isso sinaliza que
+  o validador do banco pode ter sido atualizado.
+- Para atualizar o baseline (por exemplo, após uma mudança intencional no corpus fixture), regenere
+  `baseline.json` a partir de `tests/fixtures/corpus-fixture.js` e commit o novo hash.
 
 ### Fidelidade à fonte
 
