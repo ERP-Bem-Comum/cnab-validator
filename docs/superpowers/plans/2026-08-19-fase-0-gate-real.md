@@ -357,6 +357,29 @@ Alvos localizados no fonte (`arquivoMultipag.js`):
 | G012 em branco (CA4) | `:1419`, coluna 043 | `literal_fixo` |
 | Forma de lançamento × tipo de serviço (CA1) | header de lote, a mapear na Onda 0 | `dominio` sob guarda |
 
+**Status em 2026-08-19 — #2 fechada.** As quatro regras estão no spec, geradas pelo extrator, e cada
+uma tem caso positivo e negativo executado pelo runner:
+
+| CA | Regra | Onde ficou | Arquétipo |
+|---|---|---|---|
+| CA1 | Forma de lançamento restrita por tipo de serviço | header de lote, colunas 012-013 | `dominio` com 10 valores aceitos, sob guarda do serviço 20 |
+| CA2 | Câmara P001 × banco do favorecido | Segmento A, colunas 018-020 e 021-023 | `conjuncao` — dependência cruzada, não domínio simples |
+| CA3 | Banco único por lote | Segmento A, colunas 021-023 | `conjuncao` sobre `res[i]` e `res[i + 2]` |
+| CA4 | G012 em branco | Segmento A, coluna 043 | `literal_fixo` com `!= " "` |
+| CA5/CA6 | Reprovado com defeito, aprovado sem | corpus sintético | fechadas pelo runner (#8) |
+
+Duas correções no extrator saíram daqui, e valem além da issue:
+
+1. **A cadeia de domínio não era vista quando o fonte a parentiza.** O split de conjunção parava no
+   primeiro nível, então `(A == 20 && B != 01) && (A == 20 && B != 02)` chegava ao matcher como duas
+   cláusulas opacas. Achatando a conjunção, a restrição de forma de lançamento passou a sair como
+   `dominio` **com a lista de valores aceitos** — que é literalmente o que a CA1 pede —, e mais 6
+   regras saíram de `conjuncao` para `dominio`.
+2. **As colunas publicadas vinham da primeira `substring` do texto, não da faixa que o arquétipo
+   validou.** Numa condição que lê dois campos, isso apontava o campo de referência em vez do
+   validado: as regras de data do desconto apontavam as colunas do vencimento. Corrigido em 10
+   regras, todas conferidas contra a mensagem do fonte.
+
 **Nota de escopo confirmada:** as formas de PIX não aparecem no domínio aceito pelo módulo Multipag
 deste corpus. Consistente com a hipótese da issue de que o módulo público antecede a versão do layout
 com PIX. **PIX fora do primeiro release**, e o spec deve registrar a ausência explicitamente para que
