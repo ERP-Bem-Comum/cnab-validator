@@ -37,7 +37,16 @@ Três garantias que ele precisa manter:
   aplicados com os operadores do próprio JavaScript, e as guardas são avaliadas
   por um parser de escopo fechado (`src/runner/expressao.ts`) que reconhece
   exatamente as formas do fonte e recusa o resto. O campo `comparacao` de cada
-  regra é o que diz se a comparação é estrita ou frouxa.
+  regra é o que diz se a comparação é estrita ou frouxa. `&&` e `||`
+  curto-circuitam, como no fonte: a guarda identifica o registro antes de comparar
+  o dígito, e avaliar o lado que o validador nunca olha faria a regra ser recusada
+  em toda linha do arquivo.
+
+Guarda que referencia variável calculada (o dígito verificador) é resolvida pelo
+campo `variaveis_guarda` do spec. O que não se calcula inteiro continua recusado:
+o CNPJ alfanumérico passa por uma função do fonte que o spec não modela, e o
+módulo 10 do Segmento O soma variáveis intermediárias com dobra condicional, que
+nenhum arquétipo cobre. O relatório separa esses dois motivos.
 
 Corpus em `tests/fixtures/corpus/`, com um README próprio descrevendo cada
 arquivo campo a campo. É todo sintético.

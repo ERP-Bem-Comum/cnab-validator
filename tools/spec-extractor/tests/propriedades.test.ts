@@ -164,6 +164,26 @@ describe("propriedades dos specs", () => {
         assert.deepStrictEqual(invalidos.map((r) => r.id), []);
       });
 
+      it("variável de guarda é citada pela guarda e traz o cálculo inteiro", () => {
+        const invalidas = regras.flatMap((r) =>
+          (r.variaveis_guarda ?? [])
+            .filter(
+              (v) =>
+                !new RegExp(`\\b${v.nome}\\b`).test(r.condicao_guarda ?? "") ||
+                v.base.length === 0 ||
+                v.modulo <= 0 ||
+                (v.tipo === "modulo_11" && v.resultado.length === 0)
+            )
+            .map((v) => `${r.id}:${v.nome}`)
+        );
+        assert.deepStrictEqual(invalidas, []);
+      });
+
+      it("regra sem guarda não publica variável de guarda", () => {
+        const orfas = regras.filter((r) => !r.condicao_guarda && r.variaveis_guarda);
+        assert.deepStrictEqual(orfas.map((r) => r.id), []);
+      });
+
       it("ids são únicos e determinísticos", () => {
         const ids = regras.map((r) => r.id);
         assert.strictEqual(new Set(ids).size, ids.length);

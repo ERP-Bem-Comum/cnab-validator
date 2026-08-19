@@ -1,9 +1,15 @@
 import type { DslRule } from "../rule-mapper.js";
-import { avaliarCondicao, resolverIndice } from "./condicao.js";
+import {
+  avaliarCondicao,
+  calcularDigito,
+  calcularResto,
+  resolverIndice,
+} from "./condicao.js";
 import {
   avaliarExpressao,
   ExpressaoNaoSuportada,
   type ContextoArquivo,
+  type Valor,
 } from "./expressao.js";
 
 /**
@@ -79,7 +85,13 @@ export function aplicarSpec(regras: DslRule[], linhas: string[]): Relatorio {
 
   for (const regra of regras) {
     for (const i of linhasDaRegra(regra, linhas)) {
-      const ctx: ContextoArquivo = { linhas, i };
+      // As variáveis da guarda dependem do conteúdo da linha, então são
+      // recalculadas a cada uma — como o fonte faz.
+      const ctx: ContextoArquivo = {
+        linhas,
+        i,
+        variaveis: resolverVariaveis(regra, { linhas, i }),
+      };
 
       if (regra.condicao_guarda) {
         let guarda: boolean;
@@ -122,6 +134,28 @@ export function aplicarSpec(regras: DslRule[], linhas: string[]): Relatorio {
     totalRegras: regras.length,
     linhas: linhas.length,
   };
+}
+
+/**
+ * Resolve as variáveis que a guarda referencia. Variável que não se calcula fica
+ * de fora, e a guarda que a cita passa a ser recusada por identificador
+ * desconhecido — nunca aprovada com um valor inventado.
+ */
+function resolverVariaveis(
+  regra: DslRule,
+  ctx: ContextoArquivo
+): Record<string, Valor> | undefined {
+  if (!regra.variaveis_guarda) return undefined;
+
+  const variaveis: Record<string, Valor> = {};
+  for (const variavel of regra.variaveis_guarda) {
+    const valor =
+      variavel.tipo === "resto"
+        ? calcularResto(variavel, ctx)
+        : calcularDigito(variavel, ctx);
+    if (valor !== null) variaveis[variavel.nome] = valor;
+  }
+  return Object.keys(variaveis).length > 0 ? variaveis : undefined;
 }
 
 /**

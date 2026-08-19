@@ -46,6 +46,7 @@
       },
       "condicao_original": "res[0].substring(0, 3) != \"237\"",
       "condicao_guarda": null,
+      "variaveis_guarda": null,
       "descricao": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
       "mensagem": "Linha 1, colunas 001 a 003, Header de arquivo, código do banco inválido.",
       "natureza": "validacao-estrutural",
@@ -94,6 +95,7 @@
       },
       "condicao_original": "isNaN(res[0].substring(3, 7)) || res[0].substring(3, 7).replace(/\\s/g, '').length != 0",
       "condicao_guarda": null,
+      "variaveis_guarda": null,
       "descricao": "Linha 1, colunas 004 a 007, Header de arquivo, campo numérico/branco inválido.",
       "mensagem": "Linha 1, colunas 004 a 007, Header de arquivo, campo numérico/branco inválido.",
       "natureza": "validacao-estrutural",
@@ -142,8 +144,371 @@
       },
       "condicao_original": "res[0].substring(7, 8) != \"S\" && res[0].substring(7, 8) != \"N\"",
       "condicao_guarda": null,
+      "variaveis_guarda": null,
       "descricao": "Linha 1, coluna 008, Header de arquivo, domínio inválido.",
       "mensagem": "Linha 1, coluna 008, Header de arquivo, domínio inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:67",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 67,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        31,
+        31
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 30,
+          "fim0": 31,
+          "colunas": [
+            31,
+            31
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 30,
+          "fim0": 31
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 10,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 9,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 8,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dv1",
+        "documento": "desconhecido"
+      },
+      "condicao_original": "(res[0].substring(17, 18) == 1) && (res[0].substring(30, 31) != dv1)",
+      "condicao_guarda": "(res[0].substring(17, 18) == 1)",
+      "variaveis_guarda": null,
+      "descricao": "Linha 1, coluna 031, Header de arquivo, primeiro dígito verificador inválido.",
+      "mensagem": "Linha 1, coluna 031, Header de arquivo, primeiro dígito verificador inválido.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "multipag:validarDadosMultipag:79",
+      "funcao_origem": "validarDadosMultipag",
+      "linha_fonte": 79,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        32,
+        32
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 31,
+          "fim0": 32,
+          "colunas": [
+            32,
+            32
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 32
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 11,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 10,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 9,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 8,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 30,
+            "fim0": 31,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dv2",
+        "documento": "desconhecido"
+      },
+      "condicao_original": "(res[0].substring(17, 18) == 1) && (res[0].substring(30, 31) == dv1) && (res[0].substring(31, 32) != dv2)",
+      "condicao_guarda": "(res[0].substring(17, 18) == 1) && (res[0].substring(30, 31) == dv1)",
+      "variaveis_guarda": [
+        {
+          "nome": "dv1",
+          "tipo": "modulo_11",
+          "base": [
+            {
+              "alvo": "res[0]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 10,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 9,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 8,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 7,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 6,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 5,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 4,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 3,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[0]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 11,
+          "resultado": [
+            {
+              "operador": null,
+              "resto": null,
+              "valor": null,
+              "expressao": "11 - resto"
+            },
+            {
+              "operador": "==",
+              "resto": 0,
+              "valor": "0",
+              "expressao": "0"
+            },
+            {
+              "operador": "==",
+              "resto": 1,
+              "valor": "0",
+              "expressao": "0"
+            }
+          ]
+        }
+      ],
+      "descricao": "Linha 1, coluna 032, Header de arquivo, segundo dígito verificador inválido.",
+      "mensagem": "Linha 1, coluna 032, Header de arquivo, segundo dígito verificador inválido.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     }

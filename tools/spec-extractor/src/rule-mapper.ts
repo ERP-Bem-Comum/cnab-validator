@@ -160,6 +160,12 @@ export interface DslRule {
   condicao_original: string;
   /** Guardas dos `if` externos; null quando a regra está no nível raiz da função. */
   condicao_guarda: string | null;
+  /**
+   * Variáveis que a guarda referencia, com o cálculo que as define. Sem isto a
+   * guarda do segundo dígito é ilegível — ela compara a faixa com o **primeiro**
+   * dígito, que o fonte calculou antes do `if`.
+   */
+  variaveis_guarda: VariavelDaGuarda[] | null;
   descricao: string;
   mensagem: string;
   natureza: string;
@@ -219,6 +225,81 @@ export function extrairPosicoesDaCondicao(
   const fallback = condicao.match(/\.substring\((\d+),\s*(\d+)\)/);
   if (!fallback) return null;
   return { inicio0: parseInt(fallback[1], 10), fim0: parseInt(fallback[2], 10) };
+}
+
+/**
+ * Variável do fonte que a guarda da regra referencia, resolvida como cálculo.
+ *
+ * A guarda `res[0].substring(30, 31) == dv1` não diz nada sozinha: `dv1` é o
+ * dígito que o fonte calculou antes do `if`. Sem publicar o cálculo, a regra que
+ * ela protege — a do segundo dígito — não é avaliável por motor nenhum.
+ */
+export type VariavelDaGuarda = {
+  /** Nome no fonte, que é como a guarda a referencia. */
+  nome: string;
+  base: ParcelaBase[];
+  modulo: number;
+} & (
+  | {
+      /** Dígito calculado: a guarda compara a faixa do arquivo com ele. */
+      tipo: "modulo_11";
+      /** Mesma forma do arquétipo `modulo_11`: última faixa que casa vence. */
+      resultado: ResultadoDoDigito["faixas"];
+    }
+  | {
+      /**
+       * O resto da divisão, sem virar dígito. O fonte compara faixas de resto
+       * entre si para escolher qual dígito exigir — é assim que ele decide o
+       * cálculo do segmento O.
+       */
+      tipo: "resto";
+    }
+);
+
+/**
+ * Resolve as variáveis que as guardas citam. Só publica o que se resolve
+ * inteiro: variável de forma não reconhecida fica de fora, e a guarda que
+ * depende dela continua não avaliável — que é o resultado honesto, em vez de um
+ * cálculo inventado que aprovaria arquivo errado.
+ */
+function resolverVariaveisDaGuarda(
+  condicaoGuarda: string | null | undefined,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined
+): VariavelDaGuarda[] | null {
+  if (!condicaoGuarda || !ambiente) return null;
+
+  const citadas = new Set(condicaoGuarda.match(/[A-Za-z_$][\w$]*/g) ?? []);
+  const variaveis: VariavelDaGuarda[] = [];
+
+  for (const nome of citadas) {
+    if (!(nome in ambiente)) continue;
+
+    const resultado = resolverResultado(nome, ambiente);
+    if (resultado) {
+      const calculo = resolverResto(resultado.varResto, ambiente);
+      if (calculo) {
+        variaveis.push({
+          nome,
+          tipo: "modulo_11",
+          base: calculo.base,
+          modulo: calculo.modulo,
+          resultado: resultado.faixas,
+        });
+        continue;
+      }
+    }
+
+    // A guarda também compara o resto direto, sem passar por dígito: é como o
+    // fonte escolhe qual cálculo exigir no segmento O.
+    const resto = resolverResto(nome, ambiente);
+    if (resto) {
+      variaveis.push({ nome, tipo: "resto", base: resto.base, modulo: resto.modulo });
+    }
+  }
+
+  // Ordem estável: o id da regra é determinístico e o spec inteiro precisa ser.
+  variaveis.sort((a, b) => a.nome.localeCompare(b.nome));
+  return variaveis.length > 0 ? variaveis : null;
 }
 
 export function mapToDsl(
@@ -330,6 +411,10 @@ export function mapToDsl(
     condicao,
     condicao_original: raw.condicao_original,
     condicao_guarda: raw.condicao_guarda ?? null,
+    variaveis_guarda: resolverVariaveisDaGuarda(
+      raw.condicao_guarda,
+      raw.ambiente_guarda
+    ),
     descricao: raw.mensagem.replace(/<br>/g, "").trim(),
     mensagem: raw.mensagem.replace(/<br>/g, "").trim(),
     natureza: "validacao-estrutural",

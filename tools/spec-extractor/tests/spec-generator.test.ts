@@ -28,6 +28,7 @@ function makeRule(layout: string, overrides: Partial<DslRule> = {}): DslRule {
     },
     condicao_original: 'res[0].substring(3, 7) != "0000"',
     condicao_guarda: null,
+    variaveis_guarda: null,
     descricao: "Header de arquivo, não contém número de lote 0000.",
     mensagem: "Linha 1, colunas 004 a 007, Header de arquivo, não contém número de lote 0000.",
     natureza: "validacao-estrutural",

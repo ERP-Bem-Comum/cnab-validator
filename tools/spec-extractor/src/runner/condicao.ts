@@ -91,28 +91,49 @@ export function avaliarCondicao(
   }
 }
 
-function avaliarModulo11(
-  condicao: Extract<DslCondition, { tipo: "modulo_11" }>,
+/**
+ * Resto da soma ponderada, que é a primeira metade do cálculo do dígito. O fonte
+ * também o compara direto, sem virar dígito, para escolher qual regra aplicar.
+ */
+export function calcularResto(
+  calculo: { base: Extract<DslCondition, { tipo: "modulo_11" }>["base"]; modulo: number },
   ctx: ContextoArquivo
-): boolean | null {
+): number | null {
   // A função que o fonte aplica a cada parcela do CNPJ alfanumérico não está no
   // spec — sem ela, calcular seria inventar um resultado.
-  if (condicao.transformacao !== null) return null;
-  if (condicao.base.some((parcela) => parcela.transformacao !== null)) return null;
+  if (calculo.base.some((parcela) => parcela.transformacao !== null)) return null;
 
   let soma = 0;
-  for (const parcela of condicao.base) {
+  for (const parcela of calculo.base) {
     const campo = lerFaixa(parcela.alvo, parcela, ctx);
     if (campo === null) return null;
     soma += Number(campo) * parcela.peso;
   }
   if (isNaN(soma)) return null;
 
-  const resto = soma % condicao.modulo;
+  return soma % calculo.modulo;
+}
+
+/**
+ * O dígito que o fonte calcula: soma ponderada, resto da divisão, e o valor
+ * esperado por faixa de resto. Vale tanto para a condição da regra quanto para a
+ * variável que a guarda referencia — é o mesmo cálculo, escrito duas vezes no
+ * fonte porque ele repete o bloco por dígito informado.
+ */
+export function calcularDigito(
+  calculo: {
+    base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
+    modulo: number;
+    resultado: Extract<DslCondition, { tipo: "modulo_11" }>["resultado"];
+  },
+  ctx: ContextoArquivo
+): Valor | null {
+  const resto = calcularResto(calculo, ctx);
+  if (resto === null) return null;
 
   // A ordem do fonte é a ordem de avaliação: a última atribuição que casa vence.
   let esperado: Valor | null = null;
-  for (const faixa of condicao.resultado) {
+  for (const faixa of calculo.resultado) {
     const casa =
       faixa.operador === null || faixa.resto === null
         ? true
@@ -130,6 +151,16 @@ function avaliarModulo11(
       throw erro;
     }
   }
+  return esperado;
+}
+
+function avaliarModulo11(
+  condicao: Extract<DslCondition, { tipo: "modulo_11" }>,
+  ctx: ContextoArquivo
+): boolean | null {
+  if (condicao.transformacao !== null) return null;
+
+  const esperado = calcularDigito(condicao, ctx);
   if (esperado === null) return null;
 
   const digito = lerFaixa(condicao.alvo, condicao.posicao, ctx);

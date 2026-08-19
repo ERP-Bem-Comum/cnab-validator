@@ -474,6 +474,28 @@ Três decisões de projeto que valem registro:
    como aprovadas. Fechar esse buraco é publicar o ambiente da guarda no spec, e fica registrado
    aqui como próximo passo.
 
+**Fechado em 2026-08-19 — o ambiente da guarda agora é publicado.** As 22 caíram para 3, e as 3 que
+sobram são a fronteira honesta, não omissão:
+
+- `variaveis_guarda` publica o cálculo de cada variável que a guarda cita (`dv1` como `modulo_11`,
+  `resto11` como `resto`). Sem isso a regra do **segundo** dígito nunca era avaliada em arquivo
+  nenhum: a guarda dela compara a faixa com o **primeiro** dígito.
+- A resolução acontece **no ponto em que a guarda foi aberta**, não no ponto da regra. O fonte reusa
+  `sm` dentro do bloco, então resolver pela ordem da regra daria ao primeiro dígito a soma ponderada
+  do segundo — dez parcelas onde ele tem nove.
+- O avaliador de guardas passou a **curto-circuitar** `&&` e `||`, como o JavaScript. A guarda começa
+  identificando o registro; sem curto-circuito, uma regra de header era recusada em toda linha do
+  arquivo por causa de uma comparação que o fonte nunca olha naquela linha.
+- Sobram 3 regras, todas do CNPJ alfanumérico: a guarda chama `obterValorCNPJAlfanumerico`, que o
+  spec não modela. O relatório agora as separa com motivo próprio (*função do fonte não modelada*),
+  porque essa se fecha extraindo a função, não publicando ambiente.
+- O `resto10` do Segmento O também fica de fora, e de propósito: `sm10` é soma de variáveis
+  intermediárias com dobra condicional (módulo 10 de código de barras), que nenhum arquétipo modela.
+  Publicar meio cálculo faria o runner decidir a guarda com um resto inventado.
+
+Demonstrado por `multipag-cpf-dv2-invalido.txt`: com os specs anteriores o arquivo passava limpo;
+agora é reprovado no header de arquivo e no de lote, que é onde o CPF aparece.
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M

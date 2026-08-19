@@ -21,6 +21,77 @@ describe("mapToDsl", () => {
     assert.strictEqual(rules[4].condicao.tipo, "coerencia_registro");
   });
 
+  it("resolve a variável da guarda no ponto em que a guarda foi aberta", () => {
+    // O fonte reusa `sm` dentro do bloco que a guarda abre: o segundo dígito
+    // sobrescreve a soma do primeiro. Resolver `dv1` com a ordem da regra pegaria
+    // a soma do segundo dígito — dez parcelas onde o primeiro tem nove —, e o
+    // motor conferiria o dígito informado contra um cálculo que o fonte não faz.
+    const codigo = `
+      function digitos(res) {
+        var str = "";
+        if (res[0].substring(17, 18) == 1) {
+          sm = res[0].substring(21, 22) * 10 + res[0].substring(22, 23) * 9;
+          resto1 = sm;
+          resto1 %= 11;
+          dv1 = 11 - resto1;
+          if (resto1 == 0) dv1 = 0;
+          if (res[0].substring(30, 31) == dv1) {
+            sm = res[0].substring(21, 22) * 11 + res[0].substring(22, 23) * 10 + res[0].substring(30, 31) * 2;
+            resto2 = sm;
+            resto2 %= 11;
+            dv2 = 11 - resto2;
+            if (res[0].substring(31, 32) != dv2) {
+              str += "Linha 1, coluna 032, Header de arquivo, segundo dígito inválido.<br>";
+            }
+          }
+        }
+        return str;
+      }
+    `;
+    const raw = extractRulesFromFunction(codigo, "digitos");
+    const regra = mapToDsl(raw[0], "multipag");
+
+    const dv1 = (regra.variaveis_guarda ?? []).find((v) => v.nome === "dv1");
+    assert.ok(dv1, "a guarda cita dv1; sem ele a regra não é avaliável");
+    assert.strictEqual(dv1.tipo, "modulo_11");
+    assert.deepStrictEqual(dv1.base.map((p) => p.peso), [10, 9]);
+    assert.strictEqual(dv1.modulo, 11);
+
+    // A condição continua sendo a do segundo dígito, com a soma dele.
+    assert.strictEqual(regra.condicao.tipo, "modulo_11");
+    if (regra.condicao.tipo === "modulo_11") {
+      assert.deepStrictEqual(regra.condicao.base.map((p) => p.peso), [11, 10, 2]);
+    }
+  });
+
+  it("não publica variável de guarda que não sabe calcular", () => {
+    // `sm` vem de uma soma de variáveis intermediárias (é como o fonte escreve o
+    // módulo 10 do código de barras), que nenhum arquétipo modela. Publicar um
+    // cálculo parcial faria o runner decidir a guarda com um resto inventado.
+    const codigo = `
+      function luhn(res) {
+        var str = "";
+        if (res[0].substring(13, 14) == "O") {
+          sm10 = soma1 + soma2 + soma3;
+          resto10 = sm10;
+          resto10 %= 10;
+          if (resto10 == 0) {
+            if (res[0].substring(20, 21) != "0") {
+              str += "Linha 1, coluna 021, Segmento O, dígito verificador inválido.<br>";
+            }
+          }
+        }
+        return str;
+      }
+    `;
+    const raw = extractRulesFromFunction(codigo, "luhn");
+    const regra = mapToDsl(raw[0], "multipag");
+    assert.strictEqual(
+      (regra.variaveis_guarda ?? []).find((v) => v.nome === "resto10"),
+      undefined
+    );
+  });
+
   it("cai em custom quando nenhum arquetipo bate", () => {
     const raw: RawRule = {
       funcao_origem: "amostra",
