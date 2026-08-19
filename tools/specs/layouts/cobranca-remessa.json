@@ -11906,8 +11906,8 @@
         "res[i]"
       ],
       "colunas": [
-        82,
-        85
+        23,
+        26
       ],
       "colunas_mensagem": [
         19,
@@ -11916,11 +11916,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 81,
-          "fim0": 85,
+          "inicio0": 22,
+          "fim0": 26,
           "colunas": [
-            82,
-            85
+            23,
+            26
           ],
           "tamanho": 4
         }
@@ -11957,8 +11957,8 @@
         "res[i]"
       ],
       "colunas": [
-        80,
-        81
+        21,
+        22
       ],
       "colunas_mensagem": [
         19,
@@ -11967,11 +11967,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 79,
-          "fim0": 81,
+          "inicio0": 20,
+          "fim0": 22,
           "colunas": [
-            80,
-            81
+            21,
+            22
           ],
           "tamanho": 2
         }
@@ -12008,8 +12008,8 @@
         "res[i]"
       ],
       "colunas": [
-        78,
-        79
+        19,
+        20
       ],
       "colunas_mensagem": [
         19,
@@ -12018,11 +12018,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 77,
-          "fim0": 79,
+          "inicio0": 18,
+          "fim0": 20,
           "colunas": [
-            78,
-            79
+            19,
+            20
           ],
           "tamanho": 2
         }
@@ -12059,8 +12059,8 @@
         "res[i]"
       ],
       "colunas": [
-        147,
-        150
+        23,
+        26
       ],
       "colunas_mensagem": [
         19,
@@ -12069,11 +12069,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 146,
-          "fim0": 150,
+          "inicio0": 22,
+          "fim0": 26,
           "colunas": [
-            147,
-            150
+            23,
+            26
           ],
           "tamanho": 4
         }
@@ -12110,8 +12110,8 @@
         "res[i]"
       ],
       "colunas": [
-        145,
-        146
+        21,
+        22
       ],
       "colunas_mensagem": [
         19,
@@ -12120,11 +12120,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 144,
-          "fim0": 146,
+          "inicio0": 20,
+          "fim0": 22,
           "colunas": [
-            145,
-            146
+            21,
+            22
           ],
           "tamanho": 2
         }
@@ -12161,8 +12161,8 @@
         "res[i]"
       ],
       "colunas": [
-        143,
-        144
+        19,
+        20
       ],
       "colunas_mensagem": [
         19,
@@ -12171,11 +12171,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 142,
-          "fim0": 144,
+          "inicio0": 18,
+          "fim0": 20,
           "colunas": [
-            143,
-            144
+            19,
+            20
           ],
           "tamanho": 2
         }
@@ -12212,8 +12212,8 @@
         "res[i]"
       ],
       "colunas": [
-        82,
-        85
+        47,
+        50
       ],
       "colunas_mensagem": [
         43,
@@ -12222,11 +12222,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 81,
-          "fim0": 85,
+          "inicio0": 46,
+          "fim0": 50,
           "colunas": [
-            82,
-            85
+            47,
+            50
           ],
           "tamanho": 4
         }
@@ -12263,8 +12263,8 @@
         "res[i]"
       ],
       "colunas": [
-        80,
-        81
+        45,
+        46
       ],
       "colunas_mensagem": [
         43,
@@ -12273,11 +12273,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 79,
-          "fim0": 81,
+          "inicio0": 44,
+          "fim0": 46,
           "colunas": [
-            80,
-            81
+            45,
+            46
           ],
           "tamanho": 2
         }
@@ -12314,8 +12314,8 @@
         "res[i]"
       ],
       "colunas": [
-        78,
-        79
+        43,
+        44
       ],
       "colunas_mensagem": [
         43,
@@ -12324,11 +12324,11 @@
       "posicoes": [
         {
           "alvo": "res[i]",
-          "inicio0": 77,
-          "fim0": 79,
+          "inicio0": 42,
+          "fim0": 44,
           "colunas": [
-            78,
-            79
+            43,
+            44
           ],
           "tamanho": 2
         }
@@ -48562,45 +48562,25 @@
             1
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 0,
-          "fim0": 1,
-          "colunas": [
-            1,
-            1
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "==",
-            "valor": "1",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "!=",
-            "valor": "9",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "valores": [
+          "1",
+          "2",
+          "3",
+          "6",
+          "7",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 2) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 7) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 2) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) != 7)",
@@ -48634,45 +48614,24 @@
             1
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 0,
-          "fim0": 1,
-          "colunas": [
-            1,
-            1
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "==",
-            "valor": "2",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "!=",
-            "valor": "9",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "valores": [
+          "1",
+          "3",
+          "6",
+          "7",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 7) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 2 && res[j].substring(0, 1) != 7)",
@@ -48706,45 +48665,24 @@
             1
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 0,
-          "fim0": 1,
-          "colunas": [
-            1,
-            1
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "==",
-            "valor": "3",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "!=",
-            "valor": "9",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "valores": [
+          "1",
+          "3",
+          "6",
+          "7",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 7) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 3) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 6) && (res[i].substring(0, 1) == 3 && res[j].substring(0, 1) != 7)",
@@ -48778,45 +48716,22 @@
             1
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 0,
-          "fim0": 1,
-          "colunas": [
-            1,
-            1
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "==",
-            "valor": "6",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "!=",
-            "valor": "9",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "valores": [
+          "1",
+          "7",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 6 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 6 && res[j].substring(0, 1) != 7) && (res[i].substring(0, 1) == 6 && res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 6 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 6 && res[j].substring(0, 1) != 7)",
@@ -48850,45 +48765,21 @@
             1
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 0,
-          "fim0": 1,
-          "colunas": [
-            1,
-            1
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "==",
-            "valor": "7",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 0,
-              "fim0": 1
-            },
-            "operador": "!=",
-            "valor": "9",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 1
+        },
+        "valores": [
+          "1",
+          "9"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 7 && res[j].substring(0, 1) != 1) && (res[i].substring(0, 1) == 7 && res[j].substring(0, 1) != 9)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 7 && res[j].substring(0, 1) != 1)",

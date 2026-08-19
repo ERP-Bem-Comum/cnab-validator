@@ -166,6 +166,37 @@ export interface DslRule {
   severidade: string;
 }
 
+/** Faixa que o arquétipo validou, quando ele tem uma só. */
+function posicaoDoArquetipo(
+  condicao: DslCondition
+): { inicio0: number; fim0: number } | null {
+  switch (condicao.tipo) {
+    case "literal_fixo":
+    case "numerico_branco":
+    case "dominio":
+    case "intervalo":
+    case "modulo_11":
+    case "coerencia_registro":
+      return condicao.posicao;
+    default:
+      return null;
+  }
+}
+
+/** Todas as faixas que a condição lê do alvo, na ordem em que aparecem. */
+function todasAsFaixas(
+  condicao: string,
+  alvo: string
+): { inicio0: number; fim0: number }[] {
+  const escaped = alvo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`${escaped}\\.substring\\((\\d+),\\s*(\\d+)\\)`, "g");
+  const faixas: { inicio0: number; fim0: number }[] = [];
+  for (const m of condicao.matchAll(regex)) {
+    faixas.push({ inicio0: parseInt(m[1], 10), fim0: parseInt(m[2], 10) });
+  }
+  return faixas;
+}
+
 export function extrairPosicoesDaCondicao(
   condicao: string,
   alvo: string = "res[0]"
@@ -222,7 +253,11 @@ export function mapToDsl(
   // Uma parte que lê `res[i + 2]` é sobre outra linha do arquivo: misturar as duas
   // produziria uma faixa que não existe em registro nenhum.
   const faixasDoAlvo = faixasCompostas.filter((f) => f.alvo === alvo);
-  const posicoesCondicao = extrairPosicoesDaCondicao(condicaoPropria, alvo);
+  // A posição do arquétipo é mais confiável que a primeira `substring` do texto:
+  // numa condição que lê duas faixas, a que a regra valida é a que o arquétipo
+  // classificou.
+  const posicoesCondicao =
+    posicaoDoArquetipo(condicao) ?? extrairPosicoesDaCondicao(condicaoPropria, alvo);
   // Sem faixa na condição e sem faixa na mensagem, a regra não é sobre uma posição
   // (comprimento da linha, coerência entre linhas). Publicar uma posição inventada
   // faria um motor de validação ler a coluna errada.
@@ -439,6 +474,7 @@ function inferirCondicaoSimples(
   const { alvo, condicaoGuarda, ambiente, mensagem } = ctx;
   const condicao = stripOuterParens(condicaoPropria);
   const posicaoPropria = extrairPosicoesDaCondicao(condicao, alvo);
+  const posicoesProprias = todasAsFaixas(condicao, alvo);
 
   // Fusão de cadeia: o fonte expressa domínio negado encadeando `if` aninhados sobre
   // a mesma posição, um valor por nível, com uma única mensagem no nível mais interno.
@@ -447,12 +483,12 @@ function inferirCondicaoSimples(
   const cadeia = inferirDominioPermitidos(
     stripOuterParens(ctx.condicaoCompleta),
     clausulasDaGuarda(condicaoGuarda),
-    posicaoPropria
+    posicoesProprias
   );
   if (cadeia) return cadeia;
 
   // Dominio: cadeia de alvo.substring(a,b) != "valor" conectadas por && no mesmo `if`
-  const dominio = inferirDominioPermitidos(condicao, new Set(), posicaoPropria);
+  const dominio = inferirDominioPermitidos(condicao, new Set(), posicoesProprias);
   if (dominio) return dominio;
 
   // Domínio proibido: o fonte também escreve o inverso — uma disjunção de igualdades
@@ -585,13 +621,29 @@ function parseComparacaoDePosicao(clausula: string): ComparacaoDePosicao | null 
   };
 }
 
+/**
+ * Divide uma conjunção até o fim, entrando nos parênteses.
+ *
+ * O fonte agrupa a cadeia de desigualdades dentro de um `if` já parentizado, e o
+ * split de um nível só devolve `(A && B)` como cláusula única — o que esconde a
+ * cadeia do matcher de domínio.
+ */
+function splitConjuncaoProfunda(expr: string): string[] {
+  const partes = splitLogicalClauses(expr, "&&");
+  if (partes.length === 1) return partes;
+  return partes.flatMap((parte) =>
+    // Uma parte que ainda é conjunção vira as suas próprias cláusulas.
+    splitLogicalClauses(parte, "&&").length > 1 ? splitConjuncaoProfunda(parte) : [parte]
+  );
+}
+
 function normalizarClausula(clausula: string): string {
   return stripOuterParens(clausula).replace(/\s+/g, " ").trim();
 }
 
 function clausulasDaGuarda(guarda: string | null): Set<string> {
   if (!guarda) return new Set();
-  return new Set(splitLogicalClauses(guarda, "&&").map(normalizarClausula));
+  return new Set(splitConjuncaoProfunda(guarda).map(normalizarClausula));
 }
 
 /**
@@ -603,13 +655,13 @@ function clausulasDaGuarda(guarda: string | null): Set<string> {
 function inferirDominioPermitidos(
   condicao: string,
   guardas: Set<string>,
-  posicaoPropria: { inicio0: number; fim0: number } | null
+  posicoesProprias: { inicio0: number; fim0: number }[]
 ): DslCondition | null {
   // `a && b || c` é uma disjunção, não uma conjunção: dividir por && daria uma
   // leitura errada da expressão.
   if (splitLogicalClauses(condicao, "||").length > 1) return null;
 
-  const clauses = splitLogicalClauses(condicao, "&&");
+  const clauses = splitConjuncaoProfunda(condicao);
   if (clauses.length < 2) return null;
 
   const parsed = clauses.map((texto) => ({ texto, cmp: parseComparacaoDePosicao(texto) }));
@@ -624,17 +676,17 @@ function inferirDominioPermitidos(
   const candidatos = [...grupos.entries()].filter(([, itens]) => itens.length >= 2);
   if (candidatos.length === 0) return null;
 
-  // Com mais de uma cadeia na mesma conjunção, só a que cobre a posição da condição
-  // própria é a regra em questão; as outras pertencem a outra regra do fonte.
+  // Com mais de uma cadeia na mesma conjunção, só a que cobre uma das faixas lidas
+  // pela condição própria é a regra em questão; as outras pertencem a outra regra
+  // do fonte. A condição própria pode ler mais de uma faixa — o fonte combina o
+  // tipo de serviço com a forma de lançamento no mesmo `if`.
   const escolhido =
-    candidatos.length === 1 && posicaoPropria === null
+    candidatos.length === 1 && posicoesProprias.length === 0
       ? candidatos[0]
       : candidatos.find(([, itens]) => {
           const cmp = itens[0].cmp as ComparacaoDePosicao;
-          return (
-            posicaoPropria !== null &&
-            cmp.inicio0 === posicaoPropria.inicio0 &&
-            cmp.fim0 === posicaoPropria.fim0
+          return posicoesProprias.some(
+            (posicao) => cmp.inicio0 === posicao.inicio0 && cmp.fim0 === posicao.fim0
           );
         });
   if (!escolhido) return null;

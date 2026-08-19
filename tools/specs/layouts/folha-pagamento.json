@@ -5720,45 +5720,21 @@
             8
           ],
           "tamanho": 1
-        },
-        {
-          "alvo": "res[j]",
-          "inicio0": 7,
-          "fim0": 8,
-          "colunas": [
-            8,
-            8
-          ],
-          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "conjuncao",
-        "alvo": "res[i]",
-        "partes": [
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[i]",
-            "posicao": {
-              "inicio0": 7,
-              "fim0": 8
-            },
-            "operador": "==",
-            "valor": "3",
-            "comparacao": "frouxa"
-          },
-          {
-            "tipo": "literal_fixo",
-            "alvo": "res[j]",
-            "posicao": {
-              "inicio0": 7,
-              "fim0": 8
-            },
-            "operador": "!=",
-            "valor": "5",
-            "comparacao": "frouxa"
-          }
-        ]
+        "tipo": "dominio",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 7,
+          "fim0": 8
+        },
+        "valores": [
+          "3",
+          "5"
+        ],
+        "sentido": "permitidos",
+        "comparacao": "frouxa"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 3) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 5)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 3)",

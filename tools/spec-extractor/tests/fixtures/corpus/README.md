@@ -12,6 +12,12 @@ conta aparece aqui — o repositório é público.
 | `multipag-correto.txt` | Arquivo conforme: crédito em conta (câmara `000`) com favorecido no Bradesco (`237`). O runner não produz nenhum achado sobre ele. |
 | `multipag-camara-invalida.txt` | Idêntico ao anterior, com um único campo alterado: câmara `018` (TED) mantendo o favorecido no próprio banco. É o defeito que o gate precisa pegar. |
 | `multipag-truncado.txt` | Header de arquivo íntegro e uma segunda linha cortada em 120 posições, sem lote nem trailer. Exercita o acesso fora dos limites. |
+| `multipag-forma-lancamento-invalida.txt` | Header de lote com serviço de pagamento a fornecedor e forma de lançamento fora da lista que o validador aceita para esse serviço. Um campo diferente do correto. |
+| `multipag-g012-preenchido.txt` | Segmento A com o dígito da agência do favorecido (coluna 043) preenchido, onde o validador exige branco. Um campo diferente do correto. |
+| `multipag-banco-divergente-no-lote.txt` | Dois pares Segmento A/B no mesmo lote, com favorecidos em bancos diferentes. O segundo A usa a câmara de TED e os códigos de finalidade, que são o correto para banco de fora: o único defeito é a mistura de bancos. |
+
+Os três últimos existem para os critérios de aceite da issue #2, e cada um produz
+**exatamente um achado** — o defeito injetado, nada mais.
 
 Estrutura de `multipag-correto.txt` (6 registros de 240 posições):
 
