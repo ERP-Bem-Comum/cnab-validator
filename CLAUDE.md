@@ -59,6 +59,13 @@ index.ts          orquestração: main() (com I/O) e runPipeline() (pura)
 config.ts         URL do validador, layouts do ciclo, MAPEAMENTO_FUNCOES, metadados de layout
 ```
 
+Fora do pipeline, `src/runner/` aplica um spec a um arquivo e devolve achados —
+`expressao.ts` (avaliador das guardas, que a DSL não modela), `condicao.ts` (avaliador dos
+arquétipos) e `index.ts` (orquestração e relatório). É **oráculo de teste, não validador**: sem CLI,
+sem API, sem detecção de layout, sem encoding. Nada é aprovado por omissão — `custom`, condição
+incompleta e guarda não reconhecida viram *não avaliadas* com contagem. Quando `cnab-core` existir, o
+diff entre os dois sobre o mesmo corpus é o teste de paridade.
+
 Pontos que só ficam claros lendo vários arquivos juntos:
 
 - **`config.ts` é a fonte da verdade do escopo.** Adicionar layout = adicionar entrada em

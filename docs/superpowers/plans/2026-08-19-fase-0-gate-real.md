@@ -407,6 +407,36 @@ não validador. Sem CLI pública, sem API, sem detecção de layout, sem tratame
 layout e arquivo já resolvidos e devolve achados. O validador é a Fase 1, em Rust. Quando `cnab-core`
 existir, os dois rodam sobre o mesmo corpus e o diff entre eles é o teste de paridade.
 
+**Entregue em 2026-08-19 (`src/runner/`).** As CA5 e CA6 da #2 estão fechadas por teste executável:
+
+- `multipag-correto.txt` (crédito em conta, câmara `000`, favorecido no `237`) → **nenhum achado**,
+  sobre as 512 regras do spec do Multipag.
+- `multipag-camara-invalida.txt`, que difere do anterior em **um único campo** (câmara `018`, TED,
+  mantendo o favorecido no próprio banco) → **reprovado**, com o achado apontando Segmento A,
+  colunas 018 a 020. Os outros dois achados que aparecem são consequência real do TED (código de
+  finalidade obrigatório), não ruído.
+
+O corpus foi construído usando o próprio runner como oráculo: cada campo foi preenchido até o
+relatório sobre o arquivo correto ficar vazio. Isso significa que **o arquivo sintético satisfaz de
+fato as regras extraídas** — não é um arquivo que passa porque as regras não rodam.
+
+Três decisões de projeto que valem registro:
+
+1. **As guardas não estão na DSL, então precisam de um avaliador próprio.** `src/runner/expressao.ts`
+   é um parser de escopo fechado que reconhece as formas do fonte e **recusa** o resto. Os operadores
+   são aplicados com os do próprio JavaScript: a coerção é o comportamento a reproduzir, não um
+   defeito a corrigir.
+2. **As quatro variáveis de posicionamento do fonte são booleanas, não índices.** `Header_arquivo =
+   res[i].substring(3, 17) == 0` é "a linha corrente é o header". Isso explica
+   `Header_arquivo < i > Trailer_arquivo`, que o JavaScript avalia como `(bool < i) > bool`, com duas
+   coerções: o efeito líquido é "não é trailer, e não é a primeira linha". Funciona quase como a
+   intenção, por acidente.
+3. **Nada é aprovado por omissão.** 22 regras do Multipag têm guarda que referencia variável de
+   dígito calculada (`dv1`, `resto10`, `obterValorCNPJAlfanumerico`) — o spec carrega esse ambiente
+   para a condição, não para a guarda. Elas são reportadas como *não avaliadas*, com contagem, nunca
+   como aprovadas. Fechar esse buraco é publicar o ambiente da guarda no spec, e fica registrado
+   aqui como próximo passo.
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M
