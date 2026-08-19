@@ -874,6 +874,57 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:1054",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1054,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        38,
+        38
+      ],
+      "colunas_mensagem": [
+        33,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 37,
+          "fim0": 38,
+          "colunas": [
+            38,
+            38
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "numerico_branco",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 37,
+          "fim0": 38
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
+        }
+      },
+      "condicao_original": "(res[0].substring(48, 52) != \"PGIT\" && res[0].substring(32, 33) == 3) && (isNaN(res[0].substring(37, 38)) || res[0].substring(37, 38).replace(/\\s/g, '').length != 0)",
+      "condicao_guarda": "(res[0].substring(48, 52) != \"PGIT\" && res[0].substring(32, 33) == 3)",
+      "descricao": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil Multipag. Para processar com layout Folha 240, inserir 'PGIT' nas colunas 049 a 052.",
+      "mensagem": "Linha 1, colunas 033 a 052, Header de arquivo, Código do convênio/Perfil Multipag. Para processar com layout Folha 240, inserir 'PGIT' nas colunas 049 a 052.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:1063",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 1063,
@@ -921,6 +972,54 @@
       "condicao_guarda": "(res[0].substring(48, 52) == \"PGIT\")",
       "descricao": "Linha 1, colunas 049 a 052, Header de arquivo, informado PGIT. Informar contrato Multipag com 6 caracteres nas colunas 33 a 38.",
       "mensagem": "Linha 1, colunas 049 a 052, Header de arquivo, informado PGIT. Informar contrato Multipag com 6 caracteres nas colunas 33 a 38.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1066",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1066,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        33,
+        33
+      ],
+      "colunas_mensagem": [
+        49,
+        52
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 32,
+          "fim0": 33,
+          "colunas": [
+            33,
+            33
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 32,
+          "fim0": 33
+        },
+        "operador": "!=",
+        "valor": "3",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[0].substring(48, 52) == \"PGIT\") && (res[0].substring(32, 33) != 3)",
+      "condicao_guarda": "(res[0].substring(48, 52) == \"PGIT\")",
+      "descricao": "Linha 1, colunas 049 a 052, Header de arquivo, informado PGIT para processamento Multipag. Número do contrato deve ser Multipag iniciando com 3 nas posições 33 a 38.",
+      "mensagem": "Linha 1, colunas 049 a 052, Header de arquivo, informado PGIT para processamento Multipag. Número do contrato deve ser Multipag iniciando com 3 nas posições 33 a 38.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -2824,6 +2923,106 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:1292",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1292,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "operador": "==",
+        "valor": "0001",
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) == \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lote. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1295",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1295,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[j]"
+      ],
+      "colunas": [
+        20,
+        23
+      ],
+      "colunas_mensagem": [
+        18,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[j]",
+          "inicio0": 19,
+          "fim0": 23,
+          "colunas": [
+            20,
+            23
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "intervalo",
+        "alvo": "res[j]",
+        "posicao": {
+          "inicio0": 19,
+          "fim0": 23
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "0001"
+          }
+        ],
+        "comparacao": "estrita"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23)) && (res[j].substring(19, 23) > \"0001\")",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[1].substring(3, 7) == \"0001\") && (res[i].substring(7, 8) == 5 && res[j].substring(7, 8) == 9) && (res[i].substring(3, 7) != res[j].substring(19, 23))",
+      "descricao": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "mensagem": "Linha {linha}, Trailer de arquivo, colunas 018 a 023, informado {valor} lotes. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:1315",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 1315,
@@ -3325,6 +3524,51 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:1350",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1350,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) != 9) && (res[i].substring(0, 3) != 237)",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) != 9)",
+      "descricao": "Linha {linha}, Colunas 001 a 003, deve iniciar com 237.",
+      "mensagem": "Linha {linha}, Colunas 001 a 003, deve iniciar com 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:1383",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 1383,
@@ -3567,6 +3811,54 @@
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
       "descricao": "Linha {linha}, colunas 014 a 016, Header de lote, número da versão do layout inválida. Informar 040.",
       "mensagem": "Linha {linha}, colunas 014 a 016, Header de lote, número da versão do layout inválida. Informar 040.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1451",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1451,
+      "registro": "header-lote",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        10,
+        11
+      ],
+      "colunas_mensagem": [
+        12,
+        13
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 9,
+          "fim0": 11,
+          "colunas": [
+            10,
+            11
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 9,
+          "fim0": 11
+        },
+        "operador": "!=",
+        "valor": "30",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(9, 11) != 30)",
+      "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
+      "descricao": "Linha {linha}, colunas 012 a 013, Header de lote, Tipo de serviço diferente de salários. Verifique.",
+      "mensagem": "Linha {linha}, colunas 012 a 013, Header de lote, Tipo de serviço diferente de salários. Verifique.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -5668,6 +5960,140 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:1722",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1722,
+      "registro": "nao-classificado",
+      "registro_referenciado": null,
+      "registro_origem": null,
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        8,
+        9
+      ],
+      "colunas_mensagem": [
+        9,
+        13
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 9,
+          "colunas": [
+            9,
+            9
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 7,
+              "fim0": 8
+            },
+            "operador": "==",
+            "valor": "1",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 9
+            },
+            "operador": "==",
+            "valor": "C",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 8,
+              "fim0": 13
+            },
+            "operador": "!=",
+            "valor": "00001",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\" && res[j].substring(8, 13) != 00001)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo)",
+      "descricao": "Linha {linha} , colunas 009 a 013, sequencial de registro deve iniciar com 00001.",
+      "mensagem": "Linha {linha} , colunas 009 a 013, sequencial de registro deve iniciar com 00001.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1727",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1727,
+      "registro": "detalhe",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        9,
+        13
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 8,
+          "fim0": 13,
+          "colunas": [
+            9,
+            13
+          ],
+          "tamanho": 5
+        }
+      ],
+      "condicao": {
+        "tipo": "custom",
+        "alvo": "res[i]"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(8, 13) != 0)",
+      "descricao": "Linha {linha}, colunas 009 a 013, sequencial de registro fora de sequencia.",
+      "mensagem": "Linha {linha}, colunas 009 a 013, sequencial de registro fora de sequencia.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:1735",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 1735,
@@ -7247,6 +7673,51 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:1888",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1888,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        15,
+        15
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 14,
+          "fim0": 15,
+          "colunas": [
+            15,
+            15
+          ],
+          "tamanho": 1
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 14,
+          "fim0": 15
+        },
+        "operador": "!=",
+        "valor": "0",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(14, 15) != 0)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, Colunas 015 a 015, segmento A, Tipo de movimento diferente de inclusão. Verifique.",
+      "mensagem": "Linha {linha}, Colunas 015 a 015, segmento A, Tipo de movimento diferente de inclusão. Verifique.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:1892",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 1892,
@@ -7435,6 +7906,231 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) != 000) && (res[i].substring(17, 20) != '018')",
       "descricao": "Linha {linha}, colunas 018 a 020, segmento A, Código câmara centralizadora inválida.",
       "mensagem": "Linha {linha}, colunas 018 a 020, segmento A, Código câmara centralizadora inválida.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1919",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1919,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        18,
+        23
+      ],
+      "colunas_mensagem": [
+        21,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 17,
+          "fim0": 20,
+          "colunas": [
+            18,
+            20
+          ],
+          "tamanho": 3
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 23,
+          "colunas": [
+            21,
+            23
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 20
+            },
+            "operador": "==",
+            "valor": "018",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 23
+            },
+            "operador": "==",
+            "valor": "237",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == '018' && res[i].substring(20, 23) == 237)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco favorecido para DOC/TED, deve ser diferente de 237.",
+      "mensagem": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco favorecido para DOC/TED, deve ser diferente de 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1921",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1921,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        18,
+        23
+      ],
+      "colunas_mensagem": [
+        21,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 17,
+          "fim0": 20,
+          "colunas": [
+            18,
+            20
+          ],
+          "tamanho": 3
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 23,
+          "colunas": [
+            21,
+            23
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 20
+            },
+            "operador": "==",
+            "valor": "700",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 23
+            },
+            "operador": "==",
+            "valor": "237",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == 700 && res[i].substring(20, 23) == 237)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco favorecido para DOC/TED, deve ser diferente de 237.",
+      "mensagem": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco favorecido para DOC/TED, deve ser diferente de 237.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:1923",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 1923,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        18,
+        23
+      ],
+      "colunas_mensagem": [
+        21,
+        23
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 17,
+          "fim0": 20,
+          "colunas": [
+            18,
+            20
+          ],
+          "tamanho": 3
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 20,
+          "fim0": 23,
+          "colunas": [
+            21,
+            23
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 20
+            },
+            "operador": "==",
+            "valor": "000",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 23
+            },
+            "operador": "!=",
+            "valor": "237",
+            "comparacao": "frouxa"
+          }
+        ]
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == 000 && res[i].substring(20, 23) != 237)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco para crédito em conta diferente de 237.",
+      "mensagem": "Linha {linha}, colunas 021 a 023, segmento A, Código do banco para crédito em conta diferente de 237.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -8660,6 +9356,159 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha240:2096",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2096,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        148,
+        151
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 147,
+          "fim0": 151,
+          "colunas": [
+            148,
+            151
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 97,
+          "fim0": 101
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) > res[i].substring(97, 101))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:2100",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2100,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        146,
+        147
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 145,
+          "fim0": 147,
+          "colunas": [
+            146,
+            147
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 95,
+          "fim0": 97
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101)) && (res[0].substring(145, 147) > res[i].substring(95, 97))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101))",
+      "descricao": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo. {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo. {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:2104",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2104,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        144,
+        145
+      ],
+      "colunas_mensagem": [
+        94,
+        101
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 143,
+          "fim0": 145,
+          "colunas": [
+            144,
+            145
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 93,
+          "fim0": 95
+        }
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97)) && (res[0].substring(143, 145) > res[i].substring(93, 95))",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[0].substring(147, 151) == res[i].substring(97, 101) && res[0].substring(145, 147) == res[i].substring(95, 97))",
+      "descricao": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo. {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 094 a 101, segmento A, Data de pagamento inferior a data de gravação do arquivo. {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha240:2109",
       "funcao_origem": "validarDadosFolha240",
       "linha_fonte": 2109,
@@ -9106,8 +9955,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 154,
+          "fim0": 162
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 93,
+          "fim0": 101
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0) && (res[i].substring(154, 162) != res[i].substring(93, 101))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(154, 162) != 0)",
@@ -9144,8 +10003,18 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 162,
+          "fim0": 177
+        },
+        "operador": "!=",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 119,
+          "fim0": 134
+        }
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0) && (res[i].substring(162, 177) != res[i].substring(119, 134))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(162, 177) != 0)",
@@ -9199,6 +10068,51 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
       "descricao": "Linha {linha}, colunas 163 a 177, segmento A, Valor real efetivação do pagamento em branco. Informar zeros.",
       "mensagem": "Linha {linha}, colunas 163 a 177, segmento A, Valor real efetivação do pagamento em branco. Informar zeros.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:2164",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2164,
+      "registro": "segmento-a",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        178,
+        217
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 177,
+          "fim0": 217,
+          "colunas": [
+            178,
+            217
+          ],
+          "tamanho": 40
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 177,
+          "fim0": 217
+        },
+        "operador": "!=",
+        "valor": "0",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(177, 217) != 0)",
+      "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
+      "descricao": "Linha {linha}, colunas 178 a 217, segmento A, campo destinado para informações SIAPE. Vide descrição G031 do layout técnico.",
+      "mensagem": "Linha {linha}, colunas 178 a 217, segmento A, campo destinado para informações SIAPE. Vide descrição G031 do layout técnico.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -10667,6 +11581,51 @@
       "condicao_guarda": "(res[m].substring(7, 8) == 9)",
       "descricao": "Linha {valor}, Trailer de Arquivo, tamanho do registro inválido ou sem quebra de linha.",
       "mensagem": "Linha {valor}, Trailer de Arquivo, tamanho do registro inválido ou sem quebra de linha.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha240:2376",
+      "funcao_origem": "validarDadosFolha240",
+      "linha_fonte": 2376,
+      "registro": "trailer-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[m]"
+      ],
+      "colunas": [
+        1,
+        3
+      ],
+      "colunas_mensagem": null,
+      "posicoes": [
+        {
+          "alvo": "res[m]",
+          "inicio0": 0,
+          "fim0": 3,
+          "colunas": [
+            1,
+            3
+          ],
+          "tamanho": 3
+        }
+      ],
+      "condicao": {
+        "tipo": "literal_fixo",
+        "alvo": "res[m]",
+        "posicao": {
+          "inicio0": 0,
+          "fim0": 3
+        },
+        "operador": "!=",
+        "valor": "237",
+        "comparacao": "frouxa"
+      },
+      "condicao_original": "(res[m].substring(7, 8) == 9) && (res[m].substring(0, 3) != 237)",
+      "condicao_guarda": "(res[m].substring(7, 8) == 9)",
+      "descricao": "Linha {valor}, Trailer de Arquivo, colunas 001 a 003, deve iniciar com 237.",
+      "mensagem": "Linha {valor}, Trailer de Arquivo, colunas 001 a 003, deve iniciar com 237.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -12493,6 +13452,159 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha200:257",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 257,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        99,
+        102
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 98,
+          "fim0": 102,
+          "colunas": [
+            99,
+            102
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 98,
+          "fim0": 102
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 114,
+          "fim0": 118
+        }
+      },
+      "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) > res[0].substring(114, 118))",
+      "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
+      "descricao": "Linha {linha}, colunas 111 A 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 A 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:261",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 261,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        97,
+        98
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 112,
+          "fim0": 114
+        }
+      },
+      "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118)) && (res[0].substring(96, 98) > res[0].substring(112, 114))",
+      "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118))",
+      "descricao": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:265",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 265,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        95,
+        96
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 94,
+          "fim0": 96,
+          "colunas": [
+            95,
+            96
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 110,
+          "fim0": 112
+        }
+      },
+      "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118) && res[0].substring(96, 98) == res[0].substring(112, 114)) && (res[0].substring(94, 96) > res[0].substring(110, 112))",
+      "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(98, 102) == res[0].substring(114, 118) && res[0].substring(96, 98) == res[0].substring(112, 114))",
+      "descricao": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha200:271",
       "funcao_origem": "validarDadosFolha200",
       "linha_fonte": 271,
@@ -13165,6 +14277,159 @@
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
       "descricao": "Linha 1, colunas 109 a 114, Header de arquivo, Data de débito inválida",
       "mensagem": "Linha 1, colunas 109 a 114, Header de arquivo, Data de débito inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:326",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 326,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        99,
+        100
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 98,
+          "fim0": 100
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 112,
+          "fim0": 114
+        }
+      },
+      "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) > res[0].substring(112, 114))",
+      "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:330",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 330,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        97,
+        98
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 110,
+          "fim0": 112
+        }
+      },
+      "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) == res[0].substring(112, 114)) && (res[0].substring(96, 98) > res[0].substring(110, 112))",
+      "condicao_guarda": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 100) == res[0].substring(112, 114))",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:334",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 334,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "mensagem",
+      "registro_alvo": [
+        "res[0]"
+      ],
+      "colunas": [
+        95,
+        96
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[0]",
+          "inicio0": 94,
+          "fim0": 96,
+          "colunas": [
+            95,
+            96
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "operador": ">",
+        "outro": "res[0]",
+        "posicao_outro": {
+          "inicio0": 108,
+          "fim0": 110
+        }
+      },
+      "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 102) == res[0].substring(112, 114) && res[0].substring(96, 98) == res[0].substring(110, 112)) && (res[0].substring(94, 96) > res[0].substring(108, 110))",
+      "condicao_guarda": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(98, 102) == res[0].substring(112, 114) && res[0].substring(96, 98) == res[0].substring(110, 112))",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
@@ -15042,6 +16307,159 @@
       "severidade": "erro"
     },
     {
+      "id": "folha-pagamento:validarDadosFolha200:522",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 522,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        99,
+        102
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 98,
+          "fim0": 102,
+          "colunas": [
+            99,
+            102
+          ],
+          "tamanho": 4
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 98,
+          "fim0": 102
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 114,
+          "fim0": 118
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) > res[i].substring(114, 118))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
+      "descricao": "Linha {linha}, colunas 111 A 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 A 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:526",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 526,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        97,
+        98
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 112,
+          "fim0": 114
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118)) && (res[i].substring(96, 98) > res[i].substring(112, 114))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118))",
+      "descricao": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:530",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 530,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        95,
+        96
+      ],
+      "colunas_mensagem": [
+        111,
+        118
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 94,
+          "fim0": 96,
+          "colunas": [
+            95,
+            96
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 110,
+          "fim0": 112
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118) && res[i].substring(96, 98) == res[i].substring(112, 114)) && (res[i].substring(94, 96) > res[i].substring(110, 112))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(98, 102) == res[i].substring(114, 118) && res[i].substring(96, 98) == res[i].substring(112, 114))",
+      "descricao": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 111 a 118, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
       "id": "folha-pagamento:validarDadosFolha200:536",
       "funcao_origem": "validarDadosFolha200",
       "linha_fonte": 536,
@@ -15714,6 +17132,159 @@
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
       "descricao": "Linha {linha}, colunas 109 a 114, Header de arquivo, Data de débito inválida",
       "mensagem": "Linha {linha}, colunas 109 a 114, Header de arquivo, Data de débito inválida",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:591",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 591,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        99,
+        100
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 98,
+          "fim0": 100,
+          "colunas": [
+            99,
+            100
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 98,
+          "fim0": 100
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 112,
+          "fim0": 114
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) > res[i].substring(112, 114))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:595",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 595,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        97,
+        98
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 96,
+          "fim0": 98,
+          "colunas": [
+            97,
+            98
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 110,
+          "fim0": 112
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) == res[i].substring(112, 114)) && (res[i].substring(96, 98) > res[i].substring(110, 112))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 100) == res[i].substring(112, 114))",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "natureza": "validacao-estrutural",
+      "severidade": "erro"
+    },
+    {
+      "id": "folha-pagamento:validarDadosFolha200:599",
+      "funcao_origem": "validarDadosFolha200",
+      "linha_fonte": 599,
+      "registro": "header-arquivo",
+      "registro_referenciado": null,
+      "registro_origem": "guarda",
+      "registro_alvo": [
+        "res[i]"
+      ],
+      "colunas": [
+        95,
+        96
+      ],
+      "colunas_mensagem": [
+        109,
+        114
+      ],
+      "posicoes": [
+        {
+          "alvo": "res[i]",
+          "inicio0": 94,
+          "fim0": 96,
+          "colunas": [
+            95,
+            96
+          ],
+          "tamanho": 2
+        }
+      ],
+      "condicao": {
+        "tipo": "coerencia_registro",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "operador": ">",
+        "outro": "res[i]",
+        "posicao_outro": {
+          "inicio0": 108,
+          "fim0": 110
+        }
+      },
+      "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 102) == res[i].substring(112, 114) && res[i].substring(96, 98) == res[i].substring(110, 112)) && (res[i].substring(94, 96) > res[i].substring(108, 110))",
+      "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(98, 102) == res[i].substring(112, 114) && res[i].substring(96, 98) == res[i].substring(110, 112))",
+      "descricao": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
+      "mensagem": "Linha {linha}, colunas 109 A 114, Header de arquivo, Data de pagamento inferior a data de gravação do arquivo {valor}/{valor}/{valor}. Confirme.",
       "natureza": "validacao-estrutural",
       "severidade": "erro"
     },
