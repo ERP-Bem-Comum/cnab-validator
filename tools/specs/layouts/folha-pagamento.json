@@ -266,8 +266,122 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 30,
+          "fim0": 31
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 9,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 8,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 7,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": "obterValorCNPJAlfanumerico",
+        "variavel": "dv1",
+        "documento": "cnpj"
       },
       "condicao_original": "(res[0].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[0].substring(30, 31)) != dv1)",
       "condicao_guarda": "(res[0].substring(17, 18) == 2)",
@@ -307,8 +421,129 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 32
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 9,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 8,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 7,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 30,
+            "fim0": 31,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": "obterValorCNPJAlfanumerico",
+        "variavel": "dv2",
+        "documento": "cnpj"
       },
       "condicao_original": "(res[0].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[0].substring(30, 31)) == dv1) && (obterValorCNPJAlfanumerico(res[0].substring(31, 32)) != dv2)",
       "condicao_guarda": "(res[0].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[0].substring(30, 31)) == dv1)",
@@ -888,8 +1123,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 57,
+          "fim0": 58
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 53,
+            "fim0": 54,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 54,
+            "fim0": 55,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 55,
+            "fim0": 56,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 56,
+            "fim0": 57,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(isNaN(res[0].substring(57, 58)) || res[0].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[0].substring(57, 58) != \"P\") && (res[0].substring(57, 58) != dva)",
       "condicao_guarda": "(isNaN(res[0].substring(57, 58)) || res[0].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[0].substring(57, 58) != \"P\")",
@@ -926,8 +1219,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 57,
+          "fim0": 58
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 53,
+            "fim0": 54,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 54,
+            "fim0": 55,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 55,
+            "fim0": 56,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 56,
+            "fim0": 57,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(isNaN(res[0].substring(57, 58)) || res[0].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[0].substring(57, 58) == \"P\") && (res[0].substring(57, 58) != dva)",
       "condicao_guarda": "(isNaN(res[0].substring(57, 58)) || res[0].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[0].substring(57, 58) == \"P\")",
@@ -1189,8 +1540,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(70, 71) >= 'a' && res[0].substring(70, 71) <= 'z'",
       "condicao_guarda": null,
@@ -1227,8 +1593,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 63,
+            "fim0": 64,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 64,
+            "fim0": 65,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 65,
+            "fim0": 66,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 66,
+            "fim0": 67,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 67,
+            "fim0": 68,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 68,
+            "fim0": 69,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 69,
+            "fim0": 70,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[0].substring(70, 71) != \"P\") && (res[0].substring(70, 71) != dvc)",
       "condicao_guarda": "(res[0].substring(70, 71) != \"P\")",
@@ -1265,8 +1710,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 63,
+            "fim0": 64,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 64,
+            "fim0": 65,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 65,
+            "fim0": 66,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 66,
+            "fim0": 67,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 67,
+            "fim0": 68,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 68,
+            "fim0": 69,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 69,
+            "fim0": 70,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[0].substring(70, 71) == \"P\") && (res[0].substring(70, 71) != dvc)",
       "condicao_guarda": "(res[0].substring(70, 71) == \"P\")",
@@ -1348,8 +1872,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 72,
+          "fim0": 102
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(72, 102) >= 'a') && (res[0].substring(72, 102) <= 'z')",
       "condicao_guarda": null,
@@ -1431,8 +1970,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 102,
+          "fim0": 132
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(102, 132) >= 'a') && (res[0].substring(102, 132) <= 'z')",
       "condicao_guarda": null,
@@ -1772,8 +2326,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 143,
+          "fim0": 145
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(143, 145) > \"31\"",
       "condicao_guarda": null,
@@ -1813,8 +2378,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 145,
+          "fim0": 147
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(145, 147) > \"12\"",
       "condicao_guarda": null,
@@ -1854,8 +2430,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 147,
+          "fim0": 151
+        },
+        "limites": [
+          {
+            "operador": "<",
+            "valor": "2017"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(147, 151) < \"2017\"",
       "condicao_guarda": null,
@@ -2765,8 +3352,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 8,
+          "fim0": 9
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1) && ((res[i].substring(8, 9) >= 'a') && (res[i].substring(8, 9) <= 'z'))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1)",
@@ -3092,8 +3694,122 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 30,
+          "fim0": 31
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 9,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 8,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 7,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": "obterValorCNPJAlfanumerico",
+        "variavel": "dv1",
+        "documento": "cnpj"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[i].substring(30, 31)) != dv1)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) == 2)",
@@ -3133,8 +3849,129 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 32
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 9,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 8,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 7,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 6,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 5,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 4,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 3,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 30,
+            "fim0": 31,
+            "peso": 2,
+            "transformacao": "obterValorCNPJAlfanumerico"
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": "obterValorCNPJAlfanumerico",
+        "variavel": "dv2",
+        "documento": "cnpj"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[i].substring(30, 31)) == dv1) && (obterValorCNPJAlfanumerico(res[i].substring(31, 32)) != dv2)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(17, 18) == 2) && (obterValorCNPJAlfanumerico(res[i].substring(30, 31)) == dv1)",
@@ -3612,8 +4449,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 57,
+          "fim0": 58
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 53,
+            "fim0": 54,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 54,
+            "fim0": 55,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 55,
+            "fim0": 56,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 56,
+            "fim0": 57,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(57, 58)) || res[i].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[i].substring(57, 58) != \"P\") && (res[i].substring(57, 58) != dva)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(57, 58)) || res[i].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[i].substring(57, 58) != \"P\")",
@@ -3650,8 +4545,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 57,
+          "fim0": 58
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 53,
+            "fim0": 54,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 54,
+            "fim0": 55,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 55,
+            "fim0": 56,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 56,
+            "fim0": 57,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(57, 58)) || res[i].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[i].substring(57, 58) == \"P\") && (res[i].substring(57, 58) != dva)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (isNaN(res[i].substring(57, 58)) || res[i].substring(57, 58).replace(/\\s/g, '').length != 0) && (res[i].substring(57, 58) == \"P\")",
@@ -3913,8 +4866,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) >= 'a' && res[i].substring(70, 71) <= 'z')",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -3951,8 +4919,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 63,
+            "fim0": 64,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 64,
+            "fim0": 65,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 65,
+            "fim0": 66,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 66,
+            "fim0": 67,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 67,
+            "fim0": 68,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 68,
+            "fim0": 69,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 69,
+            "fim0": 70,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) != \"P\") && (res[i].substring(70, 71) != dvc)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) != \"P\")",
@@ -3989,8 +5036,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 70,
+          "fim0": 71
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 63,
+            "fim0": 64,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 64,
+            "fim0": 65,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 65,
+            "fim0": 66,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 66,
+            "fim0": 67,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 67,
+            "fim0": 68,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 68,
+            "fim0": 69,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 69,
+            "fim0": 70,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) == \"P\") && (res[i].substring(70, 71) != dvc)",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && (res[i].substring(70, 71) == \"P\")",
@@ -4072,8 +5198,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 72,
+          "fim0": 102
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\") && ((res[i].substring(72, 102) >= 'a') && (res[i].substring(72, 102) <= 'z'))",
       "condicao_guarda": "(res[i].substring(7, 8) == 1 && res[i].substring(8, 9) == \"C\")",
@@ -4287,11 +5428,45 @@
             8
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 7,
+              "fim0": 8
+            },
+            "operador": "==",
+            "valor": "3",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 7,
+              "fim0": 8
+            },
+            "operador": "!=",
+            "valor": "5",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 3) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 5)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 3 && res[j].substring(7, 8) != 3)",
@@ -4723,17 +5898,502 @@
         {
           "alvo": "res[i]",
           "inicio0": 23,
+          "fim0": 24,
+          "colunas": [
+            24,
+            24
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 23,
           "fim0": 41,
           "colunas": [
             24,
             41
           ],
           "tamanho": 18
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 24,
+          "fim0": 25,
+          "colunas": [
+            25,
+            25
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 25,
+          "fim0": 26,
+          "colunas": [
+            26,
+            26
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 26,
+          "fim0": 27,
+          "colunas": [
+            27,
+            27
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 27,
+          "fim0": 28,
+          "colunas": [
+            28,
+            28
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 28,
+          "fim0": 29,
+          "colunas": [
+            29,
+            29
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 29,
+          "fim0": 30,
+          "colunas": [
+            30,
+            30
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 30,
+          "fim0": 31,
+          "colunas": [
+            31,
+            31
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 31,
+          "fim0": 32,
+          "colunas": [
+            32,
+            32
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 32,
+          "fim0": 33,
+          "colunas": [
+            33,
+            33
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 33,
+          "fim0": 34,
+          "colunas": [
+            34,
+            34
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 34,
+          "fim0": 35,
+          "colunas": [
+            35,
+            35
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 35,
+          "fim0": 36,
+          "colunas": [
+            36,
+            36
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 36,
+          "fim0": 37,
+          "colunas": [
+            37,
+            37
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 37,
+          "fim0": 38,
+          "colunas": [
+            38,
+            38
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 38,
+          "fim0": 39,
+          "colunas": [
+            39,
+            39
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 39,
+          "fim0": 40,
+          "colunas": [
+            40,
+            40
+          ],
+          "tamanho": 1
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 40,
+          "fim0": 41,
+          "colunas": [
+            41,
+            41
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "disjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "disjuncao",
+            "alvo": "res[i]",
+            "partes": [
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 23,
+                  "fim0": 41
+                },
+                "exige": "numerico",
+                "residuo": {
+                  "padrao": "\\d",
+                  "operador": "==",
+                  "valor": 1
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 23,
+                  "fim0": 41
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "literal_fixo",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 23,
+                  "fim0": 41
+                },
+                "operador": "==",
+                "valor": "0",
+                "comparacao": "frouxa"
+              }
+            ]
+          },
+          {
+            "tipo": "disjuncao",
+            "alvo": "res[i]",
+            "partes": [
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 23,
+                  "fim0": 24
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 24,
+                  "fim0": 25
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 25,
+                  "fim0": 26
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 26,
+                  "fim0": 27
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 27,
+                  "fim0": 28
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 28,
+                  "fim0": 29
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 29,
+                  "fim0": 30
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 30,
+                  "fim0": 31
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 31,
+                  "fim0": 32
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 32,
+                  "fim0": 33
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 33,
+                  "fim0": 34
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 34,
+                  "fim0": 35
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 35,
+                  "fim0": 36
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 36,
+                  "fim0": 37
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 37,
+                  "fim0": 38
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 38,
+                  "fim0": 39
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 39,
+                  "fim0": 40
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              },
+              {
+                "tipo": "numerico_branco",
+                "alvo": "res[i]",
+                "posicao": {
+                  "inicio0": 40,
+                  "fim0": 41
+                },
+                "exige": "numerico_preenchido",
+                "residuo": {
+                  "padrao": "\\s",
+                  "operador": "==",
+                  "valor": 0
+                }
+              }
+            ]
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5) && ((isNaN(res[i].substring(23, 41)) || res[i].substring(23, 41).replace(/\\d/g, '').length == 1 || isNaN(res[i].substring(23, 41)) || res[i].substring(23, 41).replace(/\\s/g, '').length == 0 || res[i].substring(23, 41) == 0) ||\r\n                        ((isNaN(res[i].substring(23, 24)) || res[i].substring(23, 24).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(24, 25)) || res[i].substring(24, 25).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(25, 26)) || res[i].substring(25, 26).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(26, 27)) || res[i].substring(26, 27).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(27, 28)) || res[i].substring(27, 28).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(29, 30)) || res[i].substring(29, 30).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(30, 31)) || res[i].substring(30, 31).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(31, 32)) || res[i].substring(31, 32).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(32, 33)) || res[i].substring(32, 33).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(33, 34)) || res[i].substring(33, 34).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(34, 35)) || res[i].substring(34, 35).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(35, 36)) || res[i].substring(35, 36).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(36, 37)) || res[i].substring(36, 37).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(37, 38)) || res[i].substring(37, 38).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(38, 39)) || res[i].substring(38, 39).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(39, 40)) || res[i].substring(39, 40).replace(/\\s/g, '').length == 0) ||\r\n                            (isNaN(res[i].substring(40, 41)) || res[i].substring(40, 41).replace(/\\s/g, '').length == 0)))",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(7, 8) == 5)",
@@ -5319,11 +6979,45 @@
             14
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 13,
+          "fim0": 14,
+          "colunas": [
+            14,
+            14
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 13,
+              "fim0": 14
+            },
+            "operador": "==",
+            "valor": "A",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 13,
+              "fim0": 14
+            },
+            "operador": "!=",
+            "valor": "B",
+            "comparacao": "estrita"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3) && (res[i].substring(13, 14) == \"A\" && res[j].substring(13, 14) != \"B\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3)",
@@ -5357,11 +7051,45 @@
             14
           ],
           "tamanho": 1
+        },
+        {
+          "alvo": "res[j]",
+          "inicio0": 13,
+          "fim0": 14,
+          "colunas": [
+            14,
+            14
+          ],
+          "tamanho": 1
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 13,
+              "fim0": 14
+            },
+            "operador": "==",
+            "valor": "B",
+            "comparacao": "estrita"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[j]",
+            "posicao": {
+              "inicio0": 13,
+              "fim0": 14
+            },
+            "operador": "==",
+            "valor": "B",
+            "comparacao": "estrita"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3) && (res[i].substring(13, 14) == \"B\" && res[j].substring(13, 14) == \"B\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(7, 8) == 3)",
@@ -5878,8 +7606,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 28,
+          "fim0": 29
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length != 0) && (res[i].substring(28, 29) != \"P\") && (res[i].substring(28, 29) != dva)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length != 0) && (res[i].substring(28, 29) != \"P\")",
@@ -5916,8 +7702,66 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 28,
+          "fim0": 29
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dva",
+        "documento": "agencia"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length != 0) && (res[i].substring(28, 29) == \"P\") && (res[i].substring(28, 29) != dva)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (isNaN(res[i].substring(28, 29)) || res[i].substring(28, 29).replace(/\\s/g, '').length != 0) && (res[i].substring(28, 29) == \"P\")",
@@ -6152,8 +7996,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 41,
+          "fim0": 42
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 34,
+            "fim0": 35,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 35,
+            "fim0": 36,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 36,
+            "fim0": 37,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 37,
+            "fim0": 38,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 38,
+            "fim0": 39,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 39,
+            "fim0": 40,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 40,
+            "fim0": 41,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) != \"P\") && (res[i].substring(41, 42) != dvc)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) != \"P\")",
@@ -6190,8 +8113,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 41,
+          "fim0": 42
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 34,
+            "fim0": 35,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 35,
+            "fim0": 36,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 36,
+            "fim0": 37,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 37,
+            "fim0": 38,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 38,
+            "fim0": 39,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 39,
+            "fim0": 40,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 40,
+            "fim0": 41,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) == \"P\") && (res[i].substring(41, 42) != dvc)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(20, 23) == 237) && (res[i].substring(41, 42) == \"P\")",
@@ -6231,8 +8233,23 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 41,
+          "fim0": 42
+        },
+        "limites": [
+          {
+            "operador": ">=",
+            "valor": "a"
+          },
+          {
+            "operador": "<=",
+            "valor": "z"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(41, 42) >= 'a' && res[i].substring(41, 42) <= 'z')",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -6569,8 +8586,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 93,
+          "fim0": 95
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(93, 95) > \"31\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -6610,8 +8638,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 95,
+          "fim0": 97
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(95, 97) > \"12\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -6927,7 +8966,7 @@
       ],
       "colunas": [
         18,
-        20
+        134
       ],
       "colunas_mensagem": [
         120,
@@ -6943,11 +8982,49 @@
             20
           ],
           "tamanho": 3
+        },
+        {
+          "alvo": "res[i]",
+          "inicio0": 119,
+          "fim0": 134,
+          "colunas": [
+            120,
+            134
+          ],
+          "tamanho": 15
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 17,
+              "fim0": 20
+            },
+            "operador": "==",
+            "valor": "700",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "intervalo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 119,
+              "fim0": 134
+            },
+            "limites": [
+              {
+                "operador": ">",
+                "valor": "499999"
+              }
+            ],
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\") && (res[i].substring(17, 20) == 700 && res[i].substring(119, 134) > 499999)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"A\")",
@@ -7487,8 +9564,122 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 30,
+          "fim0": 31
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 9,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 8,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dv1",
+        "documento": "cnpj"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) == 2) && (res[i].substring(30, 31) != dv1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) == 2)",
@@ -7528,8 +9719,129 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 31,
+          "fim0": 32
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 18,
+            "fim0": 19,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 19,
+            "fim0": 20,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 20,
+            "fim0": 21,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 21,
+            "fim0": 22,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 22,
+            "fim0": 23,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 23,
+            "fim0": 24,
+            "peso": 9,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 24,
+            "fim0": 25,
+            "peso": 8,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 25,
+            "fim0": 26,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 26,
+            "fim0": 27,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 27,
+            "fim0": 28,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 28,
+            "fim0": 29,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 29,
+            "fim0": 30,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 30,
+            "fim0": 31,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": null,
+            "resto": null,
+            "valor": null,
+            "expressao": "11 - resto"
+          },
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "0",
+            "expressao": "0"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dv2",
+        "documento": "cnpj"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) == 2) && (res[i].substring(30, 31) == dv1) && (res[i].substring(31, 32) != dv2)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(17, 18) == 2) && (res[i].substring(30, 31) == dv1)",
@@ -7894,8 +10206,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 127,
+          "fim0": 129
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(127, 129) > \"31\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -7935,8 +10258,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 129,
+          "fim0": 131
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\") && (res[i].substring(129, 131) > \"12\")",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"B\")",
@@ -9021,8 +11355,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "modulo_11",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 43,
+          "fim0": 44
+        },
+        "base": [
+          {
+            "alvo": "res[0]",
+            "inicio0": 36,
+            "fim0": 37,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 37,
+            "fim0": 38,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 38,
+            "fim0": 39,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 39,
+            "fim0": 40,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 40,
+            "fim0": 41,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 41,
+            "fim0": 42,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[0]",
+            "inicio0": 42,
+            "fim0": 43,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "res[0].substring(43, 44) != dvc",
       "condicao_guarda": null,
@@ -9650,8 +12063,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(94, 96) > \"31\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -9691,8 +12115,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(96, 98) > \"12\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -9984,8 +12419,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 112
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(110, 112) > \"31\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -10025,8 +12471,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 112,
+          "fim0": 114
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\") && (res[0].substring(112, 114) > \"12\")",
       "condicao_guarda": "(isNaN(res[0].substring(119, 120)) || res[0].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[0].substring(119, 120) == \"N\")",
@@ -10303,8 +12760,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(94, 96) > \"31\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -10344,8 +12812,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(96, 98) > \"12\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -10616,8 +13095,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 108,
+          "fim0": 110
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(108, 110) > \"31\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -10657,8 +13147,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[0]"
+        "tipo": "intervalo",
+        "alvo": "res[0]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 112
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[0].substring(119, 120) != \"N\") && (res[0].substring(110, 112) > \"12\")",
       "condicao_guarda": "(res[0].substring(119, 120) != \"N\")",
@@ -11403,8 +13904,87 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 43,
+          "fim0": 44
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 36,
+            "fim0": 37,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 37,
+            "fim0": 38,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 38,
+            "fim0": 39,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 39,
+            "fim0": 40,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 40,
+            "fim0": 41,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 41,
+            "fim0": 42,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 42,
+            "fim0": 43,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(43, 44) != dvc)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0)",
@@ -12032,8 +14612,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(94, 96) > \"31\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -12073,8 +14664,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(96, 98) > \"12\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -12366,8 +14968,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 112
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(110, 112) > \"31\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -12407,8 +15020,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 112,
+          "fim0": 114
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\") && (res[i].substring(112, 114) > \"12\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (isNaN(res[i].substring(119, 120)) || res[i].substring(119, 120).replace(/\\s/g, '').length != 0) && (res[i].substring(119, 120) == \"N\")",
@@ -12685,8 +15309,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 94,
+          "fim0": 96
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(94, 96) > \"31\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -12726,8 +15361,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 96,
+          "fim0": 98
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(96, 98) > \"12\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -12998,8 +15644,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 108,
+          "fim0": 110
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "31"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(108, 110) > \"31\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",
@@ -13039,8 +15696,19 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "intervalo",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 110,
+          "fim0": 112
+        },
+        "limites": [
+          {
+            "operador": ">",
+            "valor": "12"
+          }
+        ],
+        "comparacao": "estrita"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\") && (res[i].substring(110, 112) > \"12\")",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (i > 0) && (isNaN(res[i].substring(0, 1)) || res[i].substring(0, 1).replace(/\\s/g, '').length != 0) && (res[i].substring(0, 1) == 0) && (res[i].substring(119, 120) != \"N\")",

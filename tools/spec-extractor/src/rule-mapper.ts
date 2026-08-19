@@ -1,4 +1,4 @@
-import type { RawRule } from "./ast-walker.js";
+import type { AtribuicaoFonte, RawRule } from "./ast-walker.js";
 
 export interface Logger {
   warn: (message: string) => void;
@@ -59,7 +59,42 @@ export type DslCondition =
       sentido: "permitidos" | "proibidos";
       comparacao: ModoComparacao;
     }
-  | { tipo: "modulo_11"; alvo: string; posicao: { inicio0: number; fim0: number }; documento: string }
+  | {
+      tipo: "modulo_11";
+      alvo: string;
+      /** Faixa do dígito informado no arquivo. */
+      posicao: { inicio0: number; fim0: number };
+      /** Parcelas do somatório, na ordem do fonte. */
+      base: {
+        alvo: string;
+        inicio0: number;
+        fim0: number;
+        peso: number;
+        /** Função aplicada à parcela antes de multiplicar, quando existe. */
+        transformacao: string | null;
+      }[];
+      modulo: number;
+      /**
+       * Dígito esperado por faixa de resto, na ordem em que o fonte decide. O
+       * fonte repete o bloco de cálculo por valor informado no dígito, então uma
+       * mesma faixa de resto pode ter resultado diferente em cada ramo — a guarda
+       * da regra diz qual ramo é este.
+       */
+      resultado: {
+        /** null quando a atribuição é incondicional — é o valor padrão do fonte. */
+        operador: string | null;
+        resto: number | null;
+        /** Literal, quando o fonte atribui um literal. */
+        valor: string | null;
+        /** Expressão do fonte com a variável de resto renomeada para `resto`. */
+        expressao: string;
+      }[];
+      /** Função aplicada à faixa antes de comparar, quando existe. */
+      transformacao: string | null;
+      /** Nome da variável do fonte que carrega o dígito calculado. */
+      variavel: string;
+      documento: string;
+    }
   | {
       tipo: "coerencia_registro";
       alvo: string;
@@ -70,12 +105,30 @@ export type DslCondition =
     }
   | { tipo: "tamanho_linha"; alvo: string; operador: string; tamanho: number }
   /**
+   * Comparação relacional contra literal: `>`, `>=`, `<`, `<=`. Vários limites
+   * sobre a mesma faixa descrevem um intervalo (o fonte usa `>= 'a' && <= 'z'`
+   * para rejeitar minúscula). Com literal numérico a comparação é numérica; com
+   * literal entre aspas é lexicográfica — daí `comparacao` valer aqui também.
+   */
+  | {
+      tipo: "intervalo";
+      alvo: string;
+      posicao: { inicio0: number; fim0: number };
+      limites: { operador: string; valor: string }[];
+      comparacao: ModoComparacao;
+    }
+  /**
    * Disjunção do fonte: o validador encadeia com `||` vários testes sobre faixas
    * diferentes e emite uma única mensagem. Erro quando qualquer parte é verdadeira.
    * Só é publicada quando *todas* as partes têm arquétipo próprio — uma parte
    * `custom` derrubaria a regra inteira para `custom`, que é onde ela deve ficar.
    */
   | { tipo: "disjuncao"; alvo: string; partes: DslCondition[] }
+  /**
+   * Conjunção de testes sobre faixas diferentes com uma única mensagem — a
+   * combinação proibida entre dois campos. Erro só quando todas as partes valem.
+   */
+  | { tipo: "conjuncao"; alvo: string; partes: DslCondition[] }
   | { tipo: "custom"; alvo: string };
 
 export interface DslRule {
@@ -147,29 +200,36 @@ export function mapToDsl(
   // A condição própria é o teste do `if` que emite a mensagem. Classificar e posicionar
   // pela conjunção completa faria a guarda mais externa ditar as colunas da regra.
   const condicaoPropria = raw.condicao_propria ?? raw.condicao_original;
-  const condicao = inferirCondicao(
-    condicaoPropria,
+  const condicao = inferirCondicao(condicaoPropria, {
     alvo,
-    raw.condicao_original,
-    raw.condicao_guarda ?? null
-  );
+    condicaoCompleta: raw.condicao_original,
+    condicaoGuarda: raw.condicao_guarda ?? null,
+    ambiente: raw.ambiente,
+    mensagem: raw.mensagem,
+  });
 
   let colunas: [number, number];
   let inicio0: number;
   let fim0: number;
 
-  // Em disjunção cada parte lê a sua própria faixa: publicar só a primeira
-  // esconderia metade do que a regra testa.
-  const faixasDisjuncao =
-    condicao.tipo === "disjuncao" ? faixasDaCondicao(condicao) : [];
+  // Em condição composta cada parte lê a sua própria faixa: publicar só a
+  // primeira esconderia metade do que a regra testa.
+  const faixasCompostas =
+    condicao.tipo === "disjuncao" || condicao.tipo === "conjuncao"
+      ? faixasDaCondicao(condicao)
+      : [];
+  // O envelope de `colunas` só pode somar faixas do registro que a regra reprova.
+  // Uma parte que lê `res[i + 2]` é sobre outra linha do arquivo: misturar as duas
+  // produziria uma faixa que não existe em registro nenhum.
+  const faixasDoAlvo = faixasCompostas.filter((f) => f.alvo === alvo);
   const posicoesCondicao = extrairPosicoesDaCondicao(condicaoPropria, alvo);
   // Sem faixa na condição e sem faixa na mensagem, a regra não é sobre uma posição
   // (comprimento da linha, coerência entre linhas). Publicar uma posição inventada
   // faria um motor de validação ler a coluna errada.
-  const semPosicao = faixasDisjuncao.length === 0 && !posicoesCondicao && !raw.colunas;
-  if (faixasDisjuncao.length > 0) {
-    inicio0 = Math.min(...faixasDisjuncao.map((f) => f.inicio0));
-    fim0 = Math.max(...faixasDisjuncao.map((f) => f.fim0));
+  const semPosicao = faixasCompostas.length === 0 && !posicoesCondicao && !raw.colunas;
+  if (faixasDoAlvo.length > 0) {
+    inicio0 = Math.min(...faixasDoAlvo.map((f) => f.inicio0));
+    fim0 = Math.max(...faixasDoAlvo.map((f) => f.fim0));
     colunas = [inicio0 + 1, fim0];
   } else if (posicoesCondicao) {
     inicio0 = posicoesCondicao.inicio0;
@@ -215,8 +275,8 @@ export function mapToDsl(
         : null,
     posicoes: semPosicao
       ? []
-      : faixasDisjuncao.length > 0
-        ? faixasDisjuncao.map((f) => ({
+      : faixasCompostas.length > 0
+        ? faixasCompostas.map((f) => ({
             alvo: f.alvo,
             inicio0: f.inicio0,
             fim0: f.fim0,
@@ -262,9 +322,11 @@ function faixasDaCondicao(condicao: DslCondition): Faixa[] {
       case "dominio":
       case "modulo_11":
       case "coerencia_registro":
+      case "intervalo":
         faixas.push({ alvo: c.alvo, inicio0: c.posicao.inicio0, fim0: c.posicao.fim0 });
         return;
       case "disjuncao":
+      case "conjuncao":
         for (const parte of c.partes) coletar(parte);
         return;
       default:
@@ -284,21 +346,42 @@ function faixasDaCondicao(condicao: DslCondition): Faixa[] {
     .sort((a, b) => a.inicio0 - b.inicio0 || a.fim0 - b.fim0);
 }
 
-function inferirCondicao(
-  condicaoPropria: string,
-  alvo: string,
-  condicaoCompleta: string = condicaoPropria,
-  condicaoGuarda: string | null = null
-): DslCondition {
-  const simples = inferirCondicaoSimples(
-    condicaoPropria,
-    alvo,
-    condicaoCompleta,
-    condicaoGuarda
-  );
+/** O que a classificação precisa saber além do texto da condição própria. */
+interface ContextoRegra {
+  alvo: string;
+  /** Conjunção completa (guardas + teste), onde a cadeia de domínio existe. */
+  condicaoCompleta: string;
+  condicaoGuarda: string | null;
+  /** Variáveis do fonte que a condição referencia (dígito calculado, resto). */
+  ambiente?: Record<string, AtribuicaoFonte[]>;
+  mensagem: string;
+}
+
+function inferirCondicao(condicaoPropria: string, ctx: ContextoRegra): DslCondition {
+  const simples = inferirCondicaoSimples(condicaoPropria, ctx);
   if (simples.tipo !== "custom") return simples;
 
-  return inferirDisjuncao(stripOuterParens(condicaoPropria), alvo) ?? simples;
+  return inferirComposta(stripOuterParens(condicaoPropria), ctx) ?? simples;
+}
+
+/**
+ * Condição que só se descreve como combinação de outras. Roda depois dos
+ * arquétipos que já são combinações com nome próprio (`dominio`,
+ * `numerico_branco`), que descrevem melhor os casos que cobrem.
+ */
+function inferirComposta(condicao: string, ctx: ContextoRegra): DslCondition | null {
+  return (
+    inferirDisjuncao(condicao, ctx) ??
+    inferirComposicao(condicao, ctx, "&&", "conjuncao")
+  );
+}
+
+/** Classifica uma parte de uma composta: simples primeiro, composta se preciso. */
+function inferirParte(parte: string, ctx: ContextoRegra): DslCondition {
+  const contextoDaParte = { ...ctx, condicaoCompleta: parte };
+  const simples = inferirCondicaoSimples(parte, contextoDaParte);
+  if (simples.tipo !== "custom") return simples;
+  return inferirComposta(stripOuterParens(parte), contextoDaParte) ?? simples;
 }
 
 /**
@@ -306,41 +389,54 @@ function inferirCondicao(
  * Roda depois dos arquétipos que também são disjunções (`numerico_branco`,
  * `dominio` proibido), que descrevem melhor os casos que cobrem.
  */
-function inferirDisjuncao(condicao: string, alvo: string): DslCondition | null {
-  const partes = splitLogicalClauses(condicao, "||");
+function inferirDisjuncao(condicao: string, ctx: ContextoRegra): DslCondition | null {
+  return inferirComposicao(condicao, ctx, "||", "disjuncao");
+}
+
+function inferirComposicao(
+  condicao: string,
+  ctx: ContextoRegra,
+  operador: "&&" | "||",
+  tipo: "conjuncao" | "disjuncao"
+): DslCondition | null {
+  const partes = splitLogicalClauses(condicao, operador);
   if (partes.length < 2) return null;
 
   const modeladas: DslCondition[] = [];
   let i = 0;
   while (i < partes.length) {
     // `isNaN(faixa) || faixa.replace(...)` é um arquétipo só escrito em duas
-    // cláusulas: sem juntar o par, cada metade isolada não significa nada.
-    const par =
-      i + 1 < partes.length
-        ? inferirCondicaoSimples(`${partes[i]} || ${partes[i + 1]}`, alvo)
+    // cláusulas: sem juntar o par, cada metade isolada não significa nada. O par
+    // é classificado só pelos arquétipos simples — tentar a composta aqui
+    // reentraria nesta mesma expressão quando ela tem exatamente duas partes.
+    const parTexto =
+      operador === "||" && i + 1 < partes.length
+        ? `${partes[i]} || ${partes[i + 1]}`
         : null;
+    const par = parTexto
+      ? inferirCondicaoSimples(parTexto, { ...ctx, condicaoCompleta: parTexto })
+      : null;
     if (par && par.tipo !== "custom") {
       modeladas.push(par);
       i += 2;
       continue;
     }
 
-    const isolada = inferirCondicaoSimples(partes[i], alvo);
+    const isolada = inferirParte(partes[i], ctx);
     if (isolada.tipo === "custom") return null;
     modeladas.push(isolada);
     i += 1;
   }
 
   if (modeladas.length < 2) return null;
-  return { tipo: "disjuncao", alvo, partes: modeladas };
+  return { tipo, alvo: ctx.alvo, partes: modeladas };
 }
 
 function inferirCondicaoSimples(
   condicaoPropria: string,
-  alvo: string,
-  condicaoCompleta: string = condicaoPropria,
-  condicaoGuarda: string | null = null
+  ctx: ContextoRegra
 ): DslCondition {
+  const { alvo, condicaoGuarda, ambiente, mensagem } = ctx;
   const condicao = stripOuterParens(condicaoPropria);
   const posicaoPropria = extrairPosicoesDaCondicao(condicao, alvo);
 
@@ -349,7 +445,7 @@ function inferirCondicaoSimples(
   // A cadeia só existe na conjunção completa; as cláusulas que sobram precisam ser
   // guardas conhecidas, senão fundir perderia parte do teste.
   const cadeia = inferirDominioPermitidos(
-    stripOuterParens(condicaoCompleta),
+    stripOuterParens(ctx.condicaoCompleta),
     clausulasDaGuarda(condicaoGuarda),
     posicaoPropria
   );
@@ -381,28 +477,15 @@ function inferirCondicaoSimples(
   const numerico = inferirNumericoBranco(condicao);
   if (numerico) return numerico;
 
-  // Modulo 11: alvo.substring(...) != calcularModulo11(alvo.substring(...))
-  // Nota: as fontes do ciclo atual não usam essas funções (o dígito é comparado
-  // com uma variável calculada antes do `if`), mas o matcher reconhece as
-  // variações mais comuns para quando/uso futuro.
-  const MODULO_11_FUNCOES =
-    "(?:calcularModulo11|modulo11|calcModulo11|mod11|calcularDigitoVerificador|calcularDigito|calcularDV|calcDV)";
-  const moduloMatch = condicao.match(
-    new RegExp(
-      `^(res\\[[^\\]]+\\])\\.substring\\((\\d+),\\s*(\\d+)\\)\\s*!=\\s*${MODULO_11_FUNCOES}\\(\\1\\.substring\\((\\d+),\\s*(\\d+)\\)\\)$`
-    )
-  );
-  if (moduloMatch) {
-    const [, target, a1, b1, a2, b2] = moduloMatch;
-    if (a1 === a2 && b1 === b2) {
-      return {
-        tipo: "modulo_11",
-        alvo: target,
-        posicao: { inicio0: parseInt(a1, 10), fim0: parseInt(b1, 10) },
-        documento: inferirDocumento(condicao),
-      };
-    }
-  }
+  // Relacional: `faixa > "31"`, ou o par `>= 'a' && <= 'z'` que rejeita minúscula.
+  const intervalo = inferirIntervalo(condicao);
+  if (intervalo) return intervalo;
+
+  // Módulo 11: o fonte calcula o dígito numa variável, antes do `if`, e aqui só
+  // compara a faixa com ela. Sem o ambiente capturado pelo walker a condição é
+  // ilegível — é literalmente `res[0].substring(57, 58) != dva`.
+  const modulo11 = inferirModulo11(condicao, ambiente, mensagem);
+  if (modulo11) return modulo11;
 
   // Coerência entre registros: compara a mesma leitura em duas linhas distintas
   // (res[i] contra res[j] ou contra res[i + 1]). É o arquétipo que sustenta regras
@@ -614,6 +697,39 @@ function inferirDominioProibidos(condicao: string): DslCondition | null {
   };
 }
 
+const RELACIONAIS = /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(>=|<=|>|<)\s*(?:"([^"]*)"|'([^']*)'|(\d+))$/;
+
+function inferirIntervalo(condicao: string): DslCondition | null {
+  // Uma disjunção no topo não é um intervalo; deixa para o arquétipo composto.
+  if (splitLogicalClauses(condicao, "||").length > 1) return null;
+
+  const clauses = splitLogicalClauses(condicao, "&&");
+  const casadas = clauses.map((c) => stripOuterParens(c).match(RELACIONAIS));
+  if (casadas.some((m) => m === null)) return null;
+
+  const validas = casadas as RegExpMatchArray[];
+  const [, alvo, inicio, fim] = validas[0];
+  const mesmaFaixa = validas.every(
+    (m) => m[1] === alvo && m[2] === inicio && m[3] === fim
+  );
+  if (!mesmaFaixa) return null;
+
+  return {
+    tipo: "intervalo",
+    alvo,
+    posicao: { inicio0: parseInt(inicio, 10), fim0: parseInt(fim, 10) },
+    limites: validas.map((m) => ({
+      operador: m[4],
+      valor: m[5] ?? m[6] ?? m[7],
+    })),
+    // `substring()` devolve string: contra literal numérico o JavaScript coage e
+    // compara números; entre aspas a comparação é lexicográfica.
+    comparacao: validas.some((m) => m[5] === undefined && m[6] === undefined)
+      ? "frouxa"
+      : "estrita",
+  };
+}
+
 /** Combinações de teste residual que o fonte usa, e o que cada uma exige da faixa. */
 const EXIGENCIA_POR_RESIDUO: Record<string, ExigenciaNumericoBranco> = {
   "\\s|==|0": "numerico_preenchido",
@@ -732,10 +848,244 @@ function stripBalancedParens(s: string): string {
   return s.slice(1, -1).trim();
 }
 
-function inferirDocumento(condicao: string): string {
-  if (condicao.includes("CNPJ")) return "cnpj";
-  if (condicao.includes("CPF")) return "cpf";
-  if (condicao.includes("agencia")) return "agencia";
-  if (condicao.includes("conta")) return "conta";
+/**
+ * O fonte calcula o dígito verificador antes do `if` — soma ponderada, resto da
+ * divisão, e um `if` por faixa de resto atribuindo o dígito esperado a uma
+ * variável. A condição da regra só compara a faixa com essa variável, então o
+ * arquétipo só se resolve com o ambiente que o walker capturou.
+ */
+function inferirModulo11(
+  condicao: string,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined,
+  mensagem: string
+): DslCondition | null {
+  if (!ambiente) return null;
+
+  const comFuncao = condicao.match(
+    /^([A-Za-z_$][\w$]*)\((res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\)\s*(!==|!=)\s*([A-Za-z_$][\w$]*)$/
+  );
+  const direto = condicao.match(
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(!==|!=)\s*([A-Za-z_$][\w$]*)$/
+  );
+  if (!comFuncao && !direto) return null;
+
+  const transformacao = comFuncao ? comFuncao[1] : null;
+  const [alvo, inicio, fim, variavel] = comFuncao
+    ? [comFuncao[2], comFuncao[3], comFuncao[4], comFuncao[6]]
+    : [direto![1], direto![2], direto![3], direto![5]];
+
+  const resultado = resolverResultado(variavel, ambiente);
+  if (!resultado) return null;
+
+  const calculo = resolverResto(resultado.varResto, ambiente);
+  if (!calculo) return null;
+
+  return {
+    tipo: "modulo_11",
+    alvo,
+    posicao: { inicio0: parseInt(inicio, 10), fim0: parseInt(fim, 10) },
+    base: calculo.base,
+    modulo: calculo.modulo,
+    resultado: resultado.faixas,
+    transformacao,
+    variavel,
+    documento: inferirDocumento(`${condicao} ${mensagem}`),
+  };
+}
+
+interface ResultadoDoDigito {
+  varResto: string;
+  faixas: {
+    operador: string | null;
+    resto: number | null;
+    valor: string | null;
+    expressao: string;
+  }[];
+}
+
+/**
+ * O fonte escreve o dígito esperado em duas formas: um valor padrão
+ * incondicional (`dv1 = 11 - resto1`) que os `if` seguintes sobrescrevem, e um
+ * `if` por faixa de resto. A ordem é significativa — a última atribuição que
+ * casa é a que vale —, então `faixas` preserva a ordem do fonte.
+ */
+function resolverResultado(
+  variavel: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): ResultadoDoDigito | null {
+  const atribuicoes = ambiente[variavel];
+  if (!atribuicoes || atribuicoes.length === 0) return null;
+
+  let varResto: string | null = null;
+  const brutas: { quando: string | null; expressao: string }[] = [];
+
+  for (const a of atribuicoes) {
+    if (a.operador !== "=") return null;
+
+    if (!a.quando) {
+      brutas.push({ quando: null, expressao: a.expressao });
+      continue;
+    }
+
+    const guarda = stripOuterParens(a.quando).match(
+      /^([A-Za-z_$][\w$]*)\s*(===|!==|==|!=|>=|<=|>|<)\s*(\d+)$/
+    );
+    if (!guarda) return null;
+
+    const [, nome] = guarda;
+    if (varResto && varResto !== nome) return null;
+    varResto = nome;
+    brutas.push({ quando: a.quando, expressao: a.expressao });
+  }
+
+  // Sem nenhuma condicional, a variável de resto só pode vir do valor padrão.
+  if (!varResto) {
+    varResto =
+      brutas
+        .flatMap((b) => b.expressao.match(/[A-Za-z_$][\w$]*/g) ?? [])
+        .find((nome) => ambiente[nome] !== undefined) ?? null;
+  }
+  if (!varResto || brutas.length === 0) return null;
+
+  const nomeResto = varResto;
+  const faixas = brutas.map((b) => {
+    const guarda = b.quando
+      ? stripOuterParens(b.quando).match(
+          /^([A-Za-z_$][\w$]*)\s*(===|!==|==|!=|>=|<=|>|<)\s*(\d+)$/
+        )
+      : null;
+    const literal = b.expressao.match(/^(?:"([^"]*)"|'([^']*)'|(\d+))$/);
+    return {
+      operador: guarda ? guarda[2] : null,
+      resto: guarda ? parseInt(guarda[3], 10) : null,
+      valor: literal ? (literal[1] ?? literal[2] ?? literal[3]) : null,
+      // A expressão viaja com o nome canônico `resto`: um motor não conhece o
+      // nome que a variável tem no fonte.
+      expressao: b.expressao.replace(new RegExp(`\\b${nomeResto}\\b`, "g"), "resto"),
+    };
+  });
+
+  return { varResto, faixas };
+}
+
+type ParcelaBase = {
+  alvo: string;
+  inicio0: number;
+  fim0: number;
+  peso: number;
+  transformacao: string | null;
+};
+
+function resolverResto(
+  varResto: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): { base: ParcelaBase[]; modulo: number } | null {
+  const atribuicoes = ambiente[varResto];
+  if (!atribuicoes || atribuicoes.length === 0) return null;
+
+  let fonte: string | null = null;
+  let modulo: number | null = null;
+
+  for (const a of atribuicoes) {
+    if (a.operador === "=") {
+      const comModulo = a.expressao.match(/^(.+?)\s*%\s*(\d+)$/);
+      if (comModulo) {
+        fonte = comModulo[1];
+        modulo = parseInt(comModulo[2], 10);
+      } else {
+        fonte = a.expressao;
+      }
+      continue;
+    }
+    if (a.operador === "%=") {
+      const valor = a.expressao.match(/^(\d+)$/);
+      if (!valor) return null;
+      modulo = parseInt(valor[1], 10);
+      continue;
+    }
+    return null;
+  }
+
+  if (!fonte || modulo === null) return null;
+
+  // A soma costuma estar numa variável intermediária (`sm`).
+  const somaFonte = fonte.match(/^[A-Za-z_$][\w$]*$/)
+    ? ultimaExpressao(ambiente[fonte])
+    : fonte;
+  if (!somaFonte) return null;
+
+  const base = parseSomaPonderada(somaFonte);
+  if (!base) return null;
+
+  return { base, modulo };
+}
+
+function ultimaExpressao(atribuicoes: AtribuicaoFonte[] | undefined): string | null {
+  if (!atribuicoes || atribuicoes.length === 0) return null;
+  const ultima = atribuicoes[atribuicoes.length - 1];
+  return ultima.operador === "=" ? ultima.expressao : null;
+}
+
+function parseSomaPonderada(expressao: string): ParcelaBase[] | null {
+  const parcelas = splitSoma(expressao);
+  if (parcelas.length < 2) return null;
+
+  // O CNPJ alfanumérico passa cada posição por uma função antes de multiplicar.
+  const comFuncao =
+    /^([A-Za-z_$][\w$]*)\((res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\)\s*\*\s*(\d+)$/;
+  const direta = /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)$/;
+
+  const base: ParcelaBase[] = [];
+  for (const parcela of parcelas) {
+    const m1 = parcela.match(comFuncao);
+    const m2 = m1 ? null : parcela.match(direta);
+    if (!m1 && !m2) return null;
+
+    const [transformacao, alvo, inicio, fim, peso] = m1
+      ? [m1[1], m1[2], m1[3], m1[4], m1[5]]
+      : [null, m2![1], m2![2], m2![3], m2![4]];
+
+    base.push({
+      alvo,
+      inicio0: parseInt(inicio, 10),
+      fim0: parseInt(fim, 10),
+      peso: parseInt(peso, 10),
+      transformacao,
+    });
+  }
+  return base;
+}
+
+/** Soma no nível de topo: `+` dentro de `res[i + 1]` ou de parênteses não separa parcela. */
+function splitSoma(expressao: string): string[] {
+  const partes: string[] = [];
+  let atual = "";
+  let profundidade = 0;
+
+  for (const char of stripOuterParens(expressao)) {
+    if (char === "(" || char === "[") profundidade++;
+    else if (char === ")" || char === "]") profundidade--;
+
+    if (char === "+" && profundidade === 0) {
+      partes.push(atual.trim());
+      atual = "";
+      continue;
+    }
+    atual += char;
+  }
+  if (atual.trim()) partes.push(atual.trim());
+  return partes;
+}
+
+function inferirDocumento(texto: string): string {
+  // A pista costuma estar na mensagem, que é escrita em português com acento.
+  const normalizado = texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+  if (normalizado.includes("cnpj")) return "cnpj";
+  if (normalizado.includes("cpf")) return "cpf";
+  if (normalizado.includes("agencia")) return "agencia";
+  if (normalizado.includes("conta")) return "conta";
   return "desconhecido";
 }

@@ -9,7 +9,14 @@ function amostra(res) {
   if (res[0].substring(11, 13) != "01" && res[0].substring(11, 13) != "02" && res[0].substring(11, 13) != "03") {
     str += "Dominio invalido.<br>";
   }
-  if (res[0].substring(13, 27) != calcularModulo11(res[0].substring(13, 27))) {
+  sm = res[0].substring(13, 14) * 5 + res[0].substring(14, 15) * 4;
+  resto = sm;
+  resto %= 11;
+  if (resto == 0)
+    dv = 0;
+  if (resto > 1)
+    dv = 11 - resto;
+  if (res[0].substring(15, 16) != dv) {
     str += "Modulo 11 invalido.<br>";
   }
   if (res[i].substring(0, 1) != res[i + 1].substring(0, 1)) {

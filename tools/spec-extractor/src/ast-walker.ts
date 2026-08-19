@@ -37,6 +37,31 @@ export interface RawRule {
   registro_origem?: "guarda" | "mensagem" | null;
   colunas: [number, number] | null;
   alvo: string | null;
+  /**
+   * Variáveis do fonte que a condição própria referencia, com o que as define.
+   * O validador calcula dígito verificador fora do `if` e compara a faixa com a
+   * variável; sem o que está aqui, a regra é ilegível para um motor.
+   */
+  ambiente?: Record<string, AtribuicaoFonte[]>;
+}
+
+/** Atribuição como o walker a viu: guarda a pilha inteira para decidir visibilidade. */
+interface AtribuicaoInterna {
+  operador: string;
+  expressao: string;
+  guardas: string[];
+  ordem: number;
+}
+
+/** Uma atribuição a uma variável do fonte, na ordem em que o walker a encontrou. */
+export interface AtribuicaoFonte {
+  /** `=`, `%=`, `+=`… como escrito no fonte. */
+  operador: string;
+  /** Código-fonte do lado direito. */
+  expressao: string;
+  /** Guardas que valiam para esta atribuição e não valem para a regra que a lê. */
+  quando: string | null;
+  ordem: number;
 }
 
 /** Guarda de um `if` externo: o código-fonte do teste mais o nó para análise estrutural. */
@@ -82,7 +107,15 @@ export function extractRulesFromFunction(
 
   const rules: RawRule[] = [];
   if (targetBody) {
-    const ctx: WalkContext = { code, functionName, rules, lineOffset, familia };
+    const ctx: WalkContext = {
+      code,
+      functionName,
+      rules,
+      lineOffset,
+      familia,
+      variaveis: new Map(),
+      ordem: { valor: 0 },
+    };
     for (const stmt of targetBody.body) {
       visitStatement(stmt, ctx, []);
     }
@@ -97,6 +130,10 @@ interface WalkContext {
   rules: RawRule[];
   lineOffset: number;
   familia: FamiliaLayout;
+  /** Atribuições vistas até aqui, por nome de variável. */
+  variaveis: Map<string, AtribuicaoInterna[]>;
+  /** Ordem global das atribuições, para desempatar quem redefine quem. */
+  ordem: { valor: number };
 }
 
 function visitStatement(stmt: Statement, ctx: WalkContext, guards: Guard[]): void {
@@ -151,7 +188,162 @@ function visitStatement(stmt: Statement, ctx: WalkContext, guards: Guard[]): voi
       visitBlock(stmt, ctx, guards);
       break;
     }
+    case "ExpressionStatement": {
+      registrarAtribuicao(stmt.expression, ctx, guards);
+      break;
+    }
+    case "VariableDeclaration": {
+      for (const decl of stmt.declarations) {
+        if (decl.id.type !== "Identifier" || !decl.init) continue;
+        registrarValor(
+          decl.id.name,
+          "=",
+          ctx.code.slice(decl.init.start, decl.init.end),
+          ctx,
+          guards
+        );
+      }
+      break;
+    }
   }
+}
+
+function registrarAtribuicao(
+  expr: Expression,
+  ctx: WalkContext,
+  guards: Guard[]
+): void {
+  if (expr.type !== "AssignmentExpression") return;
+  if (expr.left.type !== "Identifier") return;
+  registrarValor(
+    expr.left.name,
+    expr.operator,
+    ctx.code.slice(expr.right.start, expr.right.end),
+    ctx,
+    guards
+  );
+}
+
+/**
+ * Acumulador de mensagem do fonte (`resposta = resposta + "…"`) não é dado de
+ * regra. O corte é pelo texto embutido, não pelo tamanho da expressão: o
+ * somatório do dígito de CNPJ tem doze parcelas, cada uma com uma chamada de
+ * função, e passa de 600 caracteres.
+ */
+const LIMITE_EXPRESSAO = 1400;
+const LIMITE_LITERAL = 20;
+
+function pareceMensagem(expressao: string): boolean {
+  if (expressao.includes("<br>")) return true;
+  const literais = expressao.match(/"[^"]*"|'[^']*'/g) ?? [];
+  return literais.some((literal) => literal.length - 2 > LIMITE_LITERAL);
+}
+
+function registrarValor(
+  nome: string,
+  operador: string,
+  expressao: string,
+  ctx: WalkContext,
+  guards: Guard[]
+): void {
+  if (pareceMensagem(expressao) || expressao.length > LIMITE_EXPRESSAO) return;
+
+  const lista = ctx.variaveis.get(nome) ?? [];
+  lista.push({
+    operador,
+    expressao,
+    guardas: guards.map((g) => `(${g.source})`),
+    ordem: ctx.ordem.valor++,
+  });
+  ctx.variaveis.set(nome, lista);
+}
+
+const IDENTIFICADORES_IGNORADOS = new Set([
+  "res",
+  "substring",
+  "isNaN",
+  "replace",
+  "length",
+  "parseInt",
+  "parseFloat",
+  "Number",
+  "String",
+  "Math",
+  "g",
+  "i",
+  "j",
+  "true",
+  "false",
+  "null",
+  "undefined",
+]);
+
+function identificadoresLivres(expressao: string): string[] {
+  const encontrados = expressao.match(/[A-Za-z_$][\w$]*/g) ?? [];
+  return encontrados.filter((nome) => !IDENTIFICADORES_IGNORADOS.has(nome));
+}
+
+/**
+ * Ambiente que a regra precisa para ser lida: as variáveis que a condição cita, e
+ * transitivamente as que *elas* citam — o dígito depende do resto, que depende da
+ * soma ponderada. `quando` guarda só as guardas que a atribuição tem a mais que a
+ * regra, que é o ramo do cálculo (`resto == 0`, `resto > 1`).
+ */
+function ambienteDaCondicao(
+  condicao: string,
+  ctx: WalkContext,
+  guards: Guard[],
+  ordemDaRegra: number
+): Record<string, AtribuicaoFonte[]> | undefined {
+  const guardasDaRegra = guards.map((g) => `(${g.source})`);
+  const ambiente: Record<string, AtribuicaoFonte[]> = {};
+  const pendentes = identificadoresLivres(condicao);
+  const vistos = new Set<string>();
+
+  while (pendentes.length > 0) {
+    const nome = pendentes.shift() as string;
+    if (vistos.has(nome)) continue;
+    vistos.add(nome);
+
+    const atribuicoes = (ctx.variaveis.get(nome) ?? []).filter(
+      (a) => a.ordem < ordemDaRegra && visivelPara(a, guardasDaRegra)
+    );
+    if (atribuicoes.length === 0) continue;
+
+    ambiente[nome] = atribuicoes.map((a) => ({
+      operador: a.operador,
+      expressao: a.expressao,
+      quando: quandoRelativo(a, guardasDaRegra),
+      ordem: a.ordem,
+    }));
+
+    for (const a of atribuicoes) {
+      pendentes.push(...identificadoresLivres(a.expressao));
+      for (const guarda of a.guardas) pendentes.push(...identificadoresLivres(guarda));
+    }
+  }
+
+  return Object.keys(ambiente).length > 0 ? ambiente : undefined;
+}
+
+/**
+ * Uma atribuição só alcança a regra se valia onde a regra está: toda guarda da
+ * regra precisa valer também para a atribuição. Sem isso, o ramo irmão do cálculo
+ * — o fonte repete o bloco inteiro para cada valor informado no dígito — vazaria
+ * para dentro da regra e o spec publicaria dois resultados contraditórios.
+ */
+function visivelPara(atribuicao: AtribuicaoInterna, guardasDaRegra: string[]): boolean {
+  const daAtribuicao = new Set(atribuicao.guardas);
+  return guardasDaRegra.every((g) => daAtribuicao.has(g));
+}
+
+function quandoRelativo(
+  atribuicao: AtribuicaoInterna,
+  guardasDaRegra: string[]
+): string | null {
+  const daRegra = new Set(guardasDaRegra);
+  const restantes = atribuicao.guardas.filter((g) => !daRegra.has(g));
+  return restantes.length > 0 ? restantes.join(" && ") : null;
 }
 
 function emitRule(
@@ -176,6 +368,7 @@ function emitRule(
     registro_origem: classificacao.origem,
     colunas: extrairColunas(mensagem),
     alvo,
+    ambiente: ambienteDaCondicao(condicaoPropria, ctx, guards, ctx.ordem.valor++),
   });
 }
 

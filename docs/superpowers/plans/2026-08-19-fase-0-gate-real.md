@@ -259,12 +259,59 @@ O que mudou no matcher:
   derivado da presença de aspas no literal do fonte. É o campo que impede a Fase 1 em Rust de
   divergir do validador oficial por comparar bytes onde o JavaScript coage tipos.
 
-⬜ Pendente da onda: **0.5.3** (alvo relativo em `coerencia_registro`), **0.5.4** (`modulo_11`),
-**0.5.6** (resolução de alvo) e a meta da **0.5.7**. O resíduo de 483 `custom` é dominado por dois
-padrões: **174 regras comparam a faixa com uma variável de dígito calculada antes do `if`**
-(`dv1`, `dv2`, `dva`, `dvc`, `obterValorCNPJAlfanumerico(...)`) — é a 0.5.4, e o matcher atual de
-`modulo_11` nunca casa porque procura uma chamada de função dentro da própria condição —, e **140
-usam comparação relacional** (`>`, `>=`, faixa `'a'`–`'z'`), que ainda não tem arquétipo.
+**Status em 2026-08-19 (segunda rodada) — onda 0.5 fechada.** `custom` foi de 483 (34,4%) para
+**52 (3,7%)**, contra a meta de 20%. Mesmas 1.405 regras, nenhuma criada ou perdida: as 431
+alterações são todas `custom → arquétipo`.
+
+| Arquétipo | Antes | Depois |
+|---|---:|---:|
+| `custom` | 483 (34,4%) | **52 (3,7%)** |
+| `numerico_branco` | 274 | 274 |
+| `literal_fixo` | 268 | 268 |
+| `disjuncao` | 155 | 185 |
+| `conjuncao` (novo) | — | 175 |
+| `modulo_11` | 0 | **140** |
+| `dominio` | 123 | 123 |
+| `coerencia_registro` | 94 | 94 |
+| `intervalo` (novo) | — | 86 |
+
+- **0.5.4 `modulo_11`** — exigiu rastrear variável, não só casar regex: o walker passou a manter um
+  ambiente de atribuições (`RawRule.ambiente`) com a pilha de guardas de cada uma. Uma atribuição só
+  alcança a regra se toda guarda da regra vale também para ela — o fonte **repete o bloco de cálculo
+  inteiro para cada valor informado no dígito**, e sem esse escopo o ramo irmão vazaria, publicando
+  dois resultados contraditórios para o mesmo resto. O matcher especulativo que procurava uma chamada
+  `calcularModulo11(...)` dentro da própria condição foi removido: nunca casou em nenhuma das 1.405
+  regras, e o arquétipo que ele produzia não tinha base nem resultado.
+- **0.5.3 `coerencia_registro` com alvo relativo** — já funcionava; a medição confirma `res[i - 1]`
+  (30), `res[i - 2]` (27), `res[j]` (23), `res[0]` (5), `res[i - 4]` (4), `res[i - 3]` (4) e
+  `res[i + 2]` (1).
+- **0.5.6 resolução de alvo** — medido, sem defeito observável: em **zero** das 1.405 regras o alvo
+  publicado difere do alvo que a condição lê. O que existe é a mensagem numerando a linha por outro
+  índice (`{valor}` em vez de `{linha}`, 104 regras com alvo `res[j]`), o que é questão de mensagem,
+  não de alvo.
+- **0.5.7 meta de qualidade** — virou teste (`tests/propriedades.test.ts`), medido sobre os specs
+  versionados.
+- **Arquétipos novos** — `intervalo` (comparação relacional, incluindo o `>= 'a' && <= 'z'` que
+  rejeita minúscula) e `conjuncao` (espelho da `disjuncao`, para a combinação proibida entre campos).
+
+**Achados de fidelidade desta rodada:**
+
+1. **A bifurcação do resto não é só do Multipag, e não é sempre a mesma.** Na cobrança 240, o ramo em
+   que o arquivo informou `P` no dígito da agência espera `P` **tanto no resto 0 quanto no resto 1**
+   (`arquivoRemessa.js`, dv agência do Segmento P); no Multipag, o mesmo ramo espera `0` no resto 0 e
+   `P` no resto 1. Uma reimplementação que escolha uma das duas divergiria de um dos layouts.
+2. **O fonte tem `res[1]` onde deveria ter `res[i]`** na segunda metade do teste de caixa baixa do
+   dígito da conta do Segmento P (cobrança 240, colunas 036). O extrator preserva: a regra é uma
+   conjunção de dois `intervalo` com alvos diferentes, e o envelope de `colunas` cobre só o alvo da
+   regra.
+3. **O fonte usa `&` (bit a bit) no lugar de `&&`** em 6 regras, e tem um `isNaN(a || b)` com o
+   parêntese fechado no lugar errado. Ambos ficam em `custom` de propósito — o comportamento não é o
+   da conjunção lógica.
+
+⬜ Pendente fora desta onda: as 52 `custom` restantes são casos genuinamente irregulares — comparação
+entre duas faixas do **mesmo** registro (6), totalizador com `parseFloat` somando campos (7),
+variáveis de contagem (`qtde_reg != qtde_linha`, 3), os dois bugs do fonte acima, e dígitos com dois
+valores aceitos (`!= dv10 && != dv11`, 6).
 
 ---
 

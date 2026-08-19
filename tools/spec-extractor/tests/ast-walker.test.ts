@@ -311,4 +311,65 @@ describe("extractRulesFromFunction", () => {
       "Linha {linha}, colunas 001 a 003, banco inválido.<br>"
     );
   });
+  it("captura o ambiente do calculo e nao deixa o ramo irmao vazar", () => {
+    // O fonte repete o bloco inteiro do cálculo para cada valor informado no
+    // dígito. As duas regras são idênticas no texto e diferem só pelo ramo: se o
+    // ambiente vazasse entre eles, o spec publicaria dois resultados
+    // contraditórios para o mesmo resto.
+    const codigo = `
+      function amostra(res) {
+        var str = "";
+        if (res[0].substring(57, 58) != "P") {
+          sm = res[0].substring(53, 54) * 5 + res[0].substring(54, 55) * 4;
+          resto = sm;
+          resto %= 11;
+          if (resto == 1)
+            dv = 0;
+          if (res[0].substring(57, 58) != dv)
+            str += "Linha 1, colunas 058 a 058, Dígito da agência inválido.<br>";
+        }
+        if (res[0].substring(57, 58) == "P") {
+          sm = res[0].substring(53, 54) * 5 + res[0].substring(54, 55) * 4;
+          resto = sm;
+          resto %= 11;
+          if (resto == 1)
+            dv = "P";
+          if (res[0].substring(57, 58) != dv)
+            str += "Linha 1, colunas 058 a 058, Dígito da agência inválido.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(codigo, "amostra");
+    const comDigito = rules.filter((r) => r.condicao_propria?.includes("!= dv"));
+    assert.strictEqual(comDigito.length, 2);
+
+    for (const regra of comDigito) {
+      const dv = regra.ambiente?.dv;
+      assert.ok(dv, "ambiente deveria trazer a variável do dígito");
+      assert.strictEqual(dv.length, 1, "cada ramo define o dígito uma vez só");
+      // A guarda do ramo já está em `condicao_guarda`; `quando` guarda só o que
+      // a atribuição tem a mais — a faixa de resto.
+      assert.strictEqual(dv[0].quando, "(resto == 1)");
+      assert.ok(regra.ambiente?.resto, "o resto precisa vir junto");
+      assert.ok(regra.ambiente?.sm, "a soma ponderada precisa vir junto");
+    }
+
+    assert.strictEqual(comDigito[0].ambiente?.dv[0].expressao, "0");
+    assert.strictEqual(comDigito[1].ambiente?.dv[0].expressao, '"P"');
+  });
+
+  it("nao registra acumulador de mensagem como variavel do calculo", () => {
+    const codigo = `
+      function amostra(res) {
+        var resposta = "";
+        if (res[0].substring(3, 7) != "0000")
+          resposta = resposta + "Linha 1, colunas 004 a 007, número de lote inválido.<br>";
+        return resposta;
+      }
+    `;
+    const rules = extractRulesFromFunction(codigo, "amostra");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].ambiente, undefined);
+  });
 });
