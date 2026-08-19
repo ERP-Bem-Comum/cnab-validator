@@ -1,0 +1,78 @@
+{
+  "arquivo": "multipag-banco-divergente-no-lote.txt",
+  "achados": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1298",
+      "linha": 3,
+      "registro": "segmento-a",
+      "colunas": [
+        21,
+        23
+      ],
+      "mensagem": "Linha {valor}, Segmento A, colunas 021 a 023, Número do banco diferente no mesmo lote."
+    }
+  ],
+  "nao_avaliadas": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1001",
+      "motivo": "condicao_custom",
+      "ocorrencias": 3
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1006",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1636",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 2
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1651",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 2,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:262",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:277",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:282",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:359",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:759",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:774",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:862",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    }
+  ],
+  "regras_avaliadas": 188,
+  "total_regras": 512,
+  "linhas": 8
+}

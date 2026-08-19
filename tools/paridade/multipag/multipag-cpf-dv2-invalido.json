@@ -1,0 +1,66 @@
+{
+  "arquivo": "multipag-cpf-dv2-invalido.txt",
+  "achados": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:244",
+      "linha": 1,
+      "registro": "header-arquivo",
+      "colunas": [
+        32,
+        32
+      ],
+      "mensagem": "Linha 1, Header de arquivo, colunas 019 a 033, número de inscrição/CPF inválido."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:740",
+      "linha": 2,
+      "registro": "header-lote",
+      "colunas": [
+        32,
+        32
+      ],
+      "mensagem": "Linha 2, Header de lote, colunas 019 a 033, número de inscrição/CPF inválido."
+    }
+  ],
+  "nao_avaliadas": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1001",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1006",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1636",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1651",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:282",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:359",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:862",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    }
+  ],
+  "regras_avaliadas": 186,
+  "total_regras": 512,
+  "linhas": 6
+}

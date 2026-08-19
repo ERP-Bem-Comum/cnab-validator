@@ -1,0 +1,78 @@
+{
+  "arquivo": "multipag-forma-lancamento-invalida.txt",
+  "achados": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:650",
+      "linha": 2,
+      "registro": "header-lote",
+      "colunas": [
+        12,
+        13
+      ],
+      "mensagem": "Linha 2, Header de lote, colunas 012 a 013, Forma de lançamento inválida para pagamento a fornecedor."
+    }
+  ],
+  "nao_avaliadas": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1001",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1006",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1636",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1651",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:262",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:277",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:282",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:359",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:759",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:774",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:862",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    }
+  ],
+  "regras_avaliadas": 185,
+  "total_regras": 512,
+  "linhas": 6
+}

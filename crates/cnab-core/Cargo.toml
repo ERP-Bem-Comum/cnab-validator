@@ -1,0 +1,15 @@
+[package]
+name = "cnab-core"
+version = "0.1.0"
+description = "Motor de validação CNAB dirigido pelos specs do validador oficial do Bradesco"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+cnab-specs = { path = "../cnab-specs" }
+serde.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

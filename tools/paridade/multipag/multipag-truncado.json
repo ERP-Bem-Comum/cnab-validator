@@ -1,0 +1,87 @@
+{
+  "arquivo": "multipag-truncado.txt",
+  "achados": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:514",
+      "linha": 2,
+      "registro": "nao-classificado",
+      "colunas": [
+        0,
+        0
+      ],
+      "mensagem": "Linha 2, Tamanho do registro inválido. {valor} caracteres."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:993",
+      "linha": 2,
+      "registro": "nao-classificado",
+      "colunas": [
+        8,
+        9
+      ],
+      "mensagem": "Linha {valor}, colunas 008 a 008, tipo de registro inválido. Inserir registro detalhe 3."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:996",
+      "linha": 2,
+      "registro": "nao-classificado",
+      "colunas": [
+        8,
+        9
+      ],
+      "mensagem": "Linha {valor}, colunas 009 a 013, sequencial de registro no lote deve iniciar com 00001."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1099",
+      "linha": 3,
+      "registro": "header-lote",
+      "colunas": [
+        14,
+        14
+      ],
+      "mensagem": "Linha {valor}, colunas 014 a 014, Código de segmento {valor}, inválido para forma de lançamento {valor} informado no Header de lote."
+    }
+  ],
+  "nao_avaliadas": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:262",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:277",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:282",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:359",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:759",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:774",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:862",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    }
+  ],
+  "regras_avaliadas": 111,
+  "total_regras": 512,
+  "linhas": 2
+}

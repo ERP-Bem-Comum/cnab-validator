@@ -530,6 +530,39 @@ O que ele achou logo na primeira execução, e que nenhum teste interno acharia:
 O item 4 é material para o core-api: empresa identificada por CPF não passa pelo validador oficial do
 Multipag, e nenhuma mudança no arquivo resolve.
 
+### Fase 1 começa: os dois primeiros crates — 2026-08-19
+
+`crates/cnab-specs` carrega o contrato e `crates/cnab-core` é o motor. A cadeia de oráculos que o
+plano previa está fechada e é verificável em CI:
+
+```
+validador oficial (JS do banco)  ←── bun run golden ──  runner TS  ←── tests/paridade.rs ──  cnab-core
+       (local, exige assets/)                          (oráculo)          (motor Rust)
+```
+
+- **Paridade total na primeira execução**, sobre os oito arquivos do corpus: mesmos achados (regra,
+  linha, registro, colunas, mensagem preenchida), mesmas recusas com o mesmo motivo, mesma contagem
+  de regras avaliadas.
+- O teste foi verificado por mutação: trocar a comparação frouxa por estrita no motor derruba dois
+  dos quatro testes de paridade. Não é um teste que passa sozinho.
+- Os relatórios em `tools/paridade/` são congelados por `bun run paridade`. Isso deixa o teste rodar
+  sem toolchain de JavaScript e faz mudança de comportamento aparecer no diff do PR. Do lado Bun,
+  `tests/paridade.test.ts` falha se o congelado sair de sincronia.
+
+Decisões que valem registro:
+
+1. **`deny_unknown_fields` e nenhuma variante "desconhecida"** em `cnab-specs`. O risco não é o
+   extrator publicar algo inválido, é publicar algo **novo** que ninguém do lado Rust leu. Assim o
+   CI quebra quando os dois saem de sincronia, que é onde deve quebrar.
+2. **A coerção do JavaScript foi reimplementada, não contornada** (`cnab-core/src/valor.rs`). É o
+   único jeito de o motor reproduzir o oficial, e era o risco que a Fase 1 corria ao planejar
+   comparar `&[u8]`.
+3. **`numero_js` cobre só o literal decimal.** `0x1f` e `Infinity` viram `NaN` de propósito: não
+   existem em arquivo CNAB, e aceitá-los abriria divergência onde o fonte nunca chega.
+
+Falta da Fase 1: `cnab-validator-cli` e `cnab-validator-api`, e estender o corpus de paridade para os
+demais layouts (hoje só o Multipag tem corpus).
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M

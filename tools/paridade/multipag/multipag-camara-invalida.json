@@ -1,0 +1,98 @@
+{
+  "arquivo": "multipag-camara-invalida.txt",
+  "achados": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1278",
+      "linha": 3,
+      "registro": "segmento-a",
+      "colunas": [
+        18,
+        23
+      ],
+      "mensagem": "Linha 3, Segmento A, colunas 018 a 020, Informado 018-TED, inválido para banco 237."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1543",
+      "linha": 3,
+      "registro": "segmento-a",
+      "colunas": [
+        220,
+        224
+      ],
+      "mensagem": "Linha 3, Segmento A, colunas 220 a 224, Código finalidade de TED inválido."
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1546",
+      "linha": 3,
+      "registro": "segmento-a",
+      "colunas": [
+        225,
+        226
+      ],
+      "mensagem": "Linha 3, Segmento A, colunas 225 a 226, Código finalidade complementar inválido. 'CC' - Corrente ou 'PP' - Poupança."
+    }
+  ],
+  "nao_avaliadas": [
+    {
+      "regra_id": "multipag:validarDadosMultipag:1001",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1006",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1636",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:1651",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:262",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:277",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:282",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:359",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:759",
+      "motivo": "condicao_incompleta",
+      "ocorrencias": 1
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:774",
+      "motivo": "guarda_nao_avaliavel",
+      "ocorrencias": 1,
+      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
+    },
+    {
+      "regra_id": "multipag:validarDadosMultipag:862",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    }
+  ],
+  "regras_avaliadas": 185,
+  "total_regras": 512,
+  "linhas": 6
+}
