@@ -1,0 +1,3411 @@
+{
+  "layout": "retorno-multipag",
+  "nome": "Multipag/Folha — Retorno",
+  "tipo": "retorno",
+  "tamanhos_linha": [
+    240
+  ],
+  "regras": [],
+  "campos": [
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8",
+      "campo": "campo_8_8",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        8,
+        8
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 7,
+          "fim0": 8,
+          "colunas": [
+            8,
+            8
+          ]
+        }
+      ],
+      "registros_lidos": [
+        "header-arquivo",
+        "header-lote",
+        "trailer-arquivo",
+        "trailer-lote"
+      ],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "0",
+          "rotulo": "Header de Arquivo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8224
+        },
+        {
+          "codigo": "1",
+          "rotulo": "Header de Lote",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8226
+        },
+        {
+          "codigo": "5",
+          "rotulo": "Trailer de Lote",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8228
+        },
+        {
+          "codigo": "9",
+          "rotulo": "Trailer de Arquivo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8230
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_10_11",
+      "campo": "campo_10_11",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        10,
+        11
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 9,
+          "fim0": 11,
+          "colunas": [
+            10,
+            11
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "01",
+          "rotulo": "Cobrança",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7734
+        },
+        {
+          "codigo": "03",
+          "rotulo": "Bloqueto Eletrônico",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7736
+        },
+        {
+          "codigo": "04",
+          "rotulo": "Conciliação Bancária",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7738
+        },
+        {
+          "codigo": "05",
+          "rotulo": "Débitos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7740
+        },
+        {
+          "codigo": "06",
+          "rotulo": "Custódia de Cheques",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7742
+        },
+        {
+          "codigo": "07",
+          "rotulo": "Gestão de Caixa",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7744
+        },
+        {
+          "codigo": "08",
+          "rotulo": "Consulta/Informação Margem",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7746
+        },
+        {
+          "codigo": "09",
+          "rotulo": "Averbação da Consignação/Retenção",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7748
+        },
+        {
+          "codigo": "10",
+          "rotulo": "Pagamento Dividendos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7750
+        },
+        {
+          "codigo": "11",
+          "rotulo": "Manutenção da Consignação",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7752
+        },
+        {
+          "codigo": "12",
+          "rotulo": "Consignação de Parcelas",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7754
+        },
+        {
+          "codigo": "13",
+          "rotulo": "Glosa da Consignação (INSS)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7756
+        },
+        {
+          "codigo": "14",
+          "rotulo": "Consulta de Tributos a pagar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7758
+        },
+        {
+          "codigo": "20",
+          "rotulo": "Pagamento Fornecedor",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7760
+        },
+        {
+          "codigo": "22",
+          "rotulo": "Pagamento de Contas, Tributos e Impostos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7762
+        },
+        {
+          "codigo": "25",
+          "rotulo": "Compror",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7764
+        },
+        {
+          "codigo": "26",
+          "rotulo": "Compror Rotativo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7766
+        },
+        {
+          "codigo": "29",
+          "rotulo": "Alegação do Sacado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7768
+        },
+        {
+          "codigo": "30",
+          "rotulo": "Pagamento Salários",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7770
+        },
+        {
+          "codigo": "32",
+          "rotulo": "Pagamento de honorários",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7772
+        },
+        {
+          "codigo": "33",
+          "rotulo": "Pagamento de bolsa auxílio",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7774
+        },
+        {
+          "codigo": "34",
+          "rotulo": "Pagamento de prebenda (remuneração a padres e sacerdotes)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7776
+        },
+        {
+          "codigo": "40",
+          "rotulo": "Vendor",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7778
+        },
+        {
+          "codigo": "41",
+          "rotulo": "Vendor a Termo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7780
+        },
+        {
+          "codigo": "50",
+          "rotulo": "Pagamento Sinistros Segurados",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7782
+        },
+        {
+          "codigo": "60",
+          "rotulo": "Pagamento Despesas Viajante em Trânsito",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7784
+        },
+        {
+          "codigo": "70",
+          "rotulo": "Pagamento Autorizado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7786
+        },
+        {
+          "codigo": "75",
+          "rotulo": "Pagamento Credenciados",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7788
+        },
+        {
+          "codigo": "77",
+          "rotulo": "Pagamento de Remuneração",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7790
+        },
+        {
+          "codigo": "80",
+          "rotulo": "Pagamento Representantes / Vendedores Autorizados",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7792
+        },
+        {
+          "codigo": "90",
+          "rotulo": "Pagamento Benefícios",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7794
+        },
+        {
+          "codigo": "98",
+          "rotulo": "Pagamentos Diversos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7796
+        },
+        {
+          "codigo": "99",
+          "rotulo": "Exclusivo Bradesco",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7798
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_12_13",
+      "campo": "campo_12_13",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        12,
+        13
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 11,
+          "fim0": 13,
+          "colunas": [
+            12,
+            13
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "01",
+          "rotulo": "Crédito em Conta Corrente",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7801
+        },
+        {
+          "codigo": "02",
+          "rotulo": "Cheque Pagamento / Administrativo",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7803
+        },
+        {
+          "codigo": "03",
+          "rotulo": "DOC/TED (1) (2)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7805
+        },
+        {
+          "codigo": "04",
+          "rotulo": "Cartão Salário (somente para Tipo de Serviço = '30')",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7807
+        },
+        {
+          "codigo": "05",
+          "rotulo": "Crédito em Conta Poupança",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7809
+        },
+        {
+          "codigo": "10",
+          "rotulo": "OP à Disposição",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7811
+        },
+        {
+          "codigo": "11",
+          "rotulo": "Pagamento de Contas e Tributos com Código de Barras",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7813
+        },
+        {
+          "codigo": "16",
+          "rotulo": "Tributo - DARF Normal",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7815
+        },
+        {
+          "codigo": "17",
+          "rotulo": "Tributo - GPS (Guia da Previdência Social)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7817
+        },
+        {
+          "codigo": "18",
+          "rotulo": "Tributo - DARF Simples",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7819
+        },
+        {
+          "codigo": "19",
+          "rotulo": "Tributo - IPTU – Prefeituras",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7821
+        },
+        {
+          "codigo": "20",
+          "rotulo": "Pagamento com Autenticação",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7823
+        },
+        {
+          "codigo": "21",
+          "rotulo": "Tributo – DARJ",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7825
+        },
+        {
+          "codigo": "22",
+          "rotulo": "Tributo - GARE-SP ICMS",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7827
+        },
+        {
+          "codigo": "23",
+          "rotulo": "Tributo - GARE-SP DR",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7829
+        },
+        {
+          "codigo": "24",
+          "rotulo": "Tributo - GARE-SP ITCMD",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7831
+        },
+        {
+          "codigo": "25",
+          "rotulo": "Tributo - IPVA",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7833
+        },
+        {
+          "codigo": "26",
+          "rotulo": "Tributo - Licenciamento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7835
+        },
+        {
+          "codigo": "27",
+          "rotulo": "Tributo – DPVAT",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7837
+        },
+        {
+          "codigo": "30",
+          "rotulo": "Liquidação de Títulos do Próprio Banco",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7839
+        },
+        {
+          "codigo": "31",
+          "rotulo": "Pagamento de Títulos de Outros Bancos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7841
+        },
+        {
+          "codigo": "40",
+          "rotulo": "Extrato de Conta Corrente",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7843
+        },
+        {
+          "codigo": "41",
+          "rotulo": "TED – Outra Titularidade (1)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7845
+        },
+        {
+          "codigo": "43",
+          "rotulo": "TED – Mesma Titularidade (1)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7847
+        },
+        {
+          "codigo": "44",
+          "rotulo": "TED para Transferência de Conta Investimento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7849
+        },
+        {
+          "codigo": "50",
+          "rotulo": "Débito em Conta Corrente",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7851
+        },
+        {
+          "codigo": "70",
+          "rotulo": "Extrato para Gestão de Caixa",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7853
+        },
+        {
+          "codigo": "71",
+          "rotulo": "Depósito Judicial em Conta Corrente",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7855
+        },
+        {
+          "codigo": "72",
+          "rotulo": "Depósito Judicial em Poupança",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7857
+        },
+        {
+          "codigo": "73",
+          "rotulo": "Extrato de Conta Investimento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7859
+        },
+        {
+          "codigo": "99",
+          "rotulo": "Cadastro de favorecidos (4)",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7861
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_15_15",
+      "campo": "campo_15_15",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        15,
+        15
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 14,
+          "fim0": 15,
+          "colunas": [
+            15,
+            15
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "0",
+          "rotulo": "Inclusão",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7916
+        },
+        {
+          "codigo": "1",
+          "rotulo": "Consulta",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7918
+        },
+        {
+          "codigo": "5",
+          "rotulo": "Alteração",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7920
+        },
+        {
+          "codigo": "7",
+          "rotulo": "Liquidação",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7922
+        },
+        {
+          "codigo": "9",
+          "rotulo": "Exclusão",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7924
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17",
+      "campo": "campo_16_17",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        16,
+        17
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 15,
+          "fim0": 17,
+          "colunas": [
+            16,
+            17
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "00",
+          "rotulo": "Liberado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7926
+        },
+        {
+          "codigo": "05",
+          "rotulo": "Alteração e bloqueia",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7928
+        },
+        {
+          "codigo": "06",
+          "rotulo": "Alteração e libera",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7930
+        },
+        {
+          "codigo": "09",
+          "rotulo": "Inclusão com bloqueio",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7932
+        },
+        {
+          "codigo": "10",
+          "rotulo": "Alter. Bloq. p/ Lib.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7934
+        },
+        {
+          "codigo": "11",
+          "rotulo": "Alter. Lib. p/ Bloq.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7936
+        },
+        {
+          "codigo": "17",
+          "rotulo": "Alter. valor do tít.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7938
+        },
+        {
+          "codigo": "19",
+          "rotulo": "Alter. data de pgto.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7940
+        },
+        {
+          "codigo": "23",
+          "rotulo": "Pg ao fornec. Baixar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7942
+        },
+        {
+          "codigo": "25",
+          "rotulo": "Manutenção carteira",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7944
+        },
+        {
+          "codigo": "27",
+          "rotulo": "Retirada de carteira",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7946
+        },
+        {
+          "codigo": "40",
+          "rotulo": "Alegação do sacado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7948
+        },
+        {
+          "codigo": "55",
+          "rotulo": "Inclusão com Bloqueio",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7950
+        },
+        {
+          "codigo": "99",
+          "rotulo": "Exclusão de pagamento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7952
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_16_17",
+      "campo": "campo_16_17",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        16,
+        17
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 15,
+          "fim0": 17,
+          "colunas": [
+            16,
+            17
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "01",
+          "rotulo": "Entrada de Títulos",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9657
+        },
+        {
+          "codigo": "02",
+          "rotulo": "Pedido de Baixa",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9658
+        },
+        {
+          "codigo": "03",
+          "rotulo": "Protesto Falimentar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9659
+        },
+        {
+          "codigo": "04",
+          "rotulo": "Concessão Abatimento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9660
+        },
+        {
+          "codigo": "05",
+          "rotulo": "Cancelamento Abatmto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9661
+        },
+        {
+          "codigo": "06",
+          "rotulo": "Alt. de Vencimento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9662
+        },
+        {
+          "codigo": "07",
+          "rotulo": "Concessão Desconto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9663
+        },
+        {
+          "codigo": "08",
+          "rotulo": "Cancelamento de Desc",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9664
+        },
+        {
+          "codigo": "09",
+          "rotulo": "Protestar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9665
+        },
+        {
+          "codigo": "10",
+          "rotulo": "Sustar Prot e Baixar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9666
+        },
+        {
+          "codigo": "11",
+          "rotulo": "Sustar Prot e Manter",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9667
+        },
+        {
+          "codigo": "12",
+          "rotulo": "Alt. de Juros de Mora",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9668
+        },
+        {
+          "codigo": "13",
+          "rotulo": "Dispensar Juros Mora",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9669
+        },
+        {
+          "codigo": "14",
+          "rotulo": "Alt. Valor/Perc Multa",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9670
+        },
+        {
+          "codigo": "15",
+          "rotulo": "Dispensar Multa",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9671
+        },
+        {
+          "codigo": "16",
+          "rotulo": "Alt Valor de Desconto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9672
+        },
+        {
+          "codigo": "17",
+          "rotulo": "Não conceder Desconto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9673
+        },
+        {
+          "codigo": "18",
+          "rotulo": "Alt Vlr de Abatimento",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9674
+        },
+        {
+          "codigo": "19",
+          "rotulo": "Alt Prazo Lim de Rec",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9675
+        },
+        {
+          "codigo": "20",
+          "rotulo": "Disp Prazo Lim de Rec",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9676
+        },
+        {
+          "codigo": "21",
+          "rotulo": "Alt número do título",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9677
+        },
+        {
+          "codigo": "22",
+          "rotulo": "Alt ctrl do Particip",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9678
+        },
+        {
+          "codigo": "23",
+          "rotulo": "Alt dados do Sacado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9679
+        },
+        {
+          "codigo": "24",
+          "rotulo": "Alt Sacador/Avalista",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9680
+        },
+        {
+          "codigo": "30",
+          "rotulo": "Recusa Aleg do Sacado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9681
+        },
+        {
+          "codigo": "31",
+          "rotulo": "Alt de Outros Dados",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9682
+        },
+        {
+          "codigo": "33",
+          "rotulo": "Alt Dados do Rat Créd",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9683
+        },
+        {
+          "codigo": "34",
+          "rotulo": "Canc Dados do Rat Cré",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9684
+        },
+        {
+          "codigo": "35",
+          "rotulo": "Desagendamento Déb Aut",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9685
+        },
+        {
+          "codigo": "40",
+          "rotulo": "Alteração de Carteira",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9686
+        },
+        {
+          "codigo": "41",
+          "rotulo": "Cancelar protesto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9687
+        },
+        {
+          "codigo": "42",
+          "rotulo": "Alt Espécie de Título",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9688
+        },
+        {
+          "codigo": "43",
+          "rotulo": "Transf carteira/modal",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9689
+        },
+        {
+          "codigo": "44",
+          "rotulo": "Alt contrato cobrança",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9690
+        },
+        {
+          "codigo": "45",
+          "rotulo": "Negativar Sem Protesto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9691
+        },
+        {
+          "codigo": "46",
+          "rotulo": "Bx Tít Negativado s/ p.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9692
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_18_20",
+      "campo": "campo_18_20",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        18,
+        20
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 17,
+          "fim0": 20,
+          "colunas": [
+            18,
+            20
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "000",
+          "rotulo": "Transf entre Cc.",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7958
+        },
+        {
+          "codigo": "018",
+          "rotulo": "TED",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7954
+        },
+        {
+          "codigo": "700",
+          "rotulo": "DOC",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7956
+        },
+        {
+          "codigo": "888",
+          "rotulo": "TED ISPB",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 7960
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_20_20",
+      "campo": "campo_20_20",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        20,
+        20
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 19,
+          "fim0": 20,
+          "colunas": [
+            20,
+            20
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "1",
+          "rotulo": "CPF",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8036
+        },
+        {
+          "codigo": "2",
+          "rotulo": "CNPJ",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8038
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_76_76",
+      "campo": "campo_76_76",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        76,
+        76
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 75,
+          "fim0": 76,
+          "colunas": [
+            76,
+            76
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "1",
+          "rotulo": "CPF",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8043
+        },
+        {
+          "codigo": "2",
+          "rotulo": "CNPJ",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8045
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_132_132",
+      "campo": "campo_132_132",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        132,
+        132
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 131,
+          "fim0": 132,
+          "colunas": [
+            132,
+            132
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "1",
+          "rotulo": "CPF",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8051
+        },
+        {
+          "codigo": "2",
+          "rotulo": "CNPJ",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8053
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_229_229",
+      "campo": "campo_229_229",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        229,
+        229
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 228,
+          "fim0": 229,
+          "colunas": [
+            229,
+            229
+          ]
+        }
+      ],
+      "registros_lidos": [],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "3",
+          "rotulo": "Não protestar",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9729
+        },
+        {
+          "codigo": "8",
+          "rotulo": "Negativação sem protesto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9735
+        },
+        {
+          "codigo": "9",
+          "rotulo": "Cancelamento de Protesto",
+          "slots": [
+            1
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 9737
+        }
+      ]
+    },
+    {
+      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias",
+      "campo": "ocorrencias",
+      "funcao_origem": "retorno_multipag_folha240",
+      "colunas": [
+        231,
+        240
+      ],
+      "slots": [
+        {
+          "ordem": 1,
+          "inicio0": 230,
+          "fim0": 232,
+          "colunas": [
+            231,
+            232
+          ]
+        },
+        {
+          "ordem": 2,
+          "inicio0": 232,
+          "fim0": 234,
+          "colunas": [
+            233,
+            234
+          ]
+        },
+        {
+          "ordem": 3,
+          "inicio0": 234,
+          "fim0": 236,
+          "colunas": [
+            235,
+            236
+          ]
+        },
+        {
+          "ordem": 4,
+          "inicio0": 236,
+          "fim0": 238,
+          "colunas": [
+            237,
+            238
+          ]
+        },
+        {
+          "ordem": 5,
+          "inicio0": 238,
+          "fim0": 240,
+          "colunas": [
+            239,
+            240
+          ]
+        }
+      ],
+      "registros_lidos": [
+        "header-arquivo",
+        "header-lote",
+        "trailer-arquivo",
+        "trailer-lote"
+      ],
+      "fora_do_dominio": "desconhecido",
+      "entradas": [
+        {
+          "codigo": "00",
+          "rotulo": "Débito Efetivado",
+          "slots": [
+            1
+          ],
+          "condicao_extra": "res[i].substring(13, 14) != \"B\"",
+          "linha_fonte": 8236
+        },
+        {
+          "codigo": "01",
+          "rotulo": "Insuficiência de fundos, Débito não efetuado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8238
+        },
+        {
+          "codigo": "02",
+          "rotulo": "Crédito ou Débito Cancelado pelo Pagador/Credor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8240
+        },
+        {
+          "codigo": "03",
+          "rotulo": "Débito Autorizado pela Agência - Efetuado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8242
+        },
+        {
+          "codigo": "5A",
+          "rotulo": "Agendado sob lista de debito",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8454
+        },
+        {
+          "codigo": "5B",
+          "rotulo": "Pagamento não autoriza sob lista de debito",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8456
+        },
+        {
+          "codigo": "5C",
+          "rotulo": "Lista com mais de uma modalidade",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8458
+        },
+        {
+          "codigo": "5D",
+          "rotulo": "Lista com mais de uma data de pagamento",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8460
+        },
+        {
+          "codigo": "5E",
+          "rotulo": "Número de lista duplicado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8462
+        },
+        {
+          "codigo": "5F",
+          "rotulo": "Lista de debito vencida e não autorizada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8464
+        },
+        {
+          "codigo": "5I",
+          "rotulo": "Ordem de pagamento emitido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8482
+        },
+        {
+          "codigo": "5J",
+          "rotulo": "Ordem de pagamento com data limite vencida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8484
+        },
+        {
+          "codigo": "5M",
+          "rotulo": "Número de lista de debito invalida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8466
+        },
+        {
+          "codigo": "5T",
+          "rotulo": "Pagamento realizado em contrato na condição de TESTE",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8486
+        },
+        {
+          "codigo": "AA",
+          "rotulo": "Controle Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8244
+        },
+        {
+          "codigo": "AB",
+          "rotulo": "Tipo de Operação Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8246
+        },
+        {
+          "codigo": "AC",
+          "rotulo": "Tipo de Serviço Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8248
+        },
+        {
+          "codigo": "AD",
+          "rotulo": "Forma de Lançamento Inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8250
+        },
+        {
+          "codigo": "AE",
+          "rotulo": "Tipo/Número de Inscrição Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8252
+        },
+        {
+          "codigo": "AF",
+          "rotulo": "Código de Convênio Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8254
+        },
+        {
+          "codigo": "AG",
+          "rotulo": "Agência/Conta Corrente/DV Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8256
+        },
+        {
+          "codigo": "AH",
+          "rotulo": "Nº Sequencial do Registro no Lote Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8258
+        },
+        {
+          "codigo": "AI",
+          "rotulo": "Código de Segmento de Detalhe Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8260
+        },
+        {
+          "codigo": "AJ",
+          "rotulo": "Tipo de Movimento Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8262
+        },
+        {
+          "codigo": "AK",
+          "rotulo": "Código da Câmara de Compensação do Banco Favorecido/Depositário Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8264
+        },
+        {
+          "codigo": "AL",
+          "rotulo": "Código do Banco Favorecido ou Depositário Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8266
+        },
+        {
+          "codigo": "AM",
+          "rotulo": "Agência Mantenedora da Conta Corrente do Favorecido Inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8268
+        },
+        {
+          "codigo": "AN",
+          "rotulo": "Conta Corrente/DV do Favorecido Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8270
+        },
+        {
+          "codigo": "AO",
+          "rotulo": "Nome do Favorecido Não Informado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8272
+        },
+        {
+          "codigo": "AP",
+          "rotulo": "Data Lançamento Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8274
+        },
+        {
+          "codigo": "AQ",
+          "rotulo": "Tipo/Quantidade da Moeda Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8276
+        },
+        {
+          "codigo": "AR",
+          "rotulo": "Valor do Lançamento Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8278
+        },
+        {
+          "codigo": "AS",
+          "rotulo": "Aviso ao Favorecido - Identificação Inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8280
+        },
+        {
+          "codigo": "AT",
+          "rotulo": "Tipo/Número de Inscrição do Favorecido Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8282
+        },
+        {
+          "codigo": "AU",
+          "rotulo": "Logradouro do Favorecido Não Informado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8284
+        },
+        {
+          "codigo": "AV",
+          "rotulo": "Nº do Local do Favorecido Não Informado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8286
+        },
+        {
+          "codigo": "AW",
+          "rotulo": "Cidade do Favorecido Não Informada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8288
+        },
+        {
+          "codigo": "AX",
+          "rotulo": "CEP/Complemento do Favorecido Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8290
+        },
+        {
+          "codigo": "AY",
+          "rotulo": "Sigla do Estado do Favorecido Inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8292
+        },
+        {
+          "codigo": "AZ",
+          "rotulo": "Código/Nome do Banco Depositário Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8294
+        },
+        {
+          "codigo": "BA",
+          "rotulo": "Código/Nome da Agência Depositária Não Informado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8296
+        },
+        {
+          "codigo": "BB",
+          "rotulo": "Seu número inválido.",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8298
+        },
+        {
+          "codigo": "BC",
+          "rotulo": "Nosso Número Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8300
+        },
+        {
+          "codigo": "BD",
+          "rotulo": "Agendado.",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8234
+        },
+        {
+          "codigo": "BE",
+          "rotulo": "Alteração Efetuada com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8302
+        },
+        {
+          "codigo": "BF",
+          "rotulo": "Exclusão Efetuada com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8304
+        },
+        {
+          "codigo": "BG",
+          "rotulo": "Agência/Conta Impedida Legalmente",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8306
+        },
+        {
+          "codigo": "BH",
+          "rotulo": "Empresa não pagou salário",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8308
+        },
+        {
+          "codigo": "BI",
+          "rotulo": "Falecimento do mutuário",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8310
+        },
+        {
+          "codigo": "BJ",
+          "rotulo": "Empresa não enviou remessa do mutuário",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8312
+        },
+        {
+          "codigo": "BK",
+          "rotulo": "Empresa não enviou remessa no vencimento",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8314
+        },
+        {
+          "codigo": "BL",
+          "rotulo": "Valor da parcela inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8316
+        },
+        {
+          "codigo": "BM",
+          "rotulo": "Identificação do contrato inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8318
+        },
+        {
+          "codigo": "BN",
+          "rotulo": "Operação de Consignação Incluída com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8320
+        },
+        {
+          "codigo": "BO",
+          "rotulo": "Operação de Consignação Alterada com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8322
+        },
+        {
+          "codigo": "BP",
+          "rotulo": "Operação de Consignação Excluída com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8324
+        },
+        {
+          "codigo": "BQ",
+          "rotulo": "Operação de Consignação Liquidada com Sucesso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8326
+        },
+        {
+          "codigo": "CA",
+          "rotulo": "Código de Barras - Código do Banco Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8328
+        },
+        {
+          "codigo": "CB",
+          "rotulo": "Código de Barras - Código da Moeda Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8330
+        },
+        {
+          "codigo": "CC",
+          "rotulo": "Código de Barras - Dígito Verificador Geral Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8332
+        },
+        {
+          "codigo": "CD",
+          "rotulo": "Código de Barras - Valor do Título Divergente/Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8334
+        },
+        {
+          "codigo": "CE",
+          "rotulo": "Código de Barras - Campo Livre Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8336
+        },
+        {
+          "codigo": "CF",
+          "rotulo": "Valor do Documento Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8338
+        },
+        {
+          "codigo": "CG",
+          "rotulo": "Valor do Abatimento Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8340
+        },
+        {
+          "codigo": "CH",
+          "rotulo": "Valor do Desconto Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8342
+        },
+        {
+          "codigo": "CI",
+          "rotulo": "Valor de Mora Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8344
+        },
+        {
+          "codigo": "CJ",
+          "rotulo": "Valor da Multa Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8346
+        },
+        {
+          "codigo": "CK",
+          "rotulo": "Valor do IR Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8348
+        },
+        {
+          "codigo": "CL",
+          "rotulo": "Valor do ISS Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8350
+        },
+        {
+          "codigo": "CM",
+          "rotulo": "Valor do IOF Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8352
+        },
+        {
+          "codigo": "CN",
+          "rotulo": "Valor de Outras Deduções Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8354
+        },
+        {
+          "codigo": "CO",
+          "rotulo": "Valor de Outros Acréscimos Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8356
+        },
+        {
+          "codigo": "CP",
+          "rotulo": "Valor do INSS Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8358
+        },
+        {
+          "codigo": "H1",
+          "rotulo": "Arquivo sem trailer",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8412
+        },
+        {
+          "codigo": "H2",
+          "rotulo": "Mutuário sem crédito na competência",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8414
+        },
+        {
+          "codigo": "H3",
+          "rotulo": "Não descontado – outros motivos",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8416
+        },
+        {
+          "codigo": "H4",
+          "rotulo": "Retorno de Crédito não pago",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8418
+        },
+        {
+          "codigo": "H5",
+          "rotulo": "Cancelamento de empréstimo retroativo",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8420
+        },
+        {
+          "codigo": "H6",
+          "rotulo": "Outros Motivos de Glosa",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8422
+        },
+        {
+          "codigo": "H7",
+          "rotulo": "Margem consignável excedida para o mutuário acima do prazo do contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8424
+        },
+        {
+          "codigo": "H8",
+          "rotulo": "Mutuário desligado do empregador",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8426
+        },
+        {
+          "codigo": "H9",
+          "rotulo": "Mutuário afastado por licença",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8428
+        },
+        {
+          "codigo": "HA",
+          "rotulo": "Lote Não Aceito",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8360
+        },
+        {
+          "codigo": "HB",
+          "rotulo": "Inscrição da Empresa Inválida para o Contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8362
+        },
+        {
+          "codigo": "HC",
+          "rotulo": "Convênio com a Empresa Inexistente/Inválido para o Contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8364
+        },
+        {
+          "codigo": "HD",
+          "rotulo": "Agência/Conta Corrente da Empresa Inexistente/Inválido para o Contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8366
+        },
+        {
+          "codigo": "HE",
+          "rotulo": "Tipo de Serviço Inválido para o Contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8368
+        },
+        {
+          "codigo": "HF",
+          "rotulo": "Conta Corrente da Empresa com Saldo Insuficiente",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8370
+        },
+        {
+          "codigo": "HG",
+          "rotulo": "Lote de Serviço Fora de Sequência",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8372
+        },
+        {
+          "codigo": "HH",
+          "rotulo": "Lote de Serviço Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8374
+        },
+        {
+          "codigo": "HI",
+          "rotulo": "Arquivo não aceito",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8376
+        },
+        {
+          "codigo": "HJ",
+          "rotulo": "Tipo de Registro Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8378
+        },
+        {
+          "codigo": "HK",
+          "rotulo": "Código Remessa / Retorno Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8380
+        },
+        {
+          "codigo": "HL",
+          "rotulo": "Versão de layout inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8382
+        },
+        {
+          "codigo": "HM",
+          "rotulo": "Mutuário não identificado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8384
+        },
+        {
+          "codigo": "HN",
+          "rotulo": "Tipo do benefício não permite empréstimo",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8386
+        },
+        {
+          "codigo": "HO",
+          "rotulo": "Beneficio cessado/suspenso",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8388
+        },
+        {
+          "codigo": "HP",
+          "rotulo": "Beneficio possui representante legal",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8390
+        },
+        {
+          "codigo": "HQ",
+          "rotulo": "Benefício é do tipo PA (Pensão alimentícia)",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8392
+        },
+        {
+          "codigo": "HR",
+          "rotulo": "Quantidade de contratos permitida excedida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8394
+        },
+        {
+          "codigo": "HS",
+          "rotulo": "Benefício não pertence ao Banco informado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8396
+        },
+        {
+          "codigo": "HT",
+          "rotulo": "Início do desconto informado já ultrapassado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8398
+        },
+        {
+          "codigo": "HU",
+          "rotulo": "Número da parcela inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8400
+        },
+        {
+          "codigo": "HV",
+          "rotulo": "Quantidade de parcela inválida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8402
+        },
+        {
+          "codigo": "HW",
+          "rotulo": "Margem consignável excedida para o mutuário dentro do prazo do contrato",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8404
+        },
+        {
+          "codigo": "HX",
+          "rotulo": "Empréstimo já cadastrado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8406
+        },
+        {
+          "codigo": "HY",
+          "rotulo": "Empréstimo inexistente",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8408
+        },
+        {
+          "codigo": "HZ",
+          "rotulo": "Empréstimo já encerrado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8410
+        },
+        {
+          "codigo": "IA",
+          "rotulo": "Primeiro nome do mutuário diferente do primeiro nome do movimento do censo ou diferente da base de Titular do Benefício",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8430
+        },
+        {
+          "codigo": "PA",
+          "rotulo": "Pix não efetivado - Tente mais tarde",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8488
+        },
+        {
+          "codigo": "PB",
+          "rotulo": "Transação interrompida devido a erro no PSP do Recebedor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8490
+        },
+        {
+          "codigo": "PC",
+          "rotulo": "Número da conta transacional encerrada no PSP do Recebedor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8492
+        },
+        {
+          "codigo": "PD",
+          "rotulo": "Tipo incorreto para a conta transacional especificada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8494
+        },
+        {
+          "codigo": "PE",
+          "rotulo": "Tipo de transação não é suportado/autorizado na conta transacional especificada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8496
+        },
+        {
+          "codigo": "PF",
+          "rotulo": "CPF/CNPJ do usuário recebedor não é consistente com o titular da conta transacional especificada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8498
+        },
+        {
+          "codigo": "PG",
+          "rotulo": "CPF/CNPJ do usuário recebedor incorreto",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8500
+        },
+        {
+          "codigo": "PH",
+          "rotulo": "Ordem rejeitada pelo PSP do Recebedor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8502
+        },
+        {
+          "codigo": "PI",
+          "rotulo": "ISPB do PSP do Pagador inválido ou inexistente",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8504
+        },
+        {
+          "codigo": "PJ",
+          "rotulo": "Chave não cadastrada no DICT",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8506
+        },
+        {
+          "codigo": "PK",
+          "rotulo": "QR COde Inválido/vencido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8508
+        },
+        {
+          "codigo": "PL",
+          "rotulo": "Forma de iniciação invalida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8510
+        },
+        {
+          "codigo": "PM",
+          "rotulo": "Chave de Pagamento invalida",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8512
+        },
+        {
+          "codigo": "PN",
+          "rotulo": "Chave de Pagamento não informada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8514
+        },
+        {
+          "codigo": "TA",
+          "rotulo": "Lote Não Aceito - Totais do Lote com Diferença",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8432
+        },
+        {
+          "codigo": "XX",
+          "rotulo": "Se migrado verifique ocorrência NTOB. Análise de arquivo.",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8232
+        },
+        {
+          "codigo": "YA",
+          "rotulo": "Título Não Encontrado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8434
+        },
+        {
+          "codigo": "YB",
+          "rotulo": "Identificador Registro Opcional Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8436
+        },
+        {
+          "codigo": "YC",
+          "rotulo": "Código Padrão Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8438
+        },
+        {
+          "codigo": "YD",
+          "rotulo": "Código de Ocorrência Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8440
+        },
+        {
+          "codigo": "YE",
+          "rotulo": "Complemento de Ocorrência Inválido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8442
+        },
+        {
+          "codigo": "YF",
+          "rotulo": "Alegação já Informada",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8444
+        },
+        {
+          "codigo": "ZA",
+          "rotulo": "Agência / Conta do Favorecido Substituída",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8446
+        },
+        {
+          "codigo": "ZB",
+          "rotulo": "Divergência entre o primeiro e último nome do beneficiário versus primeiro e último nome na Receita Federal",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8448
+        },
+        {
+          "codigo": "ZC",
+          "rotulo": "Confirmação de Antecipação de Valor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8450
+        },
+        {
+          "codigo": "ZD",
+          "rotulo": "Antecipação Parcial de Valor",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8452
+        },
+        {
+          "codigo": "ZE",
+          "rotulo": "Título bloqueado na base",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8468
+        },
+        {
+          "codigo": "ZF",
+          "rotulo": "Sistema em contingência – título valor maior que referência",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8470
+        },
+        {
+          "codigo": "ZG",
+          "rotulo": "Sistema em contingência – título vencido",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8472
+        },
+        {
+          "codigo": "ZH",
+          "rotulo": "Sistema em contingência – título indexado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8474
+        },
+        {
+          "codigo": "ZI",
+          "rotulo": "Beneficiário divergente",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8476
+        },
+        {
+          "codigo": "ZJ",
+          "rotulo": "Limite de pagamentos parciais excedidos",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8478
+        },
+        {
+          "codigo": "ZK",
+          "rotulo": "Boleto já liquidado",
+          "slots": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "condicao_extra": null,
+          "linha_fonte": 8480
+        }
+      ]
+    }
+  ]
+}
