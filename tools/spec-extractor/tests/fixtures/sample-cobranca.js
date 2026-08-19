@@ -19,7 +19,7 @@ const validarComoExpressao = function (res) {
   if (res[1].substring(0, 3) != "077") {
     str += "Linha 2, colunas 001-003, Header de lote, código do banco inválido.<br>";
   } else {
-    str += "Linha 2, colunas 001-003, Header de lote, código do banco OK.<br>";
+    str += "Linha 2, colunas 001-003, Header de lote, código do banco divergente.<br>";
   }
   return str;
 };
@@ -30,7 +30,7 @@ const validarComoArrow = (res) => {
     str += "Linha 3, colunas 004 a 007, Segmento Q, número do lote inválido.<br>";
   }
   if (Date.now() > 0) {
-    str += "Aviso genérico sem colunas.<br>";
+    str += "Aviso genérico sem colunas, preenchimento obrigatório.<br>";
   }
   return str;
 };

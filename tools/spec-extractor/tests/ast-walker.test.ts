@@ -30,6 +30,7 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[0].condicao_original, 'res[1].substring(0, 3) != "077"');
     assert.strictEqual(rules[1].registro, "header-lote");
     assert.strictEqual(rules[1].condicao_original, '!(res[1].substring(0, 3) != "077")');
+    assert.strictEqual(rules[1].mensagem, "Linha 2, colunas 001-003, Header de lote, código do banco divergente.<br>");
   });
 
   it("extracts rules from an arrow function", () => {
@@ -38,7 +39,7 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[0].registro, "segmento-q");
     assert.deepStrictEqual(rules[0].colunas, [4, 7]);
     assert.deepStrictEqual(rules[0].alvo, "res[2]");
-    assert.strictEqual(rules[1].mensagem, "Aviso genérico sem colunas.<br>");
+    assert.strictEqual(rules[1].mensagem, "Aviso genérico sem colunas, preenchimento obrigatório.<br>");
     assert.strictEqual(rules[1].colunas, null);
     assert.strictEqual(rules[1].registro, null);
   });
@@ -48,7 +49,7 @@ describe("extractRulesFromFunction", () => {
       function test(res) {
         var str = "";
         if (res[0] === "x") {
-          str += "Header do arquivo, coluna 001, ok.<br>";
+          str += "Header do arquivo, coluna 001, valor inválido.<br>";
         } else {
           str += "Header do arquivo, coluna 001, falhou.<br>";
         }
@@ -141,5 +142,57 @@ describe("extractRulesFromFunction", () => {
   it("returns empty array when function is not found", () => {
     const rules = extractRulesFromFunction(fixture, "naoExiste");
     assert.deepStrictEqual(rules, []);
+  });
+
+  it("recurses into nested if statements and merges guard conditions", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[0].substring(7, 8) == "1") {
+          if (res[0].substring(13, 14) != "A") {
+            str += "Linha 2, Segmento A, coluna 014, código inválido.<br>";
+          }
+          if (res[0].substring(17, 18) == "2") {
+            str += "Linha 2, Segmento A, coluna 018, tipo inválido.<br>";
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 2);
+    assert.strictEqual(rules[0].registro, "segmento-a");
+    assert.strictEqual(
+      rules[0].condicao_original,
+      '(res[0].substring(7, 8) == "1") && (res[0].substring(13, 14) != "A")'
+    );
+    assert.strictEqual(rules[1].registro, "segmento-a");
+    assert.strictEqual(
+      rules[1].condicao_original,
+      '(res[0].substring(7, 8) == "1") && (res[0].substring(17, 18) == "2")'
+    );
+  });
+
+  it("merges guards through else-if chains", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[0].substring(7, 8) == "1") {
+          if (res[0].substring(13, 14) == "A") {
+            str += "Segmento A, coluna 014, valor inválido.<br>";
+          } else if (res[0].substring(13, 14) == "B") {
+            str += "Segmento B, coluna 014, valor inválido.<br>";
+          } else {
+            str += "Segmento desconhecido, coluna 014, valor inválido.<br>";
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 3);
+    assert.strictEqual(rules[0].condicao_original, '(res[0].substring(7, 8) == "1") && (res[0].substring(13, 14) == "A")');
+    assert.strictEqual(rules[1].condicao_original, '(res[0].substring(7, 8) == "1") && (!(res[0].substring(13, 14) == "A")) && (res[0].substring(13, 14) == "B")');
+    assert.strictEqual(rules[2].condicao_original, '(res[0].substring(7, 8) == "1") && (!(res[0].substring(13, 14) == "A")) && (!(res[0].substring(13, 14) == "B"))');
   });
 });
