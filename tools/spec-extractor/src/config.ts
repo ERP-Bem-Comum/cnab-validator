@@ -32,3 +32,22 @@ export const LAYOUTS: Record<(typeof LAYOUTS_DO_CICLO)[number], LayoutMetadata> 
   multipag: { nome: "Multipag", tipo: "remessa", tamanhos_linha: [240] },
   "folha-pagamento": { nome: "Folha de Pagamento", tipo: "remessa", tamanhos_linha: [200, 240] },
 };
+
+/**
+ * Família estrutural do arquivo validado por cada função.
+ *
+ * Não é o mesmo eixo que o layout: `cobranca-remessa` agrega CNAB 240 e CNAB 400,
+ * que têm taxonomias de registro incompatíveis — no 240 o tipo de registro está na
+ * posição 008 e o código do segmento na coluna 014; no 400/200 o tipo está na
+ * coluna 001 e não existe segmento. O extrator precisa da família para classificar
+ * o registro a partir da guarda.
+ */
+export type FamiliaLayout = "cnab240" | "cnab400" | "cnab200";
+
+export const FAMILIA_POR_FUNCAO = {
+  validarDadosArquivo240: "cnab240",
+  validarDadosArquivo400: "cnab400",
+  validarDadosMultipag: "cnab240",
+  validarDadosFolha240: "cnab240",
+  validarDadosFolha200: "cnab200",
+} satisfies Record<keyof typeof MAPEAMENTO_FUNCOES, FamiliaLayout>;

@@ -85,9 +85,38 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
 - Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `modulo_11`,
-  `coerencia_registro`, `custom`. `custom` é o escape hatch — regra que não casa com nenhum matcher
-  cai nele com `condicao_original` preservada. Aumentar a cobertura = adicionar matcher em
-  `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+  `coerencia_registro`, `tamanho_linha`, `custom`. `custom` é o escape hatch — regra que não casa com
+  nenhum matcher cai nele com `condicao_original` preservada. Aumentar a cobertura = adicionar matcher
+  em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
+- Três condições coexistem por regra e não são intercambiáveis: `condicao_original` é a conjunção
+  completa (guardas + teste) e existe para rastreabilidade; `condicao_guarda` são só os `if` externos;
+  `condicao_propria` é o teste que emite a mensagem — **é ela que a DSL classifica e de onde saem as
+  posições**. Classificar pela conjunção completa faz a guarda mais externa ditar as colunas da regra.
+  A exceção é a **fusão de cadeia**: `inferirDominio` roda primeiro sobre `condicao_original`, porque
+  o fonte expressa domínio negado encadeando um `if` por valor sobre a mesma posição, com uma única
+  mensagem no nível mais interno. Sem essa tentativa antes, a cadeia vira uma regra `literal_fixo` de
+  um valor só e o domínio se perde.
+- `colunas` é a faixa que a condição efetivamente lê; `colunas_mensagem` guarda a faixa declarada na
+  mensagem quando difere. O fonte reporta o campo inteiro (ex.: o CNPJ) e testa só uma parte dele
+  (ex.: o dígito) — são informações distintas e ambas necessárias.
+- Regra sem faixa (comprimento de linha, por exemplo) tem `posicoes: []` e `colunas: [0, 0]`. Nunca
+  publicar posição inventada: um motor leria a coluna errada.
+
+#### Classificação do tipo de registro
+
+- A **guarda tem precedência sobre a mensagem**: `res[i].substring(7, 8) == 3` identifica o registro
+  mesmo quando o texto não o nomeia. `registro_origem` registra de onde veio (`guarda` | `mensagem`).
+- A leitura da guarda depende da **família** do arquivo, não do layout: `FAMILIA_POR_FUNCAO`
+  (`config.ts`) mapeia cada função para `cnab240` (tipo na posição 008, segmento na coluna 014),
+  `cnab400` ou `cnab200` (tipo na coluna 001, sem segmento). `cobranca-remessa` agrega 240 e 400 num
+  layout só — ao mexer em classificação, tratar as duas taxonomias separadamente.
+- Quando a mensagem cita mais de um registro, vence o que aparece **primeiro no texto**; empate no
+  mesmo offset é decidido pelo termo mais longo (senão "Segmento J-52" é engolido por "segmento J").
+  Os demais viram `registro_referenciado` — é o gancho das regras de coerência entre registros.
+- Igualdade sob `!` não identifica registro: `!(res[i].substring(13, 14) == "P")` afirma o contrário.
+- `tests/propriedades.test.ts` é a rede: roda sobre os specs versionados e falha se algum registro
+  contradisser a guarda que o cerca, se houver posição incoerente ou id duplicado. Sem asserções de
+  contagem — o número de regras muda a cada melhoria do extrator, as invariantes não.
 
 ### Política de baseline
 

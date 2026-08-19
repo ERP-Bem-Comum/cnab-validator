@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { join } from "node:path";
 import {
   ASSETS_DIR,
+  FAMILIA_POR_FUNCAO,
   LAYOUTS_DO_CICLO,
   MAPEAMENTO_FUNCOES,
   SPECS_DIR,
@@ -135,7 +136,8 @@ export function runPipeline(
     const rawRules = extractRulesFromFunction(
       found.source,
       funcName,
-      found.lineOffset
+      found.lineOffset,
+      FAMILIA_POR_FUNCAO[funcName as keyof typeof FAMILIA_POR_FUNCAO]
     );
     const dslRules = rawRules.map((r) => mapToDsl(r, layout, logger));
     rulesByLayout[layout] = rulesByLayout[layout] ?? [];

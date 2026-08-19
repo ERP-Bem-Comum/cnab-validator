@@ -66,7 +66,7 @@ describe("mapToDsl", () => {
     assert.strictEqual(dsl.condicao.tipo, "custom");
   });
 
-  it("lida com colunas nulas usando defaults quando condicao nao tem substring", () => {
+  it("trata regra de comprimento de linha como arquétipo próprio, sem posição", () => {
     const raw: RawRule = {
       funcao_origem: "amostra",
       linha_fonte: 996,
@@ -77,10 +77,9 @@ describe("mapToDsl", () => {
       alvo: "res[0]",
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "tamanho_linha");
     assert.deepStrictEqual(dsl.colunas, [0, 0]);
-    assert.strictEqual(dsl.posicoes[0].inicio0, 0);
-    assert.strictEqual(dsl.posicoes[0].fim0, 1);
-    assert.strictEqual(dsl.posicoes[0].tamanho, 1);
+    assert.deepStrictEqual(dsl.posicoes, []);
   });
 
   it("extrai colunas da condicao em vez da mensagem", () => {
@@ -246,5 +245,71 @@ describe("mapToDsl", () => {
       const dsl = mapToDsl(raw, "cobranca-remessa");
       assert.strictEqual(dsl.condicao.tipo, "modulo_11", `deveria reconhecer ${fn}`);
     }
+  });
+  it("funde cadeia de ifs aninhados sobre a mesma posição em dominio", () => {
+    // O fonte encadeia um `if` por valor e só o nível mais interno emite a mensagem;
+    // a condição própria isolada é uma desigualdade só, a cadeia inteira é o domínio.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 336,
+      condicao_original:
+        '(res[0].substring(70, 71) != "P") && (res[0].substring(70, 71) != "0") && (res[0].substring(70, 71) != "1")',
+      condicao_guarda:
+        '(res[0].substring(70, 71) != "P") && (res[0].substring(70, 71) != "0")',
+      condicao_propria: 'res[0].substring(70, 71) != "1"',
+      mensagem: "Linha 1, coluna 071, Header de arquivo, valor inválido.",
+      registro: "header-arquivo",
+      colunas: [71, 71],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    assert.deepStrictEqual(
+      dsl.condicao.tipo === "dominio" ? dsl.condicao.valores : [],
+      ["P", "0", "1"]
+    );
+    assert.deepStrictEqual(dsl.colunas, [71, 71]);
+  });
+
+  it("não funde quando a guarda testa outra posição", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 400,
+      condicao_original:
+        '(res[i].substring(13, 14) == "P") && (res[i].substring(15, 17) != "01")',
+      condicao_guarda: '(res[i].substring(13, 14) == "P")',
+      condicao_propria: 'res[i].substring(15, 17) != "01"',
+      mensagem: "Linha , colunas 016 a 017, código inválido.",
+      registro: "segmento-p",
+      colunas: [16, 17],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
+    assert.deepStrictEqual(dsl.colunas, [16, 17]);
+  });
+
+  it("classifica coerencia entre linhas distintas", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 500,
+      condicao_original:
+        '(res[i].substring(7, 8) == 1) && (res[i].substring(18, 32) != res[0].substring(18, 32))',
+      condicao_guarda: "(res[i].substring(7, 8) == 1)",
+      condicao_propria: "res[i].substring(18, 32) != res[0].substring(18, 32)",
+      mensagem: "Header de lote, colunas 019 a 032, CNPJ divergente do Header de arquivo.",
+      registro: "header-lote",
+      registro_referenciado: "header-arquivo",
+      colunas: [19, 32],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "coerencia_registro");
+    if (dsl.condicao.tipo === "coerencia_registro") {
+      assert.strictEqual(dsl.condicao.alvo, "res[i]");
+      assert.strictEqual(dsl.condicao.outro, "res[0]");
+      assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 18, fim0: 32 });
+    }
+    assert.strictEqual(dsl.registro_referenciado, "header-arquivo");
   });
 });

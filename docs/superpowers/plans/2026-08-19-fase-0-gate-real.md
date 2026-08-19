@@ -142,6 +142,7 @@ contrato dos specs está incompleto e a Fase 1 herda o defeito.
 | 0.4 | Discriminador sinal/ruído (CR3, fecha CA3) | `src/ast-walker.ts` |
 | 0.5 | Registro inferido pela guarda, não só pela mensagem — a guarda de tipo de registro (posição 008 do fonte) identifica header de lote / detalhe / trailer mesmo quando a mensagem não nomeia | `src/ast-walker.ts` |
 | 0.6 | Teste **de propriedade** (CA4): "existe ≥1 regra para cada tipo de registro do layout" e "nenhuma regra com `registro` nulo **e** `colunas` nulo". Nenhuma asserção de contagem | `tests/ast-walker.test.ts`, novo `tests/propriedades.test.ts` |
+| 0.6b | Propriedade adicional, nascida do defeito 1 abaixo: **nenhum registro contradiz a guarda que o cerca** | `tests/propriedades.test.ts` |
 | 0.7 | Regenerar specs, **revisar o diff manualmente** (CA5), commit | `tools/specs/**` |
 
 **Critério de saída da onda:** `tools/specs/layouts/multipag.json` contém regras de Segmento A,
@@ -149,6 +150,45 @@ header de lote e trailer; a suíte de propriedade passa; o diff foi revisado por
 
 **Escopo:** a correção é no walker, logo os três layouts são regerados juntos — a revisão do diff é
 que pode ser priorizada por Multipag primeiro.
+
+**Status em 2026-08-19 — 0.2 a 0.6 entregues.** 0.2 (pilha de guardas) e 0.3 (fusão de cadeia) vieram
+no commit `51a0459`; 0.4, 0.5 e 0.6 nesta rodada. Medição depois × antes, mesmo corpus, mesmo conjunto
+de regras (637 / 280 / 488 — nenhuma regra ganha ou perdida, só reclassificada):
+
+| Métrica | cobrança | folha | multipag |
+|---|---|---|---|
+| `nao-classificado` | 511 → 9 | 39 → 6 | 16 → 5 |
+| `custom` | 97% → 59% | 88% → 51% | 96% → 61% |
+| `coerencia_registro` | 0 → 78 | 0 → 4 | 0 → 12 |
+| colunas erradas | 595 → 194 | 216 → 73 | 434 → 168 |
+
+Quatro defeitos encontrados na execução, além do previsto pela CR3:
+
+1. **Classificação por texto sem desempate** — `inferirRegistro` devolvia o primeiro sinônimo na ordem
+   do dicionário. "Segmento J-52" era engolido por "segmento J" (30 regras do multipag) e
+   "Header de lote … divergente do Header de arquivo" ia para `header-arquivo`. Eram justamente as
+   regras de coerência entre registros, escondidas sob rótulo errado. Corrigido por ordem posicional
+   no texto + termo mais longo no empate; o segundo registro citado virou `registro_referenciado`.
+2. **Taxonomia monoglota** — o dicionário só falava CNAB 240. `validarDadosArquivo400` tinha 276 de
+   308 regras sem registro. Resolvido com `FAMILIA_POR_FUNCAO` em `config.ts`.
+3. **Colunas erradas em 91% das regras** — regressão da 0.2: `condicao_original` virou conjunção e o
+   extrator de posição passou a ler a guarda em vez do teste próprio. Resolvido separando
+   `condicao_propria` de `condicao_guarda`. As divergências restantes são legítimas (mensagem reporta
+   o campo, condição testa o dígito) e agora ficam em `colunas_mensagem`.
+4. **Mensagem perdia a referência de linha** — `"Linha " + i + ", colunas…"` virava `"Linha ,"`.
+   Agora emite `{linha}`; o acumulador `str` da concatenação é descartado.
+
+5. **A fusão de cadeia depende da conjunção completa** — trocar a classificação para a condição
+   própria derrubou `dominio` de 6 para 1 no repositório, porque a cadeia aninhada só existe na
+   conjunção. Resolvido tentando `inferirDominio` sobre `condicao_original` antes; travado por teste
+   nos dois sentidos (funde quando é a mesma posição, não funde quando a guarda testa outra).
+
+Efeito colateral esperado: classificar pela condição própria destravou também os matchers de
+`literal_fixo` e `numerico_branco`, que a conjunção com guardas impedia de casar. Isso adianta parte
+da 0.5.7 — `custom` caiu de ~94% para ~58%, ainda acima da meta de 20%.
+
+⬜ Pendente da onda: **0.7, a revisão humana do diff** (CA5). Os specs foram regerados e as invariantes
+estruturais passam, mas a revisão por tipo de registro e arquétipo ainda não foi feita.
 
 ---
 

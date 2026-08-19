@@ -148,7 +148,7 @@ describe("extractRulesFromFunction", () => {
     const code = `
       function test(res) {
         var str = "";
-        if (res[0].substring(7, 8) == "1") {
+        if (res[0].substring(7, 8) == "3") {
           if (res[0].substring(13, 14) != "A") {
             str += "Linha 2, Segmento A, coluna 014, código inválido.<br>";
           }
@@ -164,12 +164,12 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[0].registro, "segmento-a");
     assert.strictEqual(
       rules[0].condicao_original,
-      '(res[0].substring(7, 8) == "1") && (res[0].substring(13, 14) != "A")'
+      '(res[0].substring(7, 8) == "3") && (res[0].substring(13, 14) != "A")'
     );
     assert.strictEqual(rules[1].registro, "segmento-a");
     assert.strictEqual(
       rules[1].condicao_original,
-      '(res[0].substring(7, 8) == "1") && (res[0].substring(17, 18) == "2")'
+      '(res[0].substring(7, 8) == "3") && (res[0].substring(17, 18) == "2")'
     );
   });
 
@@ -194,5 +194,121 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[0].condicao_original, '(res[0].substring(7, 8) == "1") && (res[0].substring(13, 14) == "A")');
     assert.strictEqual(rules[1].condicao_original, '(res[0].substring(7, 8) == "1") && (!(res[0].substring(13, 14) == "A")) && (res[0].substring(13, 14) == "B")');
     assert.strictEqual(rules[2].condicao_original, '(res[0].substring(7, 8) == "1") && (!(res[0].substring(13, 14) == "A")) && (!(res[0].substring(13, 14) == "B"))');
+  });
+  it("classifica o registro pela guarda quando a mensagem não o nomeia", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(7, 8) == 3) {
+          if (res[i].substring(13, 14) == "P") {
+            if (res[i].substring(15, 17) != "01") {
+              str += "Linha , colunas 016 a 017, código de movimento inválido.<br>";
+            }
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].registro, "segmento-p");
+    assert.strictEqual(rules[0].registro_origem, "guarda");
+    assert.strictEqual(
+      rules[0].condicao_propria,
+      'res[i].substring(15, 17) != "01"'
+    );
+    assert.strictEqual(
+      rules[0].condicao_guarda,
+      '(res[i].substring(7, 8) == 3) && (res[i].substring(13, 14) == "P")'
+    );
+  });
+
+  it("usa a guarda e registra o segundo registro citado como referência", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(7, 8) == 1) {
+          if (res[i].substring(18, 32) != res[0].substring(18, 32)) {
+            str += "Header de lote, colunas 019 a 032, CNPJ divergente do Header de arquivo.<br>";
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules[0].registro, "header-lote");
+    assert.strictEqual(rules[0].registro_referenciado, "header-arquivo");
+  });
+
+  it("não deixa o termo mais curto engolir o mais específico", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[0].substring(1, 3) != "XX") {
+          str += "Segmento J-52, colunas 002 a 003, valor inválido.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules[0].registro, "segmento-j-52");
+  });
+
+  it("guarda negada não identifica registro", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(13, 14) == "P") {
+          str += "";
+        } else {
+          if (res[i].substring(15, 17) != "01") {
+            str += "Linha , colunas 016 a 017, código inválido.<br>";
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].registro, null);
+  });
+
+  it("classifica o CNAB 400 pela coluna 001 e pelo vocabulário próprio", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(0, 1) == 1) {
+          if (res[i].substring(1, 6) != "00000") {
+            str += "Linha , colunas 002 a 006, agência não numérica.<br>";
+          }
+        }
+        if (res[i].substring(20, 21) != "0") {
+          str += "Linha , coluna 021, Registro tipo 7, valor inválido.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test", 0, "cnab400");
+    assert.strictEqual(rules[0].registro, "registro-tipo-1");
+    assert.strictEqual(rules[0].registro_origem, "guarda");
+    assert.strictEqual(rules[1].registro, "registro-tipo-7");
+    assert.strictEqual(rules[1].registro_origem, "mensagem");
+  });
+
+  it("preserva a referência de linha interpolada e ignora o acumulador", () => {
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(0, 3) != "237") {
+          str = str + "Linha " + (i + 1) + ", colunas 001 a 003, banco inválido.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(
+      rules[0].mensagem,
+      "Linha {linha}, colunas 001 a 003, banco inválido.<br>"
+    );
   });
 });
