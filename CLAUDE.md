@@ -211,17 +211,19 @@ validador. É a saída de maior valor da fase para outros repositórios.
 
 ### Política de baseline
 
-- `tools/spec-extractor/baseline.json` é versionado e contém o hash SHA-256 do corpus de fixture
-  (`tests/fixtures/corpus-fixture.js`) usado no gate de reprodutibilidade. **Não é o hash do corpus
-  do Bradesco.**
+São **dois** baselines versionados, com propósitos diferentes. Um só arquivo faria o aviso do monitor
+disparar em toda execução — e alerta que sempre toca não é alerta.
+
+- **`baseline.json`** — hash SHA-256 do corpus de **fixture** (`tests/fixtures/corpus-fixture.js`),
+  usado pelo gate de reprodutibilidade. Ao mudar o corpus de fixture, regenere o hash e commite;
+  há teste que falha se os dois saírem de sincronia.
+- **`baseline-corpus.json`** — hash do corpus **público do banco**, com as URLs de origem e a data da
+  captura. É o monitor de mudança: `bun run dev` compara o corpus baixado com este hash e avisa
+  quando divergir, o que significa que o banco atualizou o validador e os specs precisam ser
+  revisados. Não quebra a execução; quando confirmada a mudança, regenere os specs e atualize o
+  arquivo com o novo hash e a nova data.
 - `assets/` continua fora do git. `bun run dev` ainda grava `assets/baseline.json` com o hash do
-  corpus baixado para referência local, mas a fonte de verdade para comparação é o arquivo
-  versionado.
-- Ao rodar `bun run dev`, o extrator compara o hash do corpus baixado com o baseline versionado.
-  Se divergir, emite um `console.warn` explícito, mas **não** quebra a execução. Isso sinaliza que
-  o validador do banco pode ter sido atualizado.
-- Para atualizar o baseline (por exemplo, após uma mudança intencional no corpus fixture), regenere
-  `baseline.json` a partir de `tests/fixtures/corpus-fixture.js` e commit o novo hash.
+  corpus baixado para referência local, mas a fonte de verdade da comparação é o arquivo versionado.
 
 ### Fidelidade à fonte
 

@@ -12,7 +12,7 @@
       "confirmado_em": "2026-08-19",
       "origem": "issue #4",
       "validador": {
-        "rotulo": "Agendado.",
+        "rotulo": "Rotulo sintetico, semantica divergente.",
         "slots": [
           1,
           2,
@@ -38,7 +38,7 @@
       "confirmado_em": "2026-08-19",
       "origem": "issue #4",
       "validador": {
-        "rotulo": "Codigo fora do manual.",
+        "rotulo": "Rotulo sintetico, codigo ausente do manual.",
         "slots": [
           1,
           2,

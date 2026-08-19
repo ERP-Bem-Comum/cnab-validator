@@ -1,4 +1,7 @@
 import { describe, it, expect } from "bun:test";
+import assert from "node:assert";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import {
   downloadText,
   parseScripts,
@@ -76,5 +79,41 @@ describe("bootstrap smoke test", () => {
   it("extrairPosicoesDaCondicao interpreta substring", () => {
     const pos = extrairPosicoesDaCondicao('res[0].substring(3, 7) != "0000"');
     expect(pos).toEqual({ inicio0: 3, fim0: 7 });
+  });
+});
+
+describe("baselines versionados", () => {
+  it("são dois arquivos distintos, com propósitos distintos", () => {
+    // O gate de reprodutibilidade compara o corpus de fixture; o monitor de
+    // mudança compara o corpus do banco. Um só arquivo faria o aviso do monitor
+    // disparar em toda execução — e alerta que sempre toca não é alerta.
+    const fixture = JSON.parse(
+      readFileSync(new URL("../baseline.json", import.meta.url), "utf-8")
+    );
+    const corpus = JSON.parse(
+      readFileSync(new URL("../baseline-corpus.json", import.meta.url), "utf-8")
+    );
+
+    assert.match(fixture.sha256, /^[0-9a-f]{64}$/);
+    assert.match(corpus.sha256, /^[0-9a-f]{64}$/);
+    assert.notStrictEqual(fixture.sha256, corpus.sha256);
+    assert.ok(corpus.fontes.length > 0, "o baseline do corpus registra de onde ele veio");
+    assert.ok(corpus.capturado_em, "a data da captura diz o quão velho o baseline está");
+  });
+
+  it("o baseline de fixture acompanha o corpus de fixture", () => {
+    const fixture = JSON.parse(
+      readFileSync(new URL("../baseline.json", import.meta.url), "utf-8")
+    );
+    const corpus = readFileSync(
+      new URL("./fixtures/corpus-fixture.js", import.meta.url),
+      "utf-8"
+    );
+    const hash = createHash("sha256").update(corpus).digest("hex");
+    assert.strictEqual(
+      fixture.sha256,
+      hash,
+      "baseline.json desatualizado: regenere o hash do corpus de fixture"
+    );
   });
 });

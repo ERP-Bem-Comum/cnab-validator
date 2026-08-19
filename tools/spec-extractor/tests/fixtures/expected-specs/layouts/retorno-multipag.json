@@ -137,7 +137,7 @@
       "entradas": [
         {
           "codigo": "00",
-          "rotulo": "Efetivado",
+          "rotulo": "Rotulo sintetico um",
           "slots": [
             1
           ],
@@ -146,7 +146,7 @@
         },
         {
           "codigo": "01",
-          "rotulo": "Recusado",
+          "rotulo": "Rotulo sintetico dois",
           "slots": [
             1,
             2,
@@ -159,7 +159,7 @@
         },
         {
           "codigo": "02",
-          "rotulo": "Cancelado",
+          "rotulo": "Rotulo sintetico tres",
           "slots": [
             1,
             2,
@@ -172,7 +172,7 @@
         },
         {
           "codigo": "BD",
-          "rotulo": "Agendado.",
+          "rotulo": "Rotulo sintetico, semantica divergente.",
           "slots": [
             1,
             2,
@@ -185,7 +185,7 @@
         },
         {
           "codigo": "XX",
-          "rotulo": "Codigo fora do manual.",
+          "rotulo": "Rotulo sintetico, codigo ausente do manual.",
           "slots": [
             1,
             2,
