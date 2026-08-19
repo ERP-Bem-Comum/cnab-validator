@@ -197,7 +197,10 @@ describe("mapToDsl", () => {
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
     assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
-    assert.strictEqual((dsl.condicao as any).operador, "!==");
+    // `!==` e `!=` colapsam no mesmo operador; o que os distingue — haver ou não
+    // coerção de tipo — vive em `comparacao`.
+    assert.strictEqual((dsl.condicao as any).operador, "!=");
+    assert.strictEqual((dsl.condicao as any).comparacao, "estrita");
   });
 
   it("classifica literal_fixo entre parenteses externos", () => {
@@ -212,7 +215,10 @@ describe("mapToDsl", () => {
     };
     const dsl = mapToDsl(raw, "cobranca-remessa");
     assert.strictEqual(dsl.condicao.tipo, "literal_fixo");
-    assert.strictEqual((dsl.condicao as any).operador, "!==");
+    // `!==` e `!=` colapsam no mesmo operador; o que os distingue — haver ou não
+    // coerção de tipo — vive em `comparacao`.
+    assert.strictEqual((dsl.condicao as any).operador, "!=");
+    assert.strictEqual((dsl.condicao as any).comparacao, "estrita");
     assert.strictEqual((dsl.condicao as any).valor, "XX");
   });
 
@@ -311,5 +317,189 @@ describe("mapToDsl", () => {
       assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 18, fim0: 32 });
     }
     assert.strictEqual(dsl.registro_referenciado, "header-arquivo");
+  });
+  it("funde cadeia negada com literal numerico e marca comparacao frouxa", () => {
+    // Forma do fonte: um `if` por valor, negando a igualdade contra literal sem
+    // aspas. Sem aspas o JavaScript coage os tipos — um campo em branco vale zero.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 600,
+      condicao_original:
+        "(res[i].substring(7, 8) == 1) && (!(res[i].substring(9, 11) == 01)) && (!(res[i].substring(9, 11) == 03)) && (!(res[i].substring(9, 11) == 90))",
+      condicao_guarda:
+        "(res[i].substring(7, 8) == 1) && (!(res[i].substring(9, 11) == 01)) && (!(res[i].substring(9, 11) == 03))",
+      condicao_propria: "!(res[i].substring(9, 11) == 90)",
+      mensagem: "Linha {linha}, colunas 010 a 011, tipo de serviço inválido.",
+      registro: "header-lote",
+      colunas: [10, 11],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    if (dsl.condicao.tipo === "dominio") {
+      assert.deepStrictEqual(dsl.condicao.valores, ["01", "03", "90"]);
+      assert.strictEqual(dsl.condicao.sentido, "permitidos");
+      assert.strictEqual(dsl.condicao.comparacao, "frouxa");
+      assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 9, fim0: 11 });
+    }
+    // A guarda de tipo de registro não é do domínio e continua publicada à parte.
+    assert.deepStrictEqual(dsl.colunas, [10, 11]);
+  });
+
+  it("nao funde cadeia quando a clausula extra nao esta na guarda", () => {
+    // Descartar uma cláusula que o `if` testa e a guarda não registra faria a regra
+    // disparar onde o fonte não dispara.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 601,
+      condicao_original:
+        'res[i].substring(20, 22) == "10" && res[i].substring(9, 11) != "01" && res[i].substring(9, 11) != "03"',
+      condicao_guarda: null,
+      condicao_propria:
+        'res[i].substring(20, 22) == "10" && res[i].substring(9, 11) != "01" && res[i].substring(9, 11) != "03"',
+      mensagem: "Linha {linha}, colunas 010 a 011, valor inválido.",
+      registro: "header-lote",
+      colunas: [10, 11],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "custom");
+  });
+
+  it("classifica dominio proibido escrito como disjuncao de igualdades", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 602,
+      condicao_original:
+        'res[0].substring(11, 13) == "07" || res[0].substring(11, 13) == "08" || res[0].substring(11, 13) == "09"',
+      mensagem: "Linha 1, colunas 012 a 013, valor não aceito.",
+      registro: "header-arquivo",
+      colunas: [12, 13],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "dominio");
+    if (dsl.condicao.tipo === "dominio") {
+      assert.strictEqual(dsl.condicao.sentido, "proibidos");
+      assert.deepStrictEqual(dsl.condicao.valores, ["07", "08", "09"]);
+      assert.strictEqual(dsl.condicao.comparacao, "estrita");
+    }
+  });
+
+  it("nao classifica dominio proibido quando as faixas diferem", () => {
+    // Data quebrada em pedaços: cada cláusula lê um campo diferente, então a lista
+    // de valores não é o domínio de uma posição.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 603,
+      condicao_original:
+        "res[0].substring(143, 145) == 00 || res[0].substring(145, 147) == 00",
+      mensagem: "Linha 1, colunas 144 a 151, data inválida.",
+      registro: "header-arquivo",
+      colunas: [144, 151],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.notStrictEqual(dsl.condicao.tipo, "dominio");
+  });
+
+  it("distingue o que cada variante de numerico_branco exige", () => {
+    const casos: [string, string][] = [
+      ["res[0].substring(7, 11).replace(/\\s/g, '').length == 0", "numerico_preenchido"],
+      ["res[0].substring(7, 11).replace(/\\s/g, '').length != 0", "branco"],
+      ["res[0].substring(7, 11).replace(/\\d/g, '').length == 1", "numerico"],
+    ];
+    for (const [residuo, exige] of casos) {
+      const raw: RawRule = {
+        funcao_origem: "amostra",
+        linha_fonte: 604,
+        condicao_original: `isNaN(res[0].substring(7, 11)) || ${residuo}`,
+        mensagem: "Linha 1, colunas 008 a 011, campo inválido.",
+        registro: "header-arquivo",
+        colunas: [8, 11],
+        alvo: "res[0]",
+      };
+      const dsl = mapToDsl(raw, "cobranca-remessa");
+      assert.strictEqual(dsl.condicao.tipo, "numerico_branco", residuo);
+      if (dsl.condicao.tipo === "numerico_branco") {
+        assert.strictEqual(dsl.condicao.exige, exige, residuo);
+        assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 7, fim0: 11 });
+      }
+    }
+  });
+
+  it("nao encaixa residuo desconhecido em numerico_branco", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 605,
+      condicao_original:
+        "isNaN(res[0].substring(7, 11)) || res[0].substring(7, 11).replace(/\\d/g, '').length == 4",
+      mensagem: "Linha 1, colunas 008 a 011, campo inválido.",
+      registro: "header-arquivo",
+      colunas: [8, 11],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "custom");
+  });
+
+  it("nao casa numerico_branco quando as duas metades leem faixas diferentes", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 606,
+      condicao_original:
+        "isNaN(res[0].substring(7, 11)) || res[0].substring(12, 15).replace(/\\s/g, '').length == 0",
+      mensagem: "Linha 1, campo inválido.",
+      registro: "header-arquivo",
+      colunas: [8, 11],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.notStrictEqual(dsl.condicao.tipo, "numerico_branco");
+  });
+
+  it("classifica disjuncao de blocos e publica todas as faixas lidas", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 607,
+      condicao_original:
+        "isNaN(res[0].substring(52, 57)) || res[0].substring(52, 57).replace(/\\d/g, '').length == 1 || isNaN(res[0].substring(58, 70)) || res[0].substring(58, 70).replace(/\\s/g, '').length == 0",
+      mensagem: "Linha 1, colunas 053 a 070, agência/conta não é numérico.",
+      registro: "header-arquivo",
+      colunas: [53, 70],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "disjuncao");
+    if (dsl.condicao.tipo === "disjuncao") {
+      assert.deepStrictEqual(
+        dsl.condicao.partes.map((p) => p.tipo),
+        ["numerico_branco", "numerico_branco"]
+      );
+    }
+    assert.deepStrictEqual(
+      dsl.posicoes.map((p) => p.colunas),
+      [
+        [53, 57],
+        [59, 70],
+      ]
+    );
+    // `colunas` da regra é o envelope das faixas que a disjunção lê.
+    assert.deepStrictEqual(dsl.colunas, [53, 70]);
+  });
+
+  it("disjuncao com parte nao modelada continua custom", () => {
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 608,
+      condicao_original:
+        'res[0].substring(7, 11) == "0000" || funcaoEstranha(res[0]) > 3',
+      mensagem: "Linha 1, campo inválido.",
+      registro: "header-arquivo",
+      colunas: [8, 11],
+      alvo: "res[0]",
+    };
+    const dsl = mapToDsl(raw, "cobranca-remessa");
+    assert.strictEqual(dsl.condicao.tipo, "custom");
   });
 });

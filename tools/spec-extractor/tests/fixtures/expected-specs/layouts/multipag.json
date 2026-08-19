@@ -41,7 +41,8 @@
           "fim0": 3
         },
         "operador": "!=",
-        "valor": "237"
+        "valor": "237",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(0, 3) != \"237\"",
       "condicao_guarda": null,
@@ -79,10 +80,16 @@
       ],
       "condicao": {
         "tipo": "numerico_branco",
-        "alvo": "res[0].substring(3, 7)",
+        "alvo": "res[0]",
         "posicao": {
           "inicio0": 3,
           "fim0": 7
+        },
+        "exige": "branco",
+        "residuo": {
+          "padrao": "\\s",
+          "operador": "!=",
+          "valor": 0
         }
       },
       "condicao_original": "isNaN(res[0].substring(3, 7)) || res[0].substring(3, 7).replace(/\\s/g, '').length != 0",
@@ -129,7 +136,9 @@
         "valores": [
           "S",
           "N"
-        ]
+        ],
+        "sentido": "permitidos",
+        "comparacao": "estrita"
       },
       "condicao_original": "res[0].substring(7, 8) != \"S\" && res[0].substring(7, 8) != \"N\"",
       "condicao_guarda": null,

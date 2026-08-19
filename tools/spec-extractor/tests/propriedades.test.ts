@@ -89,13 +89,47 @@ describe("propriedades dos specs", () => {
 
       it("posições são coerentes entre si", () => {
         const incoerentes = regras.filter((r) => {
-          const p = r.posicoes[0];
-          if (!p) return r.condicao.tipo !== "tamanho_linha";
-          if (p.inicio0 > p.fim0) return true;
-          if (p.colunas[0] !== p.inicio0 + 1 || p.colunas[1] !== p.fim0) return true;
-          return p.tamanho !== p.fim0 - p.inicio0;
+          if (r.posicoes.length === 0) return r.condicao.tipo !== "tamanho_linha";
+          // Uma regra pode publicar mais de uma faixa (disjunção sobre campos
+          // diferentes); todas precisam ser coerentes, não só a primeira.
+          return r.posicoes.some(
+            (p) =>
+              p.inicio0 > p.fim0 ||
+              p.colunas[0] !== p.inicio0 + 1 ||
+              p.colunas[1] !== p.fim0 ||
+              p.tamanho !== p.fim0 - p.inicio0
+          );
         });
         assert.deepStrictEqual(incoerentes.map((r) => r.id), []);
+      });
+
+      it("colunas da regra envolvem todas as faixas que ela lê", () => {
+        const foraDoEnvelope = regras.filter((r) => {
+          if (r.posicoes.length === 0) return false;
+          const inicio = Math.min(...r.posicoes.map((p) => p.colunas[0]));
+          const fim = Math.max(...r.posicoes.map((p) => p.colunas[1]));
+          return r.colunas[0] > inicio || r.colunas[1] < fim;
+        });
+        assert.deepStrictEqual(foraDoEnvelope.map((r) => r.id), []);
+      });
+
+      it("domínio publica sentido e ao menos um valor", () => {
+        const invalidos = regras.filter(
+          (r) =>
+            r.condicao.tipo === "dominio" &&
+            (r.condicao.valores.length === 0 ||
+              (r.condicao.sentido !== "permitidos" && r.condicao.sentido !== "proibidos"))
+        );
+        assert.deepStrictEqual(invalidos.map((r) => r.id), []);
+      });
+
+      it("disjunção nunca esconde uma parte não modelada", () => {
+        const comCustom = regras.filter(
+          (r) =>
+            r.condicao.tipo === "disjuncao" &&
+            r.condicao.partes.some((parte) => parte.tipo === "custom")
+        );
+        assert.deepStrictEqual(comCustom.map((r) => r.id), []);
       });
 
       it("ids são únicos e determinísticos", () => {
