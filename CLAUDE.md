@@ -68,6 +68,11 @@ decide qual roda:
   de layout, então esse extrator entra em `FunctionDeclaration` interna — o walker de regras não
   entra, e não precisa.
 
+`src/digito-verificador.ts` expõe o módulo 11 de agência e conta **sobre um par**, derivando pesos,
+módulo, tratamento de resto, rejeição de caixa baixa e fronteira de banco das próprias regras — é o
+que permite auditar cadastro sem gerar arquivo. Não reimplementar o algoritmo em outro lugar: uma
+cópia manual diverge do fonte na primeira atualização dele.
+
 Fora do pipeline, `src/runner/` aplica um spec a um arquivo e devolve achados —
 `expressao.ts` (avaliador das guardas, que a DSL não modela), `condicao.ts` (avaliador dos
 arquétipos) e `index.ts` (orquestração e relatório). É **oráculo de teste, não validador**: sem CLI,

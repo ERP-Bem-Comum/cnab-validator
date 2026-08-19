@@ -42,6 +42,38 @@ Três garantias que ele precisa manter:
 Corpus em `tests/fixtures/corpus/`, com um README próprio descrevendo cada
 arquivo campo a campo. É todo sintético.
 
+## Dígito verificador de agência e conta
+
+`src/digito-verificador.ts` expõe o cálculo de módulo 11 do validador **sobre um
+par agência/conta**, sem precisar gerar arquivo. É o que permite auditar cadastro
+direto, em vez de esperar retorno de remessa.
+
+```ts
+import { verificarPar } from "./src/digito-verificador.js";
+const regras = JSON.parse(readFileSync("tools/specs/layouts/multipag.json", "utf-8")).regras;
+
+verificarPar(
+  { banco: "237", agencia: "01234", digito_agencia: "3",
+    conta: "000000567890", digito_conta: "0" },
+  regras
+);
+```
+
+Nada ali é escrito à mão: pesos, módulo, tratamento de resto, a rejeição de caixa
+baixa e a fronteira de banco saem das regras extraídas. Se o banco mudar o
+algoritmo, o spec muda e a função muda junto — uma reimplementação manual
+divergiria em silêncio.
+
+Três comportamentos que surpreendem e são do validador, não escolha nossa:
+
+- **No resto 1 o validador aceita dois dígitos.** O fonte repete o bloco de
+  cálculo por valor informado: num ramo o resto 1 espera zero, no outro espera o
+  caractere alternativo. Quem escolher um só reprova arquivo que o oficial aprova.
+- **O caractere alternativo em caixa baixa é recusado**, embora o maiúsculo passe.
+- **Fora do banco aplicável, o dígito não é verificado na remessa.** `aplicavel:
+  false` não é "válido": é "o validador não julga isso aqui" — quem julga é a
+  ocorrência de retorno.
+
 ## Política de retry
 
 O downloader retrya automaticamente as seguintes condições:
