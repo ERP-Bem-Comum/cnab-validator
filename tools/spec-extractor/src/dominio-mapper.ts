@@ -176,6 +176,22 @@ function registrosLidos(
   const blocos = new Set(grupo.map((t) => t.bloco));
 
   const registros = new Set<string>();
+
+  // A guarda que cerca a tabela é a evidência direta: é o teste que decide se o
+  // bloco roda. Vem primeiro porque é a única que enxerga o **detalhe** — o fonte
+  // não o rotula no bloco das ocorrências, já que o rótulo dele saiu antes, no
+  // bloco do segmento. Derivar só da tabela irmã publicava "as ocorrências não
+  // são lidas no detalhe", que é o contrário do que o fonte faz.
+  for (const tabela of grupo) {
+    for (const guarda of tabela.guardas) {
+      for (const codigo of tiposNaGuarda(guarda, tabela.alvo, inicioTipo, fimTipo)) {
+        registros.add(tipoRegistroPorFamilia(codigo, familia));
+      }
+    }
+  }
+
+  // A tabela irmã que decodifica o tipo de registro no mesmo bloco. Continua
+  // valendo: nem todo bloco tem guarda que nomeie os tipos.
   for (const tabela of todas) {
     if (!blocos.has(tabela.bloco)) continue;
     if (tabela.inicio0 !== inicioTipo || tabela.fim0 !== fimTipo) continue;
@@ -183,7 +199,33 @@ function registrosLidos(
       registros.add(tipoRegistroPorFamilia(entrada.codigo, familia));
     }
   }
+
   return [...registros].sort();
+}
+
+/**
+ * Códigos de tipo de registro que a guarda compara com a posição do tipo.
+ *
+ * O fonte escreve a inclusão como disjunção de igualdades sobre a mesma faixa
+ * (`substring(7, 8) == "0" || ... == "9"`). Só a **igualdade** conta: `!=` afirma
+ * o contrário, e é como o fonte exclui segmentos do bloco.
+ */
+function tiposNaGuarda(
+  guarda: string,
+  alvo: string,
+  inicioTipo: number,
+  fimTipo: number
+): string[] {
+  const alvoEscapado = alvo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(
+    `${alvoEscapado}\\.substring\\(${inicioTipo},\\s*${fimTipo}\\)\\s*(===|==)\\s*(?:"([^"]*)"|'([^']*)'|(\\d+))`,
+    "g"
+  );
+  const codigos: string[] = [];
+  for (const m of guarda.matchAll(regex)) {
+    codigos.push(m[2] ?? m[3] ?? m[4]);
+  }
+  return codigos;
 }
 
 function unificarEntradas(grupo: TabelaDominio[]): EntradaCampo[] {

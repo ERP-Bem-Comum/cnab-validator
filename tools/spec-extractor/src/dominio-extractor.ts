@@ -37,6 +37,16 @@ export interface TabelaDominio {
   colunas: [number, number];
   /** Identidade do bloco em que a tabela foi lida — permite cruzar tabelas irmãs. */
   bloco: string;
+  /**
+   * Fonte dos `if` que cercam a tabela, do mais externo para o mais interno.
+   *
+   * É a evidência mais direta de em que registros o campo é lido: a guarda é
+   * literalmente o teste que decide se o bloco roda. A tabela irmã que decodifica
+   * o tipo de registro diz o mesmo por outro caminho, mas só alcança os tipos que
+   * o fonte **rotula** — e ele não rotula o detalhe, porque o rótulo dele já saiu
+   * no bloco do segmento.
+   */
+  guardas: string[];
   entradas: EntradaDominio[];
 }
 
@@ -56,7 +66,7 @@ export function extrairTabelasDeDominio(
   if (!alvo) return [];
 
   const ctx: Contexto = { code, lineOffset, tabelas: new Map() };
-  visitar(alvo.body, ctx, "raiz");
+  visitar(alvo.body, ctx, "raiz", []);
 
   return [...ctx.tabelas.values()]
     .map((tabela) => ({ ...tabela, entradas: tabela.entradas.filter(ehEntrada) }))
@@ -94,31 +104,39 @@ function acharFuncao(
   return null;
 }
 
-function visitar(stmt: Statement | null | undefined, ctx: Contexto, bloco: string): void {
+function visitar(
+  stmt: Statement | null | undefined,
+  ctx: Contexto,
+  bloco: string,
+  guardas: string[]
+): void {
   if (!stmt) return;
 
   switch (stmt.type) {
     case "BlockStatement": {
       const id = `${bloco}/${stmt.start}`;
-      for (const inner of stmt.body) visitar(inner, ctx, id);
+      for (const inner of stmt.body) visitar(inner, ctx, id, guardas);
       return;
     }
     case "IfStatement": {
-      registrarEntrada(stmt, ctx, bloco);
-      visitar(stmt.consequent, ctx, bloco);
-      visitar(stmt.alternate, ctx, bloco);
+      registrarEntrada(stmt, ctx, bloco, guardas);
+      const doIf = [...guardas, ctx.code.slice(stmt.test.start, stmt.test.end)];
+      visitar(stmt.consequent, ctx, bloco, doIf);
+      // O `else` vale o contrário do teste, e o que interessa aqui é a inclusão
+      // positiva: uma guarda negada não afirma em que registro o campo é lido.
+      visitar(stmt.alternate, ctx, bloco, guardas);
       return;
     }
     case "ForStatement":
     case "WhileStatement":
     case "DoWhileStatement":
     case "LabeledStatement":
-      visitar(stmt.body as Statement, ctx, bloco);
+      visitar(stmt.body as Statement, ctx, bloco, guardas);
       return;
     // É por aqui que o catálogo de ocorrências do retorno é alcançado.
     case "FunctionDeclaration": {
       if (stmt.body.type === "BlockStatement") {
-        visitar(stmt.body, ctx, `${bloco}/fn:${stmt.id?.name ?? stmt.start}`);
+        visitar(stmt.body, ctx, `${bloco}/fn:${stmt.id?.name ?? stmt.start}`, guardas);
       }
       return;
     }
@@ -130,7 +148,8 @@ function visitar(stmt: Statement | null | undefined, ctx: Contexto, bloco: strin
 function registrarEntrada(
   stmt: Statement & { type: "IfStatement" },
   ctx: Contexto,
-  bloco: string
+  bloco: string,
+  guardas: string[]
 ): void {
   const comparacao = lerComparacao(stmt.test, ctx);
   if (!comparacao) return;
@@ -145,6 +164,7 @@ function registrarEntrada(
     fim0: comparacao.fim0,
     colunas: [comparacao.inicio0 + 1, comparacao.fim0] as [number, number],
     bloco,
+    guardas,
     entradas: [],
   };
 
