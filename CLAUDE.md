@@ -59,8 +59,10 @@ afrouxadas sem decisão explícita:
   carga falhar, pela mesma razão que o runner reporta *não avaliada* em vez de aprovar.
 
 Os nomes dos tipos seguem o JSON, em português: traduzir criaria um segundo vocabulário para as
-mesmas coisas. A variante `modulo_11` precisa de `#[serde(rename)]` — `rename_all = "snake_case"`
-produz `modulo11`, sem o sublinhado.
+mesmas coisas. Nenhuma variante precisa de `#[serde(rename)]` — `rename_all = "snake_case"` dá conta
+de todas. Ao criar uma, conferir que o nome em `CamelCase` produz o nome do JSON: um arquétipo que
+termine em número (o antigo `Modulo11` virava `modulo11`, sem o sublinhado) precisaria do `rename`, e
+é sinal de que o nome escolhido está descrevendo o algoritmo em vez do que a regra faz.
 
 `crates/cnab-core` é o motor: `aplicar_spec(&regras, &linhas)` devolve achados e não avaliadas. Ele é
 o espelho do runner TS, e é isso que sustenta a paridade:
@@ -184,8 +186,9 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
 - Duas convenções de posição coexistem: `inicio0`/`fim0` são 0-based com fim exclusivo (espelham
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
-- Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `intervalo`, `modulo_11`,
-  `coerencia_registro`, `numero_da_linha`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
+- Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `intervalo`,
+  `digito_verificador`, `coerencia_registro`, `numero_da_linha`, `tamanho_linha`, `disjuncao`,
+  `conjuncao`, `custom`. `custom` é o escape hatch
   — regra que não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a
   cobertura = adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
 - `comparacao` (`estrita` | `frouxa`) existe em `literal_fixo` e `dominio` e **não é decoração**: o
@@ -235,20 +238,24 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   um nome de algoritmo — coincidem em 9 hoje, e assumir isso esconderia a mudança se o banco mexer num
   deles. `null` é a soma ponderada direta. Reduzir o total em vez de cada parcela dá outro número, e
   soma com reduções diferentes **não é publicada** — o cálculo fica de fora e a regra continua não
-  avaliável. O nome `modulo_11` do arquétipo é histórico: quem diz qual algoritmo é são `modulo` e
-  `dobra`.
-- `modulo_11` **depende do ambiente que o walker captura**: o fonte calcula o dígito numa variável
+  avaliável.
+- `digito_verificador` é um arquétipo só para os **dois** algoritmos que o validador usa, e é `modulo`
+  — com `dobra`, quando existe — que diz qual: módulo 11 na agência, na conta e na inscrição; módulo
+  10 com redução por parcela no código de barras do Segmento O. O nome descreve o que a regra faz, não
+  a aritmética: um arquétipo por algoritmo duplicaria `base`, `resultado` e a resolução do ambiente
+  para publicar a mesma coisa com outro divisor.
+- `digito_verificador` **depende do ambiente que o walker captura**: o fonte calcula o dígito numa variável
   antes do `if` (soma ponderada → resto → um `if` por faixa de resto) e a condição só compara a faixa
   com essa variável. `base` traz as parcelas com peso, `modulo` o divisor, `resultado` o dígito
   esperado por faixa de resto **na ordem do fonte** (uma atribuição sem `operador` é o valor padrão,
   que os `if` seguintes sobrescrevem — a última que casa vence), e `variavel` o nome no fonte. O
   validador **repete o bloco de cálculo inteiro por valor informado no dígito**, então a mesma faixa
   de resto tem resultado diferente em cada ramo; a guarda da regra diz qual ramo é. Sem ambiente não
-  se publica `modulo_11`: a condição sozinha é `faixa != variavel` e afirmar um algoritmo que o
-  extrator não viu seria inventar.
+  se publica `digito_verificador`: a condição sozinha é `faixa != variavel` e afirmar um algoritmo que
+  o extrator não viu seria inventar.
 - `variaveis_guarda` publica o cálculo das variáveis que a **guarda** referencia, e é o que torna a
   regra do segundo dígito avaliável: a guarda dela compara a faixa com o **primeiro** dígito, que o
-  fonte calculou antes do `if`. Cada variável é `modulo_11` (dígito, com `resultado` por faixa de
+  fonte calculou antes do `if`. Cada variável é `digito_verificador` (dígito, com `resultado` por faixa de
   resto) ou `resto` (só a soma ponderada e o módulo — o fonte compara restos entre si para escolher
   qual dígito exigir). A resolução usa o ambiente **do ponto em que a guarda foi aberta**, não o da
   regra: o fonte reusa `sm` dentro do bloco, e resolver pela ordem da regra daria ao primeiro dígito

@@ -143,10 +143,10 @@ describe("propriedades dos specs", () => {
         assert.deepStrictEqual(comCustom.map((r) => r.id), []);
       });
 
-      it("modulo_11 publica base, módulo e resultado", () => {
+      it("digito_verificador publica base, módulo e resultado", () => {
         const incompletas = regras.filter(
           (r) =>
-            r.condicao.tipo === "modulo_11" &&
+            r.condicao.tipo === "digito_verificador" &&
             (r.condicao.base.length === 0 ||
               r.condicao.modulo <= 0 ||
               r.condicao.resultado.length === 0)
@@ -172,7 +172,7 @@ describe("propriedades dos specs", () => {
                 !new RegExp(`\\b${v.nome}\\b`).test(r.condicao_guarda ?? "") ||
                 v.base.length === 0 ||
                 v.modulo <= 0 ||
-                (v.tipo === "modulo_11" && v.resultado.length === 0)
+                (v.tipo === "digito_verificador" && v.resultado.length === 0)
             )
             .map((v) => `${r.id}:${v.nome}`)
         );

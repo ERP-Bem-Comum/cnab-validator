@@ -59,8 +59,16 @@ export type DslCondition =
       sentido: "permitidos" | "proibidos";
       comparacao: ModoComparacao;
     }
+  /**
+   * Faixa comparada com um dígito que o fonte calcula: soma ponderada, resto da
+   * divisão por `modulo`, e o valor esperado por faixa de resto.
+   *
+   * Cobre os dois algoritmos que o validador usa, e é `modulo` — com `dobra`,
+   * quando existe — que diz qual: módulo 11 na agência, na conta e na inscrição;
+   * módulo 10 com redução por parcela no código de barras do Segmento O.
+   */
   | {
-      tipo: "modulo_11";
+      tipo: "digito_verificador";
       alvo: string;
       /** Faixa do dígito informado no arquivo. */
       posicao: { inicio0: number; fim0: number };
@@ -76,9 +84,7 @@ export type DslCondition =
       modulo: number;
       /**
        * Redução por parcela do somatório, antes de somar; `null` é a soma
-       * ponderada direta. O nome do arquétipo é histórico — quem diz qual
-       * algoritmo é são `modulo` e este campo, e o dígito do código de barras do
-       * Segmento O é módulo 10 com redução.
+       * ponderada direta.
        */
       dobra: Dobra | null;
       /**
@@ -229,7 +235,7 @@ function posicaoDoArquetipo(
     case "numerico_branco":
     case "dominio":
     case "intervalo":
-    case "modulo_11":
+    case "digito_verificador":
     case "coerencia_registro":
     case "numero_da_linha":
       return condicao.posicao;
@@ -292,8 +298,8 @@ export type VariavelDaGuarda = {
 } & (
   | {
       /** Dígito calculado: a guarda compara a faixa do arquivo com ele. */
-      tipo: "modulo_11";
-      /** Mesma forma do arquétipo `modulo_11`: última faixa que casa vence. */
+      tipo: "digito_verificador";
+      /** Mesma forma do arquétipo `digito_verificador`: última faixa que casa vence. */
       resultado: ResultadoDoDigito["faixas"];
     }
   | {
@@ -349,7 +355,7 @@ function resolverVariaveisDaGuarda(
       if (calculo) {
         variaveis.push({
           nome,
-          tipo: "modulo_11",
+          tipo: "digito_verificador",
           base: calculo.base,
           modulo: calculo.modulo,
           dobra: calculo.dobra,
@@ -521,7 +527,7 @@ function faixasDaCondicao(condicao: DslCondition): Faixa[] {
       case "literal_fixo":
       case "numerico_branco":
       case "dominio":
-      case "modulo_11":
+      case "digito_verificador":
       case "coerencia_registro":
       case "intervalo":
         faixas.push({ alvo: c.alvo, inicio0: c.posicao.inicio0, fim0: c.posicao.fim0 });
@@ -683,11 +689,11 @@ function inferirCondicaoSimples(
   const intervalo = inferirIntervalo(condicao);
   if (intervalo) return intervalo;
 
-  // Módulo 11: o fonte calcula o dígito numa variável, antes do `if`, e aqui só
-  // compara a faixa com ela. Sem o ambiente capturado pelo walker a condição é
-  // ilegível — é literalmente `res[0].substring(57, 58) != dva`.
-  const modulo11 = inferirModulo11(condicao, ambiente, mensagem);
-  if (modulo11) return modulo11;
+  // Dígito verificador: o fonte calcula o dígito numa variável, antes do `if`, e
+  // aqui só compara a faixa com ela. Sem o ambiente capturado pelo walker a
+  // condição é ilegível — é literalmente `res[0].substring(57, 58) != dva`.
+  const digito = inferirDigitoVerificador(condicao, ambiente, mensagem);
+  if (digito) return digito;
 
   // Coerência entre duas leituras: a mesma faixa em linhas distintas (`res[i]`
   // contra `res[j]` ou `res[i + 1]`), que sustenta "banco único por lote", ou
@@ -1183,7 +1189,7 @@ function stripBalancedParens(s: string): string {
  * variável. A condição da regra só compara a faixa com essa variável, então o
  * arquétipo só se resolve com o ambiente que o walker capturou.
  */
-function inferirModulo11(
+function inferirDigitoVerificador(
   condicao: string,
   ambiente: Record<string, AtribuicaoFonte[]> | undefined,
   mensagem: string
@@ -1210,7 +1216,7 @@ function inferirModulo11(
   if (!calculo) return null;
 
   return {
-    tipo: "modulo_11",
+    tipo: "digito_verificador",
     alvo,
     posicao: { inicio0: parseInt(inicio, 10), fim0: parseInt(fim, 10) },
     base: calculo.base,

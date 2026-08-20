@@ -143,7 +143,7 @@ pub enum Condicao {
         posicao: Posicao,
         valores: HashSet<String>,
     },
-    Modulo11 {
+    DigitoVerificador {
         posicao: Posicao,
         documento: Documento,
     },

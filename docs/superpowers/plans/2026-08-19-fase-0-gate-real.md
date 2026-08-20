@@ -658,7 +658,7 @@ O fonte calcula **dois** dígitos e escolhe entre eles por faixa de resto. Três
    vencer no bloco que o fonte repete por dígito.
 
 As 6 regras passam a ser avaliáveis: duas viram `literal_fixo`/`dominio` com a guarda resolvida, e
-quatro viram `conjuncao` de `modulo_11` com literal ou com o outro dígito. De brinde,
+quatro viram `conjuncao` de `digito_verificador` com literal ou com o outro dígito. De brinde,
 `folha-pagamento:validarDadosFolha200:697` — o dígito da conta do funcionário, cujo `dvc` também é
 calculado antes do `if` que o testa — saiu de `custom` pela mesma correção.
 
@@ -669,6 +669,29 @@ Golden: 0 achados no correto e 1 em comum no inválido, sem divergência. Fazer 
 redução derruba a paridade sobre o arquivo **correto**, que é o teste que importa.
 
 Com isso as duas pendências que o golden abriu estão fechadas.
+
+### `modulo_11` passou a se chamar `digito_verificador` — 2026-08-20
+
+O arquétipo cobre os **dois** algoritmos que o validador usa: módulo 11 na agência, na conta e na
+inscrição, e módulo 10 com redução por parcela no código de barras do Segmento O. Depois que `dobra`
+entrou, o nome passou a contradizer o conteúdo — havia regra publicada como `modulo_11` com
+`modulo: 10`.
+
+O nome novo descreve **o que a regra faz**; `modulo` e `dobra` dizem qual é a aritmética. Não houve
+divisão em dois arquétipos porque isso duplicaria `base`, `resultado` e a resolução do ambiente para
+publicar a mesma coisa com outro divisor.
+
+O rename é puramente nominal, e isso foi **medido**: substituir a string nos specs versionados produz
+byte a byte o que o extrator regera. Também caiu o `#[serde(rename)]` do lado Rust — ele existia
+porque `rename_all = "snake_case"` transforma `Modulo11` em `modulo11`, sem o sublinhado, e
+`DigitoVerificador` já produz `digito_verificador` sozinho.
+
+**As tabelas e medições das seções anteriores deste plano continuam dizendo `modulo_11`.** São
+registro do que foi medido na época, e reescrevê-las apagaria a data das medições.
+
+⚠️ **Quebra de contrato para quem já consumia o spec.** Nenhum consumidor externo existe hoje — os
+dois crates estão neste repositório e foram atualizados junto —, mas quem tiver um spec antigo em
+mãos precisa da substituição.
 
 ---
 

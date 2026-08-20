@@ -172,11 +172,11 @@ fn composta_nao_esconde_escape_hatch() {
 }
 
 #[test]
-fn modulo_11_traz_o_calculo_inteiro() {
+fn digito_verificador_traz_o_calculo_inteiro() {
     let catalogo = catalogo();
     for layout in catalogo.layouts() {
         for regra in &layout.regras {
-            if let Condicao::Modulo11 {
+            if let Condicao::DigitoVerificador {
                 base,
                 modulo,
                 resultado,
@@ -222,7 +222,7 @@ fn variavel_de_guarda_e_citada_pela_guarda() {
                     variavel.nome()
                 );
                 assert!(variavel.modulo() > 0, "{}: módulo inválido", regra.id);
-                if let VariavelDaGuarda::Modulo11 { resultado, .. } = variavel {
+                if let VariavelDaGuarda::DigitoVerificador { resultado, .. } = variavel {
                     assert!(
                         !resultado.is_empty(),
                         "{}: dígito sem resultado por faixa de resto",

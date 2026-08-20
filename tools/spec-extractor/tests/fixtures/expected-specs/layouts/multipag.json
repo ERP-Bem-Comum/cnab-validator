@@ -178,7 +178,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 30,
@@ -311,7 +311,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 31,
@@ -420,7 +420,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[0]",
