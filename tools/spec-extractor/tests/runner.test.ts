@@ -2,7 +2,7 @@ import { describe, it } from "bun:test";
 import assert from "node:assert";
 import { readFileSync } from "node:fs";
 import { aplicarSpec, separarLinhas } from "../src/runner/index.js";
-import { avaliarCondicao } from "../src/runner/condicao.js";
+import { avaliarCondicao, calcularResto } from "../src/runner/condicao.js";
 import { avaliarExpressao, ExpressaoNaoSuportada } from "../src/runner/expressao.js";
 import type { DslRule } from "../src/rule-mapper.js";
 
@@ -184,6 +184,46 @@ describe("runner de conformidade", () => {
     assert.strictEqual(relatorio.achados[0].regra_id, "multipag:validarDadosMultipag:498");
     assert.strictEqual(relatorio.achados[0].linha, 6);
     assert.strictEqual(relatorio.achados[0].registro, "trailer-arquivo");
+  });
+
+  it("o dígito do código de barras do tributo confere, e o errado é reprovado", () => {
+    // O par exercita o módulo 10 com redução por parcela: o código de barras
+    // dos dois arquivos cai no ramo `resto10 != 0`, onde o dígito aceito é o do
+    // módulo 10. Cálculo errado viraria falso positivo no primeiro arquivo.
+    const correto = aplicarSpec(multipag, carregarArquivo("multipag-tributo-correto.txt"));
+    assert.deepStrictEqual(
+      correto.achados.map((a) => `${a.regra_id} ${a.mensagem}`),
+      []
+    );
+
+    const invalido = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-tributo-dv-invalido.txt")
+    );
+    assert.strictEqual(invalido.achados.length, 1);
+    assert.strictEqual(invalido.achados[0].registro, "segmento-o");
+    assert.match(invalido.achados[0].mensagem, /Dígito Verificador Código de Barras/);
+  });
+
+  it("a redução é aplicada parcela a parcela, não ao total", () => {
+    // `9 * 2` é 18, que passa de 9 e vira 9; `8 * 1` é 8 e fica. A soma é 17, e
+    // o resto do módulo 10 é 7. Reduzir o total daria 26 - 9 = 17 por acaso
+    // aqui, mas a diferença aparece assim que duas parcelas excedem.
+    const calculo = {
+      base: [
+        { alvo: "res[0]", inicio0: 0, fim0: 1, peso: 2, transformacao: null },
+        { alvo: "res[0]", inicio0: 1, fim0: 2, peso: 2, transformacao: null },
+      ],
+      modulo: 10,
+      dobra: { limite: 9, subtrai: 9 },
+    };
+    // 9*2 = 18 -> 9, e 8*2 = 16 -> 7. Soma 16, resto 6.
+    assert.strictEqual(calcularResto(calculo, { linhas: ["98"], i: 0 }), 6);
+    // Sem a redução a soma seria 34, e o resto 4 — outro dígito.
+    assert.strictEqual(
+      calcularResto({ ...calculo, dobra: null }, { linhas: ["98"], i: 0 }),
+      4
+    );
   });
 
   it("a faixa é comparada com o número 1-based da linha, e coagida", () => {

@@ -4,7 +4,9 @@
 //! depende de algo que o spec não carrega. Nunca devolver `Some(false)` nesses
 //! casos é deliberado: regra silenciosamente aprovada cria falsa confiança.
 
-use cnab_specs::{Condicao, ModoComparacao, Parcela, Posicao, SentidoDominio, VariavelDaGuarda};
+use cnab_specs::{
+    Condicao, Dobra, ModoComparacao, Parcela, Posicao, SentidoDominio, VariavelDaGuarda,
+};
 
 use crate::expressao::{Contexto, aplicar_replace, substring};
 use crate::valor::{Valor, comparar, numero_js};
@@ -129,6 +131,7 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             posicao,
             base,
             modulo,
+            dobra,
             resultado,
             transformacao,
             ..
@@ -138,7 +141,7 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             if transformacao.is_some() {
                 return None;
             }
-            let esperado = calcular_digito(base, *modulo, resultado, ctx)?;
+            let esperado = calcular_digito(base, *modulo, *dobra, resultado, ctx)?;
             let digito = ler_faixa(alvo, posicao, ctx)?;
             // O fonte compara sem aspas contra número e com aspas contra letra;
             // `==` cobre os dois com a mesma coerção que ele usa.
@@ -183,7 +186,12 @@ fn comparar_literal(
 
 /// Resto da soma ponderada, primeira metade do cálculo do dígito. O fonte também
 /// o compara direto, sem virar dígito, para escolher qual regra aplicar.
-pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f64> {
+pub fn calcular_resto(
+    base: &[Parcela],
+    modulo: i64,
+    dobra: Option<Dobra>,
+    ctx: &Contexto,
+) -> Option<f64> {
     if modulo == 0 {
         return None;
     }
@@ -203,7 +211,13 @@ pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f
             },
             ctx,
         )?;
-        soma += Valor::texto(campo).como_numero() * parcela.peso as f64;
+        let produto = Valor::texto(campo).como_numero() * parcela.peso as f64;
+        // O fonte reduz parcela a parcela, antes de somar: reduzir o total daria
+        // outro número.
+        soma += match dobra {
+            Some(d) if produto > d.limite as f64 => produto - d.subtrai as f64,
+            _ => produto,
+        };
     }
     if soma.is_nan() {
         return None;
@@ -215,10 +229,11 @@ pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f
 pub fn calcular_digito(
     base: &[Parcela],
     modulo: i64,
+    dobra: Option<Dobra>,
     resultado: &[cnab_specs::FaixaDeResto],
     ctx: &Contexto,
 ) -> Option<Valor> {
-    let resto = calcular_resto(base, modulo, ctx)?;
+    let resto = calcular_resto(base, modulo, dobra, ctx)?;
 
     // A ordem do fonte é a ordem de avaliação: a última atribuição que casa vence.
     let mut esperado: Option<Valor> = None;
@@ -289,9 +304,9 @@ pub fn resolver_variaveis(variaveis: &[VariavelDaGuarda], ctx: &Contexto) -> Vec
                 modulo,
                 resultado,
                 ..
-            } => calcular_digito(base, *modulo, resultado, ctx),
+            } => calcular_digito(base, *modulo, variavel.dobra(), resultado, ctx),
             VariavelDaGuarda::Resto { base, modulo, .. } => {
-                calcular_resto(base, *modulo, ctx).map(Valor::Numero)
+                calcular_resto(base, *modulo, variavel.dobra(), ctx).map(Valor::Numero)
             }
         };
         if let Some(valor) = valor {
@@ -437,6 +452,36 @@ mod testes {
             avaliar_condicao(&condicao, &Contexto::novo(&arquivo, 4)),
             Some(true)
         );
+    }
+
+    #[test]
+    fn a_reducao_e_aplicada_parcela_a_parcela_nao_ao_total() {
+        // 9*2 = 18 passa de 9 e vira 9; 8*2 = 16 vira 7. Soma 16, resto 6. Sem a
+        // reducao a soma seria 34 e o resto 4 — outro digito.
+        let base = vec![
+            Parcela {
+                alvo: "res[0]".into(),
+                inicio0: 0,
+                fim0: 1,
+                peso: 2,
+                transformacao: None,
+            },
+            Parcela {
+                alvo: "res[0]".into(),
+                inicio0: 1,
+                fim0: 2,
+                peso: 2,
+                transformacao: None,
+            },
+        ];
+        let arquivo = vec!["98".to_string()];
+        let ctx = Contexto::novo(&arquivo, 0);
+        let dobra = Dobra {
+            limite: 9,
+            subtrai: 9,
+        };
+        assert_eq!(calcular_resto(&base, 10, Some(dobra), &ctx), Some(6.0));
+        assert_eq!(calcular_resto(&base, 10, None, &ctx), Some(4.0));
     }
 
     #[test]

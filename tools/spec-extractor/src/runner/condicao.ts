@@ -115,18 +115,27 @@ export function avaliarCondicao(
  * também o compara direto, sem virar dígito, para escolher qual regra aplicar.
  */
 export function calcularResto(
-  calculo: { base: Extract<DslCondition, { tipo: "modulo_11" }>["base"]; modulo: number },
+  calculo: {
+    base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
+    modulo: number;
+    /** Redução por excesso do módulo 10; ausente é a soma ponderada direta. */
+    dobra?: { limite: number; subtrai: number } | null;
+  },
   ctx: ContextoArquivo
 ): number | null {
   // A função que o fonte aplica a cada parcela do CNPJ alfanumérico não está no
   // spec — sem ela, calcular seria inventar um resultado.
   if (calculo.base.some((parcela) => parcela.transformacao !== null)) return null;
 
+  const dobra = calculo.dobra ?? null;
   let soma = 0;
   for (const parcela of calculo.base) {
     const campo = lerFaixa(parcela.alvo, parcela, ctx);
     if (campo === null) return null;
-    soma += Number(campo) * parcela.peso;
+    const produto = Number(campo) * parcela.peso;
+    // O fonte reduz parcela a parcela, antes de somar: reduzir o total daria
+    // outro número. É o `if (faixa * 2 > 9) soma = (faixa * 2) - 9` do módulo 10.
+    soma += dobra && produto > dobra.limite ? produto - dobra.subtrai : produto;
   }
   if (isNaN(soma)) return null;
 
@@ -143,6 +152,7 @@ export function calcularDigito(
   calculo: {
     base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
     modulo: number;
+    dobra?: { limite: number; subtrai: number } | null;
     resultado: Extract<DslCondition, { tipo: "modulo_11" }>["resultado"];
   },
   ctx: ContextoArquivo

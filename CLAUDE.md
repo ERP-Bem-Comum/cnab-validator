@@ -152,9 +152,17 @@ Pontos que só ficam claros lendo vários arquivos juntos:
   não reprova nada. O índice pode ser aritmético (`res[j + 1]` alcança o registro seguinte, como nas
   regras do Segmento R sob o P) — o consumidor já resolve essa forma, e o extrator a publica.
 - **O walker mantém um ambiente de variáveis** (`RawRule.ambiente`): atribuições vistas até a regra,
-  com a pilha de guardas de cada uma. Uma atribuição só alcança a regra se toda guarda da regra vale
-  também para ela — sem esse escopo o ramo irmão do cálculo de dígito vazaria e o spec publicaria dois
-  resultados contraditórios. Acumulador de mensagem (`resposta = resposta + "…"`) é filtrado por
+  com a pilha de guardas de cada uma. Uma atribuição alcança a regra quando as duas estão na mesma
+  linha de aninhamento — uma pilha de guardas é prefixo da outra. O que precisa ficar de fora é o
+  **ramo irmão** do cálculo de dígito (o fonte repete o bloco inteiro por valor informado), e ele fica:
+  nenhuma das duas pilhas contém a outra. As duas direções são legítimas por razões diferentes — a
+  atribuição sob **mais** guardas é o ramo do cálculo (`if (resto == 0) dv = 0`), publicado como faixa
+  de resto; a sob **menos** foi executada sempre que a regra é alcançada, e é o caso de
+  `dv10 = 10 - resto10`, calculado antes de o `if` de ramo abrir.
+- **A classificação usa os dois ambientes**, com o da regra por cima do da guarda. As parcelas do
+  somatório do código de barras vivem cada uma sob o seu próprio `if` de redução, e só o ambiente da
+  guarda as alcança; o da regra é o mais específico e precisa vencer onde os dois definem a mesma
+  variável, que é o caso do bloco repetido por dígito. Acumulador de mensagem (`resposta = resposta + "…"`) é filtrado por
   conteúdo, não por tamanho: o somatório de CNPJ passa de 600 caracteres.
 - **`runPipeline()` é pura e testável** (recebe `Map<url, source>` + inline scripts + logger injetável);
   `main()` concentra rede e escrita em disco. Novos testes de orquestração devem usar `runPipeline`.
@@ -221,6 +229,14 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
 - `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
   sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
   minúscula no dígito.
+- `dobra` viaja junto de `base`/`modulo` e diz o que o fonte faz com cada parcela **antes de somar**:
+  quando o produto passa de `limite`, subtrai `subtrai`. É o módulo 10 do código de barras do Segmento
+  O, escrito no fonte como um `if` por posição. Os dois números são publicados literalmente em vez de
+  um nome de algoritmo — coincidem em 9 hoje, e assumir isso esconderia a mudança se o banco mexer num
+  deles. `null` é a soma ponderada direta. Reduzir o total em vez de cada parcela dá outro número, e
+  soma com reduções diferentes **não é publicada** — o cálculo fica de fora e a regra continua não
+  avaliável. O nome `modulo_11` do arquétipo é histórico: quem diz qual algoritmo é são `modulo` e
+  `dobra`.
 - `modulo_11` **depende do ambiente que o walker captura**: o fonte calcula o dígito numa variável
   antes do `if` (soma ponderada → resto → um `if` por faixa de resto) e a condição só compara a faixa
   com essa variável. `base` traz as parcelas com peso, `modulo` o divisor, `resultado` o dígito

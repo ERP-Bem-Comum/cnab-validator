@@ -164,6 +164,10 @@ pub enum Condicao {
         posicao: Posicao,
         base: Vec<Parcela>,
         modulo: i64,
+        /// Redução por parcela do somatório. O nome do arquétipo é histórico —
+        /// quem diz qual algoritmo é são `modulo` e este campo, e o dígito do
+        /// código de barras do Segmento O é módulo 10 com redução.
+        dobra: Option<Dobra>,
         resultado: Vec<FaixaDeResto>,
         /// Função aplicada à faixa antes de comparar, quando existe.
         transformacao: Option<String>,
@@ -281,6 +285,7 @@ pub enum VariavelDaGuarda {
         nome: String,
         base: Vec<Parcela>,
         modulo: i64,
+        dobra: Option<Dobra>,
         resultado: Vec<FaixaDeResto>,
     },
     /// O resto da divisão, sem virar dígito: o fonte compara faixas de resto
@@ -289,7 +294,25 @@ pub enum VariavelDaGuarda {
         nome: String,
         base: Vec<Parcela>,
         modulo: i64,
+        dobra: Option<Dobra>,
     },
+}
+
+/// Redução aplicada a cada parcela quando o produto passa do limite — o módulo
+/// 10 do código de barras, que o fonte escreve como um `if` por posição
+/// (`if (faixa * 2 > 9) soma = (faixa * 2) - 9; else soma = faixa * 2`).
+///
+/// Os números vêm do fonte em vez de um nome de algoritmo: limite e valor
+/// subtraído coincidem em 9 aqui, e assumir isso esconderia a diferença se o
+/// banco mudar um dos dois. `None` é a soma ponderada direta do módulo 11.
+///
+/// A redução é **por parcela, antes de somar**: aplicá-la ao total daria outro
+/// número.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Dobra {
+    pub limite: i64,
+    pub subtrai: i64,
 }
 
 impl VariavelDaGuarda {
@@ -309,6 +332,16 @@ impl VariavelDaGuarda {
         match self {
             VariavelDaGuarda::Modulo11 { modulo, .. } | VariavelDaGuarda::Resto { modulo, .. } => {
                 *modulo
+            }
+        }
+    }
+
+    /// Redução por parcela, quando o cálculo a tem. O dígito nunca a tem: no
+    /// fonte ela só aparece no somatório do módulo 10.
+    pub fn dobra(&self) -> Option<Dobra> {
+        match self {
+            VariavelDaGuarda::Modulo11 { dobra, .. } | VariavelDaGuarda::Resto { dobra, .. } => {
+                *dobra
             }
         }
     }

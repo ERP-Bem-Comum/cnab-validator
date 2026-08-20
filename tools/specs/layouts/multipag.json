@@ -577,6 +577,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -719,6 +720,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -815,6 +817,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -966,6 +969,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -1129,6 +1133,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -1246,6 +1251,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -1898,6 +1904,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -1995,6 +2002,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -2404,6 +2412,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -2522,6 +2531,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -7335,6 +7345,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -7477,6 +7488,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -7573,6 +7585,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -7724,6 +7737,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -7887,6 +7901,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -8004,6 +8019,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -8776,6 +8792,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -8873,6 +8890,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9382,6 +9400,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9500,6 +9519,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -14110,6 +14130,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -14207,6 +14228,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -14325,6 +14347,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -14443,6 +14466,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -16942,6 +16966,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17084,6 +17109,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17180,6 +17206,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -17331,6 +17358,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17494,6 +17522,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17611,6 +17640,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -22852,6 +22882,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -22994,6 +23025,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -23090,6 +23122,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -23241,6 +23274,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -23404,6 +23438,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -23521,6 +23556,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -24102,6 +24138,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -24244,6 +24281,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -24340,6 +24378,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -24491,6 +24530,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -24654,6 +24694,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -24771,6 +24812,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -25171,6 +25213,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -25313,6 +25356,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -25409,6 +25453,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -25560,6 +25605,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -25723,6 +25769,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -25840,6 +25887,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -27476,6 +27524,318 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 == 0) && (resto11 == 0 || resto11 == 1))",
       "variaveis_guarda": [
         {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
+        {
           "nome": "resto11",
           "tipo": "resto",
           "base": [
@@ -27781,7 +28141,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -27837,6 +28198,318 @@
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 == 0) && (resto11 == 10))",
       "variaveis_guarda": [
         {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
+        {
           "nome": "resto11",
           "tipo": "resto",
           "base": [
@@ -28142,7 +28815,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -28181,12 +28855,661 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "operador": "!=",
+            "valor": "0",
+            "comparacao": "frouxa"
+          },
+          {
+            "tipo": "modulo_11",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "base": [
+              {
+                "alvo": "res[i]",
+                "inicio0": 17,
+                "fim0": 18,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 18,
+                "fim0": 19,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 19,
+                "fim0": 20,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 21,
+                "fim0": 22,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 22,
+                "fim0": 23,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 23,
+                "fim0": 24,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 24,
+                "fim0": 25,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 25,
+                "fim0": 26,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 26,
+                "fim0": 27,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 27,
+                "fim0": 28,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 28,
+                "fim0": 29,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 29,
+                "fim0": 30,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 30,
+                "fim0": 31,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 31,
+                "fim0": 32,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 32,
+                "fim0": 33,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 33,
+                "fim0": 34,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 34,
+                "fim0": 35,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 35,
+                "fim0": 36,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 36,
+                "fim0": 37,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 37,
+                "fim0": 38,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 38,
+                "fim0": 39,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 39,
+                "fim0": 40,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 40,
+                "fim0": 41,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 41,
+                "fim0": 42,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 42,
+                "fim0": 43,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 43,
+                "fim0": 44,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 44,
+                "fim0": 45,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 45,
+                "fim0": 46,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 46,
+                "fim0": 47,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 47,
+                "fim0": 48,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 48,
+                "fim0": 49,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 49,
+                "fim0": 50,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 50,
+                "fim0": 51,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 51,
+                "fim0": 52,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 52,
+                "fim0": 53,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 53,
+                "fim0": 54,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 54,
+                "fim0": 55,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 55,
+                "fim0": 56,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 56,
+                "fim0": 57,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 57,
+                "fim0": 58,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 58,
+                "fim0": 59,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 59,
+                "fim0": 60,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 60,
+                "fim0": 61,
+                "peso": 2,
+                "transformacao": null
+              }
+            ],
+            "modulo": 11,
+            "dobra": null,
+            "resultado": [
+              {
+                "operador": null,
+                "resto": null,
+                "valor": null,
+                "expressao": "11 - resto"
+              }
+            ],
+            "transformacao": null,
+            "variavel": "dv11",
+            "documento": "desconhecido"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 == 0) && (resto11 == 2 || resto11 == 3 || resto11 == 4 || resto11 == 5 || resto11 == 6 || resto11 == 7 || resto11 == 8 || resto11 == 9)) && (res[i].substring(20, 21) != 0 && res[i].substring(20, 21) != dv11)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 == 0) && (resto11 == 2 || resto11 == 3 || resto11 == 4 || resto11 == 5 || resto11 == 6 || resto11 == 7 || resto11 == 8 || resto11 == 9))",
       "variaveis_guarda": [
+        {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
         {
           "nome": "resto11",
           "tipo": "resto",
@@ -28493,7 +29816,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -28532,12 +29856,664 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "modulo_11",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "base": [
+              {
+                "alvo": "res[i]",
+                "inicio0": 17,
+                "fim0": 18,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 18,
+                "fim0": 19,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 19,
+                "fim0": 20,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 21,
+                "fim0": 22,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 22,
+                "fim0": 23,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 23,
+                "fim0": 24,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 24,
+                "fim0": 25,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 25,
+                "fim0": 26,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 26,
+                "fim0": 27,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 27,
+                "fim0": 28,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 28,
+                "fim0": 29,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 29,
+                "fim0": 30,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 30,
+                "fim0": 31,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 31,
+                "fim0": 32,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 32,
+                "fim0": 33,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 33,
+                "fim0": 34,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 34,
+                "fim0": 35,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 35,
+                "fim0": 36,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 36,
+                "fim0": 37,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 37,
+                "fim0": 38,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 38,
+                "fim0": 39,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 39,
+                "fim0": 40,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 40,
+                "fim0": 41,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 41,
+                "fim0": 42,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 42,
+                "fim0": 43,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 43,
+                "fim0": 44,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 44,
+                "fim0": 45,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 45,
+                "fim0": 46,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 46,
+                "fim0": 47,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 47,
+                "fim0": 48,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 48,
+                "fim0": 49,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 49,
+                "fim0": 50,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 50,
+                "fim0": 51,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 51,
+                "fim0": 52,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 52,
+                "fim0": 53,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 53,
+                "fim0": 54,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 54,
+                "fim0": 55,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 55,
+                "fim0": 56,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 56,
+                "fim0": 57,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 57,
+                "fim0": 58,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 58,
+                "fim0": 59,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 59,
+                "fim0": 60,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 60,
+                "fim0": 61,
+                "peso": 2,
+                "transformacao": null
+              }
+            ],
+            "modulo": 10,
+            "dobra": {
+              "limite": 9,
+              "subtrai": 9
+            },
+            "resultado": [
+              {
+                "operador": null,
+                "resto": null,
+                "valor": null,
+                "expressao": "10 - resto"
+              }
+            ],
+            "transformacao": null,
+            "variavel": "dv10",
+            "documento": "desconhecido"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "operador": "!=",
+            "valor": "0",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 0 || resto11 == 1)) && (res[i].substring(20, 21) != dv10 && res[i].substring(20, 21) != 0)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 0 || resto11 == 1))",
       "variaveis_guarda": [
+        {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
         {
           "nome": "resto11",
           "tipo": "resto",
@@ -28844,7 +30820,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -28883,12 +30860,664 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "modulo_11",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "base": [
+              {
+                "alvo": "res[i]",
+                "inicio0": 17,
+                "fim0": 18,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 18,
+                "fim0": 19,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 19,
+                "fim0": 20,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 21,
+                "fim0": 22,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 22,
+                "fim0": 23,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 23,
+                "fim0": 24,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 24,
+                "fim0": 25,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 25,
+                "fim0": 26,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 26,
+                "fim0": 27,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 27,
+                "fim0": 28,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 28,
+                "fim0": 29,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 29,
+                "fim0": 30,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 30,
+                "fim0": 31,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 31,
+                "fim0": 32,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 32,
+                "fim0": 33,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 33,
+                "fim0": 34,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 34,
+                "fim0": 35,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 35,
+                "fim0": 36,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 36,
+                "fim0": 37,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 37,
+                "fim0": 38,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 38,
+                "fim0": 39,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 39,
+                "fim0": 40,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 40,
+                "fim0": 41,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 41,
+                "fim0": 42,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 42,
+                "fim0": 43,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 43,
+                "fim0": 44,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 44,
+                "fim0": 45,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 45,
+                "fim0": 46,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 46,
+                "fim0": 47,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 47,
+                "fim0": 48,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 48,
+                "fim0": 49,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 49,
+                "fim0": 50,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 50,
+                "fim0": 51,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 51,
+                "fim0": 52,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 52,
+                "fim0": 53,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 53,
+                "fim0": 54,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 54,
+                "fim0": 55,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 55,
+                "fim0": 56,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 56,
+                "fim0": 57,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 57,
+                "fim0": 58,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 58,
+                "fim0": 59,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 59,
+                "fim0": 60,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 60,
+                "fim0": 61,
+                "peso": 2,
+                "transformacao": null
+              }
+            ],
+            "modulo": 10,
+            "dobra": {
+              "limite": 9,
+              "subtrai": 9
+            },
+            "resultado": [
+              {
+                "operador": null,
+                "resto": null,
+                "valor": null,
+                "expressao": "10 - resto"
+              }
+            ],
+            "transformacao": null,
+            "variavel": "dv10",
+            "documento": "desconhecido"
+          },
+          {
+            "tipo": "literal_fixo",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "operador": "!=",
+            "valor": "1",
+            "comparacao": "frouxa"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 10)) && (res[i].substring(20, 21) != dv10 && res[i].substring(20, 21) != 1)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 10))",
       "variaveis_guarda": [
+        {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
         {
           "nome": "resto11",
           "tipo": "resto",
@@ -29195,7 +31824,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -29234,12 +31864,977 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "conjuncao",
+        "alvo": "res[i]",
+        "partes": [
+          {
+            "tipo": "modulo_11",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "base": [
+              {
+                "alvo": "res[i]",
+                "inicio0": 17,
+                "fim0": 18,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 18,
+                "fim0": 19,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 19,
+                "fim0": 20,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 21,
+                "fim0": 22,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 22,
+                "fim0": 23,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 23,
+                "fim0": 24,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 24,
+                "fim0": 25,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 25,
+                "fim0": 26,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 26,
+                "fim0": 27,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 27,
+                "fim0": 28,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 28,
+                "fim0": 29,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 29,
+                "fim0": 30,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 30,
+                "fim0": 31,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 31,
+                "fim0": 32,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 32,
+                "fim0": 33,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 33,
+                "fim0": 34,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 34,
+                "fim0": 35,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 35,
+                "fim0": 36,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 36,
+                "fim0": 37,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 37,
+                "fim0": 38,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 38,
+                "fim0": 39,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 39,
+                "fim0": 40,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 40,
+                "fim0": 41,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 41,
+                "fim0": 42,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 42,
+                "fim0": 43,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 43,
+                "fim0": 44,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 44,
+                "fim0": 45,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 45,
+                "fim0": 46,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 46,
+                "fim0": 47,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 47,
+                "fim0": 48,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 48,
+                "fim0": 49,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 49,
+                "fim0": 50,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 50,
+                "fim0": 51,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 51,
+                "fim0": 52,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 52,
+                "fim0": 53,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 53,
+                "fim0": 54,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 54,
+                "fim0": 55,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 55,
+                "fim0": 56,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 56,
+                "fim0": 57,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 57,
+                "fim0": 58,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 58,
+                "fim0": 59,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 59,
+                "fim0": 60,
+                "peso": 1,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 60,
+                "fim0": 61,
+                "peso": 2,
+                "transformacao": null
+              }
+            ],
+            "modulo": 10,
+            "dobra": {
+              "limite": 9,
+              "subtrai": 9
+            },
+            "resultado": [
+              {
+                "operador": null,
+                "resto": null,
+                "valor": null,
+                "expressao": "10 - resto"
+              }
+            ],
+            "transformacao": null,
+            "variavel": "dv10",
+            "documento": "desconhecido"
+          },
+          {
+            "tipo": "modulo_11",
+            "alvo": "res[i]",
+            "posicao": {
+              "inicio0": 20,
+              "fim0": 21
+            },
+            "base": [
+              {
+                "alvo": "res[i]",
+                "inicio0": 17,
+                "fim0": 18,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 18,
+                "fim0": 19,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 19,
+                "fim0": 20,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 21,
+                "fim0": 22,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 22,
+                "fim0": 23,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 23,
+                "fim0": 24,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 24,
+                "fim0": 25,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 25,
+                "fim0": 26,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 26,
+                "fim0": 27,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 27,
+                "fim0": 28,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 28,
+                "fim0": 29,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 29,
+                "fim0": 30,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 30,
+                "fim0": 31,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 31,
+                "fim0": 32,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 32,
+                "fim0": 33,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 33,
+                "fim0": 34,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 34,
+                "fim0": 35,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 35,
+                "fim0": 36,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 36,
+                "fim0": 37,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 37,
+                "fim0": 38,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 38,
+                "fim0": 39,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 39,
+                "fim0": 40,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 40,
+                "fim0": 41,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 41,
+                "fim0": 42,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 42,
+                "fim0": 43,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 43,
+                "fim0": 44,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 44,
+                "fim0": 45,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 45,
+                "fim0": 46,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 46,
+                "fim0": 47,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 47,
+                "fim0": 48,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 48,
+                "fim0": 49,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 49,
+                "fim0": 50,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 50,
+                "fim0": 51,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 51,
+                "fim0": 52,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 52,
+                "fim0": 53,
+                "peso": 2,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 53,
+                "fim0": 54,
+                "peso": 9,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 54,
+                "fim0": 55,
+                "peso": 8,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 55,
+                "fim0": 56,
+                "peso": 7,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 56,
+                "fim0": 57,
+                "peso": 6,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 57,
+                "fim0": 58,
+                "peso": 5,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 58,
+                "fim0": 59,
+                "peso": 4,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 59,
+                "fim0": 60,
+                "peso": 3,
+                "transformacao": null
+              },
+              {
+                "alvo": "res[i]",
+                "inicio0": 60,
+                "fim0": 61,
+                "peso": 2,
+                "transformacao": null
+              }
+            ],
+            "modulo": 11,
+            "dobra": null,
+            "resultado": [
+              {
+                "operador": null,
+                "resto": null,
+                "valor": null,
+                "expressao": "11 - resto"
+              }
+            ],
+            "transformacao": null,
+            "variavel": "dv11",
+            "documento": "desconhecido"
+          }
+        ]
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 2 || resto11 == 3 || resto11 == 4 || resto11 == 5 || resto11 == 6 || resto11 == 7 || resto11 == 8 || resto11 == 9)) && (res[i].substring(20, 21) != dv10 && res[i].substring(20, 21) != dv11)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (Header_lote < res[i].substring(7, 8) > Trailer_lote) && (res[i].substring(13, 14) == \"O\") && ((resto10 != 0) && (resto11 == 2 || resto11 == 3 || resto11 == 4 || resto11 == 5 || resto11 == 6 || resto11 == 7 || resto11 == 8 || resto11 == 9))",
       "variaveis_guarda": [
+        {
+          "nome": "resto10",
+          "tipo": "resto",
+          "base": [
+            {
+              "alvo": "res[i]",
+              "inicio0": 17,
+              "fim0": 18,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 18,
+              "fim0": 19,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 19,
+              "fim0": 20,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 21,
+              "fim0": 22,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 22,
+              "fim0": 23,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 23,
+              "fim0": 24,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 24,
+              "fim0": 25,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 25,
+              "fim0": 26,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 26,
+              "fim0": 27,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 27,
+              "fim0": 28,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 28,
+              "fim0": 29,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 29,
+              "fim0": 30,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 30,
+              "fim0": 31,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 31,
+              "fim0": 32,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 32,
+              "fim0": 33,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 33,
+              "fim0": 34,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 34,
+              "fim0": 35,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 35,
+              "fim0": 36,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 36,
+              "fim0": 37,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 37,
+              "fim0": 38,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 38,
+              "fim0": 39,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 39,
+              "fim0": 40,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 40,
+              "fim0": 41,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 41,
+              "fim0": 42,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 42,
+              "fim0": 43,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 43,
+              "fim0": 44,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 44,
+              "fim0": 45,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 45,
+              "fim0": 46,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 46,
+              "fim0": 47,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 47,
+              "fim0": 48,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 48,
+              "fim0": 49,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 49,
+              "fim0": 50,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 50,
+              "fim0": 51,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 51,
+              "fim0": 52,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 52,
+              "fim0": 53,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 53,
+              "fim0": 54,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 54,
+              "fim0": 55,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 55,
+              "fim0": 56,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 56,
+              "fim0": 57,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 57,
+              "fim0": 58,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 58,
+              "fim0": 59,
+              "peso": 2,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 59,
+              "fim0": 60,
+              "peso": 1,
+              "transformacao": null
+            },
+            {
+              "alvo": "res[i]",
+              "inicio0": 60,
+              "fim0": 61,
+              "peso": 2,
+              "transformacao": null
+            }
+          ],
+          "modulo": 10,
+          "dobra": {
+            "limite": 9,
+            "subtrai": 9
+          }
+        },
         {
           "nome": "resto11",
           "tipo": "resto",
@@ -29546,7 +33141,8 @@
               "transformacao": null
             }
           ],
-          "modulo": 11
+          "modulo": 11,
+          "dobra": null
         }
       ],
       "descricao": "Linha {linha}, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021.",
@@ -32071,6 +35667,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -32213,6 +35810,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -32309,6 +35907,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -32460,6 +36059,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -32623,6 +36223,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -32740,6 +36341,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -33969,6 +37571,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -34132,6 +37735,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -34249,6 +37853,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -34379,6 +37984,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -34521,6 +38127,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -34617,6 +38224,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,

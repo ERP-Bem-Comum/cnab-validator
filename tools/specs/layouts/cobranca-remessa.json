@@ -300,6 +300,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -442,6 +443,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -538,6 +540,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -689,6 +692,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -852,6 +856,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -969,6 +974,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -1783,6 +1789,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -1880,6 +1887,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -2180,6 +2188,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -2298,6 +2307,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -3853,6 +3863,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -3995,6 +4006,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -4091,6 +4103,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -4242,6 +4255,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -4405,6 +4419,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -4522,6 +4537,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -5059,6 +5075,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5156,6 +5173,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5858,6 +5876,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5976,6 +5995,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -8164,6 +8184,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -8261,6 +8282,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9070,6 +9092,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9188,6 +9211,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9526,6 +9550,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -15995,6 +16020,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -16137,6 +16163,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -16233,6 +16260,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -16363,6 +16391,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -16505,6 +16534,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -16601,6 +16631,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -16752,6 +16783,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -16915,6 +16947,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17032,6 +17065,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -17738,6 +17772,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17880,6 +17915,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -17976,6 +18012,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -18106,6 +18143,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -18248,6 +18286,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -18344,6 +18383,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -18495,6 +18535,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -18658,6 +18699,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -18775,6 +18817,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -22983,6 +23026,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -23080,6 +23124,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -23274,6 +23319,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -23392,6 +23438,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -24817,6 +24864,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -24980,6 +25028,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -25097,6 +25146,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -26715,6 +26765,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -26812,6 +26863,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -26996,6 +27048,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -27117,6 +27170,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -30108,6 +30162,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -30226,6 +30281,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -30377,6 +30433,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -30478,6 +30535,7 @@
               }
             ],
             "modulo": 11,
+            "dobra": null,
             "resultado": [
               {
                 "operador": "==",
@@ -30933,6 +30991,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -31051,6 +31110,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -32227,6 +32287,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -32345,6 +32406,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -33780,6 +33842,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -39143,6 +39206,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -39306,6 +39370,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -39423,6 +39488,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -39553,6 +39619,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -39695,6 +39762,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -39791,6 +39859,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -40129,6 +40198,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -40292,6 +40362,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -40409,6 +40480,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -40539,6 +40611,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -40681,6 +40754,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -40777,6 +40851,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -42926,6 +43001,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -43044,6 +43120,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -43366,6 +43443,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -43484,6 +43562,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -43857,6 +43936,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -43975,6 +44055,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -44551,6 +44632,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -44648,6 +44730,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -45140,6 +45223,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -45258,6 +45342,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -46100,6 +46185,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -46197,6 +46283,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -46728,6 +46815,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -46846,6 +46934,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -47692,6 +47781,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -47789,6 +47879,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -48317,6 +48408,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -48435,6 +48527,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",

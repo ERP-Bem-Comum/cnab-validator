@@ -75,6 +75,13 @@ export type DslCondition =
       }[];
       modulo: number;
       /**
+       * Redução por parcela do somatório, antes de somar; `null` é a soma
+       * ponderada direta. O nome do arquétipo é histórico — quem diz qual
+       * algoritmo é são `modulo` e este campo, e o dígito do código de barras do
+       * Segmento O é módulo 10 com redução.
+       */
+      dobra: Dobra | null;
+      /**
        * Dígito esperado por faixa de resto, na ordem em que o fonte decide. O
        * fonte repete o bloco de cálculo por valor informado no dígito, então uma
        * mesma faixa de resto pode ter resultado diferente em cada ramo — a guarda
@@ -281,6 +288,7 @@ export type VariavelDaGuarda = {
   nome: string;
   base: ParcelaBase[];
   modulo: number;
+  dobra: Dobra | null;
 } & (
   | {
       /** Dígito calculado: a guarda compara a faixa do arquivo com ele. */
@@ -297,6 +305,25 @@ export type VariavelDaGuarda = {
       tipo: "resto";
     }
 );
+
+/**
+ * Redução aplicada a cada parcela quando o produto passa do limite. É o módulo
+ * 10 do código de barras: o fonte escreve um `if` por posição
+ * (`if (faixa * 2 > 9) soma = (faixa * 2) - 9; else soma = faixa * 2`).
+ *
+ * Publicada com os números do fonte, não como um nome de algoritmo: o limite e o
+ * valor subtraído coincidem em 9 aqui, e assumir isso esconderia a diferença se
+ * o banco mudar um dos dois. `null` é a soma ponderada direta do módulo 11.
+ *
+ * A redução é **por parcela, antes de somar** — aplicá-la ao total daria outro
+ * número. E só é publicada quando *todas* as parcelas têm a mesma: soma mista é
+ * forma que o fonte não mostrou, e o cálculo fica sem publicar, o que deixa a
+ * regra não avaliável em vez de avaliada por um algoritmo inventado.
+ */
+export interface Dobra {
+  limite: number;
+  subtrai: number;
+}
 
 /**
  * Resolve as variáveis que as guardas citam. Só publica o que se resolve
@@ -325,6 +352,7 @@ function resolverVariaveisDaGuarda(
           tipo: "modulo_11",
           base: calculo.base,
           modulo: calculo.modulo,
+          dobra: calculo.dobra,
           resultado: resultado.faixas,
         });
         continue;
@@ -335,7 +363,13 @@ function resolverVariaveisDaGuarda(
     // fonte escolhe qual cálculo exigir no segmento O.
     const resto = resolverResto(nome, ambiente);
     if (resto) {
-      variaveis.push({ nome, tipo: "resto", base: resto.base, modulo: resto.modulo });
+      variaveis.push({
+        nome,
+        tipo: "resto",
+        base: resto.base,
+        modulo: resto.modulo,
+        dobra: resto.dobra,
+      });
     }
   }
 
@@ -358,7 +392,12 @@ export function mapToDsl(
     alvo,
     condicaoCompleta: raw.condicao_original,
     condicaoGuarda: raw.condicao_guarda ?? null,
-    ambiente: raw.ambiente,
+    // Os dois ambientes, com o da regra por cima. O da guarda alcança o que foi
+    // calculado antes de o `if` de ramo abrir — as parcelas do somatório do
+    // código de barras, cada uma sob o seu próprio `if` de redução, estão só
+    // nele. O da regra é o mais específico e precisa vencer onde os dois
+    // definem a mesma variável, que é o caso do bloco repetido por dígito.
+    ambiente: { ...raw.ambiente_guarda, ...raw.ambiente },
     mensagem: raw.mensagem,
   });
 
@@ -1176,6 +1215,7 @@ function inferirModulo11(
     posicao: { inicio0: parseInt(inicio, 10), fim0: parseInt(fim, 10) },
     base: calculo.base,
     modulo: calculo.modulo,
+    dobra: calculo.dobra,
     resultado: resultado.faixas,
     transformacao,
     variavel,
@@ -1266,10 +1306,114 @@ type ParcelaBase = {
   transformacao: string | null;
 };
 
+
+/**
+ * Parcela guardada numa variável por um par `if`/`else`:
+ *
+ * ```js
+ * if (res[i].substring(17, 18) * 2 > 9) soma1 = (res[i].substring(17, 18) * 2) - 9;
+ * else                                  soma1 = res[i].substring(17, 18) * 2
+ * ```
+ *
+ * As duas atribuições precisam falar da **mesma** faixa com o **mesmo** peso, e
+ * as guardas precisam ser uma a negação da outra sobre o mesmo produto. Qualquer
+ * folga aqui publicaria um cálculo que o fonte não faz.
+ */
+function resolverParcelaComDobra(
+  nome: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): { parcela: ParcelaBase; dobra: Dobra } | null {
+  const atribuicoes = ambiente[nome];
+  if (!atribuicoes || atribuicoes.length !== 2) return null;
+  if (atribuicoes.some((a) => a.operador !== "=")) return null;
+
+  const produto = /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)$/;
+
+  // O ramo do excesso subtrai; o outro é o produto puro. A ordem no fonte é
+  // sempre essa, mas quem decide qual é qual é a forma, não a posição.
+  const reduzido = atribuicoes.find((a) => /\)\s*-\s*\d+$/.test(a.expressao.trim()));
+  const direto = atribuicoes.find((a) => a !== reduzido);
+  if (!reduzido || !direto) return null;
+
+  const mDireto = stripOuterParens(direto.expressao).trim().match(produto);
+  const mReduzido = reduzido.expressao
+    .trim()
+    .match(
+      /^\((res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)\)\s*-\s*(\d+)$/
+    );
+  if (!mDireto || !mReduzido) return null;
+
+  // Mesma faixa e mesmo peso nos dois ramos: senão não é a mesma parcela.
+  for (let i = 1; i <= 4; i++) {
+    if (mDireto[i] !== mReduzido[i]) return null;
+  }
+
+  const guardaExcesso = reduzido.quando
+    ? stripOuterParens(reduzido.quando)
+        .trim()
+        .match(
+          /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)\s*>\s*(\d+)$/
+        )
+    : null;
+  if (!guardaExcesso) return null;
+  for (let i = 1; i <= 4; i++) {
+    if (guardaExcesso[i] !== mDireto[i]) return null;
+  }
+  // O ramo direto tem de ser exatamente a negação do outro; sem isso a variável
+  // pode ter uma terceira origem que o walker não mostrou.
+  if (direto.quando !== `(!${reduzido.quando})`) return null;
+
+  return {
+    parcela: {
+      alvo: mDireto[1],
+      inicio0: parseInt(mDireto[2], 10),
+      fim0: parseInt(mDireto[3], 10),
+      peso: parseInt(mDireto[4], 10),
+      transformacao: null,
+    },
+    dobra: {
+      limite: parseInt(guardaExcesso[5], 10),
+      subtrai: parseInt(mReduzido[5], 10),
+    },
+  };
+}
+
+/**
+ * Soma cujas parcelas são nomes de variáveis, cada uma com a dobra do módulo 10.
+ * Só devolve algo quando **todas** as parcelas têm a mesma redução: soma mista é
+ * forma que o fonte não mostrou, e encaixá-la à força inventaria um algoritmo.
+ */
+function parseSomaComDobra(
+  expressao: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): { base: ParcelaBase[]; dobra: Dobra } | null {
+  const nomes = splitSoma(expressao).map((p) => p.trim());
+  if (nomes.length < 2) return null;
+  if (!nomes.every((n) => /^[A-Za-z_$][\w$]*$/.test(n))) return null;
+
+  const base: ParcelaBase[] = [];
+  let dobra: Dobra | null = null;
+  for (const nome of nomes) {
+    const resolvida = resolverParcelaComDobra(nome, ambiente);
+    if (!resolvida) return null;
+    if (dobra === null) {
+      dobra = resolvida.dobra;
+    } else if (
+      dobra.limite !== resolvida.dobra.limite ||
+      dobra.subtrai !== resolvida.dobra.subtrai
+    ) {
+      return null;
+    }
+    base.push(resolvida.parcela);
+  }
+
+  return dobra ? { base, dobra } : null;
+}
+
 function resolverResto(
   varResto: string,
   ambiente: Record<string, AtribuicaoFonte[]>
-): { base: ParcelaBase[]; modulo: number } | null {
+): { base: ParcelaBase[]; modulo: number; dobra: Dobra | null } | null {
   const atribuicoes = ambiente[varResto];
   if (!atribuicoes || atribuicoes.length === 0) return null;
 
@@ -1305,9 +1449,14 @@ function resolverResto(
   if (!somaFonte) return null;
 
   const base = parseSomaPonderada(somaFonte);
-  if (!base) return null;
+  if (base) return { base, modulo, dobra: null };
 
-  return { base, modulo };
+  // Módulo 10: cada parcela vive numa variável própria, com a redução por
+  // excesso escrita num `if`/`else` antes da soma.
+  const comDobra = parseSomaComDobra(somaFonte, ambiente);
+  if (comDobra) return { base: comDobra.base, modulo, dobra: comDobra.dobra };
+
+  return null;
 }
 
 function ultimaExpressao(atribuicoes: AtribuicaoFonte[] | undefined): string | null {

@@ -469,6 +469,125 @@ describe("mapToDsl", () => {
     }
   });
 
+  it("resolve o módulo 10 do código de barras, com a redução por parcela", () => {
+    // O fonte guarda cada parcela numa variável, com a redução escrita num
+    // `if`/`else`, e só depois soma. É a forma do dígito do Segmento O.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 800,
+      condicao_original: "(resto10 != 0) && (res[i].substring(20, 21) != dv10)",
+      condicao_guarda: "(resto10 != 0)",
+      condicao_propria: "res[i].substring(20, 21) != dv10",
+      mensagem: "Linha {linha}, Segmento O, colunas 018 a 061, Dígito inválido. Coluna 021.",
+      registro: "segmento-o",
+      colunas: [18, 61],
+      alvo: "res[i]",
+      ambiente: {
+        dv10: [{ operador: "=", expressao: "10 - resto10", quando: null, ordem: 9 }],
+        resto10: [
+          { operador: "=", expressao: "sm10", quando: null, ordem: 7 },
+          { operador: "%=", expressao: "10", quando: null, ordem: 8 },
+        ],
+        sm10: [{ operador: "=", expressao: "soma1 + soma2", quando: null, ordem: 6 }],
+        soma1: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(17, 18) * 2) - 9",
+            quando: "(res[i].substring(17, 18) * 2 > 9)",
+            ordem: 1,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(17, 18) * 2",
+            quando: "(!(res[i].substring(17, 18) * 2 > 9))",
+            ordem: 2,
+          },
+        ],
+        soma2: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(18, 19) * 1) - 9",
+            quando: "(res[i].substring(18, 19) * 1 > 9)",
+            ordem: 3,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(18, 19) * 1",
+            quando: "(!(res[i].substring(18, 19) * 1 > 9))",
+            ordem: 4,
+          },
+        ],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
+    if (dsl.condicao.tipo === "modulo_11") {
+      assert.strictEqual(dsl.condicao.modulo, 10);
+      assert.deepStrictEqual(dsl.condicao.dobra, { limite: 9, subtrai: 9 });
+      assert.strictEqual(dsl.condicao.variavel, "dv10");
+      assert.deepStrictEqual(
+        dsl.condicao.base.map((p) => [p.inicio0, p.fim0, p.peso]),
+        [
+          [17, 18, 2],
+          [18, 19, 1],
+        ]
+      );
+    }
+  });
+
+  it("soma com reduções diferentes não é publicada", () => {
+    // Duas parcelas que subtraem valores distintos é forma que o fonte não
+    // mostrou. Encaixá-la à força inventaria um algoritmo.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 810,
+      condicao_original: "(resto10 != 0) && (res[i].substring(20, 21) != dv10)",
+      condicao_guarda: "(resto10 != 0)",
+      condicao_propria: "res[i].substring(20, 21) != dv10",
+      mensagem: "Linha {linha}, Segmento O, colunas 018 a 061, Dígito inválido. Coluna 021.",
+      registro: "segmento-o",
+      colunas: [18, 61],
+      alvo: "res[i]",
+      ambiente: {
+        dv10: [{ operador: "=", expressao: "10 - resto10", quando: null, ordem: 9 }],
+        resto10: [
+          { operador: "=", expressao: "sm10", quando: null, ordem: 7 },
+          { operador: "%=", expressao: "10", quando: null, ordem: 8 },
+        ],
+        sm10: [{ operador: "=", expressao: "soma1 + soma2", quando: null, ordem: 6 }],
+        soma1: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(17, 18) * 2) - 9",
+            quando: "(res[i].substring(17, 18) * 2 > 9)",
+            ordem: 1,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(17, 18) * 2",
+            quando: "(!(res[i].substring(17, 18) * 2 > 9))",
+            ordem: 2,
+          },
+        ],
+        soma2: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(18, 19) * 1) - 8",
+            quando: "(res[i].substring(18, 19) * 1 > 9)",
+            ordem: 3,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(18, 19) * 1",
+            quando: "(!(res[i].substring(18, 19) * 1 > 9))",
+            ordem: 4,
+          },
+        ],
+      },
+    };
+    assert.strictEqual(mapToDsl(raw, "multipag").condicao.tipo, "custom");
+  });
+
   it("sem o ambiente a comparação com variável continua custom", () => {
     // Publicar o arquétipo sem saber a que a variável se resolve seria afirmar
     // um teste que o extrator não viu.

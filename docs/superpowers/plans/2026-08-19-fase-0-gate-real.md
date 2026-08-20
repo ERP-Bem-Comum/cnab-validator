@@ -630,9 +630,45 @@ uma segunda cópia da convenção do laço, livre para divergir da primeira.
 comum com o validador oficial, 0 divergências. Deslocar o contador em um no motor Rust derruba 2 dos
 4 testes de paridade.
 
-Com isso as **duas** regras de trailer que o golden expôs estão avaliáveis nos dois motores. Fica
-aberto o **módulo 10 com dobra condicional do Segmento O**, que sozinho responde pelas 6 regras do
-dígito verificador do código de barras de tributo.
+Com isso as **duas** regras de trailer que o golden expôs estão avaliáveis nos dois motores.
+
+### O dígito do código de barras do Segmento O — 2026-08-20
+
+A última lacuna do golden: as **6 regras** do dígito verificador do código de barras de tributo, todas
+não avaliadas. O bloco é a validação que mais importa nesse segmento — é ela que diz se o código de
+barras que a empresa vai pagar está íntegro.
+
+O fonte calcula **dois** dígitos e escolhe entre eles por faixa de resto. Três coisas faltavam:
+
+1. **O módulo 10 com redução por parcela.** O fonte escreve um `if` por posição
+   (`if (faixa * 2 > 9) soma1 = (faixa * 2) - 9; else soma1 = faixa * 2`), guarda cada parcela numa
+   variável e só depois soma as 43. O resolvedor só reconhecia a soma escrita numa expressão só.
+   `dobra` viaja com `base`/`modulo` e traz **os números do fonte** — limite e valor subtraído
+   coincidem em 9 hoje, e publicar "módulo 10" como nome esconderia a mudança se o banco mexer num
+   deles. Reduzir o total em vez de cada parcela dá outro número; soma com reduções diferentes não é
+   publicada, e há teste para isso.
+2. **O escopo do ambiente.** `dv10 = 10 - resto10` é calculado **antes** dos `if` que escolhem o ramo,
+   e o critério de visibilidade exigia que a atribuição estivesse sob todas as guardas da regra — o
+   que deixava de fora justamente o que está num nível mais externo, e portanto sempre executa. O
+   critério passou a ser "as duas na mesma linha de aninhamento": uma pilha de guardas é prefixo da
+   outra. O ramo irmão continua fora, que é o que a proteção existia para garantir.
+3. **Os dois ambientes na classificação.** As parcelas do somatório vivem cada uma sob o seu `if` de
+   redução, e só o ambiente da guarda as alcança; `dv10` e `dv11` só existem no da regra. A
+   classificação passa a usar os dois, com o da regra por cima — que é o mais específico, e precisa
+   vencer no bloco que o fonte repete por dígito.
+
+As 6 regras passam a ser avaliáveis: duas viram `literal_fixo`/`dominio` com a guarda resolvida, e
+quatro viram `conjuncao` de `modulo_11` com literal ou com o outro dígito. De brinde,
+`folha-pagamento:validarDadosFolha200:697` — o dígito da conta do funcionário, cujo `dvc` também é
+calculado antes do `if` que o testa — saiu de `custom` pela mesma correção.
+
+O corpus ganhou o par `multipag-tributo-correto.txt` / `multipag-tributo-dv-invalido.txt`, construído
+com o validador oficial como oráculo. O código de barras dos dois cai no ramo `resto10 != 0`, onde o
+dígito aceito é o do módulo 10 — de propósito: é o único ramo em que um erro no cálculo aparece.
+Golden: 0 achados no correto e 1 em comum no inválido, sem divergência. Fazer o motor Rust ignorar a
+redução derruba a paridade sobre o arquivo **correto**, que é o teste que importa.
+
+Com isso as duas pendências que o golden abriu estão fechadas.
 
 ---
 

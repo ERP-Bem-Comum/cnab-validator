@@ -372,14 +372,34 @@ function ambienteDasGuardas(
 }
 
 /**
- * Uma atribuição só alcança a regra se valia onde a regra está: toda guarda da
- * regra precisa valer também para a atribuição. Sem isso, o ramo irmão do cálculo
- * — o fonte repete o bloco inteiro para cada valor informado no dígito — vazaria
- * para dentro da regra e o spec publicaria dois resultados contraditórios.
+ * Uma atribuição alcança a regra quando as duas estão na **mesma linha de
+ * aninhamento** — uma das pilhas de guarda é prefixo da outra.
+ *
+ * O que precisa ficar de fora é o **ramo irmão**: o fonte repete o bloco de
+ * cálculo inteiro para cada valor informado no dígito, e a atribuição de um ramo
+ * vale sob `resto == 0` enquanto a regra está sob `resto != 0`. Nenhuma das duas
+ * pilhas contém a outra, e por isso o irmão não vaza — o spec publicaria dois
+ * resultados contraditórios.
+ *
+ * As duas direções são legítimas, por razões diferentes:
+ *
+ * - a atribuição **sob mais guardas** que a regra é o ramo do cálculo
+ *   (`if (resto == 0) dv = 0`), e `quandoRelativo` a publica como faixa de resto;
+ * - a atribuição **sob menos** foi executada sempre que a regra é alcançada, por
+ *   estar num nível mais externo. É o caso de `dv10 = 10 - resto10`, que o fonte
+ *   calcula antes de abrir os `if` que escolhem o ramo. Exigir a inclusão só num
+ *   sentido a deixava de fora, e as regras do dígito do código de barras ficavam
+ *   sem o valor com que o fonte as compara.
  */
 function visivelPara(atribuicao: AtribuicaoInterna, guardasDaRegra: string[]): boolean {
-  const daAtribuicao = new Set(atribuicao.guardas);
-  return guardasDaRegra.every((g) => daAtribuicao.has(g));
+  const daAtribuicao = atribuicao.guardas;
+  const menor = Math.min(daAtribuicao.length, guardasDaRegra.length);
+  // Prefixo comum: a pilha é ordenada de fora para dentro, então basta comparar
+  // posição a posição até o fim da mais curta.
+  for (let i = 0; i < menor; i++) {
+    if (daAtribuicao[i] !== guardasDaRegra[i]) return false;
+  }
+  return true;
 }
 
 function quandoRelativo(

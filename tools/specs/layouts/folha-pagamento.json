@@ -364,6 +364,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -527,6 +528,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -644,6 +646,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -1388,6 +1391,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -1485,6 +1489,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -1886,6 +1891,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -2004,6 +2010,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -4259,6 +4266,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -4422,6 +4430,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -4539,6 +4548,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -5078,6 +5088,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5175,6 +5186,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5576,6 +5588,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -5694,6 +5707,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -8699,6 +8713,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -8796,6 +8811,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9115,6 +9131,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -9233,6 +9250,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -10977,6 +10995,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -11140,6 +11159,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": null,
@@ -11257,6 +11277,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": null,
@@ -12922,6 +12943,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -15842,6 +15864,7 @@
           }
         ],
         "modulo": 11,
+        "dobra": null,
         "resultado": [
           {
             "operador": "==",
@@ -18463,8 +18486,88 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "modulo_11",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 79,
+          "fim0": 80
+        },
+        "base": [
+          {
+            "alvo": "res[i]",
+            "inicio0": 72,
+            "fim0": 73,
+            "peso": 2,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 73,
+            "fim0": 74,
+            "peso": 7,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 74,
+            "fim0": 75,
+            "peso": 6,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 75,
+            "fim0": 76,
+            "peso": 5,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 76,
+            "fim0": 77,
+            "peso": 4,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 77,
+            "fim0": 78,
+            "peso": 3,
+            "transformacao": null
+          },
+          {
+            "alvo": "res[i]",
+            "inicio0": 78,
+            "fim0": 79,
+            "peso": 2,
+            "transformacao": null
+          }
+        ],
+        "modulo": 11,
+        "dobra": null,
+        "resultado": [
+          {
+            "operador": "==",
+            "resto": 0,
+            "valor": "0",
+            "expressao": "0"
+          },
+          {
+            "operador": "==",
+            "resto": 1,
+            "valor": "P",
+            "expressao": "\"P\""
+          },
+          {
+            "operador": ">",
+            "resto": 1,
+            "valor": null,
+            "expressao": "11 - resto"
+          }
+        ],
+        "transformacao": null,
+        "variavel": "dvc",
+        "documento": "conta"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(72, 79)) || res[i].substring(72, 79).replace(/\\s/g, '').length != 0) && (dvc != \"P\") && (res[i].substring(79, 80) != dvc)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(0, 1) == 1) && (isNaN(res[i].substring(72, 79)) || res[i].substring(72, 79).replace(/\\s/g, '').length != 0) && (dvc != \"P\")",
@@ -18524,6 +18627,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": "==",
@@ -18647,6 +18751,7 @@
             }
           ],
           "modulo": 11,
+          "dobra": null,
           "resultado": [
             {
               "operador": "==",
