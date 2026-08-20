@@ -8,7 +8,7 @@
   "regras": [],
   "campos": [
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8:123",
+      "id": "retorno-multipag:retorno_multipag_folha240:campo_8_8:127",
       "campo": "campo_8_8",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -27,6 +27,7 @@
         }
       ],
       "registros_lidos": [
+        "detalhe",
         "header-arquivo",
         "header-lote",
         "trailer-arquivo",
@@ -41,7 +42,7 @@
             1
           ],
           "condicao_extra": null,
-          "linha_fonte": 123
+          "linha_fonte": 127
         },
         {
           "codigo": "1",
@@ -50,7 +51,7 @@
             1
           ],
           "condicao_extra": null,
-          "linha_fonte": 125
+          "linha_fonte": 129
         },
         {
           "codigo": "5",
@@ -59,7 +60,7 @@
             1
           ],
           "condicao_extra": null,
-          "linha_fonte": 127
+          "linha_fonte": 131
         },
         {
           "codigo": "9",
@@ -68,12 +69,12 @@
             1
           ],
           "condicao_extra": null,
-          "linha_fonte": 129
+          "linha_fonte": 133
         }
       ]
     },
     {
-      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias:131",
+      "id": "retorno-multipag:retorno_multipag_folha240:ocorrencias:135",
       "campo": "ocorrencias",
       "funcao_origem": "retorno_multipag_folha240",
       "colunas": [
@@ -128,6 +129,7 @@
         }
       ],
       "registros_lidos": [
+        "detalhe",
         "header-arquivo",
         "header-lote",
         "trailer-arquivo",
@@ -142,7 +144,7 @@
             1
           ],
           "condicao_extra": "res[i].substring(13, 14) != \"B\"",
-          "linha_fonte": 135
+          "linha_fonte": 139
         },
         {
           "codigo": "01",
@@ -155,7 +157,7 @@
             5
           ],
           "condicao_extra": null,
-          "linha_fonte": 137
+          "linha_fonte": 141
         },
         {
           "codigo": "02",
@@ -168,7 +170,7 @@
             5
           ],
           "condicao_extra": null,
-          "linha_fonte": 139
+          "linha_fonte": 143
         },
         {
           "codigo": "BD",
@@ -181,7 +183,7 @@
             5
           ],
           "condicao_extra": null,
-          "linha_fonte": 133
+          "linha_fonte": 137
         },
         {
           "codigo": "XX",
@@ -194,7 +196,7 @@
             5
           ],
           "condicao_extra": null,
-          "linha_fonte": 131
+          "linha_fonte": 135
         }
       ]
     }

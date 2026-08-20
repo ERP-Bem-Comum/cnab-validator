@@ -120,6 +120,10 @@ function retorno_multipag_folha240(res) {
     if (isNaN(res[i].substring(230, 240))) ocorrencias();
     i++;
     function ocorrencias() {
+      // O fonte real cerca o bloco com uma guarda de inclusao que nomeia o
+      // detalhe ("3"); a tabela de rotulos abaixo nao o nomeia, porque o rotulo
+      // do detalhe sai antes, no bloco do segmento.
+      if (res[i].substring(7, 8) == "0" || res[i].substring(7, 8) == "1" || res[i].substring(7, 8) == "3" || res[i].substring(7, 8) == "5" || res[i].substring(7, 8) == "9") {
       if (res[i].substring(7, 8) == "0")
         resposta = resposta + "<pre><b>Header de Arquivo</b> ";
       if (res[i].substring(7, 8) == 1)
@@ -171,6 +175,7 @@ function retorno_multipag_folha240(res) {
       if (res[i].substring(238, 240) == 02)
         resposta = resposta + " / 02 - Rotulo sintetico tres";
       resposta = resposta + "=====================================";
+      }
     }
   }
   return resposta;

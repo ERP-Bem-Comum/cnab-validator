@@ -27,6 +27,7 @@
         }
       ],
       "registros_lidos": [
+        "detalhe",
         "header-arquivo",
         "header-lote",
         "trailer-arquivo",
@@ -91,7 +92,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "header-lote"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -412,7 +415,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "header-lote"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -715,7 +720,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -784,7 +791,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -1282,7 +1291,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -1342,7 +1353,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -1384,7 +1397,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -1426,7 +1441,9 @@
           ]
         }
       ],
-      "registros_lidos": [],
+      "registros_lidos": [
+        "detalhe"
+      ],
       "fora_do_dominio": "desconhecido",
       "entradas": [
         {
@@ -1556,6 +1573,7 @@
         }
       ],
       "registros_lidos": [
+        "detalhe",
         "header-arquivo",
         "header-lote",
         "trailer-arquivo",

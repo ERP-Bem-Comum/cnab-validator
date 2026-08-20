@@ -106,6 +106,45 @@ describe("extração de tabela de domínio", () => {
       "trailer-arquivo",
     ]);
   });
+
+  it("a guarda do bloco alcança o registro que a tabela de rótulos não nomeia", () => {
+    // O fonte cerca o catálogo com uma guarda de inclusão que cita o detalhe, e
+    // a tabela de rótulos ao lado não o nomeia — o rótulo do detalhe já saiu no
+    // bloco do segmento. Derivar só da tabela irmã publica "as ocorrências não
+    // são lidas no detalhe", que é o contrário do que o fonte faz, e é
+    // exatamente o erro que faz um consumidor varrer só o envelope.
+    const comGuarda = FIXTURE.replace(
+      '            if (res[i].substring(7, 8) == "0")',
+      '            if (res[i].substring(7, 8) == "0" || res[i].substring(7, 8) == "3" || res[i].substring(7, 8) == 9) {\n            if (res[i].substring(7, 8) == "0")'
+    ).replace(
+      '            resposta = resposta + "==========================================";',
+      '            resposta = resposta + "==========================================";\n            }'
+    );
+    const tabelas = extrairTabelasDeDominio(comGuarda, "retorno_amostra");
+    const campos = mapearCampos(tabelas, "retorno-multipag", "retorno_amostra", "cnab240");
+    const ocorrencias = campos.find((c) => c.colunas[0] === 231);
+    assert.deepStrictEqual(ocorrencias?.registros_lidos, [
+      "detalhe",
+      "header-arquivo",
+      "trailer-arquivo",
+    ]);
+  });
+
+  it("guarda negada não afirma que o campo é lido no registro", () => {
+    // `!=` exclui — é como o fonte tira segmentos do bloco. Contar a desigualdade
+    // como inclusão publicaria registro que o fonte nunca lê ali.
+    const comNegacao = FIXTURE.replace(
+      '            if (res[i].substring(7, 8) == "0")',
+      '            if (res[i].substring(7, 8) != "5") {\n            if (res[i].substring(7, 8) == "0")'
+    ).replace(
+      '            resposta = resposta + "==========================================";',
+      '            resposta = resposta + "==========================================";\n            }'
+    );
+    const tabelas = extrairTabelasDeDominio(comNegacao, "retorno_amostra");
+    const campos = mapearCampos(tabelas, "retorno-multipag", "retorno_amostra", "cnab240");
+    const ocorrencias = campos.find((c) => c.colunas[0] === 231);
+    assert.ok(!ocorrencias?.registros_lidos.includes("trailer-lote"));
+  });
 });
 
 describe("spec de retorno versionado", () => {
@@ -120,6 +159,7 @@ describe("spec de retorno versionado", () => {
     for (const registro of [
       "header-arquivo",
       "header-lote",
+      "detalhe",
       "trailer-lote",
       "trailer-arquivo",
     ]) {

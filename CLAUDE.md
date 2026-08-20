@@ -284,9 +284,14 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   entrada diz em quais fatias aquele código é reconhecido, porque o fonte não decodifica todos em
   todas.
 - **`registros_lidos`**: em que tipos de registro o fonte lê o campo. Para as ocorrências isso inclui
-  **header e trailer, de arquivo e de lote** — recusa de envelope chega por aí, e um processador que
-  varra só o detalhe lê "nenhum erro" num arquivo inteiro recusado. Sai das tabelas irmãs que
-  decodificam a posição do tipo de registro no mesmo bloco do fonte.
+  o **detalhe** e mais **header e trailer, de arquivo e de lote** — recusa de envelope chega por aí, e
+  um processador que varra só o detalhe lê "nenhum erro" num arquivo inteiro recusado. Sai de duas
+  evidências: a **guarda que cerca o bloco**, que é o teste que decide se ele roda, e as tabelas irmãs
+  que decodificam a posição do tipo de registro no mesmo bloco. As duas valem, mas só a guarda enxerga
+  o detalhe — o fonte não o rotula ali, porque o rótulo dele já saiu no bloco do segmento. Derivar só
+  da tabela irmã publicava "as ocorrências não são lidas no detalhe", o contrário do que o fonte faz.
+  Na guarda só a **igualdade** conta: `!=` é como o fonte exclui segmentos do bloco, e contá-la como
+  inclusão publicaria registro que ele nunca lê ali.
 - **`fora_do_dominio: "desconhecido"`**: código não catalogado nunca é ignorado nem tratado como
   sucesso.
 - **`condicao_extra`** preserva a segunda condição do `if` quando existe (o fonte usa isso para
@@ -297,9 +302,8 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   o campo: o fonte decodifica as mesmas colunas em blocos diferentes com dicionários diferentes —
   016-017 é situação do pagamento num bloco e ocorrência de cobrança em outro. Sem a linha, os dois
   colidem e quem indexar por id perde um catálogo inteiro.
-- `registros_lidos` vazio significa **indeterminado**, não "nenhum": ele sai das tabelas irmãs que
-  decodificam o tipo de registro no mesmo bloco, e nem todo bloco as tem. Onde ele é indispensável é
-  no campo de ocorrências.
+- `registros_lidos` vazio significa **indeterminado**, não "nenhum": nem todo bloco tem guarda que
+  nomeie o tipo nem tabela irmã que o decodifique. Onde ele é indispensável é no campo de ocorrências.
 
 `tools/specs/divergencias.json` é o catálogo manual × validador. A curadoria vive em
 `src/divergencias.ts` — o manual não é código —, mas cada item é **verificado contra a extração**:
