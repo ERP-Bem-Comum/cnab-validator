@@ -597,10 +597,42 @@ lote. É o que fecha o ciclo — o golden mostra **1 achado em comum, 0 só no o
 que é a prova de que o arquétipo novo reproduz o validador do banco, e não só o que achamos dele.
 Verificado por mutação: fazer o motor Rust ignorar o ajuste derruba 2 dos 4 testes de paridade.
 
-Fica aberta a outra lacuna do golden — **comparação de faixa com variável de fluxo** (`qtde_linha = j`,
-o índice da linha), que é a regra de quantidade de registros do arquivo, em 4 regras — e o **módulo
-10 com dobra condicional do Segmento O**, que sozinho responde pelas 6 regras do dígito verificador
-do código de barras de tributo.
+### O alvo da regra, e a variável de fluxo — a segunda lacuna do golden — 2026-08-19
+
+A outra regra de trailer, a de quantidade de registros do **arquivo**, não era só falta de arquétipo.
+Ela também tinha o **alvo errado**, e as duas coisas precisaram de PRs separados.
+
+**Alvo (38 regras, três layouts).** O alvo decide em que linhas a regra roda e qual linha a mensagem
+reporta, e vinha só do `res[...]` do teste. Duas formas do fonte o derrubavam para o default `res[0]`,
+com o mesmo efeito nas duas: a regra existe no spec, roda no header, e a guarda dela nunca vale —
+nunca reprova nada, e nunca aparece no relatório.
+
+1. O `if` que compara **variáveis calculadas antes dele** (`qtde_reg != qtde_linha`,
+   `vlr_desc2 > 99.995`): o teste não lê registro nenhum, e quem o identifica é a guarda. O alvo passa
+   a sair da guarda mais interna, exatamente como já acontecia na classificação do tipo de registro.
+2. O **índice aritmético** `res[j + 1]`, com que o fonte alcança o registro seguinte — é como toda
+   regra do Segmento R é escrita, a partir do P. O extrator só reconhecia `res[i]` e `res[0]`, ainda
+   que o consumidor do spec já soubesse resolver a forma completa.
+
+20 regras saem de `res[0]` para `res[i]` e 18 passam a apontar para `res[j + 1]`. Nenhuma muda de
+arquétipo, e o golden segue com 0 falsos positivos.
+
+**Arquétipo `numero_da_linha` (4 regras).** A faixa comparada com a variável do laço. Só se resolve
+com o ambiente do walker, que é quem sabe que `qtde_reg` é uma leitura e `qtde_linha` é `j`. Sem
+ambiente a regra fica em `custom` — publicar sem saber a que a variável se resolve seria afirmar um
+teste que o extrator não viu, e há teste para isso.
+
+Uma decisão de contrato: `fluxo` é publicado como a **expressão** (`j`), não como um número. `j` vale
+`i + 1`, e o motor já resolve isso para `res[j]`; publicar o deslocamento em forma de número criaria
+uma segunda cópia da convenção do laço, livre para divergir da primeira.
+
+`multipag-trailer-arquivo-divergente.txt` fecha o ciclo: um byte diferente do correto, 1 achado em
+comum com o validador oficial, 0 divergências. Deslocar o contador em um no motor Rust derruba 2 dos
+4 testes de paridade.
+
+Com isso as **duas** regras de trailer que o golden expôs estão avaliáveis nos dois motores. Fica
+aberto o **módulo 10 com dobra condicional do Segmento O**, que sozinho responde pelas 6 regras do
+dígito verificador do código de barras de tributo.
 
 ---
 

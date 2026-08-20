@@ -177,7 +177,7 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
 - Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `intervalo`, `modulo_11`,
-  `coerencia_registro`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
+  `coerencia_registro`, `numero_da_linha`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
   — regra que não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a
   cobertura = adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
 - `comparacao` (`estrita` | `frouxa`) existe em `literal_fixo` e `dominio` e **não é decoração**: o
@@ -210,6 +210,14 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   JavaScript já converteu o lado ajustado para número e o `==` coage o outro; faixa não numérica vira
   `NaN`, que difere de tudo, e é assim que o fonte reprova. `null` nos dois campos é comparação
   textual, e é o que as demais regras de coerência trazem.
+- `numero_da_linha` é a faixa comparada com a **variável de fluxo do laço**, não com literal nem com
+  outra faixa: é como o fonte confere a quantidade de registros do arquivo (`qtde_reg != qtde_linha`,
+  com `qtde_linha = j`) e o sequencial de registro do CNAB 400. Depende do ambiente do walker — sem
+  ele a condição é só `qtde_reg != qtde_linha`, que não diz nada, e a regra fica em `custom`. `fluxo`
+  é a expressão a que o lado direito se resolve (`j`, que vale `i + 1`, logo o número 1-based da
+  linha corrente) e `variavel` é o nome que a condição escreve. O motor resolve `fluxo` pelo mesmo
+  caminho que já resolve `res[j]`: a convenção do laço é uma só, e publicá-la aqui como número
+  abriria espaço para as duas divergirem. A comparação é numérica — o fonte compara texto com número.
 - `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
   sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
   minúscula no dígito.

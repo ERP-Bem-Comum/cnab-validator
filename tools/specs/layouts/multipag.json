@@ -4000,8 +4000,15 @@
         }
       ],
       "condicao": {
-        "tipo": "custom",
-        "alvo": "res[i]"
+        "tipo": "numero_da_linha",
+        "alvo": "res[i]",
+        "posicao": {
+          "inicio0": 23,
+          "fim0": 29
+        },
+        "operador": "!=",
+        "fluxo": "j",
+        "variavel": "qtde_linha"
       },
       "condicao_original": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5) && (qtde_reg != qtde_linha)",
       "condicao_guarda": "(res[i].substring(0, 241) != 0) && (res[i].substring(7, 8) == 9 && res[i - 1].substring(7, 8) == 5)",

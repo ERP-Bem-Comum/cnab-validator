@@ -92,6 +92,24 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             )
         }
 
+        Condicao::NumeroDaLinha {
+            alvo,
+            posicao,
+            operador,
+            fluxo,
+            ..
+        } => {
+            let campo = ler_faixa(alvo, posicao, ctx)?;
+            let numero = indice_de(fluxo, ctx)?;
+            // O fonte compara texto com número, e o `==` do JavaScript coage a
+            // faixa: `"000006"` passa como 6.
+            comparar(
+                operador,
+                &Valor::Texto(campo),
+                &Valor::Numero(numero as f64),
+            )
+        }
+
         Condicao::TamanhoLinha {
             alvo,
             operador,
@@ -389,6 +407,34 @@ mod testes {
         let arquivo = linhas("00000X", "00002");
         assert_eq!(
             avaliar_condicao(&com_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn a_faixa_e_comparada_com_o_numero_1_based_da_linha() {
+        // `j` e `i + 1` no fonte: na sexta linha vale 6, e "000006" coage para
+        // 6. E como o trailer de arquivo declara a quantidade de registros.
+        let condicao = Condicao::NumeroDaLinha {
+            alvo: "res[i]".into(),
+            posicao: Posicao {
+                inicio0: 0,
+                fim0: 6,
+            },
+            operador: "!=".into(),
+            fluxo: "j".into(),
+            variavel: "qtde_linha".into(),
+        };
+        let arquivo: Vec<String> = ["", "", "", "", "", "000006"]
+            .iter()
+            .map(|l| l.to_string())
+            .collect();
+        assert_eq!(
+            avaliar_condicao(&condicao, &Contexto::novo(&arquivo, 5)),
+            Some(false)
+        );
+        assert_eq!(
+            avaliar_condicao(&condicao, &Contexto::novo(&arquivo, 4)),
             Some(true)
         );
     }

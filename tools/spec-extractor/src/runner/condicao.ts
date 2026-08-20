@@ -65,6 +65,21 @@ export function avaliarCondicao(
       );
     }
 
+    case "numero_da_linha": {
+      const campo = lerFaixa(condicao.alvo, condicao.posicao, ctx);
+      if (campo === null) return null;
+      let numero: number;
+      try {
+        numero = indiceDe(condicao.fluxo, ctx);
+      } catch (erro) {
+        if (erro instanceof ExpressaoNaoSuportada) return null;
+        throw erro;
+      }
+      // O fonte compara texto com número, e o `==` do JavaScript coage a faixa:
+      // `"000006"` passa como 6.
+      return aplicarComparacao(condicao.operador, campo, numero);
+    }
+
     case "tamanho_linha": {
       const indice = resolverIndice(condicao.alvo, ctx);
       if (indice === null) return null;

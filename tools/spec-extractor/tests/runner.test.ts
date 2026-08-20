@@ -172,6 +172,35 @@ describe("runner de conformidade", () => {
     assert.strictEqual(relatorio.achados[0].registro, "trailer-lote");
   });
 
+  it("o trailer de arquivo com quantidade divergente é reprovado, e só ele", () => {
+    // A regra compara a faixa com `j`, o contador do laço — não com literal nem
+    // com outra faixa. É a última das duas regras de trailer que o corpus
+    // trazia erradas sem ninguém notar.
+    const relatorio = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-trailer-arquivo-divergente.txt")
+    );
+    assert.strictEqual(relatorio.achados.length, 1);
+    assert.strictEqual(relatorio.achados[0].regra_id, "multipag:validarDadosMultipag:498");
+    assert.strictEqual(relatorio.achados[0].linha, 6);
+    assert.strictEqual(relatorio.achados[0].registro, "trailer-arquivo");
+  });
+
+  it("a faixa é comparada com o número 1-based da linha, e coagida", () => {
+    const condicao = {
+      tipo: "numero_da_linha",
+      alvo: "res[i]",
+      posicao: { inicio0: 0, fim0: 6 },
+      operador: "!=",
+      fluxo: "j",
+      variavel: "qtde_linha",
+    } as const;
+    const linhas = ["", "", "", "", "", "000006"];
+    // `j` é `i + 1`: na sexta linha (i = 5) vale 6, e `"000006"` coage para 6.
+    assert.strictEqual(avaliarCondicao(condicao, { linhas, i: 5 }), false);
+    assert.strictEqual(avaliarCondicao(condicao, { linhas, i: 4 }), true);
+  });
+
   it("o deslocamento tira a comparação do texto e a leva para o número", () => {
     const coerencia = {
       tipo: "coerencia_registro",

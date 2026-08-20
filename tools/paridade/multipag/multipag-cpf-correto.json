@@ -24,17 +24,12 @@
       "ocorrencias": 1
     },
     {
-      "regra_id": "multipag:validarDadosMultipag:498",
-      "motivo": "condicao_custom",
-      "ocorrencias": 1
-    },
-    {
       "regra_id": "multipag:validarDadosMultipag:862",
       "motivo": "condicao_custom",
       "ocorrencias": 1
     }
   ],
-  "regras_avaliadas": 188,
+  "regras_avaliadas": 189,
   "total_regras": 512,
   "linhas": 6
 }

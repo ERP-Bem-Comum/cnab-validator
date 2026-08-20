@@ -192,6 +192,26 @@ pub enum Condicao {
         ajuste: Option<i64>,
         ajuste_outro: Option<i64>,
     },
+    /// Faixa comparada com a variável de fluxo do laço, não com um literal nem
+    /// com outra faixa. É como o fonte confere a quantidade de registros do
+    /// arquivo (`qtde_reg != qtde_linha`, com `qtde_linha = j`) e o sequencial
+    /// de registro do CNAB 400.
+    ///
+    /// `j` vale `i + 1` no fonte, logo é o número 1-based da linha corrente. O
+    /// motor resolve `fluxo` pelo mesmo caminho que já resolve `res[j]`: a
+    /// convenção do laço é uma só, e duplicá-la em forma de número abriria
+    /// espaço para as duas divergirem. A comparação é numérica — o fonte compara
+    /// texto com número, e o `==` coage a faixa.
+    NumeroDaLinha {
+        alvo: String,
+        posicao: Posicao,
+        operador: String,
+        /// Expressão de fluxo a que o lado direito se resolve: `i`, `j`, `i + 1`.
+        fluxo: String,
+        /// Nome que a condição escreve, quando o fonte passa por uma variável
+        /// intermediária (`qtde_linha`). Igual a `fluxo` quando compara direto.
+        variavel: String,
+    },
     TamanhoLinha {
         alvo: String,
         operador: String,
@@ -221,6 +241,7 @@ impl Condicao {
             | Condicao::Intervalo { alvo, .. }
             | Condicao::Modulo11 { alvo, .. }
             | Condicao::CoerenciaRegistro { alvo, .. }
+            | Condicao::NumeroDaLinha { alvo, .. }
             | Condicao::TamanhoLinha { alvo, .. }
             | Condicao::Disjuncao { alvo, .. }
             | Condicao::Conjuncao { alvo, .. }
@@ -238,6 +259,7 @@ impl Condicao {
             Condicao::Intervalo { .. } => "intervalo",
             Condicao::Modulo11 { .. } => "modulo_11",
             Condicao::CoerenciaRegistro { .. } => "coerencia_registro",
+            Condicao::NumeroDaLinha { .. } => "numero_da_linha",
             Condicao::TamanhoLinha { .. } => "tamanho_linha",
             Condicao::Disjuncao { .. } => "disjuncao",
             Condicao::Conjuncao { .. } => "conjuncao",

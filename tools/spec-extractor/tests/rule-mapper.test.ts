@@ -435,6 +435,57 @@ describe("mapToDsl", () => {
     }
   });
 
+  it("classifica a faixa comparada com a variável do laço", () => {
+    // O fonte guarda a leitura e o contador em variáveis antes do `if`, e a
+    // condição fica só `qtde_reg != qtde_linha`. Sem o ambiente do walker ela
+    // não diz nada, e é por isso que ficava em `custom`.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 730,
+      condicao_original:
+        "(res[i].substring(7, 8) == 9) && (qtde_reg != qtde_linha)",
+      condicao_guarda: "(res[i].substring(7, 8) == 9)",
+      condicao_propria: "qtde_reg != qtde_linha",
+      mensagem:
+        "Linha {linha}, Trailer de arquivo, colunas 024 a 029, Quantidade de registros do arquivo divergente.",
+      registro: "trailer-arquivo",
+      colunas: [24, 29],
+      alvo: "res[i]",
+      ambiente: {
+        qtde_reg: [
+          { operador: "=", expressao: "res[i].substring(23, 29)", quando: null, ordem: 1 },
+        ],
+        qtde_linha: [{ operador: "=", expressao: "j", quando: null, ordem: 2 }],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "numero_da_linha");
+    if (dsl.condicao.tipo === "numero_da_linha") {
+      assert.strictEqual(dsl.condicao.alvo, "res[i]");
+      assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 23, fim0: 29 });
+      assert.strictEqual(dsl.condicao.operador, "!=");
+      assert.strictEqual(dsl.condicao.fluxo, "j");
+      assert.strictEqual(dsl.condicao.variavel, "qtde_linha");
+    }
+  });
+
+  it("sem o ambiente a comparação com variável continua custom", () => {
+    // Publicar o arquétipo sem saber a que a variável se resolve seria afirmar
+    // um teste que o extrator não viu.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 740,
+      condicao_original: "(res[i].substring(7, 8) == 9) && (qtde_reg != qtde_linha)",
+      condicao_guarda: "(res[i].substring(7, 8) == 9)",
+      condicao_propria: "qtde_reg != qtde_linha",
+      mensagem: "Linha {linha}, colunas 024 a 029, quantidade divergente.",
+      registro: "trailer-arquivo",
+      colunas: [24, 29],
+      alvo: "res[i]",
+    };
+    assert.strictEqual(mapToDsl(raw, "multipag").condicao.tipo, "custom");
+  });
+
   it("coerencia sem deslocamento continua sem ajuste", () => {
     // O campo existe em toda regra de coerência, e `null` é o que diz ao motor
     // para comparar texto com texto, sem passar pela coerção numérica.

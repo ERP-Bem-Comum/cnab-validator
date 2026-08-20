@@ -117,6 +117,33 @@ export type DslCondition =
       ajuste: number | null;
       ajuste_outro: number | null;
     }
+  /**
+   * Faixa comparada com a **variável de fluxo do laço**, não com um literal nem
+   * com outra faixa. É como o fonte confere a quantidade de registros do arquivo
+   * (`qtde_reg != qtde_linha`, com `qtde_linha = j`) e o sequencial de registro
+   * do CNAB 400 (`substring(394, 400) != j`).
+   *
+   * `j` vale `i + 1` no fonte, então é o número 1-based da linha corrente — o
+   * mesmo valor que o trailer de arquivo tem de declarar. O motor resolve `fluxo`
+   * pelo mesmo caminho que já resolve `res[j]`: a convenção do laço é uma só, e
+   * duplicá-la aqui em forma de número abriria espaço para as duas divergirem.
+   *
+   * A comparação é numérica: o fonte compara texto com um número, e o `==` do
+   * JavaScript coage a faixa.
+   */
+  | {
+      tipo: "numero_da_linha";
+      alvo: string;
+      posicao: { inicio0: number; fim0: number };
+      operador: string;
+      /** Expressão de fluxo a que o lado direito se resolve: `i`, `j`, `i + 1`. */
+      fluxo: string;
+      /**
+       * Nome que a condição escreve, quando o fonte passa por uma variável
+       * intermediária (`qtde_linha`). Igual a `fluxo` quando compara direto.
+       */
+      variavel: string;
+    }
   | { tipo: "tamanho_linha"; alvo: string; operador: string; tamanho: number }
   /**
    * Comparação relacional contra literal: `>`, `>=`, `<`, `<=`. Vários limites
@@ -197,6 +224,7 @@ function posicaoDoArquetipo(
     case "intervalo":
     case "modulo_11":
     case "coerencia_registro":
+    case "numero_da_linha":
       return condicao.posicao;
     default:
       return null;
@@ -661,6 +689,11 @@ function inferirCondicaoSimples(
     }
   }
 
+  // Quantidade de registros e sequencial de linha: o fonte compara a faixa com a
+  // variável do laço, direto ou por um nome intermediário que o ambiente resolve.
+  const numeroDaLinha = inferirNumeroDaLinha(condicao, ambiente);
+  if (numeroDaLinha) return numeroDaLinha;
+
   // Tamanho da linha: `res[x].length != 240`, eventualmente acompanhado de uma
   // guarda de índice (`i > 0 && res[i].length != 400`). Não lê faixa de colunas —
   // valida o registro inteiro —, por isso é arquétipo próprio e não regra sem posição.
@@ -668,6 +701,87 @@ function inferirCondicaoSimples(
   if (tamanhoLinha) return tamanhoLinha;
 
   return { tipo: "custom", alvo };
+}
+
+/** Variáveis do laço no fonte: `i` é o índice 0-based, `j` é `i + 1`. */
+const VARIAVEIS_DE_FLUXO = new Set(["i", "j"]);
+
+/**
+ * Resolve um lado da comparação até uma leitura de faixa ou até a variável do
+ * laço, atravessando os nomes intermediários que o ambiente carrega.
+ *
+ * O fonte escreve `qtde_reg = res[i].substring(23, 29)` e `qtde_linha = j` antes
+ * do `if`, e a condição fica só `qtde_reg != qtde_linha` — que sozinha não diz
+ * nada. Sem o ambiente do walker essa regra não tem como ser publicada, e é por
+ * isso que ela ficou fora do spec até aqui.
+ */
+function resolverLadoDaComparacao(
+  expressao: string,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined,
+  profundidade = 0
+):
+  | { tipo: "faixa"; alvo: string; inicio0: number; fim0: number }
+  | { tipo: "fluxo"; fluxo: string }
+  | null {
+  // Cadeia de nomes é curta no fonte; o limite existe só para não seguir um ciclo.
+  if (profundidade > 4) return null;
+  const expr = stripOuterParens(expressao).trim();
+
+  const faixa = expr.match(/^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/);
+  if (faixa) {
+    return {
+      tipo: "faixa",
+      alvo: faixa[1],
+      inicio0: parseInt(faixa[2], 10),
+      fim0: parseInt(faixa[3], 10),
+    };
+  }
+
+  if (VARIAVEIS_DE_FLUXO.has(expr)) return { tipo: "fluxo", fluxo: expr };
+
+  if (/^[A-Za-z_$][\w$]*$/.test(expr)) {
+    const atribuida = ultimaExpressao(ambiente?.[expr]);
+    if (!atribuida) return null;
+    return resolverLadoDaComparacao(atribuida, ambiente, profundidade + 1);
+  }
+
+  return null;
+}
+
+/**
+ * Faixa contra a variável do laço. Publicada só quando um lado resolve para uma
+ * leitura e o outro para o fluxo — os dois lados em faixa já são
+ * `coerencia_registro`, e os dois em fluxo não falam do arquivo.
+ */
+function inferirNumeroDaLinha(
+  condicao: string,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined
+): DslCondition | null {
+  if (splitLogicalClauses(condicao, "&&").length > 1) return null;
+  if (splitLogicalClauses(condicao, "||").length > 1) return null;
+
+  const comparacao = condicao.match(
+    /^([^<>=!]+?)\s*(===|!==|==|!=|>=|<=|>|<)\s*([^<>=!]+)$/
+  );
+  if (!comparacao) return null;
+
+  const [, esquerdaFonte, operador, direitaFonte] = comparacao;
+  const esquerda = resolverLadoDaComparacao(esquerdaFonte, ambiente);
+  const direita = resolverLadoDaComparacao(direitaFonte, ambiente);
+  if (!esquerda || !direita) return null;
+
+  // Só o par (faixa, fluxo) é este arquétipo, e a faixa precisa ficar à esquerda
+  // para o operador continuar valendo — inverter os lados inverteria um `<`.
+  if (esquerda.tipo !== "faixa" || direita.tipo !== "fluxo") return null;
+
+  return {
+    tipo: "numero_da_linha",
+    alvo: esquerda.alvo,
+    posicao: { inicio0: esquerda.inicio0, fim0: esquerda.fim0 },
+    operador,
+    fluxo: direita.fluxo,
+    variavel: stripOuterParens(direitaFonte).trim(),
+  };
 }
 
 /** `- 2` vira `-2`; `+ 1` vira `1`. */
