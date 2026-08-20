@@ -9,10 +9,10 @@ regras extraídas automaticamente (via AST) dos assets JavaScript públicos do v
 — e não um wrapper sobre o JS original.
 
 **Estado atual: Fase 0 fechada, Fase 1 em andamento.** Existem o extrator (`tools/spec-extractor/`,
-Bun + TypeScript), os specs JSON que ele gera (`tools/specs/`) e dois crates Rust:
-`crates/cnab-specs` (o consumidor do contrato) e `crates/cnab-core` (o motor, em paridade verificada
-com o runner TS). `cnab-validator-cli` e `cnab-validator-api` ainda **não** existem; o design deles
-está em `docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
+Bun + TypeScript), os specs JSON que ele gera (`tools/specs/`) e três crates Rust:
+`crates/cnab-specs` (o consumidor do contrato), `crates/cnab-core` (o motor, em paridade verificada
+com o runner TS) e `crates/cnab-validator-api` (a API HTTP). `cnab-validator-cli` ainda **não**
+existe; o design está em `docs/superpowers/specs/2026-08-18-validador-cnab-bradesco-design.md`.
 
 Layouts do ciclo atual: `cobranca-remessa`, `multipag`, `folha-pagamento`, `retorno-multipag`.
 
@@ -63,6 +63,37 @@ mesmas coisas. Nenhuma variante precisa de `#[serde(rename)]` — `rename_all = 
 de todas. Ao criar uma, conferir que o nome em `CamelCase` produz o nome do JSON: um arquétipo que
 termine em número (o antigo `Modulo11` virava `modulo11`, sem o sublinhado) precisaria do `rename`, e
 é sinal de que o nome escolhido está descrevendo o algoritmo em vez do que a regra faz.
+
+`crates/cnab-validator-api` é a API HTTP:
+
+```bash
+cargo run -p cnab-validator-api          # sobe em 127.0.0.1:8080
+curl -X POST "localhost:8080/validar?layout=multipag" --data-binary @arquivo.txt
+```
+
+`CNAB_SPECS` aponta outro diretório de specs (default: `tools/specs`) e `CNAB_ENDERECO` outro
+endereço. Os specs são lidos **de disco**, não embutidos: são 3,5 MB que mudam a cada execução do
+extrator, e trocá-los sem recompilar é o que permite conferir uma extração nova contra um arquivo real
+na hora. `GET /saude` responde de qual extração a API está servindo.
+
+O que vive nesta camada é o que **o motor não faz e o validador oficial faz** — e é por isso que ela
+não é só um `main` em volta do `aplicar_spec`:
+
+- **Encoding.** O corpo é decodificado como **latin-1**, byte a byte. CNAB é posicional em bytes e o
+  motor conta caracteres; decodificar como UTF-8 juntaria dois bytes de um acento num caractere e
+  **deslocaria todas as colunas seguintes**. Latin-1 nunca falha e mantém byte 1 : 1 caractere. O
+  preço é acento trocado no eco da mensagem quando o arquivo é mesmo UTF-8 — o lado certo de errar.
+- **Delimitador de linha.** No fonte do banco a checagem vive em `verificarDelimitadoresDeLinha`, fora
+  das funções de layout que o extrator percorre, e olha o **hex do arquivo inteiro**. Nenhum spec a
+  carrega, e sem ela um arquivo com LF passa limpo aqui e é recusado linha a linha do outro lado.
+- **Envelope**: o comprimento das linhas contra o `tamanhos_linha` do layout.
+- **O layout não é adivinhado.** Vários produtos usam registro de 240 posições; escolher errado
+  valida contra o spec de outro e produz um relatório que tem cara de relatório e não significa nada.
+  Quem chama informa, `GET /layouts` lista, e layout de retorno é recusado com motivo — ele
+  decodifica, não valida.
+- **`conforme` é conservador**: exige nenhum achado **e** delimitador certo **e** envelope certo. As
+  não avaliadas não o derrubam (sempre há algumas), mas viajam com a contagem — `conforme: true` com
+  200 não avaliadas significa outra coisa que com 9.
 
 `crates/cnab-core` é o motor: `aplicar_spec(&regras, &linhas)` devolve achados e não avaliadas. Ele é
 o espelho do runner TS, e é isso que sustenta a paridade:
