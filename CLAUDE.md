@@ -145,10 +145,24 @@ Pontos que só ficam claros lendo vários arquivos juntos:
   regra que não cita coluna (comprimento do registro) e regra cujo texto não usa palavra de erro
   ("Número do banco diferente no mesmo lote", que é a regra de banco único por lote). Ao mexer aqui,
   medir o diff **de conjunto** (quantas regras entram e quantas somem), não só a reclassificação.
+- **O alvo da regra decide em que linhas ela roda**, e não vem só do teste. Quando o `if` compara
+  variáveis calculadas antes dele (`qtde_reg != qtde_linha`), o teste não lê registro nenhum e o alvo
+  sai da **guarda mais interna** — a mesma que já dá o tipo de registro. Sem isso ele cai no default
+  `res[0]`, e a regra passa a valer só para o header, onde a guarda dela nunca vale: existe no spec e
+  não reprova nada. O índice pode ser aritmético (`res[j + 1]` alcança o registro seguinte, como nas
+  regras do Segmento R sob o P) — o consumidor já resolve essa forma, e o extrator a publica.
 - **O walker mantém um ambiente de variáveis** (`RawRule.ambiente`): atribuições vistas até a regra,
-  com a pilha de guardas de cada uma. Uma atribuição só alcança a regra se toda guarda da regra vale
-  também para ela — sem esse escopo o ramo irmão do cálculo de dígito vazaria e o spec publicaria dois
-  resultados contraditórios. Acumulador de mensagem (`resposta = resposta + "…"`) é filtrado por
+  com a pilha de guardas de cada uma. Uma atribuição alcança a regra quando as duas estão na mesma
+  linha de aninhamento — uma pilha de guardas é prefixo da outra. O que precisa ficar de fora é o
+  **ramo irmão** do cálculo de dígito (o fonte repete o bloco inteiro por valor informado), e ele fica:
+  nenhuma das duas pilhas contém a outra. As duas direções são legítimas por razões diferentes — a
+  atribuição sob **mais** guardas é o ramo do cálculo (`if (resto == 0) dv = 0`), publicado como faixa
+  de resto; a sob **menos** foi executada sempre que a regra é alcançada, e é o caso de
+  `dv10 = 10 - resto10`, calculado antes de o `if` de ramo abrir.
+- **A classificação usa os dois ambientes**, com o da regra por cima do da guarda. As parcelas do
+  somatório do código de barras vivem cada uma sob o seu próprio `if` de redução, e só o ambiente da
+  guarda as alcança; o da regra é o mais específico e precisa vencer onde os dois definem a mesma
+  variável, que é o caso do bloco repetido por dígito. Acumulador de mensagem (`resposta = resposta + "…"`) é filtrado por
   conteúdo, não por tamanho: o somatório de CNPJ passa de 600 caracteres.
 - **`runPipeline()` é pura e testável** (recebe `Map<url, source>` + inline scripts + logger injetável);
   `main()` concentra rede e escrita em disco. Novos testes de orquestração devem usar `runPipeline`.
@@ -171,7 +185,7 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
   `String.substring(a, b)` do JS) e `colunas` é 1-based inclusivo (`[inicio0 + 1, fim0]`), usado nas
   mensagens.
 - Arquétipos de `condicao`: `literal_fixo`, `numerico_branco`, `dominio`, `intervalo`, `modulo_11`,
-  `coerencia_registro`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
+  `coerencia_registro`, `numero_da_linha`, `tamanho_linha`, `disjuncao`, `conjuncao`, `custom`. `custom` é o escape hatch
   — regra que não casa com nenhum matcher cai nele com `condicao_original` preservada. Aumentar a
   cobertura = adicionar matcher em `inferirCondicao`, sempre mantendo `condicao_original` intacta.
 - `comparacao` (`estrita` | `frouxa`) existe em `literal_fixo` e `dominio` e **não é decoração**: o
@@ -197,10 +211,32 @@ variantes de `DslCondition` quebra `cnab-specs`. Invariantes:
 - `coerencia_registro` cobre duas leituras comparadas entre si — a mesma faixa em linhas distintas
   (`res[i]` contra `res[j]`), que sustenta "banco único por lote", **e** dois campos da mesma linha,
   que é como o fonte compara datas. O operador pode ser relacional; o par (`alvo`, `outro`) diz se a
-  comparação atravessa registros.
+  comparação atravessa registros. `ajuste` e `ajuste_outro` carregam o deslocamento constante que o
+  fonte soma a um dos lados: `- 1` no sequencial que avança de um em um, `- 2` na quantidade de
+  registros do lote (que conta header e trailer, e o sequencial do último detalhe não). **A presença
+  de ajuste muda o tipo da comparação** — sem ele o fonte compara texto com texto, com ele o `-` do
+  JavaScript já converteu o lado ajustado para número e o `==` coage o outro; faixa não numérica vira
+  `NaN`, que difere de tudo, e é assim que o fonte reprova. `null` nos dois campos é comparação
+  textual, e é o que as demais regras de coerência trazem.
+- `numero_da_linha` é a faixa comparada com a **variável de fluxo do laço**, não com literal nem com
+  outra faixa: é como o fonte confere a quantidade de registros do arquivo (`qtde_reg != qtde_linha`,
+  com `qtde_linha = j`) e o sequencial de registro do CNAB 400. Depende do ambiente do walker — sem
+  ele a condição é só `qtde_reg != qtde_linha`, que não diz nada, e a regra fica em `custom`. `fluxo`
+  é a expressão a que o lado direito se resolve (`j`, que vale `i + 1`, logo o número 1-based da
+  linha corrente) e `variavel` é o nome que a condição escreve. O motor resolve `fluxo` pelo mesmo
+  caminho que já resolve `res[j]`: a convenção do laço é uma só, e publicá-la aqui como número
+  abriria espaço para as duas divergirem. A comparação é numérica — o fonte compara texto com número.
 - `intervalo` cobre a comparação relacional (`>`, `>=`, `<`, `<=`) contra literal; vários limites
   sobre a mesma faixa descrevem um intervalo, como o `>= 'a' && <= 'z'` que o fonte usa para rejeitar
   minúscula no dígito.
+- `dobra` viaja junto de `base`/`modulo` e diz o que o fonte faz com cada parcela **antes de somar**:
+  quando o produto passa de `limite`, subtrai `subtrai`. É o módulo 10 do código de barras do Segmento
+  O, escrito no fonte como um `if` por posição. Os dois números são publicados literalmente em vez de
+  um nome de algoritmo — coincidem em 9 hoje, e assumir isso esconderia a mudança se o banco mexer num
+  deles. `null` é a soma ponderada direta. Reduzir o total em vez de cada parcela dá outro número, e
+  soma com reduções diferentes **não é publicada** — o cálculo fica de fora e a regra continua não
+  avaliável. O nome `modulo_11` do arquétipo é histórico: quem diz qual algoritmo é são `modulo` e
+  `dobra`.
 - `modulo_11` **depende do ambiente que o walker captura**: o fonte calcula o dígito numa variável
   antes do `if` (soma ponderada → resto → um `if` por faixa de resto) e a condição só compara a faixa
   com essa variável. `base` traz as parcelas com peso, `modulo` o divisor, `resultado` o dígito

@@ -1,29 +1,18 @@
 {
-  "arquivo": "multipag-forma-lancamento-invalida.txt",
+  "arquivo": "multipag-tributo-dv-invalido.txt",
   "achados": [
     {
-      "regra_id": "multipag:validarDadosMultipag:650",
-      "linha": 2,
-      "registro": "header-lote",
+      "regra_id": "multipag:validarDadosMultipag:2502",
+      "linha": 3,
+      "registro": "segmento-o",
       "colunas": [
-        12,
-        13
+        21,
+        21
       ],
-      "mensagem": "Linha 2, Header de lote, colunas 012 a 013, Forma de lançamento inválida para pagamento a fornecedor."
+      "mensagem": "Linha 3, Segmento O, colunas 018 a 061, Dígito Verificador Código de Barras inválido. Coluna 021."
     }
   ],
   "nao_avaliadas": [
-    {
-      "regra_id": "multipag:validarDadosMultipag:1636",
-      "motivo": "condicao_incompleta",
-      "ocorrencias": 1
-    },
-    {
-      "regra_id": "multipag:validarDadosMultipag:1651",
-      "motivo": "guarda_nao_avaliavel",
-      "ocorrencias": 1,
-      "detalhe": "função do fonte não modelada: obterValorCNPJAlfanumerico"
-    },
     {
       "regra_id": "multipag:validarDadosMultipag:262",
       "motivo": "condicao_incompleta",
@@ -62,7 +51,7 @@
       "ocorrencias": 1
     }
   ],
-  "regras_avaliadas": 188,
+  "regras_avaliadas": 156,
   "total_regras": 512,
-  "linhas": 6
+  "linhas": 5
 }

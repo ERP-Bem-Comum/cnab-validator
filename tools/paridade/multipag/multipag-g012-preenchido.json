@@ -14,16 +14,6 @@
   ],
   "nao_avaliadas": [
     {
-      "regra_id": "multipag:validarDadosMultipag:1001",
-      "motivo": "condicao_custom",
-      "ocorrencias": 1
-    },
-    {
-      "regra_id": "multipag:validarDadosMultipag:1006",
-      "motivo": "condicao_custom",
-      "ocorrencias": 1
-    },
-    {
       "regra_id": "multipag:validarDadosMultipag:1636",
       "motivo": "condicao_incompleta",
       "ocorrencias": 1
@@ -72,7 +62,7 @@
       "ocorrencias": 1
     }
   ],
-  "regras_avaliadas": 184,
+  "regras_avaliadas": 187,
   "total_regras": 512,
   "linhas": 6
 }

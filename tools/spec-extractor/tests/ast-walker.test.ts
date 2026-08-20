@@ -79,6 +79,46 @@ describe("extractRulesFromFunction", () => {
     assert.strictEqual(rules[0].alvo, "res[0]");
   });
 
+  it("o alvo vem da guarda quando o teste só compara variáveis", () => {
+    // O fonte calcula em variáveis antes do `if` e compara só os nomes. Sem
+    // olhar a guarda o alvo cai no default `res[0]`, e a regra passa a valer
+    // para o header — onde a guarda dela nunca vale. Ela existe no spec e não
+    // reprova nada, que é pior que não existir.
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[i].substring(7, 8) == 9) {
+          qtde = res[i].substring(23, 29);
+          total = j;
+          if (qtde != total) {
+            str += "Linha 1, Trailer de arquivo, colunas 024 a 029, quantidade divergente.<br>";
+          }
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].alvo, "res[i]");
+  });
+
+  it("reconhece o índice aritmético que alcança a linha vizinha", () => {
+    // `res[j + 1]` é o registro seguinte. Sem esta forma o alvo cai em `res[0]`
+    // e a mensagem reporta a linha do header em vez da do registro testado.
+    const code = `
+      function test(res) {
+        var str = "";
+        if (res[j + 1].substring(46, 50) < res[j + 1].substring(22, 26)) {
+          str += "Linha 3, Segmento R, colunas 043 a 050, data inválida.<br>";
+        }
+        return str;
+      }
+    `;
+    const rules = extractRulesFromFunction(code, "test");
+    assert.strictEqual(rules.length, 1);
+    assert.strictEqual(rules[0].alvo, "res[j + 1]");
+  });
+
   it("returns null for unclassified registers and invalid columns", () => {
     const code = `
       function test(res) {

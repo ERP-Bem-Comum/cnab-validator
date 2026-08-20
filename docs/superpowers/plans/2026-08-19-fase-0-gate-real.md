@@ -563,6 +563,113 @@ Decisões que valem registro:
 Falta da Fase 1: `cnab-validator-cli` e `cnab-validator-api`, e estender o corpus de paridade para os
 demais layouts (hoje só o Multipag tem corpus).
 
+### Coerência com deslocamento — a primeira das duas lacunas que o golden abriu — 2026-08-19
+
+O golden mostrou que os trailers estavam errados em **todos** os arquivos do corpus, e a causa era
+uma só: o fonte não compara duas leituras, compara uma com a outra **deslocada de uma constante**. O
+matcher exigia `res[a].substring(…) OP res[b].substring(…)` e nada mais, então toda regra com `- 1`
+ou `- 2` caía em `custom` — e o runner, que nunca as avaliou, foi o oráculo contra o qual o corpus
+foi dado por correto.
+
+`coerencia_registro` ganhou `ajuste` e `ajuste_outro`. **9 regras saíram de `custom`**, em três
+layouts, e nenhuma outra mudou:
+
+| Layout | Regras | O que passam a checar |
+|---|---|---|
+| `cobranca-remessa` | `:896`, `:911` | sequencial de detalhe, quantidade de registros do lote |
+| `folha-pagamento` | `:1727`, `:1735`, `:824`, `:832`, `:839` | as mesmas, em 240 e em 200 |
+| `multipag` | `:1001`, `:1006` | as mesmas |
+
+Três coisas que valem registro:
+
+1. **O deslocamento aparece dos dois lados.** `a != b - 1` no sequencial e `a - 2 != b` na
+   quantidade — um matcher que só olhasse a direita perderia metade das regras.
+2. **Ajuste muda o tipo da comparação.** Sem ele o fonte compara texto; com ele o `-` do JavaScript
+   converte o lado ajustado para número e o `==` coage o outro. `"000004" - 2` casa com `"00002"`,
+   que como texto nunca casaria. Faixa não numérica vira `NaN`, que difere de tudo — o fonte reprova,
+   e o motor precisa reprovar igual.
+3. **A medição veio antes.** O pipeline rodou sobre o corpus local num diretório de scratch e o diff
+   foi comparado por **id**: 9 reclassificações, conjunto de ids idêntico, `index.json` intacto, e as
+   174 regras de coerência já existentes com `ajuste: null` — nenhuma tocada.
+
+`multipag-trailer-lote-divergente.txt` entrou no corpus: um byte diferente do correto, no trailer de
+lote. É o que fecha o ciclo — o golden mostra **1 achado em comum, 0 só no oficial, 0 só no runner**,
+que é a prova de que o arquétipo novo reproduz o validador do banco, e não só o que achamos dele.
+Verificado por mutação: fazer o motor Rust ignorar o ajuste derruba 2 dos 4 testes de paridade.
+
+### O alvo da regra, e a variável de fluxo — a segunda lacuna do golden — 2026-08-19
+
+A outra regra de trailer, a de quantidade de registros do **arquivo**, não era só falta de arquétipo.
+Ela também tinha o **alvo errado**, e as duas coisas precisaram de PRs separados.
+
+**Alvo (38 regras, três layouts).** O alvo decide em que linhas a regra roda e qual linha a mensagem
+reporta, e vinha só do `res[...]` do teste. Duas formas do fonte o derrubavam para o default `res[0]`,
+com o mesmo efeito nas duas: a regra existe no spec, roda no header, e a guarda dela nunca vale —
+nunca reprova nada, e nunca aparece no relatório.
+
+1. O `if` que compara **variáveis calculadas antes dele** (`qtde_reg != qtde_linha`,
+   `vlr_desc2 > 99.995`): o teste não lê registro nenhum, e quem o identifica é a guarda. O alvo passa
+   a sair da guarda mais interna, exatamente como já acontecia na classificação do tipo de registro.
+2. O **índice aritmético** `res[j + 1]`, com que o fonte alcança o registro seguinte — é como toda
+   regra do Segmento R é escrita, a partir do P. O extrator só reconhecia `res[i]` e `res[0]`, ainda
+   que o consumidor do spec já soubesse resolver a forma completa.
+
+20 regras saem de `res[0]` para `res[i]` e 18 passam a apontar para `res[j + 1]`. Nenhuma muda de
+arquétipo, e o golden segue com 0 falsos positivos.
+
+**Arquétipo `numero_da_linha` (4 regras).** A faixa comparada com a variável do laço. Só se resolve
+com o ambiente do walker, que é quem sabe que `qtde_reg` é uma leitura e `qtde_linha` é `j`. Sem
+ambiente a regra fica em `custom` — publicar sem saber a que a variável se resolve seria afirmar um
+teste que o extrator não viu, e há teste para isso.
+
+Uma decisão de contrato: `fluxo` é publicado como a **expressão** (`j`), não como um número. `j` vale
+`i + 1`, e o motor já resolve isso para `res[j]`; publicar o deslocamento em forma de número criaria
+uma segunda cópia da convenção do laço, livre para divergir da primeira.
+
+`multipag-trailer-arquivo-divergente.txt` fecha o ciclo: um byte diferente do correto, 1 achado em
+comum com o validador oficial, 0 divergências. Deslocar o contador em um no motor Rust derruba 2 dos
+4 testes de paridade.
+
+Com isso as **duas** regras de trailer que o golden expôs estão avaliáveis nos dois motores.
+
+### O dígito do código de barras do Segmento O — 2026-08-20
+
+A última lacuna do golden: as **6 regras** do dígito verificador do código de barras de tributo, todas
+não avaliadas. O bloco é a validação que mais importa nesse segmento — é ela que diz se o código de
+barras que a empresa vai pagar está íntegro.
+
+O fonte calcula **dois** dígitos e escolhe entre eles por faixa de resto. Três coisas faltavam:
+
+1. **O módulo 10 com redução por parcela.** O fonte escreve um `if` por posição
+   (`if (faixa * 2 > 9) soma1 = (faixa * 2) - 9; else soma1 = faixa * 2`), guarda cada parcela numa
+   variável e só depois soma as 43. O resolvedor só reconhecia a soma escrita numa expressão só.
+   `dobra` viaja com `base`/`modulo` e traz **os números do fonte** — limite e valor subtraído
+   coincidem em 9 hoje, e publicar "módulo 10" como nome esconderia a mudança se o banco mexer num
+   deles. Reduzir o total em vez de cada parcela dá outro número; soma com reduções diferentes não é
+   publicada, e há teste para isso.
+2. **O escopo do ambiente.** `dv10 = 10 - resto10` é calculado **antes** dos `if` que escolhem o ramo,
+   e o critério de visibilidade exigia que a atribuição estivesse sob todas as guardas da regra — o
+   que deixava de fora justamente o que está num nível mais externo, e portanto sempre executa. O
+   critério passou a ser "as duas na mesma linha de aninhamento": uma pilha de guardas é prefixo da
+   outra. O ramo irmão continua fora, que é o que a proteção existia para garantir.
+3. **Os dois ambientes na classificação.** As parcelas do somatório vivem cada uma sob o seu `if` de
+   redução, e só o ambiente da guarda as alcança; `dv10` e `dv11` só existem no da regra. A
+   classificação passa a usar os dois, com o da regra por cima — que é o mais específico, e precisa
+   vencer no bloco que o fonte repete por dígito.
+
+As 6 regras passam a ser avaliáveis: duas viram `literal_fixo`/`dominio` com a guarda resolvida, e
+quatro viram `conjuncao` de `modulo_11` com literal ou com o outro dígito. De brinde,
+`folha-pagamento:validarDadosFolha200:697` — o dígito da conta do funcionário, cujo `dvc` também é
+calculado antes do `if` que o testa — saiu de `custom` pela mesma correção.
+
+O corpus ganhou o par `multipag-tributo-correto.txt` / `multipag-tributo-dv-invalido.txt`, construído
+com o validador oficial como oráculo. O código de barras dos dois cai no ramo `resto10 != 0`, onde o
+dígito aceito é o do módulo 10 — de propósito: é o único ramo em que um erro no cálculo aparece.
+Golden: 0 achados no correto e 1 em comum no inválido, sem divergência. Fazer o motor Rust ignorar a
+redução derruba a paridade sobre o arquivo **correto**, que é o teste que importa.
+
+Com isso as duas pendências que o golden abriu estão fechadas.
+
 ---
 
 ### Onda 2 — Retorno (issue #4) · tamanho M

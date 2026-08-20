@@ -384,6 +384,249 @@ describe("mapToDsl", () => {
     }
     assert.strictEqual(dsl.registro_referenciado, "header-arquivo");
   });
+  it("publica o deslocamento que o fonte soma ao outro lado da coerencia", () => {
+    // Sequencial de detalhe: o fonte não compara as duas leituras, compara uma
+    // com a outra menos um. Sem o deslocamento a regra vira `custom` — e foi
+    // assim que o corpus ficou com trailers errados sem ninguém notar.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 700,
+      condicao_original:
+        "(res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3) && (res[i].substring(8, 13) != res[j].substring(8, 13) - 1)",
+      condicao_guarda: "(res[i].substring(7, 8) == 3 && res[j].substring(7, 8) == 3)",
+      condicao_propria: "res[i].substring(8, 13) != res[j].substring(8, 13) - 1",
+      mensagem: "Linha {linha}, colunas 009 a 013, sequencial de registro fora de sequencia.",
+      registro: "detalhe",
+      colunas: [9, 13],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "coerencia_registro");
+    if (dsl.condicao.tipo === "coerencia_registro") {
+      assert.strictEqual(dsl.condicao.ajuste, null);
+      assert.strictEqual(dsl.condicao.ajuste_outro, -1);
+      assert.strictEqual(dsl.condicao.outro, "res[j]");
+    }
+  });
+
+  it("publica o deslocamento quando ele esta do lado do alvo", () => {
+    // Quantidade de registros do lote: o trailer conta header e trailer, o
+    // sequencial do último detalhe não. O `- 2` fica à esquerda, e um matcher
+    // que só olhasse a direita perderia a regra.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 710,
+      condicao_original:
+        "(res[i].substring(7, 8) == 5) && (res[i].substring(17, 23) - 2 != res[i - 1].substring(8, 13))",
+      condicao_guarda: "(res[i].substring(7, 8) == 5)",
+      condicao_propria: "res[i].substring(17, 23) - 2 != res[i - 1].substring(8, 13)",
+      mensagem: "Linha {linha}, Trailer de lote, colunas 018 a 023, quantidade divergente.",
+      registro: "trailer-lote",
+      colunas: [18, 23],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "coerencia_registro");
+    if (dsl.condicao.tipo === "coerencia_registro") {
+      assert.strictEqual(dsl.condicao.ajuste, -2);
+      assert.strictEqual(dsl.condicao.ajuste_outro, null);
+      assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 17, fim0: 23 });
+      assert.deepStrictEqual(dsl.condicao.posicao_outro, { inicio0: 8, fim0: 13 });
+    }
+  });
+
+  it("classifica a faixa comparada com a variável do laço", () => {
+    // O fonte guarda a leitura e o contador em variáveis antes do `if`, e a
+    // condição fica só `qtde_reg != qtde_linha`. Sem o ambiente do walker ela
+    // não diz nada, e é por isso que ficava em `custom`.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 730,
+      condicao_original:
+        "(res[i].substring(7, 8) == 9) && (qtde_reg != qtde_linha)",
+      condicao_guarda: "(res[i].substring(7, 8) == 9)",
+      condicao_propria: "qtde_reg != qtde_linha",
+      mensagem:
+        "Linha {linha}, Trailer de arquivo, colunas 024 a 029, Quantidade de registros do arquivo divergente.",
+      registro: "trailer-arquivo",
+      colunas: [24, 29],
+      alvo: "res[i]",
+      ambiente: {
+        qtde_reg: [
+          { operador: "=", expressao: "res[i].substring(23, 29)", quando: null, ordem: 1 },
+        ],
+        qtde_linha: [{ operador: "=", expressao: "j", quando: null, ordem: 2 }],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "numero_da_linha");
+    if (dsl.condicao.tipo === "numero_da_linha") {
+      assert.strictEqual(dsl.condicao.alvo, "res[i]");
+      assert.deepStrictEqual(dsl.condicao.posicao, { inicio0: 23, fim0: 29 });
+      assert.strictEqual(dsl.condicao.operador, "!=");
+      assert.strictEqual(dsl.condicao.fluxo, "j");
+      assert.strictEqual(dsl.condicao.variavel, "qtde_linha");
+    }
+  });
+
+  it("resolve o módulo 10 do código de barras, com a redução por parcela", () => {
+    // O fonte guarda cada parcela numa variável, com a redução escrita num
+    // `if`/`else`, e só depois soma. É a forma do dígito do Segmento O.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 800,
+      condicao_original: "(resto10 != 0) && (res[i].substring(20, 21) != dv10)",
+      condicao_guarda: "(resto10 != 0)",
+      condicao_propria: "res[i].substring(20, 21) != dv10",
+      mensagem: "Linha {linha}, Segmento O, colunas 018 a 061, Dígito inválido. Coluna 021.",
+      registro: "segmento-o",
+      colunas: [18, 61],
+      alvo: "res[i]",
+      ambiente: {
+        dv10: [{ operador: "=", expressao: "10 - resto10", quando: null, ordem: 9 }],
+        resto10: [
+          { operador: "=", expressao: "sm10", quando: null, ordem: 7 },
+          { operador: "%=", expressao: "10", quando: null, ordem: 8 },
+        ],
+        sm10: [{ operador: "=", expressao: "soma1 + soma2", quando: null, ordem: 6 }],
+        soma1: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(17, 18) * 2) - 9",
+            quando: "(res[i].substring(17, 18) * 2 > 9)",
+            ordem: 1,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(17, 18) * 2",
+            quando: "(!(res[i].substring(17, 18) * 2 > 9))",
+            ordem: 2,
+          },
+        ],
+        soma2: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(18, 19) * 1) - 9",
+            quando: "(res[i].substring(18, 19) * 1 > 9)",
+            ordem: 3,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(18, 19) * 1",
+            quando: "(!(res[i].substring(18, 19) * 1 > 9))",
+            ordem: 4,
+          },
+        ],
+      },
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
+    if (dsl.condicao.tipo === "modulo_11") {
+      assert.strictEqual(dsl.condicao.modulo, 10);
+      assert.deepStrictEqual(dsl.condicao.dobra, { limite: 9, subtrai: 9 });
+      assert.strictEqual(dsl.condicao.variavel, "dv10");
+      assert.deepStrictEqual(
+        dsl.condicao.base.map((p) => [p.inicio0, p.fim0, p.peso]),
+        [
+          [17, 18, 2],
+          [18, 19, 1],
+        ]
+      );
+    }
+  });
+
+  it("soma com reduções diferentes não é publicada", () => {
+    // Duas parcelas que subtraem valores distintos é forma que o fonte não
+    // mostrou. Encaixá-la à força inventaria um algoritmo.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 810,
+      condicao_original: "(resto10 != 0) && (res[i].substring(20, 21) != dv10)",
+      condicao_guarda: "(resto10 != 0)",
+      condicao_propria: "res[i].substring(20, 21) != dv10",
+      mensagem: "Linha {linha}, Segmento O, colunas 018 a 061, Dígito inválido. Coluna 021.",
+      registro: "segmento-o",
+      colunas: [18, 61],
+      alvo: "res[i]",
+      ambiente: {
+        dv10: [{ operador: "=", expressao: "10 - resto10", quando: null, ordem: 9 }],
+        resto10: [
+          { operador: "=", expressao: "sm10", quando: null, ordem: 7 },
+          { operador: "%=", expressao: "10", quando: null, ordem: 8 },
+        ],
+        sm10: [{ operador: "=", expressao: "soma1 + soma2", quando: null, ordem: 6 }],
+        soma1: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(17, 18) * 2) - 9",
+            quando: "(res[i].substring(17, 18) * 2 > 9)",
+            ordem: 1,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(17, 18) * 2",
+            quando: "(!(res[i].substring(17, 18) * 2 > 9))",
+            ordem: 2,
+          },
+        ],
+        soma2: [
+          {
+            operador: "=",
+            expressao: "(res[i].substring(18, 19) * 1) - 8",
+            quando: "(res[i].substring(18, 19) * 1 > 9)",
+            ordem: 3,
+          },
+          {
+            operador: "=",
+            expressao: "res[i].substring(18, 19) * 1",
+            quando: "(!(res[i].substring(18, 19) * 1 > 9))",
+            ordem: 4,
+          },
+        ],
+      },
+    };
+    assert.strictEqual(mapToDsl(raw, "multipag").condicao.tipo, "custom");
+  });
+
+  it("sem o ambiente a comparação com variável continua custom", () => {
+    // Publicar o arquétipo sem saber a que a variável se resolve seria afirmar
+    // um teste que o extrator não viu.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 740,
+      condicao_original: "(res[i].substring(7, 8) == 9) && (qtde_reg != qtde_linha)",
+      condicao_guarda: "(res[i].substring(7, 8) == 9)",
+      condicao_propria: "qtde_reg != qtde_linha",
+      mensagem: "Linha {linha}, colunas 024 a 029, quantidade divergente.",
+      registro: "trailer-arquivo",
+      colunas: [24, 29],
+      alvo: "res[i]",
+    };
+    assert.strictEqual(mapToDsl(raw, "multipag").condicao.tipo, "custom");
+  });
+
+  it("coerencia sem deslocamento continua sem ajuste", () => {
+    // O campo existe em toda regra de coerência, e `null` é o que diz ao motor
+    // para comparar texto com texto, sem passar pela coerção numérica.
+    const raw: RawRule = {
+      funcao_origem: "amostra",
+      linha_fonte: 720,
+      condicao_original: "res[i].substring(0, 3) != res[i - 1].substring(0, 3)",
+      condicao_guarda: null,
+      condicao_propria: "res[i].substring(0, 3) != res[i - 1].substring(0, 3)",
+      mensagem: "Linha {linha}, colunas 001 a 003, Número do banco diferente no mesmo lote.",
+      registro: "detalhe",
+      colunas: [1, 3],
+      alvo: "res[i]",
+    };
+    const dsl = mapToDsl(raw, "multipag");
+    assert.strictEqual(dsl.condicao.tipo, "coerencia_registro");
+    if (dsl.condicao.tipo === "coerencia_registro") {
+      assert.strictEqual(dsl.condicao.ajuste, null);
+      assert.strictEqual(dsl.condicao.ajuste_outro, null);
+    }
+  });
+
   it("funde cadeia negada com literal numerico e marca comparacao frouxa", () => {
     // Forma do fonte: um `if` por valor, negando a igualdade contra literal sem
     // aspas. Sem aspas o JavaScript coage os tipos — um campo em branco vale zero.

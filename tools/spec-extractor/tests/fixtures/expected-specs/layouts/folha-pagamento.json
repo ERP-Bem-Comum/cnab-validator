@@ -138,7 +138,9 @@
         "posicao_outro": {
           "inicio0": 0,
           "fim0": 1
-        }
+        },
+        "ajuste": null,
+        "ajuste_outro": null
       },
       "condicao_original": "res[i].substring(0, 1) != res[i + 1].substring(0, 1)",
       "condicao_guarda": null,

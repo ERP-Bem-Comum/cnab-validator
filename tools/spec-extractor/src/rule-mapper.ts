@@ -75,6 +75,13 @@ export type DslCondition =
       }[];
       modulo: number;
       /**
+       * Redução por parcela do somatório, antes de somar; `null` é a soma
+       * ponderada direta. O nome do arquétipo é histórico — quem diz qual
+       * algoritmo é são `modulo` e este campo, e o dígito do código de barras do
+       * Segmento O é módulo 10 com redução.
+       */
+      dobra: Dobra | null;
+      /**
        * Dígito esperado por faixa de resto, na ordem em que o fonte decide. O
        * fonte repete o bloco de cálculo por valor informado no dígito, então uma
        * mesma faixa de resto pode ter resultado diferente em cada ramo — a guarda
@@ -102,6 +109,47 @@ export type DslCondition =
       operador: string;
       outro: string;
       posicao_outro: { inicio0: number; fim0: number };
+      /**
+       * Deslocamento constante que o fonte soma a um dos lados antes de comparar:
+       * `res[i].substring(8, 13) != res[j].substring(8, 13) - 1` é o sequencial
+       * que deve avançar de um em um, e `substring(17, 23) - 2` é a quantidade de
+       * registros do lote descontando header e trailer.
+       *
+       * **Presença de ajuste muda o tipo da comparação.** Sem ele o fonte compara
+       * duas strings, byte a byte; com ele o `-` do JavaScript converte o lado
+       * ajustado para número e o `==` coage o outro — `"00002" - 1` é `1`, e
+       * `"00001"` passa. Faixa não numérica vira `NaN`, que difere de tudo: o
+       * fonte reporta erro, e é isso que o motor precisa reproduzir.
+       */
+      ajuste: number | null;
+      ajuste_outro: number | null;
+    }
+  /**
+   * Faixa comparada com a **variável de fluxo do laço**, não com um literal nem
+   * com outra faixa. É como o fonte confere a quantidade de registros do arquivo
+   * (`qtde_reg != qtde_linha`, com `qtde_linha = j`) e o sequencial de registro
+   * do CNAB 400 (`substring(394, 400) != j`).
+   *
+   * `j` vale `i + 1` no fonte, então é o número 1-based da linha corrente — o
+   * mesmo valor que o trailer de arquivo tem de declarar. O motor resolve `fluxo`
+   * pelo mesmo caminho que já resolve `res[j]`: a convenção do laço é uma só, e
+   * duplicá-la aqui em forma de número abriria espaço para as duas divergirem.
+   *
+   * A comparação é numérica: o fonte compara texto com um número, e o `==` do
+   * JavaScript coage a faixa.
+   */
+  | {
+      tipo: "numero_da_linha";
+      alvo: string;
+      posicao: { inicio0: number; fim0: number };
+      operador: string;
+      /** Expressão de fluxo a que o lado direito se resolve: `i`, `j`, `i + 1`. */
+      fluxo: string;
+      /**
+       * Nome que a condição escreve, quando o fonte passa por uma variável
+       * intermediária (`qtde_linha`). Igual a `fluxo` quando compara direto.
+       */
+      variavel: string;
     }
   | { tipo: "tamanho_linha"; alvo: string; operador: string; tamanho: number }
   /**
@@ -183,6 +231,7 @@ function posicaoDoArquetipo(
     case "intervalo":
     case "modulo_11":
     case "coerencia_registro":
+    case "numero_da_linha":
       return condicao.posicao;
     default:
       return null;
@@ -239,6 +288,7 @@ export type VariavelDaGuarda = {
   nome: string;
   base: ParcelaBase[];
   modulo: number;
+  dobra: Dobra | null;
 } & (
   | {
       /** Dígito calculado: a guarda compara a faixa do arquivo com ele. */
@@ -255,6 +305,25 @@ export type VariavelDaGuarda = {
       tipo: "resto";
     }
 );
+
+/**
+ * Redução aplicada a cada parcela quando o produto passa do limite. É o módulo
+ * 10 do código de barras: o fonte escreve um `if` por posição
+ * (`if (faixa * 2 > 9) soma = (faixa * 2) - 9; else soma = faixa * 2`).
+ *
+ * Publicada com os números do fonte, não como um nome de algoritmo: o limite e o
+ * valor subtraído coincidem em 9 aqui, e assumir isso esconderia a diferença se
+ * o banco mudar um dos dois. `null` é a soma ponderada direta do módulo 11.
+ *
+ * A redução é **por parcela, antes de somar** — aplicá-la ao total daria outro
+ * número. E só é publicada quando *todas* as parcelas têm a mesma: soma mista é
+ * forma que o fonte não mostrou, e o cálculo fica sem publicar, o que deixa a
+ * regra não avaliável em vez de avaliada por um algoritmo inventado.
+ */
+export interface Dobra {
+  limite: number;
+  subtrai: number;
+}
 
 /**
  * Resolve as variáveis que as guardas citam. Só publica o que se resolve
@@ -283,6 +352,7 @@ function resolverVariaveisDaGuarda(
           tipo: "modulo_11",
           base: calculo.base,
           modulo: calculo.modulo,
+          dobra: calculo.dobra,
           resultado: resultado.faixas,
         });
         continue;
@@ -293,7 +363,13 @@ function resolverVariaveisDaGuarda(
     // fonte escolhe qual cálculo exigir no segmento O.
     const resto = resolverResto(nome, ambiente);
     if (resto) {
-      variaveis.push({ nome, tipo: "resto", base: resto.base, modulo: resto.modulo });
+      variaveis.push({
+        nome,
+        tipo: "resto",
+        base: resto.base,
+        modulo: resto.modulo,
+        dobra: resto.dobra,
+      });
     }
   }
 
@@ -316,7 +392,12 @@ export function mapToDsl(
     alvo,
     condicaoCompleta: raw.condicao_original,
     condicaoGuarda: raw.condicao_guarda ?? null,
-    ambiente: raw.ambiente,
+    // Os dois ambientes, com o da regra por cima. O da guarda alcança o que foi
+    // calculado antes de o `if` de ramo abrir — as parcelas do somatório do
+    // código de barras, cada uma sob o seu próprio `if` de redução, estão só
+    // nele. O da regra é o mais específico e precisa vencer onde os dois
+    // definem a mesma variável, que é o caso do bloco repetido por dígito.
+    ambiente: { ...raw.ambiente_guarda, ...raw.ambiente },
     mensagem: raw.mensagem,
   });
 
@@ -613,13 +694,26 @@ function inferirCondicaoSimples(
   // dois campos da mesma linha, que é como o fonte compara datas entre si. O
   // operador relacional faz parte: "data do desconto superior à do vencimento" é
   // exatamente uma comparação de faixa contra faixa.
+  // O deslocamento (`- 1`, `- 2`) é opcional e pode estar de qualquer um dos
+  // lados: o fonte escreve ora `a != b - 1` (sequencial que avança), ora
+  // `a - 2 != b` (quantidade de registros descontando header e trailer).
   const coerencia = condicao.match(
-    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*(===|!==|==|!=|>=|<=|>|<)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/
+    /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)(?:\s*([-+])\s*(\d+))?\s*(===|!==|==|!=|>=|<=|>|<)\s*(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)(?:\s*([-+])\s*(\d+))?$/
   );
   if (coerencia) {
-    const [, alvoA, a1, b1, operador, alvoB, a2, b2] = coerencia;
-    // Faixa comparada consigo mesma não é regra; é sempre verdadeira ou sempre falsa.
-    const mesmaLeitura = alvoA === alvoB && a1 === a2 && b1 === b2;
+    const [, alvoA, a1, b1, sinalA, deltaA, operador, alvoB, a2, b2, sinalB, deltaB] =
+      coerencia;
+    const ajuste = deltaA === undefined ? null : sinalDe(sinalA, deltaA);
+    const ajusteOutro = deltaB === undefined ? null : sinalDe(sinalB, deltaB);
+    // Faixa comparada consigo mesma não é regra; é sempre verdadeira ou sempre
+    // falsa. Com deslocamento ela volta a ser regra: `a != a - 1` é sempre erro,
+    // mas `a >= a - 1` não, e nenhum dos dois é o teste degenerado.
+    const mesmaLeitura =
+      alvoA === alvoB &&
+      a1 === a2 &&
+      b1 === b2 &&
+      ajuste === null &&
+      ajusteOutro === null;
     if (!mesmaLeitura) {
       return {
         tipo: "coerencia_registro",
@@ -628,9 +722,16 @@ function inferirCondicaoSimples(
         operador,
         outro: alvoB,
         posicao_outro: { inicio0: parseInt(a2, 10), fim0: parseInt(b2, 10) },
+        ajuste,
+        ajuste_outro: ajusteOutro,
       };
     }
   }
+
+  // Quantidade de registros e sequencial de linha: o fonte compara a faixa com a
+  // variável do laço, direto ou por um nome intermediário que o ambiente resolve.
+  const numeroDaLinha = inferirNumeroDaLinha(condicao, ambiente);
+  if (numeroDaLinha) return numeroDaLinha;
 
   // Tamanho da linha: `res[x].length != 240`, eventualmente acompanhado de uma
   // guarda de índice (`i > 0 && res[i].length != 400`). Não lê faixa de colunas —
@@ -639,6 +740,93 @@ function inferirCondicaoSimples(
   if (tamanhoLinha) return tamanhoLinha;
 
   return { tipo: "custom", alvo };
+}
+
+/** Variáveis do laço no fonte: `i` é o índice 0-based, `j` é `i + 1`. */
+const VARIAVEIS_DE_FLUXO = new Set(["i", "j"]);
+
+/**
+ * Resolve um lado da comparação até uma leitura de faixa ou até a variável do
+ * laço, atravessando os nomes intermediários que o ambiente carrega.
+ *
+ * O fonte escreve `qtde_reg = res[i].substring(23, 29)` e `qtde_linha = j` antes
+ * do `if`, e a condição fica só `qtde_reg != qtde_linha` — que sozinha não diz
+ * nada. Sem o ambiente do walker essa regra não tem como ser publicada, e é por
+ * isso que ela ficou fora do spec até aqui.
+ */
+function resolverLadoDaComparacao(
+  expressao: string,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined,
+  profundidade = 0
+):
+  | { tipo: "faixa"; alvo: string; inicio0: number; fim0: number }
+  | { tipo: "fluxo"; fluxo: string }
+  | null {
+  // Cadeia de nomes é curta no fonte; o limite existe só para não seguir um ciclo.
+  if (profundidade > 4) return null;
+  const expr = stripOuterParens(expressao).trim();
+
+  const faixa = expr.match(/^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)$/);
+  if (faixa) {
+    return {
+      tipo: "faixa",
+      alvo: faixa[1],
+      inicio0: parseInt(faixa[2], 10),
+      fim0: parseInt(faixa[3], 10),
+    };
+  }
+
+  if (VARIAVEIS_DE_FLUXO.has(expr)) return { tipo: "fluxo", fluxo: expr };
+
+  if (/^[A-Za-z_$][\w$]*$/.test(expr)) {
+    const atribuida = ultimaExpressao(ambiente?.[expr]);
+    if (!atribuida) return null;
+    return resolverLadoDaComparacao(atribuida, ambiente, profundidade + 1);
+  }
+
+  return null;
+}
+
+/**
+ * Faixa contra a variável do laço. Publicada só quando um lado resolve para uma
+ * leitura e o outro para o fluxo — os dois lados em faixa já são
+ * `coerencia_registro`, e os dois em fluxo não falam do arquivo.
+ */
+function inferirNumeroDaLinha(
+  condicao: string,
+  ambiente: Record<string, AtribuicaoFonte[]> | undefined
+): DslCondition | null {
+  if (splitLogicalClauses(condicao, "&&").length > 1) return null;
+  if (splitLogicalClauses(condicao, "||").length > 1) return null;
+
+  const comparacao = condicao.match(
+    /^([^<>=!]+?)\s*(===|!==|==|!=|>=|<=|>|<)\s*([^<>=!]+)$/
+  );
+  if (!comparacao) return null;
+
+  const [, esquerdaFonte, operador, direitaFonte] = comparacao;
+  const esquerda = resolverLadoDaComparacao(esquerdaFonte, ambiente);
+  const direita = resolverLadoDaComparacao(direitaFonte, ambiente);
+  if (!esquerda || !direita) return null;
+
+  // Só o par (faixa, fluxo) é este arquétipo, e a faixa precisa ficar à esquerda
+  // para o operador continuar valendo — inverter os lados inverteria um `<`.
+  if (esquerda.tipo !== "faixa" || direita.tipo !== "fluxo") return null;
+
+  return {
+    tipo: "numero_da_linha",
+    alvo: esquerda.alvo,
+    posicao: { inicio0: esquerda.inicio0, fim0: esquerda.fim0 },
+    operador,
+    fluxo: direita.fluxo,
+    variavel: stripOuterParens(direitaFonte).trim(),
+  };
+}
+
+/** `- 2` vira `-2`; `+ 1` vira `1`. */
+function sinalDe(sinal: string | undefined, valor: string): number {
+  const magnitude = parseInt(valor, 10);
+  return sinal === "-" ? -magnitude : magnitude;
 }
 
 function inferirTamanhoLinha(condicao: string): DslCondition | null {
@@ -1027,6 +1215,7 @@ function inferirModulo11(
     posicao: { inicio0: parseInt(inicio, 10), fim0: parseInt(fim, 10) },
     base: calculo.base,
     modulo: calculo.modulo,
+    dobra: calculo.dobra,
     resultado: resultado.faixas,
     transformacao,
     variavel,
@@ -1117,10 +1306,114 @@ type ParcelaBase = {
   transformacao: string | null;
 };
 
+
+/**
+ * Parcela guardada numa variável por um par `if`/`else`:
+ *
+ * ```js
+ * if (res[i].substring(17, 18) * 2 > 9) soma1 = (res[i].substring(17, 18) * 2) - 9;
+ * else                                  soma1 = res[i].substring(17, 18) * 2
+ * ```
+ *
+ * As duas atribuições precisam falar da **mesma** faixa com o **mesmo** peso, e
+ * as guardas precisam ser uma a negação da outra sobre o mesmo produto. Qualquer
+ * folga aqui publicaria um cálculo que o fonte não faz.
+ */
+function resolverParcelaComDobra(
+  nome: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): { parcela: ParcelaBase; dobra: Dobra } | null {
+  const atribuicoes = ambiente[nome];
+  if (!atribuicoes || atribuicoes.length !== 2) return null;
+  if (atribuicoes.some((a) => a.operador !== "=")) return null;
+
+  const produto = /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)$/;
+
+  // O ramo do excesso subtrai; o outro é o produto puro. A ordem no fonte é
+  // sempre essa, mas quem decide qual é qual é a forma, não a posição.
+  const reduzido = atribuicoes.find((a) => /\)\s*-\s*\d+$/.test(a.expressao.trim()));
+  const direto = atribuicoes.find((a) => a !== reduzido);
+  if (!reduzido || !direto) return null;
+
+  const mDireto = stripOuterParens(direto.expressao).trim().match(produto);
+  const mReduzido = reduzido.expressao
+    .trim()
+    .match(
+      /^\((res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)\)\s*-\s*(\d+)$/
+    );
+  if (!mDireto || !mReduzido) return null;
+
+  // Mesma faixa e mesmo peso nos dois ramos: senão não é a mesma parcela.
+  for (let i = 1; i <= 4; i++) {
+    if (mDireto[i] !== mReduzido[i]) return null;
+  }
+
+  const guardaExcesso = reduzido.quando
+    ? stripOuterParens(reduzido.quando)
+        .trim()
+        .match(
+          /^(res\[[^\]]+\])\.substring\((\d+),\s*(\d+)\)\s*\*\s*(\d+)\s*>\s*(\d+)$/
+        )
+    : null;
+  if (!guardaExcesso) return null;
+  for (let i = 1; i <= 4; i++) {
+    if (guardaExcesso[i] !== mDireto[i]) return null;
+  }
+  // O ramo direto tem de ser exatamente a negação do outro; sem isso a variável
+  // pode ter uma terceira origem que o walker não mostrou.
+  if (direto.quando !== `(!${reduzido.quando})`) return null;
+
+  return {
+    parcela: {
+      alvo: mDireto[1],
+      inicio0: parseInt(mDireto[2], 10),
+      fim0: parseInt(mDireto[3], 10),
+      peso: parseInt(mDireto[4], 10),
+      transformacao: null,
+    },
+    dobra: {
+      limite: parseInt(guardaExcesso[5], 10),
+      subtrai: parseInt(mReduzido[5], 10),
+    },
+  };
+}
+
+/**
+ * Soma cujas parcelas são nomes de variáveis, cada uma com a dobra do módulo 10.
+ * Só devolve algo quando **todas** as parcelas têm a mesma redução: soma mista é
+ * forma que o fonte não mostrou, e encaixá-la à força inventaria um algoritmo.
+ */
+function parseSomaComDobra(
+  expressao: string,
+  ambiente: Record<string, AtribuicaoFonte[]>
+): { base: ParcelaBase[]; dobra: Dobra } | null {
+  const nomes = splitSoma(expressao).map((p) => p.trim());
+  if (nomes.length < 2) return null;
+  if (!nomes.every((n) => /^[A-Za-z_$][\w$]*$/.test(n))) return null;
+
+  const base: ParcelaBase[] = [];
+  let dobra: Dobra | null = null;
+  for (const nome of nomes) {
+    const resolvida = resolverParcelaComDobra(nome, ambiente);
+    if (!resolvida) return null;
+    if (dobra === null) {
+      dobra = resolvida.dobra;
+    } else if (
+      dobra.limite !== resolvida.dobra.limite ||
+      dobra.subtrai !== resolvida.dobra.subtrai
+    ) {
+      return null;
+    }
+    base.push(resolvida.parcela);
+  }
+
+  return dobra ? { base, dobra } : null;
+}
+
 function resolverResto(
   varResto: string,
   ambiente: Record<string, AtribuicaoFonte[]>
-): { base: ParcelaBase[]; modulo: number } | null {
+): { base: ParcelaBase[]; modulo: number; dobra: Dobra | null } | null {
   const atribuicoes = ambiente[varResto];
   if (!atribuicoes || atribuicoes.length === 0) return null;
 
@@ -1156,9 +1449,14 @@ function resolverResto(
   if (!somaFonte) return null;
 
   const base = parseSomaPonderada(somaFonte);
-  if (!base) return null;
+  if (base) return { base, modulo, dobra: null };
 
-  return { base, modulo };
+  // Módulo 10: cada parcela vive numa variável própria, com a redução por
+  // excesso escrita num `if`/`else` antes da soma.
+  const comDobra = parseSomaComDobra(somaFonte, ambiente);
+  if (comDobra) return { base: comDobra.base, modulo, dobra: comDobra.dobra };
+
+  return null;
 }
 
 function ultimaExpressao(atribuicoes: AtribuicaoFonte[] | undefined): string | null {

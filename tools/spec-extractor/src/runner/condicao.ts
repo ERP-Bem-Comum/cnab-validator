@@ -58,7 +58,26 @@ export function avaliarCondicao(
       const campo = lerFaixa(condicao.alvo, condicao.posicao, ctx);
       const outro = lerFaixa(condicao.outro, condicao.posicao_outro, ctx);
       if (campo === null || outro === null) return null;
-      return aplicarComparacao(condicao.operador, campo, outro);
+      return aplicarComparacao(
+        condicao.operador,
+        deslocar(campo, condicao.ajuste),
+        deslocar(outro, condicao.ajuste_outro)
+      );
+    }
+
+    case "numero_da_linha": {
+      const campo = lerFaixa(condicao.alvo, condicao.posicao, ctx);
+      if (campo === null) return null;
+      let numero: number;
+      try {
+        numero = indiceDe(condicao.fluxo, ctx);
+      } catch (erro) {
+        if (erro instanceof ExpressaoNaoSuportada) return null;
+        throw erro;
+      }
+      // O fonte compara texto com número, e o `==` do JavaScript coage a faixa:
+      // `"000006"` passa como 6.
+      return aplicarComparacao(condicao.operador, campo, numero);
     }
 
     case "tamanho_linha": {
@@ -96,18 +115,27 @@ export function avaliarCondicao(
  * também o compara direto, sem virar dígito, para escolher qual regra aplicar.
  */
 export function calcularResto(
-  calculo: { base: Extract<DslCondition, { tipo: "modulo_11" }>["base"]; modulo: number },
+  calculo: {
+    base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
+    modulo: number;
+    /** Redução por excesso do módulo 10; ausente é a soma ponderada direta. */
+    dobra?: { limite: number; subtrai: number } | null;
+  },
   ctx: ContextoArquivo
 ): number | null {
   // A função que o fonte aplica a cada parcela do CNPJ alfanumérico não está no
   // spec — sem ela, calcular seria inventar um resultado.
   if (calculo.base.some((parcela) => parcela.transformacao !== null)) return null;
 
+  const dobra = calculo.dobra ?? null;
   let soma = 0;
   for (const parcela of calculo.base) {
     const campo = lerFaixa(parcela.alvo, parcela, ctx);
     if (campo === null) return null;
-    soma += Number(campo) * parcela.peso;
+    const produto = Number(campo) * parcela.peso;
+    // O fonte reduz parcela a parcela, antes de somar: reduzir o total daria
+    // outro número. É o `if (faixa * 2 > 9) soma = (faixa * 2) - 9` do módulo 10.
+    soma += dobra && produto > dobra.limite ? produto - dobra.subtrai : produto;
   }
   if (isNaN(soma)) return null;
 
@@ -124,6 +152,7 @@ export function calcularDigito(
   calculo: {
     base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
     modulo: number;
+    dobra?: { limite: number; subtrai: number } | null;
     resultado: Extract<DslCondition, { tipo: "modulo_11" }>["resultado"];
   },
   ctx: ContextoArquivo
@@ -187,6 +216,16 @@ function avaliarValor(fonte: string, ctx: ContextoArquivo): Valor {
 
   // `avaliarExpressao` devolve booleano; aqui o que se quer é o valor.
   throw new ExpressaoNaoSuportada(`expressão de valor não suportada: ${limpo}`);
+}
+
+/**
+ * Aplica o deslocamento do fonte a uma faixa. Sem deslocamento a faixa segue
+ * string, e a comparação é textual; com deslocamento o `-` do JavaScript já
+ * converteu para número antes do operador ver os dois lados — inclusive quando a
+ * conversão dá `NaN`, que é como o fonte reprova faixa não numérica.
+ */
+function deslocar(campo: string, ajuste: number | null): Valor {
+  return ajuste === null ? campo : Number(campo) + ajuste;
 }
 
 function comparar(

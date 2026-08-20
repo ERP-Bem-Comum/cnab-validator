@@ -164,6 +164,10 @@ pub enum Condicao {
         posicao: Posicao,
         base: Vec<Parcela>,
         modulo: i64,
+        /// Redução por parcela do somatório. O nome do arquétipo é histórico —
+        /// quem diz qual algoritmo é são `modulo` e este campo, e o dígito do
+        /// código de barras do Segmento O é módulo 10 com redução.
+        dobra: Option<Dobra>,
         resultado: Vec<FaixaDeResto>,
         /// Função aplicada à faixa antes de comparar, quando existe.
         transformacao: Option<String>,
@@ -180,6 +184,37 @@ pub enum Condicao {
         operador: String,
         outro: String,
         posicao_outro: Posicao,
+        /// Deslocamento constante que o fonte soma a um dos lados antes de
+        /// comparar: o sequencial que avança de um em um (`- 1`), ou a
+        /// quantidade de registros do lote descontando header e trailer (`- 2`).
+        ///
+        /// **Presença de ajuste muda o tipo da comparação.** Sem ele o fonte
+        /// compara duas strings, byte a byte; com ele o `-` do JavaScript já
+        /// converteu o lado ajustado para número, e o `==` coage o outro. Faixa
+        /// não numérica vira `NaN`, que difere de tudo — é assim que o fonte
+        /// reprova, e é o que o motor precisa reproduzir.
+        ajuste: Option<i64>,
+        ajuste_outro: Option<i64>,
+    },
+    /// Faixa comparada com a variável de fluxo do laço, não com um literal nem
+    /// com outra faixa. É como o fonte confere a quantidade de registros do
+    /// arquivo (`qtde_reg != qtde_linha`, com `qtde_linha = j`) e o sequencial
+    /// de registro do CNAB 400.
+    ///
+    /// `j` vale `i + 1` no fonte, logo é o número 1-based da linha corrente. O
+    /// motor resolve `fluxo` pelo mesmo caminho que já resolve `res[j]`: a
+    /// convenção do laço é uma só, e duplicá-la em forma de número abriria
+    /// espaço para as duas divergirem. A comparação é numérica — o fonte compara
+    /// texto com número, e o `==` coage a faixa.
+    NumeroDaLinha {
+        alvo: String,
+        posicao: Posicao,
+        operador: String,
+        /// Expressão de fluxo a que o lado direito se resolve: `i`, `j`, `i + 1`.
+        fluxo: String,
+        /// Nome que a condição escreve, quando o fonte passa por uma variável
+        /// intermediária (`qtde_linha`). Igual a `fluxo` quando compara direto.
+        variavel: String,
     },
     TamanhoLinha {
         alvo: String,
@@ -210,6 +245,7 @@ impl Condicao {
             | Condicao::Intervalo { alvo, .. }
             | Condicao::Modulo11 { alvo, .. }
             | Condicao::CoerenciaRegistro { alvo, .. }
+            | Condicao::NumeroDaLinha { alvo, .. }
             | Condicao::TamanhoLinha { alvo, .. }
             | Condicao::Disjuncao { alvo, .. }
             | Condicao::Conjuncao { alvo, .. }
@@ -227,6 +263,7 @@ impl Condicao {
             Condicao::Intervalo { .. } => "intervalo",
             Condicao::Modulo11 { .. } => "modulo_11",
             Condicao::CoerenciaRegistro { .. } => "coerencia_registro",
+            Condicao::NumeroDaLinha { .. } => "numero_da_linha",
             Condicao::TamanhoLinha { .. } => "tamanho_linha",
             Condicao::Disjuncao { .. } => "disjuncao",
             Condicao::Conjuncao { .. } => "conjuncao",
@@ -248,6 +285,7 @@ pub enum VariavelDaGuarda {
         nome: String,
         base: Vec<Parcela>,
         modulo: i64,
+        dobra: Option<Dobra>,
         resultado: Vec<FaixaDeResto>,
     },
     /// O resto da divisão, sem virar dígito: o fonte compara faixas de resto
@@ -256,7 +294,25 @@ pub enum VariavelDaGuarda {
         nome: String,
         base: Vec<Parcela>,
         modulo: i64,
+        dobra: Option<Dobra>,
     },
+}
+
+/// Redução aplicada a cada parcela quando o produto passa do limite — o módulo
+/// 10 do código de barras, que o fonte escreve como um `if` por posição
+/// (`if (faixa * 2 > 9) soma = (faixa * 2) - 9; else soma = faixa * 2`).
+///
+/// Os números vêm do fonte em vez de um nome de algoritmo: limite e valor
+/// subtraído coincidem em 9 aqui, e assumir isso esconderia a diferença se o
+/// banco mudar um dos dois. `None` é a soma ponderada direta do módulo 11.
+///
+/// A redução é **por parcela, antes de somar**: aplicá-la ao total daria outro
+/// número.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Dobra {
+    pub limite: i64,
+    pub subtrai: i64,
 }
 
 impl VariavelDaGuarda {
@@ -276,6 +332,16 @@ impl VariavelDaGuarda {
         match self {
             VariavelDaGuarda::Modulo11 { modulo, .. } | VariavelDaGuarda::Resto { modulo, .. } => {
                 *modulo
+            }
+        }
+    }
+
+    /// Redução por parcela, quando o cálculo a tem. O dígito nunca a tem: no
+    /// fonte ela só aparece no somatório do módulo 10.
+    pub fn dobra(&self) -> Option<Dobra> {
+        match self {
+            VariavelDaGuarda::Modulo11 { dobra, .. } | VariavelDaGuarda::Resto { dobra, .. } => {
+                *dobra
             }
         }
     }

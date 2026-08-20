@@ -1,15 +1,15 @@
 {
-  "arquivo": "multipag-forma-lancamento-invalida.txt",
+  "arquivo": "multipag-trailer-arquivo-divergente.txt",
   "achados": [
     {
-      "regra_id": "multipag:validarDadosMultipag:650",
-      "linha": 2,
-      "registro": "header-lote",
+      "regra_id": "multipag:validarDadosMultipag:498",
+      "linha": 6,
+      "registro": "trailer-arquivo",
       "colunas": [
-        12,
-        13
+        24,
+        29
       ],
-      "mensagem": "Linha 2, Header de lote, colunas 012 a 013, Forma de lançamento inválida para pagamento a fornecedor."
+      "mensagem": "Linha 6, Trailer de arquivo, colunas 024 a 029, Quantidade de registros do arquivo divergente. Informado {valor}."
     }
   ],
   "nao_avaliadas": [
@@ -62,7 +62,7 @@
       "ocorrencias": 1
     }
   ],
-  "regras_avaliadas": 188,
+  "regras_avaliadas": 187,
   "total_regras": 512,
   "linhas": 6
 }

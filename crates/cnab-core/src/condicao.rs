@@ -4,10 +4,12 @@
 //! depende de algo que o spec não carrega. Nunca devolver `Some(false)` nesses
 //! casos é deliberado: regra silenciosamente aprovada cria falsa confiança.
 
-use cnab_specs::{Condicao, ModoComparacao, Parcela, Posicao, SentidoDominio, VariavelDaGuarda};
+use cnab_specs::{
+    Condicao, Dobra, ModoComparacao, Parcela, Posicao, SentidoDominio, VariavelDaGuarda,
+};
 
 use crate::expressao::{Contexto, aplicar_replace, substring};
-use crate::valor::{Valor, comparar};
+use crate::valor::{Valor, comparar, numero_js};
 
 pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
     match condicao {
@@ -80,10 +82,34 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             operador,
             outro,
             posicao_outro,
+            ajuste,
+            ajuste_outro,
         } => {
             let campo = ler_faixa(alvo, posicao, ctx)?;
             let outro = ler_faixa(outro, posicao_outro, ctx)?;
-            comparar(operador, &Valor::Texto(campo), &Valor::Texto(outro))
+            comparar(
+                operador,
+                &deslocar(campo, *ajuste),
+                &deslocar(outro, *ajuste_outro),
+            )
+        }
+
+        Condicao::NumeroDaLinha {
+            alvo,
+            posicao,
+            operador,
+            fluxo,
+            ..
+        } => {
+            let campo = ler_faixa(alvo, posicao, ctx)?;
+            let numero = indice_de(fluxo, ctx)?;
+            // O fonte compara texto com número, e o `==` do JavaScript coage a
+            // faixa: `"000006"` passa como 6.
+            comparar(
+                operador,
+                &Valor::Texto(campo),
+                &Valor::Numero(numero as f64),
+            )
         }
 
         Condicao::TamanhoLinha {
@@ -105,6 +131,7 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             posicao,
             base,
             modulo,
+            dobra,
             resultado,
             transformacao,
             ..
@@ -114,7 +141,7 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             if transformacao.is_some() {
                 return None;
             }
-            let esperado = calcular_digito(base, *modulo, resultado, ctx)?;
+            let esperado = calcular_digito(base, *modulo, *dobra, resultado, ctx)?;
             let digito = ler_faixa(alvo, posicao, ctx)?;
             // O fonte compara sem aspas contra número e com aspas contra letra;
             // `==` cobre os dois com a mesma coerção que ele usa.
@@ -159,7 +186,12 @@ fn comparar_literal(
 
 /// Resto da soma ponderada, primeira metade do cálculo do dígito. O fonte também
 /// o compara direto, sem virar dígito, para escolher qual regra aplicar.
-pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f64> {
+pub fn calcular_resto(
+    base: &[Parcela],
+    modulo: i64,
+    dobra: Option<Dobra>,
+    ctx: &Contexto,
+) -> Option<f64> {
     if modulo == 0 {
         return None;
     }
@@ -179,7 +211,13 @@ pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f
             },
             ctx,
         )?;
-        soma += Valor::texto(campo).como_numero() * parcela.peso as f64;
+        let produto = Valor::texto(campo).como_numero() * parcela.peso as f64;
+        // O fonte reduz parcela a parcela, antes de somar: reduzir o total daria
+        // outro número.
+        soma += match dobra {
+            Some(d) if produto > d.limite as f64 => produto - d.subtrai as f64,
+            _ => produto,
+        };
     }
     if soma.is_nan() {
         return None;
@@ -191,10 +229,11 @@ pub fn calcular_resto(base: &[Parcela], modulo: i64, ctx: &Contexto) -> Option<f
 pub fn calcular_digito(
     base: &[Parcela],
     modulo: i64,
+    dobra: Option<Dobra>,
     resultado: &[cnab_specs::FaixaDeResto],
     ctx: &Contexto,
 ) -> Option<Valor> {
-    let resto = calcular_resto(base, modulo, ctx)?;
+    let resto = calcular_resto(base, modulo, dobra, ctx)?;
 
     // A ordem do fonte é a ordem de avaliação: a última atribuição que casa vence.
     let mut esperado: Option<Valor> = None;
@@ -265,9 +304,9 @@ pub fn resolver_variaveis(variaveis: &[VariavelDaGuarda], ctx: &Contexto) -> Vec
                 modulo,
                 resultado,
                 ..
-            } => calcular_digito(base, *modulo, resultado, ctx),
+            } => calcular_digito(base, *modulo, variavel.dobra(), resultado, ctx),
             VariavelDaGuarda::Resto { base, modulo, .. } => {
-                calcular_resto(base, *modulo, ctx).map(Valor::Numero)
+                calcular_resto(base, *modulo, variavel.dobra(), ctx).map(Valor::Numero)
             }
         };
         if let Some(valor) = valor {
@@ -275,6 +314,17 @@ pub fn resolver_variaveis(variaveis: &[VariavelDaGuarda], ctx: &Contexto) -> Vec
         }
     }
     resolvidas
+}
+
+/// Aplica o deslocamento do fonte a uma faixa. Sem deslocamento a faixa segue
+/// texto, e a comparação é textual; com deslocamento o `-` do JavaScript já
+/// converteu para número antes de o operador ver os dois lados — inclusive
+/// quando a conversão dá `NaN`, que é como o fonte reprova faixa não numérica.
+fn deslocar(campo: String, ajuste: Option<i64>) -> Valor {
+    match ajuste {
+        None => Valor::Texto(campo),
+        Some(delta) => Valor::Numero(numero_js(&campo) + delta as f64),
+    }
 }
 
 fn ler_faixa(alvo: &str, posicao: &Posicao, ctx: &Contexto) -> Option<String> {
@@ -316,5 +366,133 @@ fn variavel_de_indice(nome: &str, ctx: &Contexto) -> Option<i64> {
             Some(Valor::Numero(n)) => Some(*n as i64),
             _ => None,
         },
+    }
+}
+
+#[cfg(test)]
+mod testes {
+    use super::*;
+
+    fn coerencia(ajuste: Option<i64>, ajuste_outro: Option<i64>) -> Condicao {
+        Condicao::CoerenciaRegistro {
+            alvo: "res[0]".into(),
+            posicao: Posicao {
+                inicio0: 0,
+                fim0: 6,
+            },
+            operador: "!=".into(),
+            outro: "res[1]".into(),
+            posicao_outro: Posicao {
+                inicio0: 0,
+                fim0: 5,
+            },
+            ajuste,
+            ajuste_outro,
+        }
+    }
+
+    fn linhas(a: &str, b: &str) -> Vec<String> {
+        vec![a.to_string(), b.to_string()]
+    }
+
+    #[test]
+    fn o_deslocamento_tira_a_comparacao_do_texto_e_a_leva_para_o_numero() {
+        // `"000004" - 2` é 2, e o `!=` coage `"00002"` para 2: não é erro. Sem o
+        // deslocamento o fonte compararia dois textos de larguras diferentes,
+        // que nunca casariam.
+        let com_ajuste = coerencia(Some(-2), None);
+        let arquivo = linhas("000004", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(false)
+        );
+
+        let divergente = linhas("000005", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&divergente, 0)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn faixa_nao_numerica_com_deslocamento_difere_de_tudo() {
+        // `NaN` não é igual nem a si mesmo: o fonte reprova, e aprovar em
+        // silêncio seria o oposto do que ele faz.
+        let com_ajuste = coerencia(Some(-2), None);
+        let arquivo = linhas("00000X", "00002");
+        assert_eq!(
+            avaliar_condicao(&com_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn a_faixa_e_comparada_com_o_numero_1_based_da_linha() {
+        // `j` e `i + 1` no fonte: na sexta linha vale 6, e "000006" coage para
+        // 6. E como o trailer de arquivo declara a quantidade de registros.
+        let condicao = Condicao::NumeroDaLinha {
+            alvo: "res[i]".into(),
+            posicao: Posicao {
+                inicio0: 0,
+                fim0: 6,
+            },
+            operador: "!=".into(),
+            fluxo: "j".into(),
+            variavel: "qtde_linha".into(),
+        };
+        let arquivo: Vec<String> = ["", "", "", "", "", "000006"]
+            .iter()
+            .map(|l| l.to_string())
+            .collect();
+        assert_eq!(
+            avaliar_condicao(&condicao, &Contexto::novo(&arquivo, 5)),
+            Some(false)
+        );
+        assert_eq!(
+            avaliar_condicao(&condicao, &Contexto::novo(&arquivo, 4)),
+            Some(true)
+        );
+    }
+
+    #[test]
+    fn a_reducao_e_aplicada_parcela_a_parcela_nao_ao_total() {
+        // 9*2 = 18 passa de 9 e vira 9; 8*2 = 16 vira 7. Soma 16, resto 6. Sem a
+        // reducao a soma seria 34 e o resto 4 — outro digito.
+        let base = vec![
+            Parcela {
+                alvo: "res[0]".into(),
+                inicio0: 0,
+                fim0: 1,
+                peso: 2,
+                transformacao: None,
+            },
+            Parcela {
+                alvo: "res[0]".into(),
+                inicio0: 1,
+                fim0: 2,
+                peso: 2,
+                transformacao: None,
+            },
+        ];
+        let arquivo = vec!["98".to_string()];
+        let ctx = Contexto::novo(&arquivo, 0);
+        let dobra = Dobra {
+            limite: 9,
+            subtrai: 9,
+        };
+        assert_eq!(calcular_resto(&base, 10, Some(dobra), &ctx), Some(6.0));
+        assert_eq!(calcular_resto(&base, 10, None, &ctx), Some(4.0));
+    }
+
+    #[test]
+    fn sem_deslocamento_a_comparacao_segue_textual() {
+        // As mesmas faixas, sem ajuste: `"000004"` contra `"00002"` são textos
+        // diferentes, e o fonte acusa. É a regra de banco único por lote.
+        let sem_ajuste = coerencia(None, None);
+        let arquivo = linhas("000004", "00002");
+        assert_eq!(
+            avaliar_condicao(&sem_ajuste, &Contexto::novo(&arquivo, 0)),
+            Some(true)
+        );
     }
 }

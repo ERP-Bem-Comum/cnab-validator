@@ -2,7 +2,7 @@ import { describe, it } from "bun:test";
 import assert from "node:assert";
 import { readFileSync } from "node:fs";
 import { aplicarSpec, separarLinhas } from "../src/runner/index.js";
-import { avaliarCondicao } from "../src/runner/condicao.js";
+import { avaliarCondicao, calcularResto } from "../src/runner/condicao.js";
 import { avaliarExpressao, ExpressaoNaoSuportada } from "../src/runner/expressao.js";
 import type { DslRule } from "../src/rule-mapper.js";
 
@@ -156,6 +156,119 @@ describe("runner de conformidade", () => {
     for (const nao of porFuncao) {
       assert.strictEqual(nao.motivo, "guarda_nao_avaliavel");
     }
+  });
+
+  it("o trailer de lote com quantidade divergente é reprovado, e só ele", () => {
+    // A regra compara a faixa com o sequencial do último detalhe *mais dois*, e
+    // ficava em `custom` sem o deslocamento. Enquanto ela não era avaliada, o
+    // próprio corpus foi dado por correto com o trailer errado.
+    const relatorio = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-trailer-lote-divergente.txt")
+    );
+    assert.strictEqual(relatorio.achados.length, 1);
+    assert.strictEqual(relatorio.achados[0].regra_id, "multipag:validarDadosMultipag:1006");
+    assert.strictEqual(relatorio.achados[0].linha, 5);
+    assert.strictEqual(relatorio.achados[0].registro, "trailer-lote");
+  });
+
+  it("o trailer de arquivo com quantidade divergente é reprovado, e só ele", () => {
+    // A regra compara a faixa com `j`, o contador do laço — não com literal nem
+    // com outra faixa. É a última das duas regras de trailer que o corpus
+    // trazia erradas sem ninguém notar.
+    const relatorio = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-trailer-arquivo-divergente.txt")
+    );
+    assert.strictEqual(relatorio.achados.length, 1);
+    assert.strictEqual(relatorio.achados[0].regra_id, "multipag:validarDadosMultipag:498");
+    assert.strictEqual(relatorio.achados[0].linha, 6);
+    assert.strictEqual(relatorio.achados[0].registro, "trailer-arquivo");
+  });
+
+  it("o dígito do código de barras do tributo confere, e o errado é reprovado", () => {
+    // O par exercita o módulo 10 com redução por parcela: o código de barras
+    // dos dois arquivos cai no ramo `resto10 != 0`, onde o dígito aceito é o do
+    // módulo 10. Cálculo errado viraria falso positivo no primeiro arquivo.
+    const correto = aplicarSpec(multipag, carregarArquivo("multipag-tributo-correto.txt"));
+    assert.deepStrictEqual(
+      correto.achados.map((a) => `${a.regra_id} ${a.mensagem}`),
+      []
+    );
+
+    const invalido = aplicarSpec(
+      multipag,
+      carregarArquivo("multipag-tributo-dv-invalido.txt")
+    );
+    assert.strictEqual(invalido.achados.length, 1);
+    assert.strictEqual(invalido.achados[0].registro, "segmento-o");
+    assert.match(invalido.achados[0].mensagem, /Dígito Verificador Código de Barras/);
+  });
+
+  it("a redução é aplicada parcela a parcela, não ao total", () => {
+    // `9 * 2` é 18, que passa de 9 e vira 9; `8 * 1` é 8 e fica. A soma é 17, e
+    // o resto do módulo 10 é 7. Reduzir o total daria 26 - 9 = 17 por acaso
+    // aqui, mas a diferença aparece assim que duas parcelas excedem.
+    const calculo = {
+      base: [
+        { alvo: "res[0]", inicio0: 0, fim0: 1, peso: 2, transformacao: null },
+        { alvo: "res[0]", inicio0: 1, fim0: 2, peso: 2, transformacao: null },
+      ],
+      modulo: 10,
+      dobra: { limite: 9, subtrai: 9 },
+    };
+    // 9*2 = 18 -> 9, e 8*2 = 16 -> 7. Soma 16, resto 6.
+    assert.strictEqual(calcularResto(calculo, { linhas: ["98"], i: 0 }), 6);
+    // Sem a redução a soma seria 34, e o resto 4 — outro dígito.
+    assert.strictEqual(
+      calcularResto({ ...calculo, dobra: null }, { linhas: ["98"], i: 0 }),
+      4
+    );
+  });
+
+  it("a faixa é comparada com o número 1-based da linha, e coagida", () => {
+    const condicao = {
+      tipo: "numero_da_linha",
+      alvo: "res[i]",
+      posicao: { inicio0: 0, fim0: 6 },
+      operador: "!=",
+      fluxo: "j",
+      variavel: "qtde_linha",
+    } as const;
+    const linhas = ["", "", "", "", "", "000006"];
+    // `j` é `i + 1`: na sexta linha (i = 5) vale 6, e `"000006"` coage para 6.
+    assert.strictEqual(avaliarCondicao(condicao, { linhas, i: 5 }), false);
+    assert.strictEqual(avaliarCondicao(condicao, { linhas, i: 4 }), true);
+  });
+
+  it("o deslocamento tira a comparação do texto e a leva para o número", () => {
+    const coerencia = {
+      tipo: "coerencia_registro",
+      alvo: "res[0]",
+      posicao: { inicio0: 0, fim0: 6 },
+      operador: "!=",
+      outro: "res[1]",
+      posicao_outro: { inicio0: 0, fim0: 5 },
+      ajuste: -2,
+      ajuste_outro: null,
+    } as const;
+    // `"000004" - 2` é 4 - 2 = 2, e o `!=` coage `"00002"` para 2: não é erro.
+    // Sem o deslocamento o fonte compararia `"000004"` com `"00002"`, textos de
+    // larguras diferentes que nunca casariam.
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["000004", "00002"], i: 0 }),
+      false
+    );
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["000005", "00002"], i: 0 }),
+      true
+    );
+    // Faixa não numérica vira NaN, que difere de tudo — inclusive de si mesma.
+    // É como o fonte reprova, e não pode virar aprovação silenciosa.
+    assert.strictEqual(
+      avaliarCondicao(coerencia, { linhas: ["00000X", "00002"], i: 0 }),
+      true
+    );
   });
 
   it("custom nunca é avaliado como aprovado", () => {
