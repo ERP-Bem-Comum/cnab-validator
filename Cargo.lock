@@ -97,6 +97,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "cnab-retorno"
+version = "0.1.0"
+dependencies = [
+ "cnab-core",
+ "cnab-specs",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "cnab-specs"
 version = "0.1.0"
 dependencies = [
@@ -110,6 +120,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "cnab-core",
+ "cnab-retorno",
  "cnab-specs",
  "serde",
  "serde_json",

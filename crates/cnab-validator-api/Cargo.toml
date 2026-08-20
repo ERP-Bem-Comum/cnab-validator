@@ -9,6 +9,7 @@ repository.workspace = true
 
 [dependencies]
 cnab-core = { path = "../cnab-core" }
+cnab-retorno = { path = "../cnab-retorno" }
 cnab-specs = { path = "../cnab-specs" }
 serde.workspace = true
 serde_json.workspace = true

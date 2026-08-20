@@ -30,6 +30,7 @@ bun run typecheck   # tsc --noEmit
 bun run reproduce   # verifica reprodutibilidade contra specs fixture (sem rede)
 bun run golden      # compara o runner com o validador oficial executado localmente
 bun run paridade    # congela o relatório do runner em tools/paridade/, para o motor Rust
+bun run retorno-oraculo  # roda o decodificador oficial sobre os retornos gerados
 ```
 
 `bun run dev` é a **única** coisa que acessa a rede; os testes mockam `global.fetch`.
@@ -69,6 +70,8 @@ termine em número (o antigo `Modulo11` virava `modulo11`, sem o sublinhado) pre
 ```bash
 cargo run -p cnab-validator-api          # sobe em 127.0.0.1:8080
 curl -X POST "localhost:8080/validar?layout=multipag" --data-binary @arquivo.txt
+curl -X POST localhost:8080/retorno -H 'Content-Type: application/json' \
+  -d '{"remessa": "...", "cenario": {"padrao": ["00"], "envelope": ["01"]}}'
 ```
 
 `CNAB_SPECS` aponta outro diretório de specs (default: `tools/specs`) e `CNAB_ENDERECO` outro
@@ -91,9 +94,37 @@ não é só um `main` em volta do `aplicar_spec`:
   valida contra o spec de outro e produz um relatório que tem cara de relatório e não significa nada.
   Quem chama informa, `GET /layouts` lista, e layout de retorno é recusado com motivo — ele
   decodifica, não valida.
+- **`POST /retorno`** gera o arquivo de retorno de uma remessa (veja `cnab-retorno`). Com
+  `?detalhado=true` devolve JSON com o arquivo e o que foi escrito linha a linha; sem ele, o arquivo
+  cru, que é o que se grava em disco.
 - **`conforme` é conservador**: exige nenhum achado **e** delimitador certo **e** envelope certo. As
   não avaliadas não o derrubam (sempre há algumas), mas viajam com a contagem — `conforme: true` com
   200 não avaliadas significa outra coisa que com 9.
+
+`crates/cnab-retorno` é o **gerador de retorno**: `gerar(&layout_retorno, &linhas, &cenario)` recebe
+uma remessa e devolve o arquivo de retorno correspondente. É a outra metade do ciclo — sem ele o
+consumidor de retorno do core-api lê um formato que nunca viu chegar, e não há homologação no
+convênio para exercitá-lo.
+
+- **É transformação, não geração.** O retorno é a remessa devolvida: banco, lote, sequenciais,
+  favorecido, valores e datas são copiados, e só o que pertence ao retorno é escrito.
+- **Não prevê o desfecho.** O fonte do banco valida remessa e decodifica retorno; ele não contém
+  "dado este pagamento, o banco responde X". Quem escolhe é o `Cenario`; o crate garante a **forma**.
+- **As posições vêm do `CampoDominio` de ocorrências**, não de constante: faixa, as cinco fatias, os
+  142 códigos e os registros em que o campo é lido. Há teste que falha se alguém trocar isso por
+  número escrito no código.
+- **Existir no catálogo não basta: o código tem de valer naquela fatia.** `00` — "Débito Efetivado",
+  o mais provável num cenário de sucesso — só é decodificado na **primeira**. Escrito na terceira, o
+  banco o leria como desconhecido e o arquivo passaria por qualquer inspeção visual.
+- **A única coisa que não vem do fonte** é o valor do código de remessa/retorno (coluna 143 do header
+  de arquivo). Os dois validadores do banco leem essa posição, e é assim que se sabe onde ela fica —
+  mas nenhum diz qual é o valor de retorno; só que `1` é remessa. O default é `2` (FEBRABAN), e o
+  `Cenario` permite trocar. Sem virar esse byte o próprio banco lê o arquivo como remessa.
+- **Oráculo:** `bun run retorno-oraculo` roda o **decodificador oficial** sobre os exemplos que
+  `cargo test -p cnab-retorno` congela em `tools/retorno-exemplo/`, e exige que o banco leia o cenário
+  pedido — no detalhe **e** no envelope, sem código desconhecido, e sem ler o arquivo como remessa.
+  Mesmo arranjo de `bun run paridade`: o Rust congela, o Bun confere contra o fonte. Foi ele que pegou
+  o defeito do código de remessa, que nenhum teste interno pegaria.
 
 `crates/cnab-core` é o motor: `aplicar_spec(&regras, &linhas)` devolve achados e não avaliadas. Ele é
 o espelho do runner TS, e é isso que sustenta a paridade:

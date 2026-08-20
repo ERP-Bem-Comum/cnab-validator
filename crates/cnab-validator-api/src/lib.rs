@@ -25,6 +25,7 @@ use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use cnab_core::{Achado, NaoAvaliada, aplicar_spec, separar_linhas};
+use cnab_retorno::{Cenario, ErroDeGeracao};
 use cnab_specs::Catalogo;
 use serde::{Deserialize, Serialize};
 
@@ -40,6 +41,7 @@ pub fn rotas(catalogo: Arc<Catalogo>) -> Router {
         .route("/saude", get(saude))
         .route("/layouts", get(layouts))
         .route("/validar", post(validar))
+        .route("/retorno", post(retorno))
         .with_state(Estado { catalogo })
 }
 
@@ -164,6 +166,76 @@ async fn validar(
     Ok(axum::Json(veredito).into_response())
 }
 
+/// Layout de retorno a usar. Só existe um hoje, e é o default; o parâmetro
+/// existe para o dia em que houver outro, e não para ser adivinhado depois.
+#[derive(Debug, Deserialize)]
+struct ParametrosRetorno {
+    #[serde(default = "retorno_padrao")]
+    layout: String,
+    /// Quando `true`, devolve JSON com o arquivo e o que foi escrito, em vez do
+    /// arquivo cru. Útil para conferir o cenário sem abrir o arquivo.
+    #[serde(default)]
+    detalhado: bool,
+}
+
+fn retorno_padrao() -> String {
+    "retorno-multipag".to_string()
+}
+
+#[derive(Debug, Deserialize)]
+struct PedidoRetorno {
+    /// A remessa, como texto. Vem no JSON porque o cenário vem junto.
+    remessa: String,
+    #[serde(default)]
+    cenario: Cenario,
+}
+
+#[derive(Debug, Serialize)]
+struct RespostaRetorno {
+    layout: String,
+    linhas: usize,
+    conteudo: String,
+    escritas: Vec<cnab_retorno::Escrita>,
+}
+
+/// Gera o arquivo de retorno de uma remessa, segundo um cenário.
+///
+/// **Isto não prevê o que o banco faria.** O desfecho é escolhido por quem chama;
+/// o que a API garante é a forma — código que existe no catálogo, na fatia em que
+/// o validador o decodifica, e no registro em que ele o lê.
+async fn retorno(
+    State(estado): State<Estado>,
+    Query(parametros): Query<ParametrosRetorno>,
+    axum::Json(pedido): axum::Json<PedidoRetorno>,
+) -> Result<Response, Erro> {
+    let layout = estado
+        .catalogo
+        .layout(&parametros.layout)
+        .ok_or_else(|| Erro::layout_desconhecido(&parametros.layout, &estado))?;
+
+    let linhas = separar_linhas(&pedido.remessa);
+    let geracao = cnab_retorno::gerar(layout, &linhas, &pedido.cenario).map_err(Erro::geracao)?;
+
+    if parametros.detalhado {
+        return Ok(axum::Json(RespostaRetorno {
+            layout: parametros.layout,
+            linhas: linhas.len(),
+            conteudo: geracao.conteudo,
+            escritas: geracao.escritas,
+        })
+        .into_response());
+    }
+
+    Ok((
+        [(
+            axum::http::header::CONTENT_TYPE,
+            "text/plain; charset=iso-8859-1",
+        )],
+        geracao.conteudo,
+    )
+        .into_response())
+}
+
 /// Erro de uso da API, sempre com o que fazer a seguir.
 #[derive(Debug, Serialize)]
 pub struct Erro {
@@ -205,6 +277,15 @@ impl Erro {
                 "O layout '{pedido}' é catálogo de retorno: ele decodifica códigos de \
                  ocorrência, não carrega regra de validação. Não há o que validar aqui."
             ),
+            layouts_disponiveis: None,
+        }
+    }
+
+    fn geracao(erro: ErroDeGeracao) -> Self {
+        Self {
+            status: StatusCode::BAD_REQUEST,
+            erro: "cenario_invalido".into(),
+            detalhe: erro.to_string(),
             layouts_disponiveis: None,
         }
     }

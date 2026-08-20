@@ -193,3 +193,90 @@ async fn saude_responde_de_qual_extracao_a_api_esta_servindo() {
     assert!(corpo["fonte"].as_str().unwrap().contains("bradesco"));
     assert!(corpo["total_regras"].as_u64().unwrap() > 1000);
 }
+
+async fn post_json(caminho: &str, corpo: serde_json::Value) -> (StatusCode, Value) {
+    let app = cnab_validator_api::rotas(catalogo());
+    let resposta = app
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri(caminho)
+                .header("content-type", "application/json")
+                .body(Body::from(serde_json::to_vec(&corpo).unwrap()))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    let status = resposta.status();
+    let bytes = axum::body::to_bytes(resposta.into_body(), usize::MAX)
+        .await
+        .unwrap();
+    (
+        status,
+        serde_json::from_slice(&bytes)
+            .unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into_owned())),
+    )
+}
+
+fn remessa_texto() -> String {
+    corpus("multipag-correto.txt")
+        .iter()
+        .map(|b| *b as char)
+        .collect()
+}
+
+#[tokio::test]
+async fn gera_retorno_com_ocorrencia_no_detalhe_e_no_envelope() {
+    let (status, corpo) = post_json(
+        "/retorno?detalhado=true",
+        serde_json::json!({
+            "remessa": remessa_texto(),
+            "cenario": { "padrao": ["00"], "envelope": ["01"] }
+        }),
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+
+    let escritas = corpo["escritas"].as_array().unwrap();
+    // O envelope é o caso que um consumidor que varre só o detalhe não enxerga —
+    // simular isso é metade da razão de o gerador existir.
+    assert!(escritas.iter().any(|e| e["registro"] == "header-arquivo"));
+    assert!(escritas.iter().any(|e| e["registro"] == "detalhe"));
+
+    let conteudo = corpo["conteudo"].as_str().unwrap();
+    assert!(conteudo.ends_with("\r\n"), "o retorno sai com CRLF");
+    // Coluna 143 do header de arquivo deixa de dizer "remessa": sem isso o
+    // próprio banco lê o arquivo como remessa devolvida por engano.
+    assert_eq!(conteudo.chars().nth(142), Some('2'));
+}
+
+#[tokio::test]
+async fn cenario_com_codigo_fora_do_catalogo_e_recusado() {
+    let (status, corpo) = post_json(
+        "/retorno",
+        serde_json::json!({
+            "remessa": remessa_texto(),
+            "cenario": { "padrao": ["ZZ"] }
+        }),
+    )
+    .await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(corpo["erro"], "cenario_invalido");
+    assert!(corpo["detalhe"].as_str().unwrap().contains("ZZ"));
+}
+
+#[tokio::test]
+async fn sem_detalhado_a_resposta_e_o_arquivo_cru() {
+    let (status, corpo) = post_json(
+        "/retorno",
+        serde_json::json!({
+            "remessa": remessa_texto(),
+            "cenario": { "padrao": ["00"] }
+        }),
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    // Sem `detalhado` vem o arquivo, não JSON — é o que se grava em disco.
+    let texto = corpo.as_str().expect("arquivo cru");
+    assert!(texto.ends_with("\r\n"));
+}
