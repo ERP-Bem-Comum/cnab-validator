@@ -46,6 +46,11 @@
       "ocorrencias": 1
     },
     {
+      "regra_id": "multipag:validarDadosMultipag:498",
+      "motivo": "condicao_custom",
+      "ocorrencias": 1
+    },
+    {
       "regra_id": "multipag:validarDadosMultipag:759",
       "motivo": "condicao_incompleta",
       "ocorrencias": 1

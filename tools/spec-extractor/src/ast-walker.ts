@@ -152,8 +152,9 @@ function visitStatement(stmt: Statement, ctx: WalkContext, guards: Guard[]): voi
       const testSource = ctx.code.slice(stmt.test.start, stmt.test.end);
       const targets = findResMembers(stmt.test);
       const message = extractConcatenatedMessage(stmt.consequent, ctx.code);
+      const alvo = targets[0] ?? alvoDasGuardas(guards);
       if (message && !isNoise(message)) {
-        emitRule(ctx, stmt, message, testSource, guards, targets[0] ?? null);
+        emitRule(ctx, stmt, message, testSource, guards, alvo);
       }
 
       const guardPositiva: Guard = {
@@ -180,14 +181,7 @@ function visitStatement(stmt: Statement, ctx: WalkContext, guards: Guard[]): voi
         ) {
           const altMessage = extractConcatenatedMessage(stmt.alternate, ctx.code);
           if (altMessage && !isNoise(altMessage)) {
-            emitRule(
-              ctx,
-              stmt.alternate,
-              altMessage,
-              negated,
-              guards,
-              targets[0] ?? null
-            );
+            emitRule(ctx, stmt.alternate, altMessage, negated, guards, alvo);
           }
           visitWithGuard(stmt.alternate, ctx, guards, guardNegativa);
         } else {
@@ -395,6 +389,23 @@ function quandoRelativo(
   const daRegra = new Set(guardasDaRegra);
   const restantes = atribuicao.guardas.filter((g) => !daRegra.has(g));
   return restantes.length > 0 ? restantes.join(" && ") : null;
+}
+
+/**
+ * Registro que a regra reprova, quando o teste não lê nenhum: o fonte calcula em
+ * variáveis antes do `if` e compara só os nomes (`qtde_reg != qtde_linha`).
+ *
+ * Sem isto o alvo cai no default `res[0]` e a regra passa a valer para o header,
+ * onde a guarda dela nunca vale — ou seja, a regra existe no spec e não reprova
+ * nada. A guarda mais interna é a que mais se aproxima da regra, e é ela que
+ * identifica o registro, pelo mesmo motivo que já dá o tipo de registro.
+ */
+function alvoDasGuardas(guards: Guard[]): string | null {
+  for (let i = guards.length - 1; i >= 0; i--) {
+    const alvo = findResMembers(guards[i].test)[0];
+    if (alvo) return alvo;
+  }
+  return null;
 }
 
 function emitRule(
@@ -793,7 +804,26 @@ function nomeDoAlvo(node: Node): string | null {
   if (prop.type === "Identifier") {
     return member.computed ? `res[${prop.name}]` : `res.${prop.name}`;
   }
+  const aritmetico = indiceAritmetico(prop);
+  if (aritmetico && member.computed) return `res[${aritmetico}]`;
   return null;
+}
+
+/**
+ * `j + 1`, `i - 1` — o fonte alcança a linha vizinha somando ao índice do laço.
+ *
+ * Sem reconhecer esta forma, toda regra sobre o registro seguinte fica sem alvo
+ * e cai no default `res[0]`: ela existe no spec, mas aponta para o header. O
+ * consumidor do spec já sabe resolver índice aritmético — o que faltava era o
+ * extrator publicá-lo.
+ */
+function indiceAritmetico(node: Node): string | null {
+  if (node.type !== "BinaryExpression") return null;
+  const bin = node as BinaryExpression;
+  if (bin.operator !== "+" && bin.operator !== "-") return null;
+  if (bin.left.type !== "Identifier") return null;
+  if (!isLiteral(bin.right) || typeof bin.right.value !== "number") return null;
+  return `${bin.left.name} ${bin.operator} ${bin.right.value}`;
 }
 
 const SINONIMOS_REGISTRO: Record<string, string[]> = {
@@ -911,12 +941,8 @@ function findResMembers(test: Node): string[] {
         return;
       }
 
-      const prop = node.property;
-      if (isLiteral(prop)) {
-        targets.push(`res[${prop.value}]`);
-      } else if (prop.type === "Identifier") {
-        targets.push(node.computed ? `res[${prop.name}]` : `res.${prop.name}`);
-      }
+      const nome = nomeDoAlvo(node);
+      if (nome) targets.push(nome);
     },
   });
 

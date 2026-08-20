@@ -145,6 +145,12 @@ Pontos que só ficam claros lendo vários arquivos juntos:
   regra que não cita coluna (comprimento do registro) e regra cujo texto não usa palavra de erro
   ("Número do banco diferente no mesmo lote", que é a regra de banco único por lote). Ao mexer aqui,
   medir o diff **de conjunto** (quantas regras entram e quantas somem), não só a reclassificação.
+- **O alvo da regra decide em que linhas ela roda**, e não vem só do teste. Quando o `if` compara
+  variáveis calculadas antes dele (`qtde_reg != qtde_linha`), o teste não lê registro nenhum e o alvo
+  sai da **guarda mais interna** — a mesma que já dá o tipo de registro. Sem isso ele cai no default
+  `res[0]`, e a regra passa a valer só para o header, onde a guarda dela nunca vale: existe no spec e
+  não reprova nada. O índice pode ser aritmético (`res[j + 1]` alcança o registro seguinte, como nas
+  regras do Segmento R sob o P) — o consumidor já resolve essa forma, e o extrator a publica.
 - **O walker mantém um ambiente de variáveis** (`RawRule.ambiente`): atribuições vistas até a regra,
   com a pilha de guardas de cada uma. Uma atribuição só alcança a regra se toda guarda da regra vale
   também para ela — sem esse escopo o ramo irmão do cálculo de dígito vazaria e o spec publicaria dois

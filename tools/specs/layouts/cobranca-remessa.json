@@ -11376,7 +11376,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         127,
@@ -11385,7 +11385,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 126,
           "fim0": 141,
           "colunas": [
@@ -11397,7 +11397,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1) && (mora > 99.99)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(117, 118) == 1)",
@@ -11461,35 +11461,32 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1496",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1496,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
-        86,
-        100
-      ],
-      "colunas_mensagem": [
         75,
         89
       ],
+      "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[i]",
-          "inicio0": 85,
-          "fim0": 100,
+          "alvo": "res[j + 1]",
+          "inicio0": 74,
+          "fim0": 89,
           "colunas": [
-            86,
-            100
+            75,
+            89
           ],
           "tamanho": 15
         }
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[i]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 1) && ((parseFloat(res[j + 1].substring(74, 89)) / parseFloat(res[i].substring(85, 100))) * 100 > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(65, 66) == 1)",
@@ -11503,11 +11500,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1505",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1505,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         75,
@@ -11516,7 +11513,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 74,
           "fim0": 89,
           "colunas": [
@@ -12644,11 +12641,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1629",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1629,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         23,
@@ -12660,7 +12657,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 22,
           "fim0": 26,
           "colunas": [
@@ -12698,11 +12695,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1634",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1634,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         21,
@@ -12714,7 +12711,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 20,
           "fim0": 22,
           "colunas": [
@@ -12752,11 +12749,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1639",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1639,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         19,
@@ -12768,7 +12765,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 18,
           "fim0": 20,
           "colunas": [
@@ -12806,11 +12803,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1647",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1647,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         23,
@@ -12822,7 +12819,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 22,
           "fim0": 26,
           "colunas": [
@@ -12860,11 +12857,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1652",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1652,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         21,
@@ -12876,7 +12873,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 20,
           "fim0": 22,
           "colunas": [
@@ -12914,11 +12911,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1657",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1657,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         19,
@@ -12930,7 +12927,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 18,
           "fim0": 20,
           "colunas": [
@@ -12968,11 +12965,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1667",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1667,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         47,
@@ -12984,7 +12981,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 46,
           "fim0": 50,
           "colunas": [
@@ -13022,11 +13019,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1672",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1672,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         45,
@@ -13038,7 +13035,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 44,
           "fim0": 46,
           "colunas": [
@@ -13076,11 +13073,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1677",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1677,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[i]"
+        "res[j + 1]"
       ],
       "colunas": [
         43,
@@ -13092,7 +13089,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[i]",
+          "alvo": "res[j + 1]",
           "inicio0": 42,
           "fim0": 44,
           "colunas": [
@@ -13130,11 +13127,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1689",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1689,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         47,
@@ -13146,7 +13143,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 46,
           "fim0": 50,
           "colunas": [
@@ -13184,11 +13181,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1694",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1694,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         45,
@@ -13200,7 +13197,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 44,
           "fim0": 46,
           "colunas": [
@@ -13238,11 +13235,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1699",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1699,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         43,
@@ -13254,7 +13251,7 @@
       ],
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 42,
           "fim0": 44,
           "colunas": [
@@ -13292,11 +13289,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1889",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1889,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13305,7 +13302,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13317,7 +13314,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1) && (vlr_desc2 > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 1)",
@@ -13331,11 +13328,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1894",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1894,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13344,7 +13341,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13381,11 +13378,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1901",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1901,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13394,7 +13391,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13406,7 +13403,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 3) && (desc2_diacor > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 3)",
@@ -13420,11 +13417,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1908",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1908,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13433,7 +13430,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13445,7 +13442,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 4) && (desc2_diauti > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(17, 18) == 4)",
@@ -13459,11 +13456,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1913",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1913,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13472,7 +13469,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13509,11 +13506,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1918",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1918,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         27,
@@ -13522,7 +13519,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 26,
           "fim0": 41,
           "colunas": [
@@ -13559,11 +13556,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1927",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1927,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13572,7 +13569,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -13584,7 +13581,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1) && (vlr_desc3 > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 1)",
@@ -13598,11 +13595,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1932",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1932,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13611,7 +13608,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -13648,11 +13645,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1939",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1939,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13661,7 +13658,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -13673,7 +13670,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 3) && (desc3_diacor > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 3)",
@@ -13687,11 +13684,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1946",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1946,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13700,7 +13697,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -13712,7 +13709,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[j + 1]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 4) && (desc3_diauti > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(13, 14) == \"P\" && res[j + 1].substring(13, 14) == \"R\") && (res[j + 1].substring(41, 42) == 4)",
@@ -13726,11 +13723,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1951",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1951,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13739,7 +13736,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -13776,11 +13773,11 @@
       "id": "cobranca-remessa:validarDadosArquivo240:1956",
       "funcao_origem": "validarDadosArquivo240",
       "linha_fonte": 1956,
-      "registro": "segmento-p",
+      "registro": "segmento-r",
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[j + 1]"
       ],
       "colunas": [
         51,
@@ -13789,7 +13786,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[j + 1]",
           "inicio0": 50,
           "fim0": 65,
           "colunas": [
@@ -14340,7 +14337,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         151,
@@ -14349,7 +14346,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 150,
           "fim0": 165,
           "colunas": [
@@ -14361,7 +14358,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1) && (vlr_desc1 > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 1)",
@@ -14429,7 +14426,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         151,
@@ -14438,7 +14435,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 150,
           "fim0": 165,
           "colunas": [
@@ -14450,7 +14447,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 3) && (desc1_diacor > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 3)",
@@ -14468,7 +14465,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         151,
@@ -14477,7 +14474,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 150,
           "fim0": 165,
           "colunas": [
@@ -14489,7 +14486,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 4) && (desc1_diauti > 99.995)",
       "condicao_guarda": "(Header_arquivo < i > Trailer_arquivo) && (res[i].substring(13, 14) == \"P\") && (res[i].substring(141, 142) == 4)",
@@ -27675,7 +27672,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         24,
@@ -27684,7 +27681,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 23,
           "fim0": 29,
           "colunas": [
@@ -27696,7 +27693,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(res[i].substring(7, 8) == 9) && (qtde_reg != qtde_linha)",
       "condicao_guarda": "(res[i].substring(7, 8) == 9)",
@@ -33939,7 +33936,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         83,
@@ -33948,7 +33945,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 82,
           "fim0": 92,
           "colunas": [
@@ -33960,7 +33957,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (desc_boni > 99.995)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237)",
@@ -36643,7 +36640,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         161,
@@ -36652,7 +36649,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 160,
           "fim0": 173,
           "colunas": [
@@ -36664,7 +36661,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(66, 70) == 0) && (mora > 99.995)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(66, 70) == 0)",
@@ -38359,7 +38356,7 @@
       "registro_referenciado": null,
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         180,
@@ -38368,7 +38365,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 179,
           "fim0": 192,
           "colunas": [
@@ -38380,7 +38377,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (per_desc1 > 99.995)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31)",
@@ -38398,7 +38395,7 @@
       "registro_referenciado": "registro-tipo-2",
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         328,
@@ -38407,7 +38404,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 327,
           "fim0": 340,
           "colunas": [
@@ -38419,7 +38416,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (per_desc2 > 99.995)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2)",
@@ -38437,7 +38434,7 @@
       "registro_referenciado": "registro-tipo-2",
       "registro_origem": "guarda",
       "registro_alvo": [
-        "res[0]"
+        "res[i]"
       ],
       "colunas": [
         347,
@@ -38446,7 +38443,7 @@
       "colunas_mensagem": null,
       "posicoes": [
         {
-          "alvo": "res[0]",
+          "alvo": "res[i]",
           "inicio0": 346,
           "fim0": 359,
           "colunas": [
@@ -38458,7 +38455,7 @@
       ],
       "condicao": {
         "tipo": "custom",
-        "alvo": "res[0]"
+        "alvo": "res[i]"
       },
       "condicao_original": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2) && (per_desc3 > 99.995)",
       "condicao_guarda": "(!(res[0].substring(76, 79) != 237)) && (res[i].substring(0, 1) == 1) && (res[i].substring(62, 65) != 237) && (res[i].substring(108, 110) == \"01\" || res[i].substring(108, 110) == 31) && (res[i].substring(0, 1) == 1 && res[j].substring(0, 1) == 2)",
