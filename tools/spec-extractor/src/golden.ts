@@ -75,7 +75,7 @@ function normalizar(texto: string): string {
  * que a validação usa. Os que dependem de DOM para *rodar* recebem os mínimos
  * abaixo.
  */
-function carregarValidadorOficial(): Context | null {
+export function carregarValidadorOficial(): Context | null {
   const htmlPath = join(ASSETS_DIR, "validadorgeral.html");
   if (!existsSync(htmlPath)) return null;
 

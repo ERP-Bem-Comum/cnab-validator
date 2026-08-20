@@ -8,7 +8,8 @@
     "typecheck": "tsc --noEmit",
     "reproduce": "bun run src/reproduce.ts",
     "golden": "bun run src/golden.ts",
-    "paridade": "bun run src/paridade.ts"
+    "paridade": "bun run src/paridade.ts",
+    "retorno-oraculo": "bun run src/retorno-oraculo.ts"
   },
   "dependencies": {
     "acorn": "^8.12.1",
