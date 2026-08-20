@@ -90,8 +90,8 @@ export function avaliarCondicao(
       );
     }
 
-    case "modulo_11":
-      return avaliarModulo11(condicao, ctx);
+    case "digito_verificador":
+      return avaliarDigitoVerificador(condicao, ctx);
 
     case "disjuncao": {
       const partes = condicao.partes.map((parte) => avaliarCondicao(parte, ctx));
@@ -116,7 +116,7 @@ export function avaliarCondicao(
  */
 export function calcularResto(
   calculo: {
-    base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
+    base: Extract<DslCondition, { tipo: "digito_verificador" }>["base"];
     modulo: number;
     /** Redução por excesso do módulo 10; ausente é a soma ponderada direta. */
     dobra?: { limite: number; subtrai: number } | null;
@@ -150,10 +150,10 @@ export function calcularResto(
  */
 export function calcularDigito(
   calculo: {
-    base: Extract<DslCondition, { tipo: "modulo_11" }>["base"];
+    base: Extract<DslCondition, { tipo: "digito_verificador" }>["base"];
     modulo: number;
     dobra?: { limite: number; subtrai: number } | null;
-    resultado: Extract<DslCondition, { tipo: "modulo_11" }>["resultado"];
+    resultado: Extract<DslCondition, { tipo: "digito_verificador" }>["resultado"];
   },
   ctx: ContextoArquivo
 ): Valor | null {
@@ -183,8 +183,8 @@ export function calcularDigito(
   return esperado;
 }
 
-function avaliarModulo11(
-  condicao: Extract<DslCondition, { tipo: "modulo_11" }>,
+function avaliarDigitoVerificador(
+  condicao: Extract<DslCondition, { tipo: "digito_verificador" }>,
   ctx: ContextoArquivo
 ): boolean | null {
   if (condicao.transformacao !== null) return null;

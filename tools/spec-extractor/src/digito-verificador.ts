@@ -56,7 +56,7 @@ export function parametrosDoSpec(
     const doDocumento = regras.filter(
       (r) =>
         r.registro === registro &&
-        r.condicao.tipo === "modulo_11" &&
+        r.condicao.tipo === "digito_verificador" &&
         r.condicao.documento === documento
     );
     if (doDocumento.length === 0) {
@@ -65,7 +65,7 @@ export function parametrosDoSpec(
 
     const referencia = doDocumento[0].condicao as Extract<
       DslCondition,
-      { tipo: "modulo_11" }
+      { tipo: "digito_verificador" }
     >;
     const banco = doDocumento
       .map((r) => r.condicao_guarda?.match(REGEX_BANCO_DA_GUARDA)?.[1])
@@ -113,7 +113,7 @@ export function digitosAceitos(valor: string, regras: DslRule[], documento: Docu
 
   const aceitos: string[] = [];
   for (const regra of regras) {
-    if (regra.condicao.tipo !== "modulo_11") continue;
+    if (regra.condicao.tipo !== "digito_verificador") continue;
     if (regra.condicao.documento !== documento) continue;
     const esperado = digitoEsperado(regra.condicao, resto);
     if (esperado !== null && !aceitos.includes(esperado)) aceitos.push(esperado);
@@ -137,7 +137,7 @@ export function restoDe(valor: string, parametros: ParametrosDigito): number | n
 
 /** Percorre os ramos na ordem do fonte: a última atribuição que casa é a que vale. */
 function digitoEsperado(
-  condicao: Extract<DslCondition, { tipo: "modulo_11" }>,
+  condicao: Extract<DslCondition, { tipo: "digito_verificador" }>,
   resto: number
 ): string | null {
   let esperado: string | null = null;

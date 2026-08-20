@@ -157,16 +157,20 @@ pub enum Condicao {
         limites: Vec<Limite>,
         comparacao: ModoComparacao,
     },
-    #[serde(rename = "modulo_11")]
-    Modulo11 {
+    /// Faixa comparada com um dígito que o fonte calcula: soma ponderada, resto
+    /// da divisão por `modulo`, e o valor esperado por faixa de resto.
+    ///
+    /// Cobre os dois algoritmos que o validador usa, e é `modulo` — com `dobra`,
+    /// quando existe — que diz qual: módulo 11 na agência, na conta e na
+    /// inscrição; módulo 10 com redução por parcela no código de barras do
+    /// Segmento O.
+    DigitoVerificador {
         alvo: String,
         /// Faixa do dígito informado no arquivo.
         posicao: Posicao,
         base: Vec<Parcela>,
         modulo: i64,
-        /// Redução por parcela do somatório. O nome do arquétipo é histórico —
-        /// quem diz qual algoritmo é são `modulo` e este campo, e o dígito do
-        /// código de barras do Segmento O é módulo 10 com redução.
+        /// Redução por parcela do somatório; `None` é a soma ponderada direta.
         dobra: Option<Dobra>,
         resultado: Vec<FaixaDeResto>,
         /// Função aplicada à faixa antes de comparar, quando existe.
@@ -243,7 +247,7 @@ impl Condicao {
             | Condicao::NumericoBranco { alvo, .. }
             | Condicao::Dominio { alvo, .. }
             | Condicao::Intervalo { alvo, .. }
-            | Condicao::Modulo11 { alvo, .. }
+            | Condicao::DigitoVerificador { alvo, .. }
             | Condicao::CoerenciaRegistro { alvo, .. }
             | Condicao::NumeroDaLinha { alvo, .. }
             | Condicao::TamanhoLinha { alvo, .. }
@@ -261,7 +265,7 @@ impl Condicao {
             Condicao::NumericoBranco { .. } => "numerico_branco",
             Condicao::Dominio { .. } => "dominio",
             Condicao::Intervalo { .. } => "intervalo",
-            Condicao::Modulo11 { .. } => "modulo_11",
+            Condicao::DigitoVerificador { .. } => "digito_verificador",
             Condicao::CoerenciaRegistro { .. } => "coerencia_registro",
             Condicao::NumeroDaLinha { .. } => "numero_da_linha",
             Condicao::TamanhoLinha { .. } => "tamanho_linha",
@@ -280,8 +284,7 @@ impl Condicao {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "tipo", rename_all = "snake_case", deny_unknown_fields)]
 pub enum VariavelDaGuarda {
-    #[serde(rename = "modulo_11")]
-    Modulo11 {
+    DigitoVerificador {
         nome: String,
         base: Vec<Parcela>,
         modulo: i64,
@@ -318,31 +321,31 @@ pub struct Dobra {
 impl VariavelDaGuarda {
     pub fn nome(&self) -> &str {
         match self {
-            VariavelDaGuarda::Modulo11 { nome, .. } | VariavelDaGuarda::Resto { nome, .. } => nome,
+            VariavelDaGuarda::DigitoVerificador { nome, .. }
+            | VariavelDaGuarda::Resto { nome, .. } => nome,
         }
     }
 
     pub fn base(&self) -> &[Parcela] {
         match self {
-            VariavelDaGuarda::Modulo11 { base, .. } | VariavelDaGuarda::Resto { base, .. } => base,
+            VariavelDaGuarda::DigitoVerificador { base, .. }
+            | VariavelDaGuarda::Resto { base, .. } => base,
         }
     }
 
     pub fn modulo(&self) -> i64 {
         match self {
-            VariavelDaGuarda::Modulo11 { modulo, .. } | VariavelDaGuarda::Resto { modulo, .. } => {
-                *modulo
-            }
+            VariavelDaGuarda::DigitoVerificador { modulo, .. }
+            | VariavelDaGuarda::Resto { modulo, .. } => *modulo,
         }
     }
 
-    /// Redução por parcela, quando o cálculo a tem. O dígito nunca a tem: no
-    /// fonte ela só aparece no somatório do módulo 10.
+    /// Redução por parcela, quando o cálculo a tem. Vale para as duas variantes:
+    /// `dv10` é um dígito, e o somatório dele reduz cada parcela.
     pub fn dobra(&self) -> Option<Dobra> {
         match self {
-            VariavelDaGuarda::Modulo11 { dobra, .. } | VariavelDaGuarda::Resto { dobra, .. } => {
-                *dobra
-            }
+            VariavelDaGuarda::DigitoVerificador { dobra, .. }
+            | VariavelDaGuarda::Resto { dobra, .. } => *dobra,
         }
     }
 }

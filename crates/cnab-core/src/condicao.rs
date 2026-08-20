@@ -126,7 +126,7 @@ pub fn avaliar_condicao(condicao: &Condicao, ctx: &Contexto) -> Option<bool> {
             )
         }
 
-        Condicao::Modulo11 {
+        Condicao::DigitoVerificador {
             alvo,
             posicao,
             base,
@@ -299,7 +299,7 @@ pub fn resolver_variaveis(variaveis: &[VariavelDaGuarda], ctx: &Contexto) -> Vec
     let mut resolvidas = Vec::new();
     for variavel in variaveis {
         let valor = match variavel {
-            VariavelDaGuarda::Modulo11 {
+            VariavelDaGuarda::DigitoVerificador {
                 base,
                 modulo,
                 resultado,

@@ -228,7 +228,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 30,
@@ -364,7 +364,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 31,
@@ -473,7 +473,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[0]",
@@ -599,7 +599,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 30,
@@ -756,7 +756,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 31,
@@ -886,7 +886,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[0]",
@@ -1752,7 +1752,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 57,
@@ -1850,7 +1850,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 57,
@@ -2130,7 +2130,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 70,
@@ -2249,7 +2249,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 70,
@@ -3791,7 +3791,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 31,
@@ -3927,7 +3927,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 32,
@@ -4036,7 +4036,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -4162,7 +4162,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 31,
@@ -4319,7 +4319,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 32,
@@ -4449,7 +4449,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -5038,7 +5038,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 58,
@@ -5136,7 +5136,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 58,
@@ -5818,7 +5818,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 71,
@@ -5937,7 +5937,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 71,
@@ -8147,7 +8147,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 22,
@@ -8245,7 +8245,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 22,
@@ -9034,7 +9034,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 35,
@@ -9153,7 +9153,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 35,
@@ -9455,7 +9455,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -15948,7 +15948,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 31,
@@ -16084,7 +16084,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 32,
@@ -16193,7 +16193,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -16319,7 +16319,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 31,
@@ -16455,7 +16455,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 32,
@@ -16564,7 +16564,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -16690,7 +16690,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 31,
@@ -16847,7 +16847,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 32,
@@ -16977,7 +16977,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -17700,7 +17700,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 167,
@@ -17836,7 +17836,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 168,
@@ -17945,7 +17945,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -18071,7 +18071,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 167,
@@ -18207,7 +18207,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 168,
@@ -18316,7 +18316,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -18442,7 +18442,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 167,
@@ -18599,7 +18599,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 168,
@@ -18729,7 +18729,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -22989,7 +22989,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 215,
@@ -23087,7 +23087,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 215,
@@ -23261,7 +23261,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 228,
@@ -23380,7 +23380,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 228,
@@ -24771,7 +24771,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 33,
@@ -24928,7 +24928,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 34,
@@ -25058,7 +25058,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -26728,7 +26728,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 84,
@@ -26826,7 +26826,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 84,
@@ -26990,7 +26990,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 97,
@@ -27112,7 +27112,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 97,
@@ -30104,7 +30104,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 386,
@@ -30223,7 +30223,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[0]",
         "posicao": {
           "inicio0": 386,
@@ -30396,7 +30396,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 6,
@@ -30498,7 +30498,7 @@
         "alvo": "res[i]",
         "partes": [
           {
-            "tipo": "modulo_11",
+            "tipo": "digito_verificador",
             "alvo": "res[i]",
             "posicao": {
               "inicio0": 6,
@@ -30933,7 +30933,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 19,
@@ -31052,7 +31052,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 19,
@@ -32229,7 +32229,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 36,
@@ -32348,7 +32348,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 36,
@@ -33742,7 +33742,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 81,
@@ -39113,7 +39113,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 232,
@@ -39270,7 +39270,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 233,
@@ -39400,7 +39400,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -39547,7 +39547,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 232,
@@ -39683,7 +39683,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 233,
@@ -39792,7 +39792,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -40105,7 +40105,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 347,
@@ -40262,7 +40262,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 348,
@@ -40392,7 +40392,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -40539,7 +40539,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 347,
@@ -40675,7 +40675,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 348,
@@ -40784,7 +40784,7 @@
       "variaveis_guarda": [
         {
           "nome": "dv1",
-          "tipo": "modulo_11",
+          "tipo": "digito_verificador",
           "base": [
             {
               "alvo": "res[i]",
@@ -42943,7 +42943,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 381,
@@ -43062,7 +43062,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 381,
@@ -43385,7 +43385,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 16,
@@ -43504,7 +43504,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 16,
@@ -43878,7 +43878,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 16,
@@ -43997,7 +43997,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 16,
@@ -44595,7 +44595,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 51,
@@ -44693,7 +44693,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 51,
@@ -45165,7 +45165,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 64,
@@ -45284,7 +45284,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 64,
@@ -46148,7 +46148,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 168,
@@ -46246,7 +46246,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 168,
@@ -46757,7 +46757,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 181,
@@ -46876,7 +46876,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 181,
@@ -47744,7 +47744,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 285,
@@ -47842,7 +47842,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 285,
@@ -48350,7 +48350,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 298,
@@ -48469,7 +48469,7 @@
         }
       ],
       "condicao": {
-        "tipo": "modulo_11",
+        "tipo": "digito_verificador",
         "alvo": "res[i]",
         "posicao": {
           "inicio0": 298,

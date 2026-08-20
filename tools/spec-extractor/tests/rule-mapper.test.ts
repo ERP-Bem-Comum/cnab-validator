@@ -17,7 +17,7 @@ describe("mapToDsl", () => {
     assert.strictEqual(rules[0].condicao.tipo, "literal_fixo");
     assert.strictEqual(rules[1].condicao.tipo, "numerico_branco");
     assert.strictEqual(rules[2].condicao.tipo, "dominio");
-    assert.strictEqual(rules[3].condicao.tipo, "modulo_11");
+    assert.strictEqual(rules[3].condicao.tipo, "digito_verificador");
     assert.strictEqual(rules[4].condicao.tipo, "coerencia_registro");
   });
 
@@ -53,13 +53,13 @@ describe("mapToDsl", () => {
 
     const dv1 = (regra.variaveis_guarda ?? []).find((v) => v.nome === "dv1");
     assert.ok(dv1, "a guarda cita dv1; sem ele a regra não é avaliável");
-    assert.strictEqual(dv1.tipo, "modulo_11");
+    assert.strictEqual(dv1.tipo, "digito_verificador");
     assert.deepStrictEqual(dv1.base.map((p) => p.peso), [10, 9]);
     assert.strictEqual(dv1.modulo, 11);
 
     // A condição continua sendo a do segundo dígito, com a soma dele.
-    assert.strictEqual(regra.condicao.tipo, "modulo_11");
-    if (regra.condicao.tipo === "modulo_11") {
+    assert.strictEqual(regra.condicao.tipo, "digito_verificador");
+    if (regra.condicao.tipo === "digito_verificador") {
       assert.deepStrictEqual(regra.condicao.base.map((p) => p.peso), [11, 10, 2]);
     }
   });
@@ -130,9 +130,9 @@ describe("mapToDsl", () => {
     }
   });
 
-  it("nao classifica modulo_11 sem o ambiente que define o digito", () => {
+  it("nao classifica digito_verificador sem o ambiente que define o digito", () => {
     // A condição sozinha é `faixa != variavel`: sem saber como a variável foi
-    // calculada, publicar `modulo_11` seria afirmar um algoritmo que o extrator
+    // calculada, publicar `digito_verificador` seria afirmar um algoritmo que o extrator
     // não viu.
     const raw: RawRule = {
       funcao_origem: "amostra",
@@ -520,8 +520,8 @@ describe("mapToDsl", () => {
       },
     };
     const dsl = mapToDsl(raw, "multipag");
-    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
-    if (dsl.condicao.tipo === "modulo_11") {
+    assert.strictEqual(dsl.condicao.tipo, "digito_verificador");
+    if (dsl.condicao.tipo === "digito_verificador") {
       assert.strictEqual(dsl.condicao.modulo, 10);
       assert.deepStrictEqual(dsl.condicao.dobra, { limite: 9, subtrai: 9 });
       assert.strictEqual(dsl.condicao.variavel, "dv10");
@@ -812,7 +812,7 @@ describe("mapToDsl", () => {
     const dsl = mapToDsl(raw, "cobranca-remessa");
     assert.strictEqual(dsl.condicao.tipo, "custom");
   });
-  it("classifica modulo_11 a partir do ambiente do fonte", () => {
+  it("classifica digito_verificador a partir do ambiente do fonte", () => {
     const raw: RawRule = {
       funcao_origem: "amostra",
       linha_fonte: 700,
@@ -846,8 +846,8 @@ describe("mapToDsl", () => {
       },
     };
     const dsl = mapToDsl(raw, "multipag");
-    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
-    if (dsl.condicao.tipo !== "modulo_11") return;
+    assert.strictEqual(dsl.condicao.tipo, "digito_verificador");
+    if (dsl.condicao.tipo !== "digito_verificador") return;
 
     assert.strictEqual(dsl.condicao.modulo, 11);
     assert.strictEqual(dsl.condicao.variavel, "dva");
@@ -904,8 +904,8 @@ describe("mapToDsl", () => {
       },
     };
     const dsl = mapToDsl(raw, "multipag");
-    assert.strictEqual(dsl.condicao.tipo, "modulo_11");
-    if (dsl.condicao.tipo !== "modulo_11") return;
+    assert.strictEqual(dsl.condicao.tipo, "digito_verificador");
+    if (dsl.condicao.tipo !== "digito_verificador") return;
 
     assert.strictEqual(dsl.condicao.transformacao, "obterValorCNPJAlfanumerico");
     assert.strictEqual(dsl.condicao.base[0].transformacao, "obterValorCNPJAlfanumerico");
